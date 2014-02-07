@@ -7,13 +7,22 @@
 
 package view;
 
-public class AdminGUI extends UserGUI{
-	public AdminGUI(){
-		
+public class AdminGUI extends UserGUI {
+	public AdminGUI() {
+
 	}
-	
-	// Place all components
-	protected void buildGUI(){
+
+	/**
+	 * Create all buttons
+	 */
+	protected void initButtons() {
+		super.initButtons();
+	}
+
+	/**
+	 * Place all components
+	 */
+	protected void buildGUI() {
 		super.buildGUI();
 	}
 }

@@ -15,18 +15,29 @@ public abstract class UserGUI extends GUI {
 		super();
 	}
 
-	// Init logout
+	/**
+	 * Create all buttons
+	 */
 	protected void initButtons() {
+		super.initButtons();
+		// Init logout
 		components.put("logOut", new JButton("Log Out"));
 	}
 
-	// Init top,menu panel
+	/**
+	 * Create all panels
+	 */
 	protected void initPanels() {
+		super.initPanels();
+		// Init top
 		components.put("topPanel", new JPanel());
+		// Init side-menu
 		components.put("menuPanel", new JPanel());
 	}
 
-	// Place all components
+	/**
+	 * Place all components
+	 */
 	protected void buildGUI() {
 		super.buildGUI();
 	}

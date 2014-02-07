@@ -22,7 +22,6 @@ public class Window {
 		createFrame();
 		// Init all the views
 		initViews();
-		frame.pack();
 	}
 
 	private void createFrame() {

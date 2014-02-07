@@ -7,10 +7,11 @@
 
 package view;
 
-import java.awt.Component;
-import java.util.Iterator;
+import java.awt.BorderLayout;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
@@ -20,19 +21,42 @@ public class LoginGUI extends GUI {
 		initTextFields();
 	}
 
-	// Init logIn
+	/**
+	 * Create all buttons
+	 */
 	protected void initButtons() {
+		super.initButtons();
+
+		// Init logIn
+		super.initButtons();
 		components.put("logIn", new JButton("Log In"));
 	}
 
-	// Init TF name & pass
-	private void initTextFields() {
+	/**
+	 * Create all panels
+	 */
+	protected void initPanels() {
+		super.initPanels();
+	}
+
+	/**
+	 * Create all text fields.
+	 */
+	protected void initTextFields() {
+		super.initTextFields();
+
+		// Init username
 		components.put("userName", new JTextField());
+
+		// Init password
 		components.put("password", new JPasswordField());
 	}
 
-	// Place all components
+	/**
+	 * Place all components
+	 */
 	protected void buildGUI() {
 		super.buildGUI();
+
 	}
 }

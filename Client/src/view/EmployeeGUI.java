@@ -7,13 +7,22 @@
 
 package view;
 
-public class EmployeeGUI extends UserGUI{
-	public EmployeeGUI(){
-		
+public class EmployeeGUI extends UserGUI {
+	public EmployeeGUI() {
+
 	}
-	
-	// Place all components
-	protected void buildGUI(){
+
+	/**
+	 * Create all buttons
+	 */
+	protected void initButtons() {
+		super.initButtons();
+	}
+
+	/**
+	 * Place all components
+	 */
+	protected void buildGUI() {
 		super.buildGUI();
 	}
 }
