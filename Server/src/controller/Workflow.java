@@ -1,13 +1,25 @@
 /**
- * Write a description of class Workflow here.
  * 
  * @author David Stromner
- * @version 2013-02-06
+ * @author  Henrik Johansson
+ * @version 2013-02-07
  */
 
 
 package controller;
 
 public class Workflow {
+	public Workflow(){
+		
+	}
+	
+	private void initWindowThread(){
+		
+	}
+	
+	private void initModelThread(){
+		
+	}
+	
 
 }
