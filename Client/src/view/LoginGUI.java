@@ -7,6 +7,29 @@
 
 package view;
 
-public class LoginGUI extends GUI{
+import javax.swing.JButton;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 
+public class LoginGUI extends GUI{	
+	public LoginGUI(){
+		super();
+		initTextFields();
+	}
+	
+	// Init logIn
+	protected void initButtons(){
+		components.put("logIn", new JButton());
+	}
+	
+	// Init TF name & pass
+	private void initTextFields(){
+		components.put("userName", new JTextField());
+		components.put("password", new JPasswordField());
+	}
+	
+	// Modify & add logIn, userName, password
+	protected void buildGUI(){
+		
+	}
 }

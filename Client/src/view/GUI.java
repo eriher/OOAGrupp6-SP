@@ -7,6 +7,18 @@
 
 package view;
 
-public abstract class GUI {
+import java.awt.Container;
+import java.util.HashMap;
 
+public abstract class GUI /*implements JContainer*/ {
+	protected HashMap<String, Container> components;
+	
+	public GUI(){
+		components = new HashMap<String, Container>();
+		initButtons();
+		buildGUI();
+	}
+	
+	protected abstract void initButtons();
+	protected abstract void buildGUI();
 }

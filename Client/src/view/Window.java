@@ -12,23 +12,23 @@ import java.util.HashMap;
 import javax.swing.JFrame;
 
 public class Window {
-	private HashMap<String,GUI> interfaceList;
+	private HashMap<String, GUI> interfaceList;
 	private JFrame frame;
-	
-	public Window(){
-		interfaceList = new HashMap<String,GUI>();
+
+	public Window() {
+		interfaceList = new HashMap<String, GUI>();
 		frame = new JFrame();
 		// Init all the views
 		initViews();
 	}
-	
-	private void initViews(){
+
+	private void initViews() {
 		interfaceList.put("Login", new LoginGUI());
 		interfaceList.put("Admin", new AdminGUI());
-		interfaceList.put("Employee", new EmployeeGUI());	
+		interfaceList.put("Employee", new EmployeeGUI());
 	}
-	
-	public void SetView(String key){
+
+	public void SetView(String key) {
 		frame.add(interfaceList.get(key));
 	}
 }
