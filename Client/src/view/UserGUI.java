@@ -7,6 +7,7 @@
 
 package view;
 
+<<<<<<< HEAD
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
@@ -30,4 +31,8 @@ public abstract class UserGUI extends GUI {
 	protected void buildGUI(){
 		
 	}
+=======
+public abstract class UserGUI extends GUI{
+
+>>>>>>> c3d93de206165536386cf1ded63d4c0f90aa0733
 }

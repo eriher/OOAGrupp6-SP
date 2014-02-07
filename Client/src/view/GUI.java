@@ -7,6 +7,7 @@
 
 package view;
 
+<<<<<<< HEAD
 import java.awt.Container;
 import java.util.HashMap;
 
@@ -22,3 +23,8 @@ public abstract class GUI /*implements JContainer*/ {
 	protected abstract void initButtons();
 	protected abstract void buildGUI();
 }
+=======
+public abstract class GUI {
+
+}
+>>>>>>> c3d93de206165536386cf1ded63d4c0f90aa0733

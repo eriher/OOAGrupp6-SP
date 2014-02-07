@@ -7,6 +7,7 @@
 
 package view;
 
+<<<<<<< HEAD
 import javax.swing.JButton;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -32,4 +33,8 @@ public class LoginGUI extends GUI{
 	protected void buildGUI(){
 		
 	}
+=======
+public class LoginGUI extends GUI{
+
+>>>>>>> c3d93de206165536386cf1ded63d4c0f90aa0733
 }
