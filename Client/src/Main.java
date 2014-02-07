@@ -1,3 +1,5 @@
+import view.Window;
+
 /**
  * Write a description of class Main here.
  * 
@@ -11,8 +13,8 @@ public class Main {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		Window win = new Window();
+		win.SetView("Login");
 	}
 
 }

@@ -9,22 +9,32 @@ package model;
 
 public class ScheduleHandler {
 
-getWeek(personnr)
-{}
-getNextWeek(personnr)
-{}
-getPrevWeek()
-{}
-checkin()
-{}
-checkout()
-{}
-modifySchedule()
-{}
-modifySchedule([])
-{}
+	getWeek(int personnr) {
 
+	}
 
+	getNextWeek(int personnr) {
 
+	}
+
+	getPrevWeek() {
+
+	}
+
+	checkin() {
+		
+	}
+
+	checkout() {
+		
+	}
+
+	modifySchedule() {
+		 
+	} 
+	
+	modifySchedule([]) {
+	
+	}
 
 }

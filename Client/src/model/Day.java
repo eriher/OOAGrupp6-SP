@@ -6,18 +6,16 @@
  */
 
 /*
-Schema uppbyggnad
+ Schema uppbyggnad
 
-Object för varje dag, håller reda på nödvändig information.
+ Object för varje dag, håller reda på nödvändig information.
 
-Object lagras i nångon form av lista eller tree set.
+ Object lagras i nångon form av lista eller tree set.
 
-*/
+ */
 
 package model;
 
 public class Day {
-	
-	//test
 
 }

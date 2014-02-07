@@ -8,7 +8,7 @@
 package view;
 
 public class JSchedule {
-	public Jschedule(){
-		
+	public JSchedule() {
+
 	}
 }

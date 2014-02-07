@@ -5,23 +5,21 @@
  * @version 2013-02-06
  */
 /*
-Sparar användarsession
-*/
+ Sparar användarsession
+ */
 
 package model;
 
 public class UserHandler {
 
-private string user;
+	private String user;
 
-public void UserHandler(personnr)
-{
-	user = personnr;
-}
-getUser(string personnr);
-{
-	return user;
-}
+	public void userHandler(int personnr) {
+		user = Integer.toString(personnr);
+	}
 
+	String getUser(String personnr) {
+		return user;
+	}
 
 }
