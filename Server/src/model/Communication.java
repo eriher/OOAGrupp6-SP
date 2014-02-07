@@ -33,7 +33,7 @@ public class Communication {
 			
 			
 			
-		//recCom.start(); // Starts the recieving and send threads
+		recCom.start(); // Starts the recieving and send threads
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

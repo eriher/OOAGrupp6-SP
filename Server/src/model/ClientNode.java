@@ -13,8 +13,10 @@ import java.io.IOException;
 import java.net.ServerSocket;
 
 public class ClientNode{
+	private static ClientNode nod = null;
 	ServerSocket server;
-	public ClientNode(int port){		//Must be made Singleton method or else ServerSocket will already be occupied.
+	
+	private ClientNode(int port){		//Must be made Singleton method or else ServerSocket will already be occupied.
 		
 		try {
 			server = new ServerSocket(port);
@@ -27,6 +29,13 @@ public class ClientNode{
 		
 		
 		
+	}
+	
+	public static synchronized ClientNode singleton(int port){
+		if(nod == null){
+			nod = new ClientNode(port);
+		}
+		return nod;
 	}
 	
 	/*public Communication newConnect(){

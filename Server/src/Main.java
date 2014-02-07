@@ -15,7 +15,7 @@ public class Main {
 	private static final int PORT = 4444;
 	
 	public static void main(String[] args) {
-		ClientNode node = new ClientNode(PORT);
+		ClientNode node = ClientNode.singleton(PORT);
 		
 		
 		
