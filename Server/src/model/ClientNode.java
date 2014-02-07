@@ -11,12 +11,13 @@ package model;
 
 public class ClientNode extends Communication{
 	public ClientNode(){
+		super(4444);
 		
 	}
 	
-	public Communication newConnect(){
+	/*public Communication newConnect(){
 		
-	}
+	}*/
 	
 	public void removeConnect(){
 		

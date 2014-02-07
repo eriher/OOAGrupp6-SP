@@ -10,13 +10,15 @@
 package controller;
 
 public class ActionHandler { //Singleton
+	
+	
 	private ActionHandler(){
 		
 	}
 	
-	public ActionHandler singleton(){ //Singleton method
+	/*public ActionHandler singleton(){ //Singleton method
 		
-	}
+	}*/
 	
 	public void startButton(){	//Executes when click on start button
 		
