@@ -1,4 +1,4 @@
-import model.Communication;
+import model.ClientNode;
 
 /**
  * Write a description of class Main here.
@@ -12,8 +12,11 @@ public class Main {
 	/**
 	 * @param args
 	 */
+	private static final int PORT = 4444;
+	
 	public static void main(String[] args) {
-		Communication comm = new Communication(4444);
+		ClientNode node = new ClientNode(PORT);
+		
 		
 		
 	}

@@ -14,24 +14,20 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Scanner;
 
-public class CommRecieve implements Runnable {
-	private ServerSocket server;
-	private int port;
+public class CommRecieve implements Runnable {		//Should be made Observable and when a scanin.hasNextline comes in it should update Communication
 	
-	public CommRecieve(int port) {
-		this.port = port;
-		
-
+	private static Socket soc;
+	public CommRecieve(Socket soc) {
+		this.soc = soc;
 	}
 
 	public void run() {
-
+		System.out.println("hoho" + soc.toString() );
+		/*
 		try {
-			server = new ServerSocket(port);
 			
 			
 			while (true) {
-				Socket soc = server.accept();
 				Scanner scanin = new Scanner(soc.getInputStream());
 
 				while (scanin.hasNextLine()) {
@@ -43,6 +39,6 @@ public class CommRecieve implements Runnable {
 		} catch (IOException e) {
 			e.printStackTrace();
 
-		}
+		}*/
 	}
 }

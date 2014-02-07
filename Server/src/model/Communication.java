@@ -16,11 +16,29 @@ import java.net.Socket;
 import java.util.Scanner;
 
 public class Communication {
-	public Communication(int port) {
-		Thread recCom = new Thread(new CommRecieve(port) ); //Creates the recieve and send threads
-		
-		
-		recCom.start();										//Starts the recieving and send threads
+	private ServerSocket server;
+	private Socket soc;
+
+	public Communication(ServerSocket server) { // Should be made observer of
+												// CommRecieve
+		this.server = server;
+
+		Socket soc;
+		try {
+			soc = server.accept();
+			Thread recCom = new Thread(new CommRecieve(soc)); // Creates the
+																// recieve and
+																// send threads
+
+			
+			
+			
+		//recCom.start(); // Starts the recieving and send threads
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 
