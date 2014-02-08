@@ -10,7 +10,9 @@
 
 package model;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Scanner;
@@ -23,21 +25,26 @@ public class Communication {
 												// CommRecieve
 		this.server = server;
 
-		Socket soc;
 		try {
-			soc = server.accept();
-			Thread recCom = new Thread(new CommRecieve(soc)); // Creates the
-																// recieve and
-																// send threads
+			
 
-			
-			
-			
-		recCom.start(); // Starts the recieving and send threads
+			Boolean again = true;
+			while (again) {
+				soc = server.accept();
+				BufferedReader buffReader = new BufferedReader(
+						new InputStreamReader(soc.getInputStream()));
+
+				String meddelande = buffReader.readLine();
+
+				System.out.println(meddelande);
+
+				soc.close();
+			}
+
+			server.close();
 
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+
 		}
 
 	}

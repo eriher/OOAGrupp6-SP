@@ -9,23 +9,29 @@
 
 package model;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.ServerSocket;
+import java.net.Socket;
 
 public class ClientNode{
 	private static ClientNode nod = null;
 	ServerSocket server;
 	
-	private ClientNode(int port){		//Must be made Singleton method or else ServerSocket will already be occupied.
+	private ClientNode(int port){		//Use singleton method to create
 		
 		try {
-			server = new ServerSocket(port);
+			server = new ServerSocket(4444);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		Communication comm = new Communication(server);
-		System.out.println("hejsan");
+		
+	
+		
 		
 		
 		
