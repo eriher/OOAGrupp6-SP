@@ -16,7 +16,6 @@ public class Window {
 	private HashMap<String, GUI> interfaceList;
 	private JFrame frame;
 
-	
 	public Window() {
 		interfaceList = new HashMap<String, GUI>();
 		createFrame();
@@ -27,6 +26,7 @@ public class Window {
 	private void createFrame() {
 		frame = new JFrame();
 		frame.setLayout(new BorderLayout());
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
 	}
 
@@ -37,11 +37,19 @@ public class Window {
 	}
 
 	/**
-	 * @param key name of the GUI to switch to.
+	 * @param key
+	 *            name of the GUI to switch to.
 	 */
-	public void SetView(String key) {
+	public void SetView(String key) throws IllegalArgumentException {
+		if (interfaceList.get(key) == null) {
+			throw new IllegalArgumentException("Invalid key: " + key);
+		}
+
 		frame.getContentPane().removeAll();
 		frame.add(interfaceList.get(key).getCanvas());
 		frame.pack();
+		frame.setExtendedState(JFrame.MAXIMIZED_BOTH); // Needs to be called
+														// after add because of
+														// internal layouts
 	}
 }

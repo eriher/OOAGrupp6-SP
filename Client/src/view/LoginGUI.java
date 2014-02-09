@@ -8,8 +8,10 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
@@ -40,15 +42,11 @@ public class LoginGUI extends GUI {
 
 		JPanel tempPanel;
 
-		// Init logInWindow to put logInPanel, userName, and password into.
+		// Init logInWindow to put logInButton, userName, and password into.
 		tempPanel = new JPanel();
 		components.put("logInWindow", tempPanel);
-		tempPanel.setLayout(new BoxLayout(tempPanel, BoxLayout.Y_AXIS));
+		tempPanel.setLayout(new GridBagLayout());
 
-		// Init logInPanel
-		tempPanel = new JPanel();
-		components.put("logInPanel", tempPanel);
-		tempPanel.setLayout(new BoxLayout(tempPanel, BoxLayout.X_AXIS));
 	}
 
 	/**
@@ -57,11 +55,15 @@ public class LoginGUI extends GUI {
 	protected void initTextFields() {
 		super.initTextFields();
 
+		JTextField tempField;
+
 		// Init userName
-		components.put("userNameTF", new JTextField());
+		tempField = new JTextField();
+		components.put("userNameTF", tempField);
 
 		// Init password
-		components.put("passwordPF", new JPasswordField());
+		tempField = new JPasswordField();
+		components.put("passwordPF", tempField);
 	}
 
 	/**
@@ -69,13 +71,26 @@ public class LoginGUI extends GUI {
 	 */
 	protected void buildGUI() {
 		super.buildGUI();
-		
-		components.get("logInPanel").add(components.get("logInButton"));
-		
-		components.get("logInWindow").add(components.get("userNameTF"));
-		components.get("logInWindow").add(components.get("passwordPF"));
-		components.get("logInWindow").add(components.get("logInPanel"));
-		
+
+		JPanel panel = (JPanel) components.get("logInWindow");
+		GridBagConstraints c = new GridBagConstraints();
+
+		// userNameTextField
+		c.gridy = 0;
+		c.ipadx = 450;
+		panel.add(components.get("userNameTF"), c);
+
+		// passwordPasswordField
+		c.gridy = 1;
+		panel.add(components.get("passwordPF"), c);
+		c.ipadx = 0;
+
+		// logInButton
+		c.gridy = 2;
+		c.anchor = GridBagConstraints.SOUTHEAST;
+		c.insets = new Insets(16, 0, 0, 0);
+		panel.add(components.get("logInButton"), c);
+
 		canvas.add(components.get("logInWindow"), BorderLayout.CENTER);
 
 	}

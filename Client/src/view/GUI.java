@@ -47,12 +47,12 @@ public abstract class GUI {
 	protected void initPanels() {
 
 	}
-	
+
 	/**
 	 * Create all text fields.
 	 */
 	protected void initTextFields() {
-		
+
 	}
 
 	/**
