@@ -11,9 +11,7 @@ import java.awt.BorderLayout;
 import java.awt.Container;
 import java.util.HashMap;
 
-import javax.swing.JButton;
 import javax.swing.JPanel;
-import javax.swing.JPasswordField;
 
 public abstract class GUI {
 	protected JPanel canvas; // Every component MUST be connected to the

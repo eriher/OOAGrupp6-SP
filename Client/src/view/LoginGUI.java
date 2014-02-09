@@ -18,6 +18,7 @@ import javax.swing.JTextField;
 public class LoginGUI extends GUI {
 	public LoginGUI() {
 		super();
+
 		initTextFields();
 	}
 
@@ -28,8 +29,7 @@ public class LoginGUI extends GUI {
 		super.initButtons();
 
 		// Init logIn
-		super.initButtons();
-		components.put("logIn", new JButton("Log In"));
+		components.put("logInButton", new JButton("Log In"));
 	}
 
 	/**
@@ -37,6 +37,18 @@ public class LoginGUI extends GUI {
 	 */
 	protected void initPanels() {
 		super.initPanels();
+
+		JPanel tempPanel;
+
+		// Init logInWindow to put logInPanel, userName, and password into.
+		tempPanel = new JPanel();
+		components.put("logInWindow", tempPanel);
+		tempPanel.setLayout(new BoxLayout(tempPanel, BoxLayout.Y_AXIS));
+
+		// Init logInPanel
+		tempPanel = new JPanel();
+		components.put("logInPanel", tempPanel);
+		tempPanel.setLayout(new BoxLayout(tempPanel, BoxLayout.X_AXIS));
 	}
 
 	/**
@@ -45,11 +57,11 @@ public class LoginGUI extends GUI {
 	protected void initTextFields() {
 		super.initTextFields();
 
-		// Init username
-		components.put("userName", new JTextField());
+		// Init userName
+		components.put("userNameTF", new JTextField());
 
 		// Init password
-		components.put("password", new JPasswordField());
+		components.put("passwordPF", new JPasswordField());
 	}
 
 	/**
@@ -57,6 +69,14 @@ public class LoginGUI extends GUI {
 	 */
 	protected void buildGUI() {
 		super.buildGUI();
+		
+		components.get("logInPanel").add(components.get("logInButton"));
+		
+		components.get("logInWindow").add(components.get("userNameTF"));
+		components.get("logInWindow").add(components.get("passwordPF"));
+		components.get("logInWindow").add(components.get("logInPanel"));
+		
+		canvas.add(components.get("logInWindow"), BorderLayout.CENTER);
 
 	}
 }
