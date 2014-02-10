@@ -21,6 +21,7 @@ public abstract class GUI {
 	public GUI() {
 		canvas = new JPanel();
 		components = new HashMap<String, Container>();
+		initLabels();
 		initButtons();
 		initPanels();
 		initTextFields();
@@ -32,6 +33,13 @@ public abstract class GUI {
 	 */
 	public JPanel getCanvas() {
 		return canvas;
+	}
+
+	/**
+	 * Create all labels
+	 */
+	protected void initLabels() {
+
 	}
 
 	/**
@@ -61,5 +69,4 @@ public abstract class GUI {
 	protected void buildGUI() {
 		canvas.setLayout(new BorderLayout());
 	}
-
 }
