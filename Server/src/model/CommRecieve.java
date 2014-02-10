@@ -14,9 +14,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.Scanner;
+import java.util.Observable;
 
-public class CommRecieve implements Runnable {		//Should be made Observable and when a scanin.hasNextline comes in it should update Communication
+public class CommRecieve extends Observable implements Runnable {		//Should be made Observable and when a scanin.hasNextline comes in it should update Communication
 	
 	private Socket soc;
 	private ServerSocket server;
@@ -41,8 +41,10 @@ public class CommRecieve implements Runnable {		//Should be made Observable and 
 
 				message = buffReader.readLine();
 
-				System.out.println(message);				//Uppdate Observers
-
+				System.out.println(message);				//Debug	
+				setChanged(); 								//Uppdate Observers
+				notifyObservers();
+				
 				
 			}
 			soc.close();
