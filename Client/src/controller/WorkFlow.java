@@ -8,5 +8,7 @@
 package controller;
 
 public class Workflow {
-
+	public Workflow(){
+		
+	}
 }
