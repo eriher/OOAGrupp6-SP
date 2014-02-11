@@ -1,34 +1,55 @@
 /**
  * Write a description of class Window here.
  * 
- * @author David Stromner
- * @version 2013-02-06
+ * @author David Stromner, Benjamin Wijk, Magnus Kallten
+ * @version 2013-02-07
  */
 
 package view;
 
+import java.awt.BorderLayout;
 import java.util.HashMap;
 
 import javax.swing.JFrame;
 
 public class Window {
-	private HashMap<String,GUI> interfaceList;
+	private HashMap<String, GUI> interfaceList;
 	private JFrame frame;
-	
-	public Window(){
-		interfaceList = new HashMap<String,GUI>();
-		frame = new JFrame();
+
+	public Window() {
+		interfaceList = new HashMap<String, GUI>();
+		createFrame();
 		// Init all the views
 		initViews();
 	}
-	
-	private void initViews(){
+
+	private void createFrame() {
+		frame = new JFrame();
+		frame.setLayout(new BorderLayout());
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setVisible(true);
+	}
+
+	private void initViews() {
 		interfaceList.put("Login", new LoginGUI());
 		interfaceList.put("Admin", new AdminGUI());
-		interfaceList.put("Employee", new EmployeeGUI());	
+		interfaceList.put("Employee", new EmployeeGUI());
 	}
-	
-	public void SetView(String key){
-		frame.add(interfaceList.get(key));
+
+	/**
+	 * @param key
+	 *            name of the GUI to switch to.
+	 */
+	public void SetView(String key) throws IllegalArgumentException {
+		if (interfaceList.get(key) == null) {
+			throw new IllegalArgumentException("Invalid key: " + key);
+		}
+
+		frame.getContentPane().removeAll();
+		frame.add(interfaceList.get(key).getCanvas());
+		frame.pack();
+		frame.setExtendedState(JFrame.MAXIMIZED_BOTH); // Needs to be called
+														// after add because of
+														// internal layouts
 	}
 }

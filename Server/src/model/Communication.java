@@ -1,3 +1,4 @@
+
 /**
  * Write a description of class Communication here.
  * 
@@ -52,3 +53,4 @@ public class Communication {
 	}
 
 }
+

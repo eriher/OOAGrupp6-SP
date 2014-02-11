@@ -1,3 +1,4 @@
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -9,7 +10,6 @@ import model.ClientNode;
 /**
  * Write a description of class Main here.
  * 
- * @author David Stromner
  * @author Henrik Johansson
  * @version 2013-02-07
  */
@@ -32,3 +32,4 @@ public class Main {
 	}
 
 }
+

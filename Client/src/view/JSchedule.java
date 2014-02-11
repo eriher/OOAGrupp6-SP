@@ -2,11 +2,22 @@
  * Write a description of class JSchedule here.
  * 
  * @author David Stromner
- * @version 2013-02-06
+ * @version 2013-02-07
  */
 
 package view;
 
-public class JSchedule {
+import java.util.Observer;
 
+public class JSchedule implements Observer {
+	public JSchedule() {
+
+	}
+
+	/**
+	 * @param o
+	 */
+	public void update(OBJEKT o) {
+
+	}
 }
