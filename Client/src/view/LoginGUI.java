@@ -29,6 +29,8 @@ public class LoginGUI extends GUI {
 	 * Create all labels
 	 */
 	protected void initLabels() {
+		super.initLabels();
+		
 		// Init IDLabel
 		components.put("usernameLabel", new JLabel("Username:"));
 
