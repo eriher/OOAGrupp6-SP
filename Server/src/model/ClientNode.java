@@ -19,7 +19,7 @@ public class ClientNode{
 	private static ClientNode nod = null;
 	ServerSocket server;
 	
-	private ClientNode(int port){		//Use singleton method to create
+	private ClientNode(int port){		//TODO change singleton method to getInstance
 		
 		try {
 			server = new ServerSocket(4444);

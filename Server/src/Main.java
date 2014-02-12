@@ -17,7 +17,7 @@ public class Main {
 	  public static void main(String[] args) {
 	  
 	  
-	  ClientNode node = ClientNode.singleton(PORT);	//TODO testar att skicka från communication
+	  ClientNode node = ClientNode.singleton(PORT);	//TODO atm recieves input and prints out the string, its nasty right now I know sry...
 	  }
 
 

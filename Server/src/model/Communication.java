@@ -28,11 +28,11 @@ public class Communication implements Observer {
 	public Communication(ServerSocket server) { 
 		this.server = server;
 
-		//recieveInit();
+		recieveInit();
 		System.out.println("Under recieve");
 		
 		
-		
+		/*					//TODO send test remove this when done
 		InetAddress iaddr;
 		try {
 			iaddr = InetAddress.getByName("localhost");
@@ -40,7 +40,7 @@ public class Communication implements Observer {
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 		
 
 	}
