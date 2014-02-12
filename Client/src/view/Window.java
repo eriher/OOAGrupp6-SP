@@ -23,6 +23,9 @@ public class Window {
 		initViews();
 	}
 
+	/**
+	 * Initiate main window
+	 */
 	private void createFrame() {
 		frame = new JFrame();
 		frame.setLayout(new BorderLayout());
@@ -30,6 +33,9 @@ public class Window {
 		frame.setVisible(true);
 	}
 
+	/**
+	 * Create all GUIs
+	 */
 	private void initViews() {
 		interfaceList.put("Login", new LoginGUI());
 		interfaceList.put("Admin", new AdminGUI());
@@ -49,7 +55,7 @@ public class Window {
 		frame.add(interfaceList.get(key).getCanvas());
 		frame.pack();
 		frame.setExtendedState(JFrame.MAXIMIZED_BOTH); // Needs to be called
-														// after add because of
-														// internal layouts
+		// after add because of
+		// internal layouts
 	}
 }

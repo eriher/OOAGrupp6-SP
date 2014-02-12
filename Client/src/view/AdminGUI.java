@@ -9,7 +9,7 @@ package view;
 
 public class AdminGUI extends UserGUI {
 	public AdminGUI() {
-
+		super();
 	}
 
 	/**

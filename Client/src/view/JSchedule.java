@@ -7,6 +7,7 @@
 
 package view;
 
+import java.util.Observable;
 import java.util.Observer;
 
 public class JSchedule implements Observer {
@@ -17,7 +18,7 @@ public class JSchedule implements Observer {
 	/**
 	 * @param o
 	 */
-	public void update(OBJEKT o) {
-
+	public void update(Observable o, Object arg) {
+		
 	}
 }
