@@ -12,6 +12,7 @@ package model;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Observable;
@@ -39,11 +40,13 @@ public class CommRecieve extends Observable implements Runnable {		//Should be m
 				BufferedReader buffReader = new BufferedReader(
 						new InputStreamReader(soc.getInputStream()));
 
+				InetAddress iaddr = soc.getInetAddress();
+				
 				message = buffReader.readLine();
 
-				System.out.println(message);				//Debug	
-				setChanged(); 								//Uppdate Observers
-				notifyObservers();
+				System.out.println(message);				// TODO Debug	
+				setChanged(); 								//Update Observers
+				notifyObservers(message);
 				
 				
 			}

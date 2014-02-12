@@ -1,8 +1,8 @@
 /**
+ * This is the overall controller of the Server
  * 
- * @author David Stromner
  * @author  Henrik Johansson
- * @version 2013-02-07
+ * @version 2013-02-12
  */
 
 

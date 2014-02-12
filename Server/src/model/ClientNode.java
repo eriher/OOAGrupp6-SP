@@ -1,8 +1,7 @@
 
 /**
- * Write a description of class ClientNode here.
+ * ClientNode keeps track of all current connections.
  * 
- * @author David Stromner
  * @author Henrik Johansson
  * @version 2013-02-07
  */

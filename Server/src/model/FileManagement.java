@@ -1,9 +1,9 @@
 /**
- * Write a description of class FileManagement here.
+ * Read a txt file from hdd and return it to whomever needs it,
+ * Save a txt file to hdd.
  * 
- * @author David Stromner
  * @author Henrik Johansson
- * @version 2013-02-07
+ * @version 2013-02-12
  */
 
 

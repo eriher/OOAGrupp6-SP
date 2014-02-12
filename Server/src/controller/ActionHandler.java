@@ -1,55 +1,27 @@
-<<<<<<< HEAD
+
 /**
- * Write a description of class ActionHandler here.
+ * Controls all ActionEvents
  * 
- * @author David Stromner
  * @author Henrik Johansson
- * @version 2013-02-07
+ * @version 2013-02-12
  */
 
 
 package controller;
 
 public class ActionHandler { //Singleton
+	private static ActionHandler instance = null;
 	
 	
 	private ActionHandler(){
 		
 	}
 	
-	/*public ActionHandler singleton(){ //Singleton method
-		
-	}*/
-	
-	public void startButton(){	//Executes when click on start button
-		
-	}
-	
-	public void stopButton(){	//Executes when click on stop button
-		
-	}
-	
-
-}
-=======
-/**
- * Write a description of class ActionHandler here.
- * 
- * @author David Stromner
- * @author Henrik Johansson
- * @version 2013-02-07
- */
-
-
-package controller;
-
-public class ActionHandler { //Singleton
-	private ActionHandler(){
-		
-	}
-	
-	public ActionHandler singleton(){ //Singleton method
-		
+	public ActionHandler getInstance(){ //Singleton method
+		if(instance == null){
+			instance = new ActionHandler();
+		}
+		return instance;
 	}
 	
 	public void startButton(){	//Executes when click on start button
@@ -62,4 +34,3 @@ public class ActionHandler { //Singleton
 	
 
 }
->>>>>>> 82a98fb5092bcc4433c521cbf43a181e614c6e01

@@ -1,39 +1,68 @@
 
 /**
- * Write a description of class Communication here.
- * 
- * @author David Stromner
+ * Each connecton to the server should initiate a new Communication objec.
+ *
  * @author Henrik Johansson
- * @version 2013-02-07
+ * @version 2013-02-12
  * 
  * @param port	port number for Serversocket.
  */
 
 package model;
 
-import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.Scanner;
+import java.net.UnknownHostException;
+import java.util.Observable;
+import java.util.Observer;
 
-public class Communication {
+public class Communication implements Observer {
 	private ServerSocket server;
-	private Socket soc;
+	//private Socket soc; TODO remove
 	private Boolean recieveInited = false;
 	private CommRecieve recComm ;
 
-	public Communication(ServerSocket server) { // Should be made observer of CommRecieve
+	public Communication(ServerSocket server) { 
 		this.server = server;
 
-		recieveInit();
+		//recieveInit();
 		System.out.println("Under recieve");
+		
+		
+		
+		InetAddress iaddr;
+		try {
+			iaddr = InetAddress.getByName("localhost");
+			send(iaddr , 4445, "hajhajserver");
+		} catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 
 	}
+	
+	public void update(Observable o, Object arg){
+		System.out.println("CommRecieve has uppdated something");
+	}
 
-	public void send() {
+	public void send(InetAddress ipAddress, int port, String message){	//Send message to ip ipAddress on port port lol :)
+				
+			try {
+				Socket sendSoc = new Socket(ipAddress, port);
+				DataOutputStream out = new DataOutputStream(sendSoc.getOutputStream() );
+				out.writeBytes(message);
+				sendSoc.close();
+				
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}		
+			
+		
 
 	}
 	
@@ -45,6 +74,7 @@ public class Communication {
 		if(!recieveInited){
 			recieveInited = true;
 			CommRecieve recComm = new CommRecieve(server);
+			recComm.addObserver(this);
 			Thread recieve = new Thread( recComm );
 			recieve.start();
 		}
