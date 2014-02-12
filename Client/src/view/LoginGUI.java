@@ -1,5 +1,5 @@
 /**
- * Write a description of class LoginGUI here.
+ * All unique swing components for the LoginGUI.
  * 
  * @author David Stromner, Benjamin Wijk, Magnus Kallten
  * @version 2013-02-07
@@ -19,10 +19,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
 
 import controller.ActionHandler;
+import controller.DocumentListenerHandler;
 
 public class LoginGUI extends GUI {
 	public LoginGUI() {
@@ -30,7 +29,7 @@ public class LoginGUI extends GUI {
 	}
 
 	/**
-	 * Create all labels
+	 * Create all labels.
 	 */
 	@Override
 	protected void initLabels() {
@@ -44,7 +43,7 @@ public class LoginGUI extends GUI {
 	}
 
 	/**
-	 * Create all buttons
+	 * Create all buttons.
 	 */
 	@Override
 	protected void initButtons() {
@@ -65,7 +64,7 @@ public class LoginGUI extends GUI {
 	}
 
 	/**
-	 * Create all panels
+	 * Create all panels.
 	 */
 	@Override
 	protected void initPanels() {
@@ -88,50 +87,25 @@ public class LoginGUI extends GUI {
 		super.initTextFields();
 
 		JTextField tempField;
+		DocumentListenerHandler handler;
 
 		// Init userName
 		tempField = new JTextField();
 		components.put("usernameTF", tempField);
-		tempField.getDocument().addDocumentListener(new DocumentListener() {
-			@Override
-			public void changedUpdate(DocumentEvent e) {
-				ActionHandler.getInstance().usernameActivity(e);
-			}
-
-			@Override
-			public void insertUpdate(DocumentEvent e) {
-				ActionHandler.getInstance().usernameActivity(e);
-			}
-
-			@Override
-			public void removeUpdate(DocumentEvent e) {
-				ActionHandler.getInstance().usernameActivity(e);
-			}
-		});
+		handler = new DocumentListenerHandler();
+		handler.setMethod(ActionHandler.getInstance(), "usernameActivity");
+		tempField.getDocument().addDocumentListener(handler);
 
 		// Init password
 		tempField = new JPasswordField();
 		components.put("passwordPF", tempField);
-		tempField.getDocument().addDocumentListener(new DocumentListener() {
-			@Override
-			public void changedUpdate(DocumentEvent e) {
-				ActionHandler.getInstance().passwordActivity(e);
-			}
-
-			@Override
-			public void insertUpdate(DocumentEvent e) {
-				ActionHandler.getInstance().passwordActivity(e);
-			}
-
-			@Override
-			public void removeUpdate(DocumentEvent e) {
-				ActionHandler.getInstance().passwordActivity(e);
-			}
-		});
+		handler = new DocumentListenerHandler();
+		handler.setMethod(ActionHandler.getInstance(), "passwordActivity");
+		tempField.getDocument().addDocumentListener(handler);
 	}
 
 	/**
-	 * Place all components
+	 * Place all components.
 	 */
 	@Override
 	protected void buildGUI() {
@@ -152,13 +126,13 @@ public class LoginGUI extends GUI {
 		c.insets = new Insets(0, 10, 0, 0);
 		panel.add(components.get("passwordLabel"), c);
 
-		// userNameTextField
+		// usernameTF
 		c.gridx = 1;
 		c.gridy = 0;
 		c.ipadx = 270;
 		panel.add(components.get("usernameTF"), c);
 
-		// passwordPasswordField
+		// passwordPF
 		c.gridx = 1;
 		c.gridy = 1;
 		panel.add(components.get("passwordPF"), c);
@@ -171,6 +145,6 @@ public class LoginGUI extends GUI {
 		c.insets = new Insets(16, 0, 0, 0);
 		panel.add(components.get("logInButton"), c);
 
-		canvas.add(components.get("logInWindow"), BorderLayout.CENTER);
+		getCanvas().add(components.get("logInWindow"), BorderLayout.CENTER);
 	}
 }

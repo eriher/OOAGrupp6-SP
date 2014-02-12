@@ -1,8 +1,8 @@
 /**
- * Write a description of class ActionHandler here.
+ * Takes care of all events that can be triggered by swing components.
  * 
  * @author David Stromner
- * @version 2013-02-06
+ * @version 2013-02-12
  */
 
 package controller;
@@ -21,20 +21,20 @@ public class ActionHandler {
 	}
 
 	/**
-	 * Update userName with any activity that happens to userNameTF
+	 * Update userName with any activity that happens to userNameTF.
 	 * 
 	 * @param e
-	 *            DocumentEvent that happened
+	 *            DocumentEvent that happened.
 	 */
 	public void usernameActivity(DocumentEvent e) {
 		username = logString(e);
 	}
 
 	/**
-	 * Update password with any activity that happens to userNameTF
+	 * Update password with any activity that happens to userNameTF.
 	 * 
 	 * @param e
-	 *            DocumentEvent that happened
+	 *            DocumentEvent that happened.
 	 */
 	public void passwordActivity(DocumentEvent e) {
 		password = logString(e);
@@ -42,7 +42,7 @@ public class ActionHandler {
 
 	/**
 	 * @param e
-	 *            DocumentEvent that happened
+	 *            DocumentEvent to get string from.
 	 */
 	private String logString(DocumentEvent e) {
 		Document doc = e.getDocument();
@@ -58,8 +58,7 @@ public class ActionHandler {
 	}
 
 	/**
-	 * Retrieves the information stored in userName & password and sends it to
-	 * the server.
+	 * Retrieves login information and sends it to the server.
 	 */
 	public void logIn() {
 		System.out.println("Pressing: Log In\n With information Username: "
@@ -67,7 +66,9 @@ public class ActionHandler {
 	}
 
 	/**
-	 * @return The single instance of the object
+	 * Singleton method.
+	 * 
+	 * @return The single instance of the object.
 	 */
 	public static ActionHandler getInstance() {
 		if (actionHandler == null) {

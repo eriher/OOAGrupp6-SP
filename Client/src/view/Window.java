@@ -1,13 +1,14 @@
 /**
- * Write a description of class Window here.
+ * Contains all the different GUIs' and also manage the frame itself.
  * 
  * @author David Stromner, Benjamin Wijk, Magnus Kallten
- * @version 2013-02-07
+ * @version 2013-02-12
  */
 
 package view;
 
 import java.awt.BorderLayout;
+import java.awt.Frame;
 import java.util.HashMap;
 
 import javax.swing.JFrame;
@@ -54,7 +55,7 @@ public class Window {
 		frame.getContentPane().removeAll();
 		frame.add(interfaceList.get(key).getCanvas());
 		frame.pack();
-		frame.setExtendedState(JFrame.MAXIMIZED_BOTH); // Needs to be called
+		frame.setExtendedState(Frame.MAXIMIZED_BOTH); // Needs to be called
 		// after add because of
 		// internal layouts
 	}

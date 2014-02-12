@@ -1,8 +1,8 @@
 /**
- * Write a description of class GUI here.
+ * All unique swing components for the GUI.
  * 
  * @author David Stromner, Benjamin Wijk, Magnus Kallten
- * @version 2013-02-07
+ * @version 2013-02-12
  */
 
 package view;
@@ -14,7 +14,7 @@ import java.util.HashMap;
 import javax.swing.JPanel;
 
 public abstract class GUI {
-	protected JPanel canvas; // Every component MUST be connected to the
+	private JPanel canvas; // Every component MUST be connected to the
 	// canvas.
 	protected HashMap<String, Container> components;
 
@@ -38,30 +38,22 @@ public abstract class GUI {
 	/**
 	 * Create all labels
 	 */
-	protected void initLabels() {
-
-	}
+	protected void initLabels() {}
 
 	/**
 	 * Create all buttons
 	 */
-	protected void initButtons() {
-
-	}
+	protected void initButtons() {}
 
 	/**
 	 * Create all panels
 	 */
-	protected void initPanels() {
-
-	}
+	protected void initPanels() {}
 
 	/**
 	 * Create all text fields.
 	 */
-	protected void initTextFields() {
-
-	}
+	protected void initTextFields() {}
 
 	/**
 	 * Place all components
