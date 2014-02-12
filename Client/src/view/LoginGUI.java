@@ -19,6 +19,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 import controller.ActionHandler;
 
@@ -30,6 +32,7 @@ public class LoginGUI extends GUI {
 	/**
 	 * Create all labels
 	 */
+	@Override
 	protected void initLabels() {
 		super.initLabels();
 
@@ -43,6 +46,7 @@ public class LoginGUI extends GUI {
 	/**
 	 * Create all buttons
 	 */
+	@Override
 	protected void initButtons() {
 		super.initButtons();
 
@@ -52,6 +56,7 @@ public class LoginGUI extends GUI {
 		tempButton = new JButton("Log In");
 		components.put("logInButton", tempButton);
 		tempButton.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				ActionHandler.getInstance().logIn();
 			}
@@ -62,6 +67,7 @@ public class LoginGUI extends GUI {
 	/**
 	 * Create all panels
 	 */
+	@Override
 	protected void initPanels() {
 		super.initPanels();
 
@@ -77,6 +83,7 @@ public class LoginGUI extends GUI {
 	/**
 	 * Create all text fields.
 	 */
+	@Override
 	protected void initTextFields() {
 		super.initTextFields();
 
@@ -84,16 +91,49 @@ public class LoginGUI extends GUI {
 
 		// Init userName
 		tempField = new JTextField();
-		components.put("userNameTF", tempField);
+		components.put("usernameTF", tempField);
+		tempField.getDocument().addDocumentListener(new DocumentListener() {
+			@Override
+			public void changedUpdate(DocumentEvent e) {
+				ActionHandler.getInstance().usernameActivity(e);
+			}
+
+			@Override
+			public void insertUpdate(DocumentEvent e) {
+				ActionHandler.getInstance().usernameActivity(e);
+			}
+
+			@Override
+			public void removeUpdate(DocumentEvent e) {
+				ActionHandler.getInstance().usernameActivity(e);
+			}
+		});
 
 		// Init password
 		tempField = new JPasswordField();
 		components.put("passwordPF", tempField);
+		tempField.getDocument().addDocumentListener(new DocumentListener() {
+			@Override
+			public void changedUpdate(DocumentEvent e) {
+				ActionHandler.getInstance().passwordActivity(e);
+			}
+
+			@Override
+			public void insertUpdate(DocumentEvent e) {
+				ActionHandler.getInstance().passwordActivity(e);
+			}
+
+			@Override
+			public void removeUpdate(DocumentEvent e) {
+				ActionHandler.getInstance().passwordActivity(e);
+			}
+		});
 	}
 
 	/**
 	 * Place all components
 	 */
+	@Override
 	protected void buildGUI() {
 		super.buildGUI();
 
@@ -116,7 +156,7 @@ public class LoginGUI extends GUI {
 		c.gridx = 1;
 		c.gridy = 0;
 		c.ipadx = 270;
-		panel.add(components.get("userNameTF"), c);
+		panel.add(components.get("usernameTF"), c);
 
 		// passwordPasswordField
 		c.gridx = 1;

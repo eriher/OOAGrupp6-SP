@@ -18,6 +18,7 @@ public abstract class UserGUI extends GUI {
 	/**
 	 * Create all buttons
 	 */
+	@Override
 	protected void initButtons() {
 		super.initButtons();
 		// Init logout
@@ -27,6 +28,7 @@ public abstract class UserGUI extends GUI {
 	/**
 	 * Create all panels
 	 */
+	@Override
 	protected void initPanels() {
 		super.initPanels();
 		// Init top
@@ -38,6 +40,7 @@ public abstract class UserGUI extends GUI {
 	/**
 	 * Place all components
 	 */
+	@Override
 	protected void buildGUI() {
 		super.buildGUI();
 	}

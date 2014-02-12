@@ -15,6 +15,7 @@ public class AdminGUI extends UserGUI {
 	/**
 	 * Create all buttons
 	 */
+	@Override 
 	protected void initButtons() {
 		super.initButtons();
 	}
@@ -22,6 +23,7 @@ public class AdminGUI extends UserGUI {
 	/**
 	 * Place all components
 	 */
+	@Override 
 	protected void buildGUI() {
 		super.buildGUI();
 	}
