@@ -11,10 +11,14 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
 
+import model.Communication;
+import model.UserHandler;
+
 public class ActionHandler {
 	private static ActionHandler actionHandler = null;
 	private String username, password;
-
+	private UserHandler user;
+	private Communication comm;
 	private ActionHandler() {
 		username = "";
 		password = "";
@@ -60,9 +64,24 @@ public class ActionHandler {
 	/**
 	 * Retrieves login information and sends it to the server.
 	 */
-	public void logIn() {
+	public void logIn(String username, String password) {
+		
+		if((username != null && password != null) &&
+					!(username.isEmpty() && password.isEmpty()))
+			{
+				user = new UserHandler(username, password);
+				if(comm.requestLogin(user).equals("1"))
+					System.out.println("Du är inloggad");
+				else
+					System.out.println("Något gick fel");
+			}
+			else 
+				System.out.println("inga tomma fält");
+	
+		/*
 		System.out.println("Pressing: Log In\n With information Username: "
 				+ username + "\tPassword:" + password);
+		*/
 	}
 
 	/**
