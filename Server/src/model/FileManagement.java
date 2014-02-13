@@ -27,7 +27,7 @@ public class FileManagement {
 	 * @param perNr
 	 * @return
 	 */
-	public String checkPassword(String fileName, String perNr){
+	public String getPassword(String fileName, String perNr){
 		try {
 			Scanner in = new Scanner(new FileReader(fileName) );
 			
@@ -46,6 +46,7 @@ public class FileManagement {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		System.out.println("null returned from file manager");
 		return null;
 		
 	}

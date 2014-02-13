@@ -13,6 +13,8 @@ import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+import controller.Workflow;
+
 public class ClientNode {
 	private static ClientNode nod = null;
 	ServerSocket server;
@@ -22,7 +24,7 @@ public class ClientNode {
 	 *            Porten
 	 * 
 	 */
-	private ClientNode(int port) { // TODO change singleton method to
+	private ClientNode(int port, Workflow flow) { // TODO change singleton method to
 									// getInstance
 
 		try {
@@ -32,13 +34,13 @@ public class ClientNode {
 			e.printStackTrace();
 		}
 
-		Communication comm = new Communication(server);
+		Communication comm = new Communication(server, flow);
 
 	}
 
-	public static synchronized ClientNode singleton(int port) {
+	public static synchronized ClientNode getInstance(int port, Workflow flow) {
 		if (nod == null) {
-			nod = new ClientNode(port);
+			nod = new ClientNode(port, flow);
 		}
 		return nod;
 	}

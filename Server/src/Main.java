@@ -1,3 +1,4 @@
+import controller.Workflow;
 import model.ClientNode;
 import model.FileManagement;
 
@@ -18,8 +19,10 @@ public class Main {
 	public static void main(String[] args) {
 		// ClientNode node = ClientNode.singleton(PORT); //TODO atm recieves
 		// input and prints out the string, its nasty right now I know sry...
-		FileManagement filetest = new FileManagement();
-		System.out.println(filetest.checkPassword("test.txt", "124456789876"));
+		//FileManagement filetest = new FileManagement();
+		//System.out.println(filetest.getPassword("test.txt", "124456789876"));
+		
+		Workflow flow = new Workflow();
 
 	}
 

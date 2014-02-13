@@ -19,13 +19,20 @@ import java.net.UnknownHostException;
 import java.util.Observable;
 import java.util.Observer;
 
+import controller.Workflow;
+
 public class Communication implements Observer {
 	private ServerSocket server;
 	private Boolean recieveInited = false;
 	private CommRecieve recComm ;
+	
+	private InetAddress iaddr = null;
+	private String message = null;
+	private Workflow flow;
 
-	public Communication(ServerSocket server) { 
+	public Communication(ServerSocket server, Workflow flow) { 
 		this.server = server;
+		this.flow = flow;
 
 		recieveInit();
 		System.out.println("Under recieve");	//TODO remove this debug
@@ -37,13 +44,27 @@ public class Communication implements Observer {
 			
 			if(arg instanceof InetAddress){
 				System.out.println("You have recieved a message from " + (InetAddress) arg );
+				iaddr = (InetAddress) arg;
 			}else if(arg instanceof String){
-				System.out.println("You recieved this message" + (String) arg);
+				System.out.println("You recieved this message " + (String) arg);
+				message = (String) arg;
+				messageRecieved();
 			}
 			
 		}
 		
 		
+	}
+	
+	private void messageRecieved(){
+		if(iaddr != null && message != null){
+			
+			
+			flow.loginRecieved(iaddr, message, this);
+			
+			iaddr= null;
+			message = null;
+		}
 	}
 
 	public void send(InetAddress ipAddress, int port, String message){	//Send message to ip ipAddress on port port lol :)
