@@ -7,7 +7,6 @@
 
 package view;
 
-import java.awt.BorderLayout;
 import java.awt.Frame;
 import java.util.HashMap;
 
@@ -29,7 +28,6 @@ public class Window {
 	 */
 	private void createFrame() {
 		frame = new JFrame();
-		frame.setLayout(new BorderLayout());
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
 	}
