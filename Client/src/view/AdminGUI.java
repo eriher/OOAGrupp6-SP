@@ -1,8 +1,8 @@
 /**
- * Write a description of class AdminGUI here.
+ * All unique swing components for the AdminGUI.
  * 
  * @author David Stromner
- * @version 2013-02-07
+ * @version 2013-02-12
  */
 
 package view;
@@ -13,15 +13,17 @@ public class AdminGUI extends UserGUI {
 	}
 
 	/**
-	 * Create all buttons
+	 * Create all buttons.
 	 */
+	@Override
 	protected void initButtons() {
 		super.initButtons();
 	}
 
 	/**
-	 * Place all components
+	 * Place all components.
 	 */
+	@Override
 	protected void buildGUI() {
 		super.buildGUI();
 	}

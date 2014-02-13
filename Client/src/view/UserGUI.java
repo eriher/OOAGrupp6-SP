@@ -1,8 +1,8 @@
 /**
- * Write a description of class UserGUI here.
+ * All unique swing components for the UserGUI.
  * 
  * @author David Stromner, Benjamin Wijk, Magnus Kallten
- * @version 2013-02-07
+ * @version 2013-02-12
  */
 
 package view;
@@ -16,8 +16,9 @@ public abstract class UserGUI extends GUI {
 	}
 
 	/**
-	 * Create all buttons
+	 * Create all buttons.
 	 */
+	@Override
 	protected void initButtons() {
 		super.initButtons();
 		// Init logout
@@ -25,8 +26,9 @@ public abstract class UserGUI extends GUI {
 	}
 
 	/**
-	 * Create all panels
+	 * Create all panels.
 	 */
+	@Override
 	protected void initPanels() {
 		super.initPanels();
 		// Init top
@@ -36,8 +38,9 @@ public abstract class UserGUI extends GUI {
 	}
 
 	/**
-	 * Place all components
+	 * Place all components.
 	 */
+	@Override
 	protected void buildGUI() {
 		super.buildGUI();
 	}

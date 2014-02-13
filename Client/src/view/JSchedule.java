@@ -1,5 +1,5 @@
 /**
- * Write a description of class JSchedule here.
+ * Visual representation of the data that makes up the Schedule.
  * 
  * @author David Stromner
  * @version 2013-02-07
