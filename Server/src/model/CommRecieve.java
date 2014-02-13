@@ -17,8 +17,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Observable;
 
-public class CommRecieve extends Observable implements Runnable {		//Should be made Observable and when a scanin.hasNextline comes in it should update Communication
-	
+public class CommRecieve extends Observable implements Runnable {		
 	private Socket soc;
 	private ServerSocket server;
 	private String message = null;
@@ -27,26 +26,32 @@ public class CommRecieve extends Observable implements Runnable {		//Should be m
 		
 	}
 
+	
+	/* (non-Javadoc)
+	 * @see java.lang.Runnable#run()
+	 */
 	public void run() {
 	
 		try {
 			
-			Boolean again = true;
+			Boolean again = true;		//TODO remove after debug
 			
 			while (again) {
 				
-				soc = server.accept();						//Why if I move this outside loop it will only catch first message?
-				
+				soc = server.accept();						
 				BufferedReader buffReader = new BufferedReader(
 						new InputStreamReader(soc.getInputStream()));
 
 				InetAddress iaddr = soc.getInetAddress();
+				setChanged(); 								//Update Observers of recieved message from iaddr ip
+				notifyObservers(iaddr);
 				
 				message = buffReader.readLine();
 
 				System.out.println(message);				// TODO Debug	
 				setChanged(); 								//Update Observers
 				notifyObservers(message);
+				
 				
 				
 			}

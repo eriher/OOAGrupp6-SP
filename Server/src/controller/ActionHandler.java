@@ -9,6 +9,10 @@
 
 package controller;
 
+/**
+ * @author Henrik
+ *
+ */
 public class ActionHandler { //Singleton
 	private static ActionHandler instance = null;
 	
@@ -17,6 +21,9 @@ public class ActionHandler { //Singleton
 		
 	}
 	
+	/**
+	 * @return
+	 */
 	public ActionHandler getInstance(){ //Singleton method
 		if(instance == null){
 			instance = new ActionHandler();

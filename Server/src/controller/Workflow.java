@@ -10,7 +10,7 @@ package controller;
 
 public class Workflow {
 	public Workflow(){
-		
+		initModelThread();
 	}
 	
 	private void initWindowThread(){

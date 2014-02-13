@@ -12,26 +12,31 @@ package model;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Scanner;
 
 public class FileManagement {
 	public FileManagement(){
-		long longPrNr = 123456789101L;
-					
-		checkPassword("test.txt", longPrNr);
+		
 	}
 	
-	public String checkPassword(String fileName, long perNr){
+	/**
+	 * @param fileName
+	 * @param perNr
+	 * @return
+	 */
+	public String checkPassword(String fileName, String perNr){
 		try {
 			Scanner in = new Scanner(new FileReader(fileName) );
 			
 			while(in.hasNextLine() ){
 				String fullText = in.nextLine();
-				if(fullText.contains( Long.toString(perNr)) ){
+				if(fullText.contains( perNr)  ){
 					//Hittat raden med perssonnummret
 					in.close();
 					String[] persNrPassword = fullText.split(" ");
-					System.out.println();
 					return persNrPassword[1];		//Return password for perNr
 				}
 			}
@@ -45,9 +50,21 @@ public class FileManagement {
 		
 	}
 	
-	public void writeFile(){
-		
+	public void writeFile(String fileName){
+		try {
+			fileName ="test.txt";
+			PrintWriter out = new PrintWriter(new FileWriter(fileName));
+			out.write("hejsan i texten test.txt");
+			out.close();
+			
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
+	
+	
 	
 	
 

@@ -21,7 +21,6 @@ import java.util.Observer;
 
 public class Communication implements Observer {
 	private ServerSocket server;
-	//private Socket soc; TODO remove
 	private Boolean recieveInited = false;
 	private CommRecieve recComm ;
 
@@ -29,24 +28,22 @@ public class Communication implements Observer {
 		this.server = server;
 
 		recieveInit();
-		System.out.println("Under recieve");
-		
-		
-		/*					//TODO send test remove this when done
-		InetAddress iaddr;
-		try {
-			iaddr = InetAddress.getByName("localhost");
-			send(iaddr , 4445, "hajhajserver");
-		} catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
-		
+		System.out.println("Under recieve");	//TODO remove this debug
 
 	}
 	
 	public void update(Observable o, Object arg){
-		System.out.println("CommRecieve has uppdated something");
+		if(o instanceof CommRecieve ){
+			
+			if(arg instanceof InetAddress){
+				System.out.println("You have recieved a message from " + (InetAddress) arg );
+			}else if(arg instanceof String){
+				System.out.println("You recieved this message" + (String) arg);
+			}
+			
+		}
+		
+		
 	}
 
 	public void send(InetAddress ipAddress, int port, String message){	//Send message to ip ipAddress on port port lol :)
@@ -66,9 +63,7 @@ public class Communication implements Observer {
 
 	}
 	
-	public String recieveMessage(){
-		return recComm.getMessage();
-	}
+	
 
 	public void recieveInit() {
 		if(!recieveInited){
