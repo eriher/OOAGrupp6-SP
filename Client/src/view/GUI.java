@@ -2,7 +2,7 @@
  * All unique swing components for the GUI.
  * 
  * @author David Stromner, Benjamin Wijk, Magnus Kallten
- * @version 2013-02-12
+ * @version 2013-02-13
  */
 
 package view;
@@ -20,6 +20,7 @@ public abstract class GUI {
 
 	public GUI() {
 		canvas = new JPanel();
+		canvas.setLayout(new BorderLayout());
 		components = new HashMap<String, Container>();
 		initLabels();
 		initButtons();

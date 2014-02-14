@@ -7,6 +7,8 @@
 
 package view;
 
+import java.awt.BorderLayout;
+
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
@@ -43,5 +45,11 @@ public abstract class UserGUI extends GUI {
 	@Override
 	protected void buildGUI() {
 		super.buildGUI();
+		
+		// topPanel
+		getCanvas().add(components.get("topPanel"), BorderLayout.NORTH);
+		
+		// menuPanel
+		getCanvas().add(components.get("topPanel"), BorderLayout.WEST);
 	}
 }

@@ -1,7 +1,7 @@
 /**
  * All unique swing components for the LoginGUI.
  * 
- * @author David Stromner, Benjamin Wijk, Magnus Kallten
+ * @author David Stromner
  * @version 2013-02-07
  */
 
