@@ -96,6 +96,23 @@ public class Communication implements Observer {
 
 	}
 	
+	public void send(InetAddress ipAddress, int port, Boolean boolMessage){	//Send message to ip ipAddress on port port lol :)
+		
+		try {
+			Socket sendSoc = new Socket(ipAddress, port);
+			DataOutputStream out = new DataOutputStream(sendSoc.getOutputStream() );
+			out.writeBoolean(boolMessage);
+			sendSoc.close();
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+		
+	
+
+}
+	
 	
 
 	/**

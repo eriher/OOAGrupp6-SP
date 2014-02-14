@@ -44,8 +44,12 @@ public class Workflow {
 			
 			// Now true is to be sent back
 			System.out.println("True skickas tillbaka");
-			comm.send(iaddr, 6666, "true");					//Sends back to socket 6666
+			comm.send(iaddr, 4445, true);					//Sends back to socket 6666
 			
+		}
+		else{
+			comm.send(iaddr, 4445, false);
+			System.out.println("False skickas tillbaka");
 		}
 
 	}
