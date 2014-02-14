@@ -61,12 +61,6 @@ public class Communication {
 		if (user == null) {
 			throw new IllegalArgumentException("UserHandler not found");
 		}
-		if (user.getUser() == null) {
-			user.setUser("");
-		}
-		if (user.getPassword() == null) {
-			user.setPassword("");
-		}
 
 		connect();
 

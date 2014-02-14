@@ -21,7 +21,8 @@ public class ActionHandler {
 	private Communication communication;
 
 	private ActionHandler() {
-		
+		username = "";
+		password = "";
 	}
 
 	/**
@@ -61,6 +62,7 @@ public class ActionHandler {
 	 */
 	public void usernameActivity(DocumentEvent e) {
 		username = logString(e);
+		userHandler.setUser(username);
 	}
 
 	/**
@@ -71,6 +73,7 @@ public class ActionHandler {
 	 */
 	public void passwordActivity(DocumentEvent e) {
 		password = logString(e);
+		userHandler.setPassword(password);
 	}
 
 	/**
@@ -91,11 +94,9 @@ public class ActionHandler {
 	}
 
 	/**
-	 * Retrieves login information and sends it to the server.
+	 * Retrieves userHandler and sends it to the server.
 	 */
 	public void logIn() {
-		userHandler.setUser(username);
-		userHandler.setPassword(password);
 		communication.requestLogin(userHandler);
 	}
 }
