@@ -7,10 +7,9 @@
 
 package model;
 
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
@@ -18,8 +17,8 @@ import java.net.UnknownHostException;
 public class Communication {
 
 	private Socket socket;
-	private BufferedReader in;
-	private DataOutputStream out;
+	private ObjectInputStream in;
+	private ObjectOutputStream out;
 	private InetAddress ip;
 	private int portNumber;
 
@@ -43,10 +42,9 @@ public class Communication {
 	private void connect() {
 		try {
 			socket = new Socket(ip, portNumber);
-			socket.setSoTimeout(10);
-			in = new BufferedReader(new InputStreamReader(socket
-					.getInputStream()));
-			out = new DataOutputStream(socket.getOutputStream());
+			socket.setSoTimeout(10000);
+			in = new ObjectInputStream(socket.getInputStream());
+			out = new ObjectOutputStream(socket.getOutputStream());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -71,8 +69,9 @@ public class Communication {
 		Boolean result = false;
 		try {
 			out.writeBytes(username + " " + password);
-			in.readLine();
-		} catch (IOException e) {
+			result = (Boolean) in.readObject();
+			// IOException & ClassNotFoundException
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
