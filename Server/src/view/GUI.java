@@ -1,5 +1,5 @@
 /**
- * Write a description of class GUI here.
+ * Creates the GUI for the Server
  * 
  * @author David Stromner
  * @author Henrik Johansson

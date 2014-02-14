@@ -1,9 +1,8 @@
 /**
- * Write a description of class Window here.
+ * Sets up the frame
  * 
- * @author David Stromner
  * @author Henrik Johansson
- * @version 2013-02-07
+ * @version 2013-02-12
  */
 
 
