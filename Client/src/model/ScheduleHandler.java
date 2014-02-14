@@ -1,7 +1,7 @@
 /**
  * Write a description of class Schedule here.
  * 
- * @author David Stromner
+ * @author
  * @version 2013-02-06
  */
 
