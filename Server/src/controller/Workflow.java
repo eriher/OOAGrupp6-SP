@@ -20,7 +20,7 @@ public class Workflow {
 		initModelThread();
 	}
 
-	private void initWindowThread() {
+	private void initWindowThread() {	//Initializes the Window
 
 	}
 
@@ -30,7 +30,12 @@ public class Workflow {
 
 	}
 
-	public void loginRecieved(InetAddress iaddr, String message, Communication comm) {
+	/**
+	 * @param iaddr		InetAddress
+	 * @param message	The message to be sent
+	 * @param comm		What communication object oto use
+	 */
+	public void loginRecieved(InetAddress iaddr, String message, Communication comm) { //A login has been recieved
 		String[] persNrPass = message.split(" ");
 
 		if (persNrPass[1].equals(fileMan.getPassword("inlogg.txt",

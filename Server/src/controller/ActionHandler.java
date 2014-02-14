@@ -1,6 +1,6 @@
 
 /**
- * Controls all ActionEvents
+ * Controls all ActionEvents (All 2 of them)
  * 
  * @author Henrik Johansson
  * @version 2013-02-12
@@ -22,7 +22,7 @@ public class ActionHandler { //Singleton
 	}
 	
 	/**
-	 * @return
+	 * @return instance of ActionHandler
 	 */
 	public ActionHandler getInstance(){ //Singleton method
 		if(instance == null){

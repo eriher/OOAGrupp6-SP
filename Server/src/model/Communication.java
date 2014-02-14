@@ -1,6 +1,6 @@
 
 /**
- * Each connecton to the server should initiate a new Communication objec.
+ * Each connecton to the server should initiate a new Communication object.
  *
  * @author Henrik Johansson
  * @version 2013-02-12
@@ -39,6 +39,9 @@ public class Communication implements Observer {
 
 	}
 	
+	/* (non-Javadoc)
+	 * @see java.util.Observer#update(java.util.Observable, java.lang.Object)
+	 */
 	public void update(Observable o, Object arg){
 		if(o instanceof CommRecieve ){
 			
@@ -56,6 +59,9 @@ public class Communication implements Observer {
 		
 	}
 	
+	/**
+	 * Check what type of message has been recieved. For now it only check for login recieved.
+	 */
 	private void messageRecieved(){
 		if(iaddr != null && message != null){
 			
@@ -67,6 +73,12 @@ public class Communication implements Observer {
 		}
 	}
 
+	/**
+	 * Send message to specific ip address and port with the message "message".
+	 * @param ipAddress	ipaddress
+	 * @param port		port nr
+	 * @param message	the message to be sent
+	 */
 	public void send(InetAddress ipAddress, int port, String message){	//Send message to ip ipAddress on port port lol :)
 				
 			try {
@@ -86,7 +98,10 @@ public class Communication implements Observer {
 	
 	
 
-	public void recieveInit() {
+	/**
+	 * Initialise recieve part
+	 */
+	private void recieveInit() {
 		if(!recieveInited){
 			recieveInited = true;
 			CommRecieve recComm = new CommRecieve(server);

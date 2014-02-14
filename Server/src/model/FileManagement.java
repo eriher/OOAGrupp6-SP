@@ -23,9 +23,10 @@ public class FileManagement {
 	}
 	
 	/**
+	 * 	Get password for "perNr" from file "fileName"
 	 * @param fileName
 	 * @param perNr
-	 * @return
+	 * @return	password if exist both perNr and Password, null otherwise.
 	 */
 	public String getPassword(String fileName, String perNr){
 		try {
@@ -51,6 +52,10 @@ public class FileManagement {
 		
 	}
 	
+	//TODO fix so that you add text to textfile instead.
+	/**
+	 * @param fileName
+	 */
 	public void writeFile(String fileName){
 		try {
 			fileName ="test.txt";
