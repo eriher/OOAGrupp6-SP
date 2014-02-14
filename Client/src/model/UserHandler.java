@@ -24,7 +24,7 @@ public class UserHandler implements Serializable {
 		this.user = user;
 	}
 	
-	public void setPassword(String passowrd){
+	public void setPassword(String password){
 		this.password = password;
 	}
 

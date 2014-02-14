@@ -10,6 +10,7 @@ package model;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.InetAddress;
 import java.net.Socket;
 import java.net.SocketException;
 
@@ -25,7 +26,8 @@ public class Communication {
 
 	private void connect() {
 		try {
-			socket = new Socket("127.0.0.1", 1234);
+			InetAddress inet = InetAddress.getByName("127.0.0.1");
+			socket = new Socket(inet, 4444);
 		} catch (IOException e) {
 			e.printStackTrace();
 			return;
@@ -41,7 +43,7 @@ public class Communication {
 
 	public void requestLogin(UserHandler user) throws IllegalArgumentException {
 		if (user == null) {
-			throw new IllegalArgumentException("UserHandler not fouind");
+			throw new IllegalArgumentException("UserHandler not found");
 		}
 		if (user.getUser() == null) {
 			user.setUser("");
@@ -50,11 +52,13 @@ public class Communication {
 			user.setPassword("");
 		}
 
-		String result = "0";
+		Boolean result = false;
+		String logIn = user.getUser()+ " " + user.getPassword();
+		
 		try {
-			outStream.writeObject(user);
+			outStream.writeObject(logIn);
 			try {
-				result = (String) inStream.readObject();
+				result = (Boolean) inStream.readObject();
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
 			}
@@ -64,10 +68,10 @@ public class Communication {
 			e.printStackTrace();
 		}
 
-		if (result.equals("1")) {
-			System.out.println("Du är inloggad");
+		if (result == true) {
+			System.out.println("Logged in!");
 		} else {
-			System.out.println("Något gick fel");
+			System.out.println("Bad username or password");
 		}
 	}
 }

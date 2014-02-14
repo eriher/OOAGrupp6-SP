@@ -1,5 +1,5 @@
 /**
- * Write a description of class Workflow here.
+ * Manage the workflow of the client program.
  * 
  * @author David Stromner
  * @version 2013-02-06
