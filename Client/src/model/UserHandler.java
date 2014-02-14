@@ -13,25 +13,27 @@ package model;
 import java.io.Serializable;
 
 public class UserHandler implements Serializable {
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -1570700443561640144L;
 	private String user;
-	private String pw;
+	private String password;
 
-	public UserHandler(String personnr, String pass) {
-		user = personnr;
-		pw	 =	pass;
+	public UserHandler() {
 	}
 
-	String getUser() {
-		return user;
+	public void setUser(String user) {
+		this.user = user;
 	}
 	
-	String getPass() {
-		return pw;
+	public void setPassword(String passowrd){
+		this.password = password;
+	}
+
+	public String getUser() {
+		return user;
+	}
+
+	public String getPassword() {
+		return password;
 	}
 
 }

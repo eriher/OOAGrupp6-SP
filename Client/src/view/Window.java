@@ -45,7 +45,7 @@ public class Window {
 	 * @param key
 	 *            name of the GUI to switch to.
 	 */
-	public void SetView(String key) throws IllegalArgumentException {
+	public void setView(String key) throws IllegalArgumentException {
 		if (interfaceList.get(key) == null) {
 			throw new IllegalArgumentException("Invalid key: " + key);
 		}

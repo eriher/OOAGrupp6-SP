@@ -1,4 +1,4 @@
-import view.Window;
+import controller.Workflow;
 
 /**
  * Write a description of class Main here.
@@ -13,8 +13,7 @@ public class Main {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		Window win = new Window();
-		win.SetView("Login");
+		new Workflow();
 	}
 
 }

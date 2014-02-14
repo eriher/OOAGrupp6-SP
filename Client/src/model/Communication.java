@@ -19,15 +19,13 @@ public class Communication {
 	private static ObjectInputStream inStream;
 	private static ObjectOutputStream outStream;
 
-	public Communication()
-	{
+	public Communication() {
 		connect();
 	}
 
-	private void connect()
-	{
+	private void connect() {
 		try {
-			socket = new Socket("127.0.0.1",1234);
+			socket = new Socket("127.0.0.1", 1234);
 		} catch (IOException e) {
 			e.printStackTrace();
 			return;
@@ -41,27 +39,35 @@ public class Communication {
 		}
 	}
 
-	public String requestLogin(UserHandler user)
-	{
+	public void requestLogin(UserHandler user) throws IllegalArgumentException {
+		if (user == null) {
+			throw new IllegalArgumentException("UserHandler not fouind");
+		}
+		if (user.getUser() == null) {
+			user.setUser("");
+		}
+		if (user.getPassword() == null) {
+			user.setPassword("");
+		}
+
 		String result = "0";
 		try {
 			outStream.writeObject(user);
 			try {
-				result = (String)inStream.readObject();
-				}	catch(ClassNotFoundException e)
-				{
-					e.printStackTrace();
-				}
-		}
-		catch(SocketException e)
-		{
+				result = (String) inStream.readObject();
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			}
+		} catch (SocketException e) {
 			System.out.println(e.toString());
-		}
-		catch(IOException e)
-		{
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return result;
-	}
 
+		if (result.equals("1")) {
+			System.out.println("Du är inloggad");
+		} else {
+			System.out.println("Något gick fel");
+		}
+	}
 }

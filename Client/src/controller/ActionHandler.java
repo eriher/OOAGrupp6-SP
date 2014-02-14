@@ -17,11 +17,40 @@ import model.UserHandler;
 public class ActionHandler {
 	private static ActionHandler actionHandler = null;
 	private String username, password;
-	private UserHandler user;
-	private Communication comm;
+	private UserHandler userHandler;
+	private Communication communication;
+
 	private ActionHandler() {
-		username = "";
-		password = "";
+		
+	}
+
+	/**
+	 * Singleton method.
+	 * 
+	 * @return The single instance of the object.
+	 */
+	public static ActionHandler getInstance() {
+		if (actionHandler == null) {
+			actionHandler = new ActionHandler();
+		}
+
+		return actionHandler;
+	}
+
+	/**
+	 * Set the class instance
+	 * 
+	 * @param userHandler
+	 */
+	public void setUserHandler(UserHandler userHandler) {
+		this.userHandler = userHandler;
+	}
+	
+	/**
+	 * @param communication
+	 */
+	public void setCommunication(Communication communication){
+		this.communication = communication;
 	}
 
 	/**
@@ -64,36 +93,9 @@ public class ActionHandler {
 	/**
 	 * Retrieves login information and sends it to the server.
 	 */
-	public void logIn(String username, String password) {
-		
-		if((username != null && password != null) &&
-					!(username.isEmpty() && password.isEmpty()))
-			{
-				user = new UserHandler(username, password);
-				if(comm.requestLogin(user).equals("1"))
-					System.out.println("Du är inloggad");
-				else
-					System.out.println("Något gick fel");
-			}
-			else 
-				System.out.println("inga tomma fält");
-	
-		/*
-		System.out.println("Pressing: Log In\n With information Username: "
-				+ username + "\tPassword:" + password);
-		*/
-	}
-
-	/**
-	 * Singleton method.
-	 * 
-	 * @return The single instance of the object.
-	 */
-	public static ActionHandler getInstance() {
-		if (actionHandler == null) {
-			actionHandler = new ActionHandler();
-		}
-
-		return actionHandler;
+	public void logIn() {
+		userHandler.setUser(username);
+		userHandler.setPassword(password);
+		communication.requestLogin(userHandler);
 	}
 }
