@@ -24,7 +24,7 @@ public class Communication {
 	private int portNumber;
 
 	/**
-	 * 
+	 * Init port number and IP that the client needs to create a socket against.
 	 */
 	public Communication() {
 		// TODO Read these two variables from a text file instead of hard coded
@@ -43,6 +43,7 @@ public class Communication {
 	private void connect() {
 		try {
 			socket = new Socket(ip, portNumber);
+			socket.setSoTimeout(10);
 			in = new BufferedReader(new InputStreamReader(socket
 					.getInputStream()));
 			out = new DataOutputStream(socket.getOutputStream());
@@ -57,21 +58,25 @@ public class Communication {
 	 * @throws IllegalArgumentException
 	 *             If 'user' is null.
 	 */
-	public void requestLogin(UserHandler user) throws IllegalArgumentException {
-		if (user == null) {
-			throw new IllegalArgumentException("UserHandler not found");
+	public void requestLogin(String username, String password) {
+		if (username == null) {
+			username = "";
+		}
+		if (password == null) {
+			password = "";
 		}
 
 		connect();
 
 		Boolean result = false;
 		try {
-			out.writeBytes(user.getUser() + " " + user.getPassword());
+			out.writeBytes(username + " " + password);
 			in.readLine();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
+		// TODO Remove this debug.
 		if (result == true) {
 			System.out.println("Logged in!");
 		} else {

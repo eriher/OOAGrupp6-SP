@@ -17,7 +17,6 @@ import model.UserHandler;
 public class ActionHandler {
 	private static ActionHandler actionHandler = null;
 	private String username, password;
-	private UserHandler userHandler;
 	private Communication communication;
 
 	private ActionHandler() {
@@ -37,15 +36,6 @@ public class ActionHandler {
 
 		return actionHandler;
 	}
-
-	/**
-	 * Set the class instance
-	 * 
-	 * @param userHandler
-	 */
-	public void setUserHandler(UserHandler userHandler) {
-		this.userHandler = userHandler;
-	}
 	
 	/**
 	 * @param communication
@@ -62,7 +52,6 @@ public class ActionHandler {
 	 */
 	public void usernameActivity(DocumentEvent e) {
 		username = logString(e);
-		userHandler.setUser(username);
 	}
 
 	/**
@@ -73,7 +62,6 @@ public class ActionHandler {
 	 */
 	public void passwordActivity(DocumentEvent e) {
 		password = logString(e);
-		userHandler.setPassword(password);
 	}
 
 	/**
@@ -97,6 +85,8 @@ public class ActionHandler {
 	 * Retrieves userHandler and sends it to the server.
 	 */
 	public void logIn() {
-		communication.requestLogin(userHandler);
+		UserHandler.getInstance().setUsername(username);
+		UserHandler.getInstance().setPassword(password);
+		communication.requestLogin(username, password);
 	}
 }
