@@ -1,5 +1,5 @@
 /**
- * Write a description of class Schedule here.
+ * 
  * 
  * @author David Stromner
  * @version 2013-02-06
@@ -10,16 +10,28 @@
 
 package model;
 
-public class UserHandler {
+import java.io.Serializable;
 
+public class UserHandler implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1570700443561640144L;
 	private String user;
+	private String pw;
 
-	public void userHandler(int personnr) {
-		user = Integer.toString(personnr);
+	public UserHandler(String personnr, String pass) {
+		user = personnr;
+		pw	 =	pass;
 	}
 
-	String getUser(String personnr) {
+	String getUser() {
 		return user;
+	}
+	
+	String getPass() {
+		return pw;
 	}
 
 }
