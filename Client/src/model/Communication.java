@@ -2,45 +2,61 @@
  * Write a description of class Communication here.
  * 
  * @author Erik Hermansson
- * @version 2013-02-10
+ * @version 2013-02-14
  */
 
 package model;
 
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.InputStreamReader;
 import java.net.InetAddress;
 import java.net.Socket;
-import java.net.SocketException;
+import java.net.UnknownHostException;
 
 public class Communication {
 
 	private Socket socket;
-	private static ObjectInputStream inStream;
-	private static ObjectOutputStream outStream;
+	private BufferedReader in;
+	private DataOutputStream out;
+	private InetAddress ip;
+	private int portNumber;
 
+	/**
+	 * 
+	 */
 	public Communication() {
-		connect();
+		// TODO Read these two variables from a text file instead of hard coded
+		// like this
+		try {
+			ip = InetAddress.getByName("localhost");
+		} catch (UnknownHostException e) {
+			e.printStackTrace();
+		}
+		portNumber = 4444;
 	}
 
+	/**
+	 * Set up a new socket and connect to the given ip and port number.
+	 */
 	private void connect() {
 		try {
-			InetAddress inet = InetAddress.getByName("127.0.0.1");
-			socket = new Socket(inet, 4444);
+			socket = new Socket(ip, portNumber);
+			in = new BufferedReader(new InputStreamReader(socket
+					.getInputStream()));
+			out = new DataOutputStream(socket.getOutputStream());
 		} catch (IOException e) {
 			e.printStackTrace();
-			return;
-		}
-		try {
-			outStream = new ObjectOutputStream(socket.getOutputStream());
-			inStream = new ObjectInputStream(socket.getInputStream());
-		} catch (IOException e) {
-			e.printStackTrace();
-			return;
 		}
 	}
 
+	/**
+	 * @param user
+	 *            Object containing information about the current user.
+	 * @throws IllegalArgumentException
+	 *             If 'user' is null.
+	 */
 	public void requestLogin(UserHandler user) throws IllegalArgumentException {
 		if (user == null) {
 			throw new IllegalArgumentException("UserHandler not found");
@@ -52,18 +68,12 @@ public class Communication {
 			user.setPassword("");
 		}
 
+		connect();
+
 		Boolean result = false;
-		String logIn = user.getUser()+ " " + user.getPassword();
-		
 		try {
-			outStream.writeObject(logIn);
-			try {
-				result = (Boolean) inStream.readObject();
-			} catch (ClassNotFoundException e) {
-				e.printStackTrace();
-			}
-		} catch (SocketException e) {
-			System.out.println(e.toString());
+			out.writeBytes(user.getUser() + " " + user.getPassword());
+			in.readLine();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

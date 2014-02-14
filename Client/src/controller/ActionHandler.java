@@ -86,7 +86,7 @@ public class ActionHandler {
 		} catch (BadLocationException ex) {
 			ex.printStackTrace();
 		}
-
+		
 		return s;
 	}
 

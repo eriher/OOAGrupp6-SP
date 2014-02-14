@@ -19,8 +19,8 @@ public class Workflow {
 	public Workflow(){
 		window = new Window();
 		window.setView("Login");
-		userHandler = new UserHandler();
 		communication = new Communication();
+		userHandler = new UserHandler();
 		
 		ActionHandler.getInstance().setUserHandler(userHandler);
 		ActionHandler.getInstance().setCommunication(communication);
