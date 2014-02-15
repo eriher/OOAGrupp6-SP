@@ -156,6 +156,8 @@ public class LoginGUI extends GUI {
 		// logInWindow
 		c.gridx = 0;
 		c.gridy = 0;
+		c.ipadx = 120;
+		c.ipady = 50;
 		c.anchor = GridBagConstraints.CENTER;
 		wrapper.add(panel, c);
 

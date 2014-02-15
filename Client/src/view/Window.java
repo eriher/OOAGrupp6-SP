@@ -9,10 +9,14 @@ package view;
 
 import java.awt.Frame;
 import java.util.HashMap;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.JFrame;
 
-public class Window {
+import model.Communication;
+
+public class Window implements Observer {
 	private HashMap<String, GUI> interfaceList;
 	private JFrame frame;
 
@@ -21,6 +25,26 @@ public class Window {
 		createFrame();
 		// Init all the views
 		initViews();
+	}
+
+	/**
+	 * Sign up to be notified about updates from object 'o'.
+	 * 
+	 * @param o
+	 *            The object that the class want updates from.
+	 */
+	public void addObserver(Observable o) {
+		o.addObserver(this);
+	}
+
+	public void update(Observable o, Object arg) {
+		// TODO Recive a char/int/string that identifies the user level instead
+		// of Boolean.
+		if (o instanceof Communication && arg instanceof Boolean) {
+			if ((Boolean) arg == true) {
+				setView("Employee");
+			}
+		}
 	}
 
 	/**

@@ -21,7 +21,9 @@ public class Workflow {
 		window = new Window();
 		window.setView("Login");
 		communication = new Communication();
-		
+
 		ActionHandler.getInstance().setCommunication(communication);
+		// TODO Better solution to being able to call communication.addObserver(this).
+		window.addObserver(communication);
 	}
 }

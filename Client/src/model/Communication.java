@@ -13,8 +13,9 @@ import java.io.ObjectOutputStream;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.Observable;
 
-public class Communication {
+public class Communication extends Observable{
 
 	private Socket socket;
 	private ObjectInputStream in;
@@ -74,12 +75,16 @@ public class Communication {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+		setChanged();
+		// TODO Send a char/int/string that identifies the user level instead of Boolean.
+		notifyObservers(result);
 
-		// TODO Remove this debug.
+		// TODO Remove
 		if (result == true) {
 			System.out.println("Logged in!");
 		} else {
-			System.out.println("Bad username or password");
+			System.out.println("Bad username and/or password");
 		}
 	}
 }
