@@ -14,6 +14,7 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -76,7 +77,13 @@ public class LoginGUI extends GUI {
 		tempPanel = new JPanel();
 		components.put("logInWindow", tempPanel);
 		tempPanel.setLayout(new GridBagLayout());
+		tempPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory
+				.createRaisedBevelBorder(), "Log In"));
 
+		// Init wrapperPanel for logInWindow
+		tempPanel = new JPanel();
+		components.put("wrapperPanel", tempPanel);
+		tempPanel.setLayout(new GridBagLayout());
 	}
 
 	/**
@@ -112,6 +119,7 @@ public class LoginGUI extends GUI {
 		super.buildGUI();
 
 		JPanel panel = (JPanel) components.get("logInWindow");
+		JPanel wrapper = (JPanel) components.get("wrapperPanel");
 		GridBagConstraints c = new GridBagConstraints();
 
 		// usernameLabel
@@ -145,6 +153,12 @@ public class LoginGUI extends GUI {
 		c.insets = new Insets(16, 0, 0, 0);
 		panel.add(components.get("logInButton"), c);
 
-		getCanvas().add(components.get("logInWindow"), BorderLayout.CENTER);
+		// logInWindow
+		c.gridx = 0;
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.CENTER;
+		wrapper.add(panel, c);
+
+		getCanvas().add(wrapper, BorderLayout.CENTER);
 	}
 }
