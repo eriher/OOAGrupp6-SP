@@ -2,7 +2,7 @@
  * Write a description of class Communication here.
  * 
  * @author Erik Hermansson
- * @version 2013-02-14
+ * @version 2013-02-16
  */
 
 package model;
@@ -52,10 +52,8 @@ public class Communication extends Observable{
 	}
 
 	/**
-	 * @param user
-	 *            Object containing information about the current user.
-	 * @throws IllegalArgumentException
-	 *             If 'user' is null.
+	 * @param username ID to be sent to server.
+	 * @param password Password to be sent to server.
 	 */
 	public void requestLogin(String username, String password) {
 		if (username == null) {
@@ -79,12 +77,5 @@ public class Communication extends Observable{
 		setChanged();
 		// TODO Send a char/int/string that identifies the user level instead of Boolean.
 		notifyObservers(result);
-
-		// TODO Remove
-		if (result == true) {
-			System.out.println("Logged in!");
-		} else {
-			System.out.println("Bad username and/or password");
-		}
 	}
 }

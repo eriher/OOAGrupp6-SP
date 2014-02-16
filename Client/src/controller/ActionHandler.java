@@ -2,7 +2,7 @@
  * Takes care of all events that can be triggered by swing components.
  * 
  * @author David Stromner
- * @version 2013-02-12
+ * @version 2013-02-16
  */
 
 package controller;
@@ -11,13 +11,10 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
 
-import model.Communication;
-import model.UserHandler;
-
 public class ActionHandler {
 	private static ActionHandler actionHandler = null;
 	private String username, password;
-	private Communication communication;
+	private Workflow workflow;
 
 	private ActionHandler() {
 		username = "";
@@ -36,12 +33,12 @@ public class ActionHandler {
 
 		return actionHandler;
 	}
-	
+
 	/**
 	 * @param communication
 	 */
-	public void setCommunication(Communication communication){
-		this.communication = communication;
+	public void setWorkflow(Workflow workflow) {
+		this.workflow = workflow;
 	}
 
 	/**
@@ -77,16 +74,14 @@ public class ActionHandler {
 		} catch (BadLocationException ex) {
 			ex.printStackTrace();
 		}
-		
+
 		return s;
 	}
 
 	/**
-	 * Retrieves userHandler and sends it to the server.
+	 * Retrieves user information and sends it to the workflow.
 	 */
 	public void logIn() {
-		UserHandler.getInstance().setUsername(username);
-		UserHandler.getInstance().setPassword(password);
-		communication.requestLogin(username, password);
+		workflow.connectToServer(username, password);
 	}
 }

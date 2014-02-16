@@ -2,7 +2,7 @@
  * Contains all the different GUIs' and also manage the frame itself.
  * 
  * @author David Stromner, Benjamin Wijk, Magnus Kallten
- * @version 2013-02-12
+ * @version 2013-02-16
  */
 
 package view;
@@ -13,6 +13,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 import model.Communication;
 
@@ -44,7 +45,20 @@ public class Window implements Observer {
 			if ((Boolean) arg == true) {
 				setView("Employee");
 			}
+			// Bad things happened, display error.
+			else {
+				setErrorMessage("Bad login information");
+			}
 		}
+	}
+
+	/**
+	 * @param msg
+	 *            Message to be displayed in the pop up
+	 */
+	public void setErrorMessage(String msg) {
+		JOptionPane.showMessageDialog(frame, msg, "Error",
+				JOptionPane.ERROR_MESSAGE);
 	}
 
 	/**

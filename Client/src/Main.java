@@ -1,10 +1,9 @@
 import controller.Workflow;
 
 /**
- * Write a description of class Main here.
+ * Init workflow.
  * 
- * @author David Stromner, Henrik Johansson
- * @version 2013-02-06
+ * @version 2013-02-16
  */
 
 public class Main {
@@ -13,7 +12,7 @@ public class Main {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		new Workflow();
+		Workflow.getInstance();
 	}
 
 }
