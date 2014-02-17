@@ -10,9 +10,7 @@ package model;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.net.InetAddress;
 import java.net.Socket;
-import java.net.UnknownHostException;
 import java.util.Observable;
 
 public class Communication extends Observable{
@@ -20,7 +18,7 @@ public class Communication extends Observable{
 	private Socket socket;
 	private ObjectInputStream in;
 	private ObjectOutputStream out;
-	private InetAddress ip;
+	private String ip;
 	private int portNumber;
 
 	/**
@@ -29,11 +27,7 @@ public class Communication extends Observable{
 	public Communication() {
 		// TODO Read these two variables from a text file instead of hard coded
 		// like this
-		try {
-			ip = InetAddress.getByName("localhost");
-		} catch (UnknownHostException e) {
-			e.printStackTrace();
-		}
+		ip = "localhost";
 		portNumber = 4444;
 	}
 
@@ -44,8 +38,6 @@ public class Communication extends Observable{
 		try {
 			socket = new Socket(ip, portNumber);
 			socket.setSoTimeout(10000);
-			in = new ObjectInputStream(socket.getInputStream());
-			out = new ObjectOutputStream(socket.getOutputStream());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -66,9 +58,14 @@ public class Communication extends Observable{
 		connect();
 
 		Boolean result = false;
+		String s = username + " " + password;
 		try {
-			out.writeBytes(username + " " + password);
+			out = new ObjectOutputStream(socket.getOutputStream());
+			out.writeBytes(s);
+			out.close();
+			in = new ObjectInputStream(socket.getInputStream());
 			result = (Boolean) in.readObject();
+			in.close();
 			// IOException & ClassNotFoundException
 		} catch (Exception e) {
 			e.printStackTrace();
