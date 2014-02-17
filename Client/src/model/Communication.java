@@ -61,7 +61,7 @@ public class Communication extends Observable{
 		String s = username + " " + password;
 		try {
 			out = new ObjectOutputStream(socket.getOutputStream());
-			out.writeBytes(s);
+			out.writeObject(s);
 			out.close();
 			in = new ObjectInputStream(socket.getInputStream());
 			result = (Boolean) in.readObject();
