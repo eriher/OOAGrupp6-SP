@@ -1,10 +1,10 @@
-import controller.Workflow;
-
 /**
  * Init workflow.
  * 
  * @version 2013-02-16
  */
+
+import controller.Workflow;
 
 public class Main {
 

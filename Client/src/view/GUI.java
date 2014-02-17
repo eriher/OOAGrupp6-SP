@@ -9,8 +9,12 @@ package view;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.util.HashMap;
 
+import javax.swing.JButton;
 import javax.swing.JPanel;
 
 public abstract class GUI {
@@ -44,12 +48,21 @@ public abstract class GUI {
 	/**
 	 * Create all buttons
 	 */
-	protected void initButtons() {}
+	protected void initButtons() {
+		JButton tempButton = new JButton("Network Config");
+		components.put("networkButton", tempButton);
+	}
 
 	/**
 	 * Create all panels
 	 */
-	protected void initPanels() {}
+	protected void initPanels() {
+		canvas.setLayout(new BorderLayout());
+		
+		JPanel tempPanel = new JPanel();
+		components.put("southPanel", tempPanel);
+		tempPanel.setLayout(new GridBagLayout());
+	}
 
 	/**
 	 * Create all text fields.
@@ -60,6 +73,16 @@ public abstract class GUI {
 	 * Place all components
 	 */
 	protected void buildGUI() {
-		canvas.setLayout(new BorderLayout());
+		GridBagConstraints c = new GridBagConstraints();
+		JPanel panel = (JPanel) components.get("southPanel");
+		
+		// networkButton
+		c.weightx = 1.0;
+		c.weighty = 1.0;
+		c.anchor = GridBagConstraints.SOUTHEAST;
+		c.insets = new Insets(0, 0, 25, 25);
+		panel.add(components.get("networkButton"), c);
+		
+		getCanvas().add(panel, BorderLayout.SOUTH);
 	}
 }

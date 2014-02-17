@@ -1,11 +1,6 @@
 /**
- * 
- * 
- * @author David Stromner
+ * @author
  * @version 2013-02-06
- */
-/*
- Sparar användarsession
  */
 
 package model;
@@ -19,22 +14,22 @@ public class UserHandler implements Serializable {
 	private static UserHandler userHandler;
 
 	private UserHandler() {
-		
+
 	}
-	
-	public static UserHandler getInstance(){
-		if(userHandler == null){
+
+	public static UserHandler getInstance() {
+		if (userHandler == null) {
 			userHandler = new UserHandler();
 		}
-		
+
 		return userHandler;
 	}
 
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	
-	public void setPassword(String password){
+
+	public void setPassword(String password) {
 		this.password = password;
 	}
 
