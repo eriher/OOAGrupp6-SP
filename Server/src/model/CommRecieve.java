@@ -54,8 +54,8 @@ public class CommRecieve extends Observable implements Runnable {
 				
 				
 				
-			}
 			soc.close();
+			}
 			server.close();
 
 		} catch (IOException e) {

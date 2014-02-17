@@ -28,11 +28,13 @@ public class Communication implements Observer {
 	
 	private InetAddress iaddr = null;
 	private String message = null;
-	private Workflow flow;
+	private FileManagement fileMan;
+	
+	private final int CLIENT_PORT = 4444;
 
 	public Communication(ServerSocket server, Workflow flow) { 
 		this.server = server;
-		this.flow = flow;
+		fileMan = new FileManagement();
 
 		recieveInit();
 		System.out.println("Under recieve");	//TODO remove this debug
@@ -66,12 +68,48 @@ public class Communication implements Observer {
 		if(iaddr != null && message != null){
 			
 			
-			flow.loginRecieved(iaddr, message, this);
+			loginRecieved(iaddr, message);
 			
 			iaddr= null;
 			message = null;
 		}
 	}
+	
+	/**
+	 * @param iaddr		InetAddress
+	 * @param message	The message to be sent
+	 * @param comm		What communication object to use
+	 */
+	public void loginRecieved(InetAddress iaddr, String message) { //A login has been recieved
+		String[] persNrPass = message.split(" ");
+		try{
+			String recievedPassword= persNrPass[1];				//If you send empty password server will crash without Catch
+			
+			String realPassword = fileMan.getPassword("inlogg.txt", persNrPass[0]);
+			
+			if ( recievedPassword.equals(realPassword) ) { // Checks with the inlogg file to see if sent
+										// password is correct
+				
+				// Now true is to be sent back
+				System.out.println("True is sent back due to RIGHT password");
+				send(iaddr, CLIENT_PORT, true);					//Sends back to port
+			}
+			else{
+				System.out.println("False is sent back due to WRONG password");
+				send(iaddr, CLIENT_PORT, false);
+			}
+		}catch(Exception e){
+			System.out.println("Did not recieve password");
+
+			System.out.println("False is sent back due to INVALID messsage recieved");
+			send(iaddr, CLIENT_PORT, false);
+		}
+		
+		
+
+	}
+	
+	
 
 	/**
 	 * Send message to specific ip address and port with the message "message".
@@ -88,7 +126,7 @@ public class Communication implements Observer {
 				sendSoc.close();
 				
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
+				System.out.println("Client is not recieving, kill it with fire!");
 				e.printStackTrace();
 			}		
 			
@@ -105,7 +143,7 @@ public class Communication implements Observer {
 			sendSoc.close();
 			
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			System.out.println("Client not active, did you close clients recieveing part?");	
 			e.printStackTrace();
 		}		
 		
