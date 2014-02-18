@@ -8,7 +8,7 @@
 package model;
 
 public class ScheduleHandler {
-
+	/*
 	getWeek(int personnr) {
 
 	}
@@ -36,5 +36,6 @@ public class ScheduleHandler {
 	modifySchedule([]) {
 	
 	}
+	*/
 
 }

@@ -77,11 +77,39 @@ public class ActionHandler {
 
 		return s;
 	}
+	
+	/**
+	 * Open popup that retrieves config info and display it in two edible text fields
+	 */
+	public void networkConfig(){
+		System.out.println("There's suppose to be a window here, sadly it's taking a break for the time being");
+	}
 
 	/**
 	 * Retrieves user information and sends it to the workflow.
 	 */
 	public void logIn() {
 		workflow.connectToServer(username, password);
+	}
+	
+	/**
+	 * Retrieves user information and sends it to the workflow.
+	 */
+	public void logOut() {
+		//workflow.disconnectToServer(username, password);
+	}
+	
+	/**
+	 * Message the server that the user started working.
+	 */
+	public void checkIn(){
+		
+	}
+	
+	/**
+	 * Message the server that the user stopped working.
+	 */
+	public void checkOut(){
+		
 	}
 }

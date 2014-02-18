@@ -54,13 +54,13 @@ public class LoginGUI extends GUI {
 
 		// Init logIn
 		tempButton = new JButton("Log In");
-		components.put("logInButton", tempButton);
 		tempButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				ActionHandler.getInstance().logIn();
 			}
 		});
+		components.put("logInButton", tempButton);
 
 	}
 
@@ -75,15 +75,15 @@ public class LoginGUI extends GUI {
 
 		// Init logInWindow to put logInButton, userName, and password into.
 		tempPanel = new JPanel();
-		components.put("logInWindow", tempPanel);
 		tempPanel.setLayout(new GridBagLayout());
 		tempPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory
 				.createRaisedBevelBorder(), "Log In"));
+		components.put("logInWindow", tempPanel);
 
 		// Init wrapperPanel for logInWindow
 		tempPanel = new JPanel();
-		components.put("wrapperPanel", tempPanel);
 		tempPanel.setLayout(new GridBagLayout());
+		components.put("wrapperPanel", tempPanel);
 	}
 
 	/**
@@ -98,17 +98,17 @@ public class LoginGUI extends GUI {
 
 		// Init userName
 		tempField = new JTextField();
-		components.put("usernameTF", tempField);
 		handler = new DocumentListenerHandler();
 		handler.setMethod(ActionHandler.getInstance(), "usernameActivity");
 		tempField.getDocument().addDocumentListener(handler);
+		components.put("usernameTF", tempField);
 
 		// Init password
 		tempField = new JPasswordField();
-		components.put("passwordPF", tempField);
 		handler = new DocumentListenerHandler();
 		handler.setMethod(ActionHandler.getInstance(), "passwordActivity");
 		tempField.getDocument().addDocumentListener(handler);
+		components.put("passwordPF", tempField);
 	}
 
 	/**

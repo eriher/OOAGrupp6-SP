@@ -8,7 +8,9 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
@@ -33,10 +35,18 @@ public abstract class UserGUI extends GUI {
 	@Override
 	protected void initPanels() {
 		super.initPanels();
+		
+		JPanel tempPanel;
+		
 		// Init top
-		components.put("topPanel", new JPanel());
-		// Init side-menu
-		components.put("menuPanel", new JPanel());
+		tempPanel = new JPanel();
+		tempPanel.setBorder(BorderFactory.createLineBorder(Color.black));
+		components.put("topPanel", tempPanel);
+		
+		// Init sideMenu
+		tempPanel = new JPanel();
+		tempPanel.setLayout(new BorderLayout());
+		components.put("menuPanel", tempPanel);
 	}
 
 	/**
@@ -50,6 +60,6 @@ public abstract class UserGUI extends GUI {
 		getCanvas().add(components.get("topPanel"), BorderLayout.NORTH);
 		
 		// menuPanel
-		getCanvas().add(components.get("topPanel"), BorderLayout.WEST);
+		getCanvas().add(components.get("menuPanel"), BorderLayout.WEST);
 	}
 }

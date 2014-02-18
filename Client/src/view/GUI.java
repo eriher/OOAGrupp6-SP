@@ -12,10 +12,14 @@ import java.awt.Container;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.HashMap;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
+
+import controller.ActionHandler;
 
 public abstract class GUI {
 	private JPanel canvas; // Every component MUST be connected to the
@@ -50,6 +54,12 @@ public abstract class GUI {
 	 */
 	protected void initButtons() {
 		JButton tempButton = new JButton("Network Config");
+		tempButton.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e){
+				ActionHandler.getInstance().networkConfig();
+			}
+		});
 		components.put("networkButton", tempButton);
 	}
 
