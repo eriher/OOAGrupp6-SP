@@ -9,9 +9,9 @@
 
 package model;
 
-import java.io.BufferedReader;
+import java.io.BufferedInputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -21,6 +21,9 @@ public class CommRecieve extends Observable implements Runnable {
 	private Socket soc;
 	private ServerSocket server;
 	private String message = null;
+	private ObjectInputStream objInputStream;
+	
+	
 	public CommRecieve(ServerSocket server) {
 		this.server = server;
 		
@@ -37,16 +40,16 @@ public class CommRecieve extends Observable implements Runnable {
 			Boolean again = true;		//TODO remove after debug
 			
 			while (again) {
-				
 				soc = server.accept();						
-				BufferedReader buffReader = new BufferedReader(
-						new InputStreamReader(soc.getInputStream()));
+				objInputStream = new ObjectInputStream((soc.getInputStream()));
 
 				InetAddress iaddr = soc.getInetAddress();
 				setChanged(); 								//Update Observers of recieved message from iaddr ip
 				notifyObservers(iaddr);
 				
-				message = buffReader.readLine();
+				
+				Object inFromClient = objInputStream.readObject();
+				message = inFromClient.toString();
 
 				System.out.println(message);				// TODO Debug	
 				setChanged(); 								//Update Observers
@@ -59,7 +62,12 @@ public class CommRecieve extends Observable implements Runnable {
 			server.close();
 
 		} catch (IOException e) {
-
+			e.printStackTrace();
+			
+		}catch(ClassNotFoundException e){
+			
+			System.out.println("message = (String) buffIn.readObject().toString(); ");
+			e.printStackTrace();
 		}
 		
 	}

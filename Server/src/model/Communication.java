@@ -12,6 +12,7 @@ package model;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -92,23 +93,22 @@ public class Communication implements Observer {
 				
 				// Now true is to be sent back
 				System.out.println("True is sent back due to RIGHT password");
-				send(iaddr, CLIENT_PORT, true);					//Sends back to port
+				send(iaddr, CLIENT_PORT, (Boolean) true);					//Sends back to port
 			}
 			else{
 				System.out.println("False is sent back due to WRONG password");
-				send(iaddr, CLIENT_PORT, false);
+				send(iaddr, CLIENT_PORT, (Object) false);
 			}
 		}catch(Exception e){
 			System.out.println("Did not recieve password");
 
 			System.out.println("False is sent back due to INVALID messsage recieved");
-			send(iaddr, CLIENT_PORT, false);
+			send(iaddr, CLIENT_PORT, (Object)false);
 		}
 		
 		
 
 	}
-	
 	
 
 	/**
@@ -134,7 +134,7 @@ public class Communication implements Observer {
 
 	}
 	
-	public void send(InetAddress ipAddress, int port, Boolean boolMessage){	//Send message to ip ipAddress on port port lol :)
+	/*public void send(InetAddress ipAddress, int port, Boolean boolMessage){	//Send message to ip ipAddress on port port lol :)
 		
 		try {
 			Socket sendSoc = new Socket(ipAddress, port);
@@ -149,7 +149,25 @@ public class Communication implements Observer {
 		
 	
 
-}
+	}*/
+	
+	public void send(InetAddress ipAddress, int port, Object objBoolMessage){	//Send message to ip ipAddress on port port lol :)
+		
+		try {
+			Socket sendSoc = new Socket(ipAddress, port);
+			ObjectOutputStream out = new ObjectOutputStream(sendSoc.getOutputStream() );
+			out.writeObject(objBoolMessage);
+			sendSoc.close();
+			
+		} catch (IOException e) {
+			System.out.println("Client not active, did you close clients recieveing part?");	
+			e.printStackTrace();
+		}		
+		
+	
+
+	}
+	
 	
 	
 
@@ -169,4 +187,3 @@ public class Communication implements Observer {
 	}
 
 }
-
