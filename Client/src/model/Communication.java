@@ -1,8 +1,10 @@
 /**
- * Write a description of class Communication here.
+ * Set up a connection to the server with IP and port number from a config file. 
+ * Responsible for sending log in request from a user and receiving if it worked.
+ * Also takes care of receiving the user's schedule and sending modified user schedules back to the server.
  * 
  * @author Erik Hermansson
- * @version 2013-02-16
+ * @version 2013-02-18
  */
 
 package model;
@@ -10,10 +12,11 @@ package model;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.InetAddress;
 import java.net.Socket;
 import java.util.Observable;
 
-public class Communication extends Observable{
+public class Communication extends Observable {
 
 	private Socket socket;
 	private ObjectInputStream in;
@@ -36,16 +39,20 @@ public class Communication extends Observable{
 	 */
 	private void connect() {
 		try {
-			socket = new Socket(ip, portNumber);
+			socket = new Socket(InetAddress.getByName(ip), portNumber);
 			socket.setSoTimeout(10000);
+
+			out = new ObjectOutputStream(socket.getOutputStream());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
 	/**
-	 * @param username ID to be sent to server.
-	 * @param password Password to be sent to server.
+	 * @param username
+	 *            ID to be sent to server.
+	 * @param password
+	 *            Password to be sent to server.
 	 */
 	public void requestLogin(String username, String password) {
 		if (username == null) {
@@ -60,19 +67,19 @@ public class Communication extends Observable{
 		Boolean result = false;
 		String s = username + " " + password;
 		try {
-			out = new ObjectOutputStream(socket.getOutputStream());
 			out.writeObject(s);
-			out.close();
+			out.flush();
+			// getInputStream is blocking, initiate just before first receive
 			in = new ObjectInputStream(socket.getInputStream());
 			result = (Boolean) in.readObject();
-			in.close();
 			// IOException & ClassNotFoundException
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		setChanged();
-		// TODO Send a char/int/string that identifies the user level instead of Boolean.
+		// TODO Send a char/int/string that identifies the user level instead of
+		// Boolean.
 		notifyObservers(result);
 	}
 }
