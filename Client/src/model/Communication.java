@@ -41,8 +41,21 @@ public class Communication extends Observable {
 		try {
 			socket = new Socket(InetAddress.getByName(ip), portNumber);
 			socket.setSoTimeout(10000);
-
+			
 			out = new ObjectOutputStream(socket.getOutputStream());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * Close down the socket
+	 */
+	private void close(){
+		try {
+			out.close();
+			in.close();
+			socket.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -74,6 +87,7 @@ public class Communication extends Observable {
 			result = (Boolean) in.readObject();
 			// IOException & ClassNotFoundException
 		} catch (Exception e) {
+			close(); // TODO Possible move/remove this.
 			e.printStackTrace();
 		}
 

@@ -96,7 +96,7 @@ public class ActionHandler {
 	 * Retrieves user information and sends it to the workflow.
 	 */
 	public void logOut() {
-		//workflow.disconnectToServer(username, password);
+		//workflow.disconnectFromServer(username, password);
 	}
 	
 	/**

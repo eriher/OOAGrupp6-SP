@@ -42,7 +42,7 @@ public class Communication  implements Runnable {
 	 * Check what type of message has been recieved. For now it only check for login recieved.
 	 */
 	public void messageRecieved(InetAddress iaddr , String message){
-		if(iaddr != null && message != null){			//Fungerar endast för login nu
+		if(iaddr != null && message != null){			//Fungerar endast fï¿½r login nu
 			this.iaddr = iaddr;
 			this.message = message;
 			
@@ -70,17 +70,17 @@ public class Communication  implements Runnable {
 				
 				// Now true is to be sent back
 				System.out.println("True is sent back due to RIGHT password");
-				send(soc, (Boolean) true);					//Sends back to port
+				send(soc, true);					//Sends back to port
 			}
 			else{
 				System.out.println("False is sent back due to WRONG password");
-				send(soc, (Object) false);
+				send(soc, false);
 			}
 		}catch(Exception e){
 			System.out.println("Did not recieve password");
 
 			System.out.println("False is sent back due to INVALID messsage recieved");
-			send(soc, (Object)false);
+			send(soc, false);
 		}
 		
 		

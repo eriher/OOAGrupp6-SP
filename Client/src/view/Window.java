@@ -47,7 +47,7 @@ public class Window implements Observer {
 			}
 			// Bad things happened, display error.
 			else {
-				setErrorMessage("Bad login information");
+				setErrorMessage("Bad login information or problem with server");
 			}
 		}
 	}
