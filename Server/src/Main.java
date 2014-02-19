@@ -8,7 +8,7 @@ import model.FileManagement;
  * @author Henrik Johansson
  * @version 2013-02-12
  */
-public class Main {
+public class Main {		//TODO Skicka med socket till Communication inte serversocket
 
 	/**
 	 * @param args
@@ -18,6 +18,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		
+		System.out.println("Server main method started.");
 		Workflow flow = new Workflow();
 
 	}

@@ -7,56 +7,102 @@
 
 package model;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.HashMap;
+import java.util.Observable;
+import java.util.Observer;
 
-import controller.Workflow;
-
-public class ClientNode {
+public class ClientNode implements Observer {
 	private static ClientNode nod = null;
-	ServerSocket server;
+	
+	private HashMap<InetAddress, Communication> clientConnected;
+	
+	private Boolean recieveInited = false;
+	private ServerSocket server;
+	private final int SERVER_SOCKET = 4444;
 
 	/**
 	 * @param port
 	 *            Porten
 	 * 
 	 */
-	private ClientNode(int port, Workflow flow) { // TODO change singleton method to
-									// getInstance
+	private ClientNode(int port) {
 
 		try {
-			server = new ServerSocket(4444);
+			server = new ServerSocket(SERVER_SOCKET);
+			recieveInit();								//TODO Singleton alreadey need not recieveinit Booolean
+			
+			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-		Communication comm = new Communication(server, flow);
 
 	}
 
-	public static synchronized ClientNode getInstance(int port, Workflow flow) {
+	public static synchronized ClientNode getInstance(int port) {
 		if (nod == null) {
-			nod = new ClientNode(port, flow);
+			nod = new ClientNode(port);
 		}
 		return nod;
 	}
+	
+	public void update(Observable o, Object arg){
+		if(o instanceof CommRecieve && arg instanceof InetAddress){
+			//Check if inetaddress is already in list
+			//if not add new, otherwise do nothing
+			
+			if( !clientConnected.containsKey(arg) ){
+				addConnection((InetAddress) arg, ((CommRecieve)o).getSocket()   );
+			}
+		}
+		else if(o instanceof CommRecieve && arg instanceof String){
+			//Recieved message from Inetaddress send to Communication part
+			
+			forwardMessage( ((CommRecieve) o).getInetAddress()  , (String)arg );
+		}
+	}
+	
+	private void recieveInit() {
+		if(!recieveInited){
+			recieveInited = true;
+			
+			 clientConnected = new HashMap<InetAddress, Communication>() ;
+			
+			CommRecieve recComm = new CommRecieve(server);
+			recComm.addObserver(this);
+			Thread recieve = new Thread( recComm );
+			recieve.start();
+		}
+	}
 
-	/*
-	 * public Communication newConnect(){
-	 * 
-	 * }
-	 */
 
-	public void removeConnect() {
+	private void removeConnect() {
 
 	}
 
-	public void addConnection() {
-
+	private void addConnection(InetAddress iaddr, Socket soc) {
+		System.out.println("Add Connection");
+		clientConnected.put(iaddr, new Communication(soc) );
+		new Thread( clientConnected.get(iaddr) );
+		
+		
 	}
+	
+	private void forwardMessage(InetAddress iaddr, Object message){
+		if(clientConnected.containsKey(iaddr) ){
+			clientConnected.get(iaddr).messageRecieved(iaddr, (String) message);
+			
+		}
+		else{
+			System.out.println("HashMap did not contain InetAddress: " + iaddr);
+		}
+	}
+	
+	
 
 }

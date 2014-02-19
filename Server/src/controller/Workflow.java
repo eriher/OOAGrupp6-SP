@@ -25,8 +25,8 @@ public class Workflow {
 	}
 
 	private void initModelThread() {
-		ClientNode clientNode = ClientNode.getInstance(4444, this);
-		fileMan = new FileManagement();
+		ClientNode clientNode = ClientNode.getInstance(4444);
+
 
 	}
 

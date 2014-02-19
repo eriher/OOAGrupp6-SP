@@ -22,6 +22,7 @@ public class CommRecieve extends Observable implements Runnable {
 	private ServerSocket server;
 	private String message = null;
 	private ObjectInputStream objInputStream;
+	private InetAddress iaddr;
 	
 	
 	public CommRecieve(ServerSocket server) {
@@ -40,10 +41,11 @@ public class CommRecieve extends Observable implements Runnable {
 			Boolean again = true;		//TODO remove after debug
 			
 			while (again) {
+				
 				soc = server.accept();						
 				objInputStream = new ObjectInputStream((soc.getInputStream()));
 
-				InetAddress iaddr = soc.getInetAddress();
+				iaddr = soc.getInetAddress();
 				setChanged(); 								//Update Observers of recieved message from iaddr ip
 				notifyObservers(iaddr);
 				
@@ -53,11 +55,11 @@ public class CommRecieve extends Observable implements Runnable {
 
 				System.out.println(message);				// TODO Debug	
 				setChanged(); 								//Update Observers
-				notifyObservers(message);
+				notifyObservers(message );
 				
 				
-				
-			soc.close();
+				soc.close();
+			
 			}
 			server.close();
 
@@ -74,5 +76,13 @@ public class CommRecieve extends Observable implements Runnable {
 	
 	public String getMessage(){
 		return message;
+	}
+	
+	public Socket getSocket(){
+		return soc;
+	}
+	
+	public InetAddress getInetAddress(){
+		return iaddr;
 	}
 }
