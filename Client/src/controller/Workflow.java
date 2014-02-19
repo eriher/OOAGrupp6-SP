@@ -55,5 +55,6 @@ public class Workflow {
 	 */
 	public void disconnectFromServer(){
 		communication.disconnect();
+		window.setView("Login");
 	}
 }

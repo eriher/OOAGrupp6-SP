@@ -42,12 +42,12 @@ public class Window implements Observer {
 		if (o instanceof Communication && arg instanceof String) {
 			if (((String) arg).compareToIgnoreCase("Employee") == 0) {
 				setView("Employee");
-			}
-			else if(((String) arg).compareToIgnoreCase("Admin") == 0) {
+			} else if (((String) arg).compareToIgnoreCase("Admin") == 0) {
 				setView("Admin");
 			}
 			// Bad things happened, display error.
 			else {
+				setView("Employee");
 				setErrorMessage("Bad login information or problem with server");
 			}
 		}

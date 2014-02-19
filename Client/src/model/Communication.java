@@ -53,9 +53,16 @@ public class Communication extends Observable {
 	 */
 	public void disconnect(){
 		try {
-			out.close();
-			in.close();
-			socket.close();
+			// Possible null pointers can happen if these are not checked
+			if(out != null && !socket.isOutputShutdown()){
+				out.close();
+			}
+			if(in != null && !socket.isInputShutdown()){
+				in.close();
+			}
+			if(socket != null && !socket.isClosed()){
+				socket.close();
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 
@@ -88,9 +95,7 @@ public class Communication extends Observable {
 			// IOException & ClassNotFoundException
 		} catch (Exception e) {
 			e.printStackTrace();
-			disconnect(); // TODO Possible move/remove this.
 		}
-
 		setChanged();
 		notifyObservers(result);
 	}
