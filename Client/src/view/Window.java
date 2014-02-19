@@ -39,11 +39,12 @@ public class Window implements Observer {
 	}
 
 	public void update(Observable o, Object arg) {
-		// TODO Recive a char/int/string that identifies the user level instead
-		// of Boolean.
-		if (o instanceof Communication && arg instanceof Boolean) {
-			if ((Boolean) arg == true) {
+		if (o instanceof Communication && arg instanceof String) {
+			if (((String) arg).compareToIgnoreCase("Employee") == 0) {
 				setView("Employee");
+			}
+			else if(((String) arg).compareToIgnoreCase("Admin") == 0) {
+				setView("Admin");
 			}
 			// Bad things happened, display error.
 			else {
@@ -93,6 +94,7 @@ public class Window implements Observer {
 		frame.getContentPane().removeAll();
 		frame.add(interfaceList.get(key).getCanvas());
 		frame.pack();
+		frame.setMinimumSize(frame.getPreferredSize());
 		frame.setExtendedState(Frame.MAXIMIZED_BOTH); // Needs to be called
 		// after add because of
 		// internal layouts

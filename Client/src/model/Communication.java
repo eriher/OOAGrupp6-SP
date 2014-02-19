@@ -49,15 +49,16 @@ public class Communication extends Observable {
 	}
 	
 	/**
-	 * Close down the socket
+	 * Close down the socket.
 	 */
-	private void close(){
+	public void disconnect(){
 		try {
 			out.close();
 			in.close();
 			socket.close();
 		} catch (IOException e) {
 			e.printStackTrace();
+
 		}
 	}
 
@@ -74,26 +75,23 @@ public class Communication extends Observable {
 		if (password == null) {
 			password = "";
 		}
-
 		connect();
 
-		Boolean result = false;
-		String s = username + " " + password;
+		String result = "false";
+		String s = "login " + username + " " + password;
 		try {
 			out.writeObject(s);
 			out.flush();
 			// getInputStream is blocking, initiate just before first receive
 			in = new ObjectInputStream(socket.getInputStream());
-			result = (Boolean) in.readObject();
+			result = (String) in.readObject();
 			// IOException & ClassNotFoundException
 		} catch (Exception e) {
-			close(); // TODO Possible move/remove this.
 			e.printStackTrace();
+			disconnect(); // TODO Possible move/remove this.
 		}
 
 		setChanged();
-		// TODO Send a char/int/string that identifies the user level instead of
-		// Boolean.
 		notifyObservers(result);
 	}
 }

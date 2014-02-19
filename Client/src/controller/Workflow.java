@@ -49,4 +49,11 @@ public class Workflow {
 		UserHandler.getInstance().setPassword(password);
 		communication.requestLogin(username, password);
 	}
+	
+	/**
+	 * Disconnect from a server
+	 */
+	public void disconnectFromServer(){
+		communication.disconnect();
+	}
 }
