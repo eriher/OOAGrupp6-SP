@@ -9,10 +9,16 @@ package view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+
+import controller.ActionHandler;
 
 public abstract class UserGUI extends GUI {
 	public UserGUI() {
@@ -25,8 +31,18 @@ public abstract class UserGUI extends GUI {
 	@Override
 	protected void initButtons() {
 		super.initButtons();
-		// Init logout
-		components.put("logOut", new JButton("Log Out"));
+
+		JButton tempButton;
+
+		// Init logOut
+		tempButton = new JButton("Log Out");
+		tempButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ActionHandler.getInstance().logOut();
+			}
+		});
+		components.put("logOutButton", tempButton);
 	}
 
 	/**
@@ -35,18 +51,28 @@ public abstract class UserGUI extends GUI {
 	@Override
 	protected void initPanels() {
 		super.initPanels();
-		
+
 		JPanel tempPanel;
-		
+
 		// Init top
 		tempPanel = new JPanel();
 		tempPanel.setBorder(BorderFactory.createLineBorder(Color.black));
 		components.put("topPanel", tempPanel);
-		
+
 		// Init sideMenu
 		tempPanel = new JPanel();
 		tempPanel.setLayout(new BorderLayout());
 		components.put("menuPanel", tempPanel);
+		
+		// Init top
+		tempPanel = new JPanel();
+		tempPanel.setLayout(new GridBagLayout());
+		components.put("topMenuPanel", tempPanel);
+		
+		// Init sideMenu
+		tempPanel = new JPanel();
+		tempPanel.setLayout(new GridBagLayout());
+		components.put("botMenuPanel", tempPanel);
 	}
 
 	/**
@@ -56,10 +82,25 @@ public abstract class UserGUI extends GUI {
 	protected void buildGUI() {
 		super.buildGUI();
 		
+		JPanel topMenuPanel = (JPanel) components.get("topMenuPanel");
+		JPanel botMenuPanel = (JPanel) components.get("botMenuPanel");
+		GridBagConstraints c = new GridBagConstraints();
+
 		// topPanel
 		getCanvas().add(components.get("topPanel"), BorderLayout.NORTH);
-		
+
 		// menuPanel
 		getCanvas().add(components.get("menuPanel"), BorderLayout.WEST);
+		
+		// topMenuPanel
+		components.get("menuPanel").add(topMenuPanel, BorderLayout.NORTH);
+		
+		// botMenuPanel
+		components.get("menuPanel").add(botMenuPanel, BorderLayout.SOUTH);
+		
+		// logOutButton
+		c.gridy = 0;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		botMenuPanel.add(components.get("logOutButton"), c);
 	}
 }

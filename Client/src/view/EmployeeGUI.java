@@ -7,9 +7,7 @@
 
 package view;
 
-import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -33,16 +31,6 @@ public class EmployeeGUI extends UserGUI {
 
 		JButton tempButton;
 
-		// Init logOut
-		tempButton = new JButton("Log Out");
-		tempButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				ActionHandler.getInstance().logOut();
-			}
-		});
-		components.put("logOutButton", tempButton);
-
 		// Init checkIn
 		tempButton = new JButton("Check In");
 		tempButton.addActionListener(new ActionListener() {
@@ -65,26 +53,6 @@ public class EmployeeGUI extends UserGUI {
 	}
 	
 	/**
-	 * Create all panels.
-	 */
-	@Override
-	protected void initPanels() {
-		super.initPanels();
-		
-		JPanel tempPanel;
-		
-		// Init top
-		tempPanel = new JPanel();
-		tempPanel.setLayout(new GridBagLayout());
-		components.put("topMenuPanel", tempPanel);
-		
-		// Init sideMenu
-		tempPanel = new JPanel();
-		tempPanel.setLayout(new GridBagLayout());
-		components.put("botMenuPanel", tempPanel);
-	}
-
-	/**
 	 * Place all components.
 	 */
 	@Override
@@ -92,7 +60,6 @@ public class EmployeeGUI extends UserGUI {
 		super.buildGUI();
 
 		JPanel topMenuPanel = (JPanel) components.get("topMenuPanel");
-		JPanel botMenuPanel = (JPanel) components.get("botMenuPanel");
 		GridBagConstraints c = new GridBagConstraints();
 
 		// checkInButton
@@ -106,16 +73,5 @@ public class EmployeeGUI extends UserGUI {
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.insets = new Insets(5, 0, 0, 0);
 		topMenuPanel.add(components.get("checkOutButton"), c);
-
-		// logOutButton
-		c.gridy = 0;
-		c.fill = GridBagConstraints.HORIZONTAL;
-		botMenuPanel.add(components.get("logOutButton"), c);
-		
-		// topMenuPanel
-		components.get("menuPanel").add(topMenuPanel, BorderLayout.NORTH);
-		
-		// botMenuPanel
-		components.get("menuPanel").add(botMenuPanel, BorderLayout.SOUTH);
 	}
 }
