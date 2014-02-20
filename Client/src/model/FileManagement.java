@@ -20,15 +20,30 @@ public class FileManagement {
 	/**
 	 * @param file
 	 */
-	public void openFile(String file){
+	public void openReadFile(String file){
 		// Add to hashmap
-		// Open
+		// Open read
+	}
+	
+	/**
+	 * @param file
+	 */
+	public void openWriteFile(String file){
+		// Add to hashmap
+		// Open write
 	}
 	
 	/**
 	 * 
 	 */
-	private void closeFile(){
+	private void closeReadFile(){
+		
+	}
+	
+	/**
+	 * 
+	 */
+	private void closeWriteFile(){
 		
 	}
 	
