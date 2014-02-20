@@ -7,6 +7,16 @@
 
 package view;
 
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JPanel;
+
+import controller.ActionHandler;
+
 public class AdminGUI extends UserGUI {
 	public AdminGUI() {
 		super();
@@ -18,6 +28,53 @@ public class AdminGUI extends UserGUI {
 	@Override
 	protected void initButtons() {
 		super.initButtons();
+		
+		JButton tempButton;
+		
+		// Init createUser
+		tempButton = new JButton("Create User");
+		tempButton.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				ActionHandler.getInstance().createUser();
+			}
+		});
+		components.put("createUserButton", tempButton);
+		
+		// Init editUser
+		tempButton = new JButton("Edit User");
+		tempButton.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				ActionHandler.getInstance().editUser();
+			}
+		});
+		components.put("editUserButton", tempButton);
+		
+		// Init openSchedule
+		tempButton = new JButton("Open Schedule");
+		tempButton.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				ActionHandler.getInstance().openSchedule();
+			}
+		});
+		components.put("openScheduleButton", tempButton);
+		
+		// Init newSchedule
+		tempButton = new JButton("New Schedule");
+		tempButton.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				ActionHandler.getInstance().newSchedule();
+			}
+		});
+		components.put("newScheduleButton", tempButton);
+		
+		// Init newTimeSlot
+		tempButton = new JButton("New Time Slot");
+		tempButton.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				ActionHandler.getInstance().newTimeSlot();
+			}
+		});
+		components.put("newTimeSlotButton", tempButton);
 	}
 
 	/**
@@ -26,5 +83,38 @@ public class AdminGUI extends UserGUI {
 	@Override
 	protected void buildGUI() {
 		super.buildGUI();
+		
+		JPanel topMenuPanel = (JPanel) components.get("topMenuPanel");
+		GridBagConstraints c = new GridBagConstraints();
+		
+		// createUserButton
+		c.gridy = 0;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.insets = new Insets(5, 0, 0, 0);
+		topMenuPanel.add(components.get("createUserButton"), c);
+		
+		// editUserButtton
+		c.gridy = 1;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.insets = new Insets(5, 0, 0, 0);
+		topMenuPanel.add(components.get("editUserButton"), c);
+		
+		// openScheduleButton
+		c.gridy = 2;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.insets = new Insets(5, 0, 0, 0);
+		topMenuPanel.add(components.get("openScheduleButton"), c);
+		
+		// newScheduleButton
+		c.gridy = 3;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.insets = new Insets(5, 0, 0, 0);
+		topMenuPanel.add(components.get("newScheduleButton"), c);
+		
+		// newTimeSlotButton
+		c.gridy = 4;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.insets = new Insets(5, 0, 0, 0);
+		topMenuPanel.add(components.get("newTimeSlotButton"), c);
 	}
 }

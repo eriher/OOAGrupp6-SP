@@ -8,9 +8,9 @@
 package view;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -56,19 +56,20 @@ public abstract class UserGUI extends GUI {
 
 		// Init top
 		tempPanel = new JPanel();
-		tempPanel.setBorder(BorderFactory.createLineBorder(Color.black));
+		tempPanel.setBorder(BorderFactory.createLoweredBevelBorder());
 		components.put("topPanel", tempPanel);
 
 		// Init sideMenu
 		tempPanel = new JPanel();
+		tempPanel.setBorder(BorderFactory.createLoweredBevelBorder());
 		tempPanel.setLayout(new BorderLayout());
 		components.put("menuPanel", tempPanel);
-		
+
 		// Init top
 		tempPanel = new JPanel();
 		tempPanel.setLayout(new GridBagLayout());
 		components.put("topMenuPanel", tempPanel);
-		
+
 		// Init sideMenu
 		tempPanel = new JPanel();
 		tempPanel.setLayout(new GridBagLayout());
@@ -81,7 +82,7 @@ public abstract class UserGUI extends GUI {
 	@Override
 	protected void buildGUI() {
 		super.buildGUI();
-		
+
 		JPanel topMenuPanel = (JPanel) components.get("topMenuPanel");
 		JPanel botMenuPanel = (JPanel) components.get("botMenuPanel");
 		GridBagConstraints c = new GridBagConstraints();
@@ -91,16 +92,17 @@ public abstract class UserGUI extends GUI {
 
 		// menuPanel
 		getCanvas().add(components.get("menuPanel"), BorderLayout.WEST);
-		
+
 		// topMenuPanel
 		components.get("menuPanel").add(topMenuPanel, BorderLayout.NORTH);
-		
+
 		// botMenuPanel
 		components.get("menuPanel").add(botMenuPanel, BorderLayout.SOUTH);
-		
+
 		// logOutButton
 		c.gridy = 0;
 		c.fill = GridBagConstraints.HORIZONTAL;
+		c.insets = new Insets(0, 0, 5, 0);
 		botMenuPanel.add(components.get("logOutButton"), c);
 	}
 }

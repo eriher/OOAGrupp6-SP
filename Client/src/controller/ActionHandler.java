@@ -77,12 +77,14 @@ public class ActionHandler {
 
 		return s;
 	}
-	
+
 	/**
-	 * Open popup that retrieves config info and display it in two edible text fields
+	 * Open popup that retrieves config info and display it in two edible text
+	 * fields
 	 */
-	public void networkConfig(){
-		System.out.println("There's suppose to be a window here, sadly it's taking a break for the time being");
+	public void networkConfig() {
+		System.out
+				.println("There's suppose to be a window here, sadly it's taking a break for the time being");
 	}
 
 	/**
@@ -91,25 +93,60 @@ public class ActionHandler {
 	public void logIn() {
 		workflow.connectToServer(username, password);
 	}
-	
+
 	/**
 	 * Retrieves user information and sends it to the workflow.
 	 */
 	public void logOut() {
 		workflow.disconnectFromServer();
 	}
-	
+
 	/**
 	 * Message the server that the user started working.
 	 */
-	public void checkIn(){
-		
+	public void checkIn() {
+
 	}
-	
+
 	/**
 	 * Message the server that the user stopped working.
 	 */
-	public void checkOut(){
-		
+	public void checkOut() {
+
+	}
+
+	/**
+	 * Message the server that a new user needs to be added.
+	 */
+	public void createUser() {
+
+	}
+
+	/**
+	 * Request a user from the server with all paramaters so they can be edited.
+	 */
+	public void editUser() {
+
+	}
+
+	/**
+	 * Request another user's schedule from the server.
+	 */
+	public void openSchedule() {
+
+	}
+
+	/**
+	 * Create a new schedule for the current user.
+	 */
+	public void newSchedule() {
+
+	}
+
+	/**
+	 * Create a new time slot for the current week.
+	 */
+	public void newTimeSlot() {
+
 	}
 }
