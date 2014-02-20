@@ -14,6 +14,7 @@ import model.Communication;
 import model.FileManagement;
 
 public class Workflow {
+	private final int SERVER_PORT = 4444;
 	private FileManagement fileMan;
 
 	public Workflow() {
@@ -25,7 +26,7 @@ public class Workflow {
 	}
 
 	private void initModelThread() {
-		ClientNode clientNode = ClientNode.getInstance(4444);
+		ClientNode clientNode = ClientNode.getInstance(SERVER_PORT);
 
 
 	}

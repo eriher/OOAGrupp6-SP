@@ -8,7 +8,7 @@ import model.FileManagement;
  * @author Henrik Johansson
  * @version 2013-02-12
  */
-public class Main {		//TODO Skicka med socket till Communication inte serversocket
+public class Main {	
 
 	/**
 	 * @param args

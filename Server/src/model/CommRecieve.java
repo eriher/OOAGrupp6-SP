@@ -58,7 +58,7 @@ public class CommRecieve extends Observable implements Runnable {
 				notifyObservers(message );
 				
 				
-				soc.close();
+				//soc.close();
 			
 			}
 			server.close();

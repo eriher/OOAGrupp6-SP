@@ -17,30 +17,25 @@ import java.util.Observer;
 
 public class ClientNode implements Observer {
 	private static ClientNode nod = null;
-	
+
 	private HashMap<InetAddress, Communication> clientConnected;
-	
-	private Boolean recieveInited = false;
 	private ServerSocket server;
-	private final int SERVER_SOCKET = 4444;
 
 	/**
 	 * @param port
 	 *            Porten
 	 * 
 	 */
-	private ClientNode(int port) {
+	private ClientNode(int port) {			//Private constructor use getInstance. (singleton)
 
 		try {
-			server = new ServerSocket(SERVER_SOCKET);
-			recieveInit();								//TODO Singleton alreadey need not recieveinit Booolean
-			
-			
+			server = new ServerSocket(port);
+			recieveInit();
+
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 
 	}
 
@@ -50,59 +45,55 @@ public class ClientNode implements Observer {
 		}
 		return nod;
 	}
-	
-	public void update(Observable o, Object arg){
-		if(o instanceof CommRecieve && arg instanceof InetAddress){
-			//Check if inetaddress is already in list
-			//if not add new, otherwise do nothing
+
+	public void update(Observable o, Object arg) {
+		if (o instanceof CommRecieve && arg instanceof InetAddress) {
+			// Check if inetaddress is already in list
+			// if not add new, otherwise do nothing
+
 			
-			if( !clientConnected.containsKey(arg) ){
-				addConnection((InetAddress) arg, ((CommRecieve)o).getSocket()   );
+			addConnection((InetAddress) arg, ((CommRecieve) o).getSocket());
+		}
+			
+			/*if (!clientConnected.containsKey(arg)) {
+				addConnection((InetAddress) arg, ((CommRecieve) o).getSocket());
 			}
+		} else*/ if (o instanceof CommRecieve && arg instanceof String) {
+			// Recieved message from Inetaddress send to Communication part
+
+			forwardMessage(((CommRecieve) o).getInetAddress(), (String) arg);
 		}
-		else if(o instanceof CommRecieve && arg instanceof String){
-			//Recieved message from Inetaddress send to Communication part
-			
-			forwardMessage( ((CommRecieve) o).getInetAddress()  , (String)arg );
+		else if(o instanceof Communication){	//Remove Connection 
+			System.out.println("Remove connection (in update)");
+			clientConnected.remove(   ( (Communication) o).getInetAddress() );
 		}
 	}
-	
+
 	private void recieveInit() {
-		if(!recieveInited){
-			recieveInited = true;
-			
-			 clientConnected = new HashMap<InetAddress, Communication>() ;
-			
-			CommRecieve recComm = new CommRecieve(server);
-			recComm.addObserver(this);
-			Thread recieve = new Thread( recComm );
-			recieve.start();
-		}
-	}
-
-
-	private void removeConnect() {
+		clientConnected = new HashMap<InetAddress, Communication>();
+		CommRecieve recComm = new CommRecieve(server);
+		recComm.addObserver(this);
+		Thread recieve = new Thread(recComm);
+		recieve.start();
 
 	}
 
 	private void addConnection(InetAddress iaddr, Socket soc) {
 		System.out.println("Add Connection");
-		clientConnected.put(iaddr, new Communication(soc) );
-		new Thread( clientConnected.get(iaddr) );
-		
-		
+		clientConnected.put(iaddr, new Communication(soc));
+		clientConnected.get(iaddr).addObserver(this);				//Lägg till addObserver(this.)
+		new Thread(clientConnected.get(iaddr));
+
+
 	}
-	
-	private void forwardMessage(InetAddress iaddr, Object message){
-		if(clientConnected.containsKey(iaddr) ){
+
+	private void forwardMessage(InetAddress iaddr, Object message) {
+		if (clientConnected.containsKey(iaddr)) {
 			clientConnected.get(iaddr).messageRecieved(iaddr, (String) message);
-			
-		}
-		else{
+
+		} else {
 			System.out.println("HashMap did not contain InetAddress: " + iaddr);
 		}
 	}
-	
-	
 
 }
