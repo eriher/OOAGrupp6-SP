@@ -39,7 +39,7 @@ public class Workflow {
 	}
 
 	/**
-	 * Tries to connect on a new thread to the server.
+	 * Tries to connect to the server.
 	 * 
 	 * @param username To be sent to the server.
 	 * @param password To be sent to the server.
@@ -47,11 +47,12 @@ public class Workflow {
 	public void connectToServer(String username, String password) {
 		UserHandler.getInstance().setUsername(username);
 		UserHandler.getInstance().setPassword(password);
+		communication.connect();
 		communication.requestLogin(username, password);
 	}
 	
 	/**
-	 * Disconnect from a server
+	 * Disconnect from the server
 	 */
 	public void disconnectFromServer(){
 		communication.disconnect();

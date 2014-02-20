@@ -37,30 +37,30 @@ public class Communication extends Observable {
 	/**
 	 * Set up a new socket and connect to the given ip and port number.
 	 */
-	private void connect() {
+	public void connect() {
 		try {
 			socket = new Socket(InetAddress.getByName(ip), portNumber);
 			socket.setSoTimeout(10000);
-			
+
 			out = new ObjectOutputStream(socket.getOutputStream());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * Close down the socket.
 	 */
-	public void disconnect(){
+	public void disconnect() {
 		try {
 			// Possible null pointers can happen if these are not checked
-			if(out != null && !socket.isOutputShutdown()){
+			if (out != null && !socket.isOutputShutdown()) {
 				out.close();
 			}
-			if(in != null && !socket.isInputShutdown()){
+			if (in != null && !socket.isInputShutdown()) {
 				in.close();
 			}
-			if(socket != null && !socket.isClosed()){
+			if (socket != null && !socket.isClosed()) {
 				socket.close();
 			}
 		} catch (IOException e) {
@@ -82,13 +82,13 @@ public class Communication extends Observable {
 		if (password == null) {
 			password = "";
 		}
-		connect();
 
 		String result = "false";
 		String s = "login " + username + " " + password;
 		try {
 			out.writeObject(s);
 			out.flush();
+
 			// getInputStream is blocking, initiate just before first receive
 			in = new ObjectInputStream(socket.getInputStream());
 			result = (String) in.readObject();
