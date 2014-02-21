@@ -19,14 +19,17 @@ public class Workflow {
 	 * Set up all classes that workflow needs to manage
 	 */
 	private Workflow() {
-		window = new Window();
-		window.setView("Login");
 		communication = new Communication();
-
+		new Thread() {
+			public void run() {
+				window = new Window();
+				window.setView("Login");
+				// TODO Better solution to being able to call
+				// communication.addObserver(this).
+				window.addObserver(communication);
+			}
+		}.start();
 		ActionHandler.getInstance().setWorkflow(this);
-		// TODO Better solution to being able to call
-		// communication.addObserver(this).
-		window.addObserver(communication);
 	}
 
 	public static Workflow getInstance() {

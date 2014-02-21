@@ -9,6 +9,7 @@ package view;
 
 import java.awt.Frame;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -26,6 +27,9 @@ public class Window implements Observer {
 		createFrame();
 		// Init all the views
 		initViews();
+
+		JOptionPane.showInputDialog(frame, "Info about this popup",
+				"Network config", JOptionPane.PLAIN_MESSAGE, null, null, "ham");
 	}
 
 	/**
@@ -39,15 +43,24 @@ public class Window implements Observer {
 	}
 
 	public void update(Observable o, Object arg) {
-		if (o instanceof Communication && arg instanceof String) {
-			if (((String) arg).compareToIgnoreCase("Employee") == 0) {
-				setView("Employee");
-			} else if (((String) arg).compareToIgnoreCase("Admin") == 0) {
-				setView("Admin");
-			}
-			// Bad things happened, display error.
-			else {
-				setErrorMessage("Bad login information or problem with server");
+		@SuppressWarnings("unchecked")
+		LinkedList<Object> argsList = (LinkedList<Object>) arg;
+
+		if (o instanceof Communication) {
+			if (((String) argsList.get(0)).compareToIgnoreCase("Login") == 0) {
+				if (((String) argsList.get(1)).compareToIgnoreCase("Employee") == 0) {
+					setView("Employee");
+				} else if (((String) argsList.get(1))
+						.compareToIgnoreCase("Admin") == 0) {
+					setView("Admin");
+				} else if (((String) argsList.get(1))
+						.compareToIgnoreCase("False") == 0) {
+					setErrorMessage("Bad login information");
+				}
+				// Bad/Unexpected things happened, display error.
+				else {
+					setErrorMessage("Critical error!\n\n" + arg.toString());
+				}
 			}
 		}
 	}
