@@ -14,95 +14,104 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.InetAddress;
 import java.net.Socket;
-import java.net.SocketException;
-import java.net.UnknownHostException;
+import java.util.LinkedList;
 import java.util.Observable;
 
 public class Communication extends Observable {
-	
+
 	private Socket socket;
-	private static ObjectInputStream in;
-	private static ObjectOutputStream out;
-	
-	public Communication()
-	{
-		
-		connect();
+	private ObjectInputStream in;
+	private ObjectOutputStream out;
+	private String ip;
+	private int portNumber;
+
+	/**
+	 * Init port number and IP that the client needs to create a socket against.
+	 */
+	public Communication() {
+		/*
+		 * FileManagement.getInstance().openReadFile("config.txt"); String s =
+		 * FileManagement.getInstance().readFile(); String[] sArr =
+		 * s.split("\\n"); ip = sArr[0]; portNumber = Integer.parseInt(sArr[1]);
+		 */
+
+		ip = "localhost";
+		portNumber = 4444;
 	}
 
 	/**
-	 * initiates connection
+	 * Set up a new socket and connect to the given ip and port number.
 	 */
-	private void connect()
-	{
-		String ip;
-		Integer port;
-		FileManagement.getInstance().openReadFile("config.txt");
-		String s = FileManagement.getInstance().readFile();
-		String[] sArr = s.split("\\n");
-		ip = sArr[0];
-		port = Integer.parseInt(sArr[1]);
-		InetAddress toAddr = null;
-		try 
-		{
-			toAddr = InetAddress.getByName(ip);
-			
-		} catch (UnknownHostException e) {
-			e.printStackTrace();
-			return;
-		}
-		try {
-			socket = new Socket(toAddr,port);
-		} catch (IOException e) {
-			e.printStackTrace();
-			return;
-		}
-		try {
-			out = new ObjectOutputStream(socket.getOutputStream());
-			in = new ObjectInputStream(socket.getInputStream());
-		} catch (IOException e) {
-			e.printStackTrace();
-			return;
-		}
-	}
-	/**
-	 *		closes connections
-	 */
-	public void disconnect()
-	{
-		try {
-			out.close();
-			in.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-	}
-	/**
-	 * @param Object[] 
-	 *            Includes command and information.
-	 */
-	public void communicate(Object[] cmnd)
-	{
-		Object result = null;
-		try {
-			out.writeObject(cmnd);
+	private void connect() {
+		if (socket == null) {
 			try {
-				result = in.readObject();
-				}	catch(ClassNotFoundException e)
-				{
-					e.printStackTrace();
-				}
+
+				socket = new Socket(InetAddress.getByName(ip), portNumber);
+				socket.setSoTimeout(10000);
+
+				out = new ObjectOutputStream(socket.getOutputStream());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
-		catch(SocketException e)
-		{
-			System.out.println(e.toString());
+	}
+
+	/**
+	 * Close down the socket.
+	 */
+	public void disconnect() {
+		try {
+			// Possible null pointers exception can happen if these are not
+			// checked
+			out.close();
+			out = null;
+			in.close();
+			in = null;
+			socket.close();
+			socket = null;
+		} catch (IOException e) {
+			e.printStackTrace();
+
 		}
-		catch(IOException e)
-		{
+	}
+
+	/**
+	 * Open the socket's input stream if one of the following is met:
+	 * 
+	 * 1) Socket's input isn't connected.
+	 * 
+	 * 2) The object input stream is null.
+	 */
+	private void openInputStream() {
+		if (in == null) {
+			try {
+				in = new ObjectInputStream(socket.getInputStream());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	/**
+	 * @param args
+	 *            Additional arguments to be sent with the message.
+	 */
+	public void send(Object... args) {
+		connect();
+
+		LinkedList<Object> argsList = new LinkedList<Object>();
+		for (Object o : args) {
+			argsList.add(o);
+		}
+
+		try {
+			out.writeObject(args);
+			out.flush();
+			openInputStream();
+			setChanged();
+			notifyObservers(in.readObject());
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		setChanged();
-		notifyObservers(result);
 	}
 }

@@ -8,7 +8,6 @@
 package controller;
 
 import model.Communication;
-import model.UserHandler;
 import view.Window;
 
 public class Workflow {
@@ -29,30 +28,31 @@ public class Workflow {
 		// communication.addObserver(this).
 		window.addObserver(communication);
 	}
-	
-	public static Workflow getInstance(){
-		if(workflow == null){
+
+	public static Workflow getInstance() {
+		if (workflow == null) {
 			workflow = new Workflow();
 		}
-		
+
 		return workflow;
 	}
 
 	/**
 	 * Tries to connect to the server.
 	 * 
-	 * @param username To be sent to the server.
-	 * @param password To be sent to the server.
+	 * @param username
+	 *            To be sent to the server.
+	 * @param password
+	 *            To be sent to the server.
 	 */
 	public void connectToServer(String username, String password) {
-		
-		communication.communicate(new String[]{"login",username,password});
+		communication.send("login", username, password);
 	}
-	
+
 	/**
 	 * Disconnect from the server
 	 */
-	public void disconnectFromServer(){
+	public void disconnectFromServer() {
 		communication.disconnect();
 		window.setView("Login");
 	}
