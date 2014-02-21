@@ -14,38 +14,8 @@
 
  */
 
-
 package model;
 
-
-import java.io.Serializable;
-
-import org.joda.time.*;
-
-public class Day implements Serializable {
-	
-	private static final long serialVersionUID = -7092684252961129250L;
-
-	//Dagens nummer i veckan, börjar på 0
-	private int dayNr;
-	
-	public DateTime checkInTime;
-	public DateTime checkOutTime;
-	
-	public DateTime scheduledInTime;
-	public DateTime scheduledOutTime;
-
-	public Day() {
-
-	}
-	
-	public int getDayNr() {
-		return dayNr;
-	}
-
-	public void setDayNr(int dayNr) {
-		this.dayNr = dayNr;
-	}
-	
+public class Day {
 
 }
