@@ -12,9 +12,18 @@ import java.util.HashMap;
 
 public class FileManagement {
 	private HashMap<String, FILE> fileList; // Contains all opened files
+	private static FileManagement fileManagement;
 	
-	public FileManagement(){
+	private FileManagement(){
 		// Create hashmap
+	}
+	
+	public static FileManagement getInstance(){
+		if(fileManagement == null){
+			fileManagement = new FileManagement();
+		}
+		
+		return fileManagement;
 	}
 	
 	/**

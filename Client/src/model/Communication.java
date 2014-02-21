@@ -28,10 +28,13 @@ public class Communication extends Observable {
 	 * Init port number and IP that the client needs to create a socket against.
 	 */
 	public Communication() {
+		FileManagement.getInstance().openReadFile("config.txt");
+		String s = FileManagement.getInstance().readFile();
+		String[] sArr = s.split("\\n");
 		// TODO Read these two variables from a text file instead of hard coded
 		// like this
-		ip = "localhost";
-		portNumber = 4444;
+		ip = sArr[0];
+		portNumber = Integer.parseInt(sArr[2]);
 	}
 
 	/**
