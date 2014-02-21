@@ -41,15 +41,12 @@ public class Workflow {
 	}
 
 	/**
-	 * Tries to connect to the server.
+	 * Help method for outside methods to send to server.
 	 * 
-	 * @param username
-	 *            To be sent to the server.
-	 * @param password
-	 *            To be sent to the server.
+	 * @param args 
 	 */
-	public void connectToServer(String username, String password) {
-		communication.send("login", username, password);
+	public void send(Object ... args) {
+		communication.send(args);
 	}
 
 	/**
