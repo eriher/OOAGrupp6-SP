@@ -91,7 +91,7 @@ public class ActionHandler {
 	 * Retrieves user information and sends it to the workflow.
 	 */
 	public void logIn() {
-		workflow.connectToServer(username, password);
+		workflow.send("Login", username, password);
 	}
 
 	/**
