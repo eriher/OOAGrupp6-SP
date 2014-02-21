@@ -1,4 +1,4 @@
-OOAGrupp6-SP
+MarximumWorker 9001
 ============
 
-Stämplings program, med schema, server/klient och flera behörigheter för användarna
+Stamping program with visual schedule and different permissions depending on the type of user.
