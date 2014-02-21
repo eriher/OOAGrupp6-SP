@@ -14,89 +14,92 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.InetAddress;
 import java.net.Socket;
+import java.net.SocketException;
+import java.net.UnknownHostException;
 import java.util.Observable;
 
 public class Communication extends Observable {
-
+	
 	private Socket socket;
-	private ObjectInputStream in;
-	private ObjectOutputStream out;
-	private String ip;
-	private int portNumber;
+	private static ObjectInputStream in;
+	private static ObjectOutputStream out;
+	
+	public Communication()
+	{
+		
+		connect();
+	}
 
 	/**
-	 * Init port number and IP that the client needs to create a socket against.
+	 * initiates connection
 	 */
-	public Communication() {
+	private void connect()
+	{
+		String ip;
+		Integer port;
 		FileManagement.getInstance().openReadFile("config.txt");
 		String s = FileManagement.getInstance().readFile();
 		String[] sArr = s.split("\\n");
-		// TODO Read these two variables from a text file instead of hard coded
-		// like this
 		ip = sArr[0];
-		portNumber = Integer.parseInt(sArr[2]);
-	}
-
-	/**
-	 * Set up a new socket and connect to the given ip and port number.
-	 */
-	public void connect() {
+		port = Integer.parseInt(sArr[1]);
+		InetAddress toAddr = null;
+		try 
+		{
+			toAddr = InetAddress.getByName(ip);
+			
+		} catch (UnknownHostException e) {
+			e.printStackTrace();
+			return;
+		}
 		try {
-			socket = new Socket(InetAddress.getByName(ip), portNumber);
-			socket.setSoTimeout(10000);
-
+			socket = new Socket(toAddr,port);
+		} catch (IOException e) {
+			e.printStackTrace();
+			return;
+		}
+		try {
 			out = new ObjectOutputStream(socket.getOutputStream());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Close down the socket.
-	 */
-	public void disconnect() {
-		try {
-			// Possible null pointers can happen if these are not checked
-			if (out != null && !socket.isOutputShutdown()) {
-				out.close();
-			}
-			if (in != null && !socket.isInputShutdown()) {
-				in.close();
-			}
-			if (socket != null && !socket.isClosed()) {
-				socket.close();
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-
-		}
-	}
-
-	/**
-	 * @param username
-	 *            ID to be sent to server.
-	 * @param password
-	 *            Password to be sent to server.
-	 */
-	public void requestLogin(String username, String password) {
-		if (username == null) {
-			username = "";
-		}
-		if (password == null) {
-			password = "";
-		}
-
-		String result = "false";
-		String s = "login " + username + " " + password;
-		try {
-			out.writeObject(s);
-			out.flush();
-
-			// getInputStream is blocking, initiate just before first receive
 			in = new ObjectInputStream(socket.getInputStream());
-			result = (String) in.readObject();
-			// IOException & ClassNotFoundException
-		} catch (Exception e) {
+		} catch (IOException e) {
+			e.printStackTrace();
+			return;
+		}
+	}
+	/**
+	 *		closes connections
+	 */
+	public void disconnect()
+	{
+		try {
+			out.close();
+			in.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	/**
+	 * @param Object[] 
+	 *            Includes command and information.
+	 */
+	public void communicate(Object[] cmnd)
+	{
+		Object result = null;
+		try {
+			out.writeObject(cmnd);
+			try {
+				result = in.readObject();
+				}	catch(ClassNotFoundException e)
+				{
+					e.printStackTrace();
+				}
+		}
+		catch(SocketException e)
+		{
+			System.out.println(e.toString());
+		}
+		catch(IOException e)
+		{
 			e.printStackTrace();
 		}
 		setChanged();

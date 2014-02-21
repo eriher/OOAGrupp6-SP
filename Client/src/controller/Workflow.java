@@ -45,10 +45,8 @@ public class Workflow {
 	 * @param password To be sent to the server.
 	 */
 	public void connectToServer(String username, String password) {
-		UserHandler.getInstance().setUsername(username);
-		UserHandler.getInstance().setPassword(password);
-		communication.connect();
-		communication.requestLogin(username, password);
+		
+		communication.communicate(new String[]{"login",username,password});
 	}
 	
 	/**
