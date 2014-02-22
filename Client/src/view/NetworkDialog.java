@@ -19,9 +19,8 @@ import javax.swing.JTextField;
 import model.FileManagement;
 
 public class NetworkDialog extends JDialog {
+	private static final long serialVersionUID = -8181628380699630749L;
 	private JPanel canvas;
-	private static final long serialVersionUID = 696L;
-
 	private HashMap<String, Container> components;
 
 	public NetworkDialog() {

@@ -18,6 +18,8 @@ import javax.swing.JPanel;
 import controller.ActionHandler;
 
 public class EmployeeGUI extends UserGUI {
+	private static final long serialVersionUID = -6805802081178406024L;
+
 	public EmployeeGUI() {
 		super();
 	}

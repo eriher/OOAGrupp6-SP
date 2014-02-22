@@ -21,19 +21,19 @@ import javax.swing.JPanel;
 
 import controller.ActionHandler;
 
-public abstract class GUI {
-	private JPanel canvas; // Every component MUST be connected to the
-	// canvas.
+public abstract class GUI extends JPanel {
+	private static final long serialVersionUID = -6618159364253053973L;
 	protected HashMap<String, Container> components;
 
 	public GUI() {
-		canvas = new JPanel();
-		canvas.setLayout(new BorderLayout());
+		setLayout(new BorderLayout());
 		components = new HashMap<String, Container>();
+		
 		initLabels();
 		initButtons();
 		initPanels();
 		initTextFields();
+		
 		buildGUI();
 	}
 
@@ -41,7 +41,7 @@ public abstract class GUI {
 	 * @return canvas Contains all objects to be displayed in a single panel.
 	 */
 	public JPanel getCanvas() {
-		return canvas;
+		return this;
 	}
 
 	/**
@@ -67,7 +67,7 @@ public abstract class GUI {
 	 * Create all panels
 	 */
 	protected void initPanels() {
-		canvas.setLayout(new BorderLayout());
+		setLayout(new BorderLayout());
 		
 		JPanel tempPanel = new JPanel();
 		components.put("southPanel", tempPanel);

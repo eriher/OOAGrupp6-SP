@@ -21,6 +21,8 @@ import javax.swing.JPanel;
 import controller.ActionHandler;
 
 public abstract class UserGUI extends GUI {
+	private static final long serialVersionUID = 3638212974922784125L;
+
 	public UserGUI() {
 		super();
 	}

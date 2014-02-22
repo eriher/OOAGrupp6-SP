@@ -25,6 +25,8 @@ import controller.ActionHandler;
 import controller.DocumentListenerHandler;
 
 public class LoginGUI extends GUI {
+	private static final long serialVersionUID = 5285405077713830734L;
+
 	public LoginGUI() {
 		super();
 	}
