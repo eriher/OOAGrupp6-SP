@@ -31,7 +31,7 @@ public class Communication extends Observable {
 	 */
 	public Communication() {
 		String s = FileManagement.getInstance().readLine("config.txt");
-		String[] sArr = s.split(";");
+		String[] sArr = s.split(":");
 		ip = sArr[0];
 		portNumber = Integer.parseInt(sArr[1]);
 
