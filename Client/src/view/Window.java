@@ -17,6 +17,7 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+import view.dialog.NetworkDialog;
 import model.Communication;
 
 public class Window extends JFrame implements Observer {

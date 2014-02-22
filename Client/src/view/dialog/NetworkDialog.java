@@ -3,47 +3,35 @@
  * @version 2014-02-22
  */
 
-package view;
+package view.dialog;
 
 import java.awt.Container;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.util.HashMap;
 
-import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import model.FileManagement;
 
-public class NetworkDialog extends JDialog {
-	private static final long serialVersionUID = -8181628380699630749L;
-	private JPanel canvas;
-	private HashMap<String, Container> components;
+public class NetworkDialog extends CustomDialog {
+	private static final long serialVersionUID = 1894512864549284805L;
 
 	public NetworkDialog() {
 		super();
-
-		components = new HashMap<String, Container>();
 		
-		create();
-		build();
-		
-		pack();
 		setTitle("Network Dialog");
-		setModal(true); // Block all other components when visible
 	}
 
 	/**
 	 * Create all components that is going to be used inside the dialog.
 	 */
-	private void create() {
+	@Override
+	protected void create() {
+		super.create();
 		Container temp;
-		
-		canvas = new JPanel();
-		canvas.setLayout(new GridBagLayout());
 		
 		temp = new JPanel();
 		temp.setLayout(new GridBagLayout());
@@ -70,8 +58,11 @@ public class NetworkDialog extends JDialog {
 	/**
 	 * Place all created components.
 	 */
-	private void build() {
+	@Override
+	protected void build() {
+		super.build();
 		GridBagConstraints c = new GridBagConstraints();
+		JPanel canvas = getCanvas();
 		Container temp;
 		
 		// IPLabel
