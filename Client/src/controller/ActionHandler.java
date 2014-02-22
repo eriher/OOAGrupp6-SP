@@ -105,21 +105,21 @@ public class ActionHandler {
 	 * Message the server that the user started working.
 	 */
 	public void checkIn() {
-		workflow.send("checkin");
+
 	}
 
 	/**
 	 * Message the server that the user stopped working.
 	 */
 	public void checkOut() {
-		workflow.send("checkout");
+
 	}
 
 	/**
 	 * Message the server that a new user needs to be added.
 	 */
 	public void createUser() {
-		workflow.send("createuser");
+
 	}
 
 	/**
@@ -140,7 +140,7 @@ public class ActionHandler {
 	 * Create a new schedule for the current user.
 	 */
 	public void newSchedule() {
-		
+
 	}
 
 	/**
