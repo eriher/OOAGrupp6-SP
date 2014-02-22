@@ -1,75 +1,52 @@
-GLÖM INTE ATT ÄNDRA DESC.
 /**
- * Write a description of class FileManagement here.
+ * Handles reading of files
  * 
- * @author 
- * @version 2013-02-20
+ * @author	Erik Hermansson
+ * @version 2014-02-22
  */
 
 package model;
 
-import java.util.HashMap;
+import java.io.BufferedReader;
+import java.io.FileReader;
+
 
 public class FileManagement {
-	private HashMap<String, FILE> fileList; // Contains all opened files
-	private static FileManagement fileManagement;
+	private static FileManagement fm = null;
+
 	
 	private FileManagement(){
-		// Create hashmap
-	}
-	
-	public static FileManagement getInstance(){
-		if(fileManagement == null){
-			fileManagement = new FileManagement();
-		}
 		
-		return fileManagement;
 	}
 	
 	/**
-	 * @param file
-	 */
-	public void openReadFile(String file){
-		// Add to hashmap
-		// Open read
-	}
-	
-	/**
-	 * @param file
-	 */
-	public void openWriteFile(String file){
-		// Add to hashmap
-		// Open write
-	}
-	
-	/**
+	 * Singleton method.
 	 * 
+	 * @return The single instance of the object.
 	 */
-	private void closeReadFile(){
-		
+	public static FileManagement getInstance() {
+		if (fm == null) 
+			fm = new FileManagement();
+		return fm;
 	}
 	
 	/**
-	 * 
-	 */
-	private void closeWriteFile(){
-		
-	}
-	
-	/**
+	 * Reads one line and returns it as String
+	 * @param file
+	 * Name of the file to be read.
 	 * @return
+	 * First line of file as String
 	 */
-	public String readFile(){
-		// Check if file is already open for writing.
-		// Read
-		// Return read data
+	public String readLine(String file)
+	{
+		try(BufferedReader br = new BufferedReader(new FileReader(file))){
+			String line;
+			line = br.readLine();
+			return line;
+		}catch (Exception e) {
+				e.printStackTrace();
+			}
+		return null;
 	}
-	
-	/**
-	 * 
-	 */
-	public void writeFile(){
-		// Check if file is already open for reading.
-		// Write
-	}
+
 }
