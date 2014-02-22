@@ -1,8 +1,8 @@
 /**
- * Contains all the different GUIs' and also manage the frame itself.
+ * Contains all the different GUIs' and dialogs. Manages the frame itself.
  * 
- * @author David Stromner, Benjamin Wijk, Magnus Kallten
- * @version 2013-02-16
+ * @author David Stromner
+ * @version 2013-02-22
  */
 
 package view;
@@ -13,6 +13,7 @@ import java.util.LinkedList;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -20,16 +21,17 @@ import model.Communication;
 
 public class Window implements Observer {
 	private HashMap<String, GUI> interfaceList;
+	private HashMap<String, JDialog> dialogList;
 	private JFrame frame;
 
 	public Window() {
 		interfaceList = new HashMap<String, GUI>();
+		dialogList = new HashMap<String, JDialog>();
 		createFrame();
-		// Init all the views
-		initViews();
+		createViews();
+		createDialogs();
 
-		JOptionPane.showInputDialog(frame, "Info about this popup",
-				"Network config", JOptionPane.PLAIN_MESSAGE, null, null, "ham");
+		new NetworkDialog();
 	}
 
 	/**
@@ -43,11 +45,14 @@ public class Window implements Observer {
 	}
 
 	public void update(Observable o, Object arg) {
-		@SuppressWarnings("unchecked")
-		LinkedList<Object> argsList = (LinkedList<Object>) arg;
-
 		if (o instanceof Communication) {
+			// Naughty but communication always update with a linkedlist
+			@SuppressWarnings("unchecked")
+			LinkedList<Object> argsList = (LinkedList<Object>) arg;
+
+			// Check what type of message was received
 			if (((String) argsList.get(0)).compareToIgnoreCase("Login") == 0) {
+				// Check which type of user it was
 				if (((String) argsList.get(1)).compareToIgnoreCase("Employee") == 0) {
 					setView("Employee");
 				} else if (((String) argsList.get(1))
@@ -67,7 +72,7 @@ public class Window implements Observer {
 
 	/**
 	 * @param msg
-	 *            Message to be displayed in the pop up
+	 *            message to be displayed in the pop up.
 	 */
 	public void setErrorMessage(String msg) {
 		JOptionPane.showMessageDialog(frame, msg, "Error",
@@ -75,28 +80,36 @@ public class Window implements Observer {
 	}
 
 	/**
-	 * Initiate main window
+	 * Initiate main window,
 	 */
 	private void createFrame() {
 		frame = new JFrame();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
+		frame.setTitle("MarximumWorker 9001");
 	}
 
 	/**
-	 * Create all GUIs
+	 * Create all GUIs.
 	 */
-	private void initViews() {
+	private void createViews() {
 		interfaceList.put("Login", new LoginGUI());
 		interfaceList.put("Admin", new AdminGUI());
 		interfaceList.put("Employee", new EmployeeGUI());
 	}
 
 	/**
+	 * Create all dialogs.
+	 */
+	private void createDialogs() {
+		dialogList.put("networkDialog", new NetworkDialog());
+	}
+
+	/**
 	 * @param key
 	 *            name of the GUI to switch to.
 	 * @throws IllegalArgumentException
-	 *             If 'key' contains a non-existing key.
+	 *             if 'key' contains a non-existing key.
 	 */
 	public void setView(String key) throws IllegalArgumentException {
 		if (interfaceList.get(key) == null) {
@@ -110,5 +123,14 @@ public class Window implements Observer {
 		frame.setExtendedState(Frame.MAXIMIZED_BOTH); // Needs to be called
 		// after add because of
 		// internal layouts
+	}
+
+	/**
+	 * @param key
+	 *            name of the dialog window.
+	 * @return instance of the dialog.
+	 */
+	public JDialog getDialog(String key) {
+		return dialogList.get(key);
 	}
 }

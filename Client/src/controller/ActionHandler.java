@@ -83,8 +83,7 @@ public class ActionHandler {
 	 * fields
 	 */
 	public void networkConfig() {
-		System.out
-				.println("There's suppose to be a window here, sadly it's taking a break for the time being");
+		workflow.getWindow().getDialog("networkDialog").setVisible(true);
 	}
 
 	/**

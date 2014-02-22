@@ -41,7 +41,10 @@ public class FileManagement {
 			BufferedReader br = new BufferedReader(new FileReader(file));
 			String line;
 			line = br.readLine();
+			br.close();
+			
 			return line;
+			
 			// IOException
 		}catch (Exception e) {
 			e.printStackTrace();

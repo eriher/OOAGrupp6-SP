@@ -39,6 +39,13 @@ public class Workflow {
 
 		return workflow;
 	}
+	
+	/**
+	 * @return instance of the window.
+	 */
+	public Window getWindow(){
+		return window;
+	}
 
 	/**
 	 * Help method for outside methods to send to server.
