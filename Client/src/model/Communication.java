@@ -26,10 +26,15 @@ public class Communication extends Observable {
 	private int portNumber;
 
 	/**
-	 * Read port number and IP from config.txt
-	 *  which the client needs to create a socket against.
+	 * Read port number and IP from config.txt which the client needs to create
+	 * a socket against.
 	 */
 	public Communication() {
+		String s = FileManagement.getInstance().readLine("config.txt");
+		String[] sArr = s.split(":");
+		ip = sArr[0];
+		portNumber = Integer.parseInt(sArr[1]);
+
 	}
 
 	/**
@@ -38,7 +43,6 @@ public class Communication extends Observable {
 	private void connect() {
 		if (socket == null) {
 			try {
-
 				socket = new Socket(InetAddress.getByName(ip), portNumber);
 				socket.setSoTimeout(10000);
 
