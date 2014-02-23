@@ -7,18 +7,19 @@
 
 package controller;
 
-import javax.swing.event.DocumentEvent;
-import javax.swing.text.BadLocationException;
-import javax.swing.text.Document;
+import java.awt.Container;
+
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+
+import model.FileManagement;
+import view.dialog.CustomDialog;
 
 public class ActionHandler {
 	private static ActionHandler actionHandler = null;
-	private String username, password;
 	private Workflow workflow;
 
 	private ActionHandler() {
-		username = "";
-		password = "";
 	}
 
 	/**
@@ -42,43 +43,6 @@ public class ActionHandler {
 	}
 
 	/**
-	 * Update userName with any activity that happens to userNameTF.
-	 * 
-	 * @param e
-	 *            DocumentEvent that happened.
-	 */
-	public void usernameActivity(DocumentEvent e) {
-		username = logString(e);
-	}
-
-	/**
-	 * Update password with any activity that happens to userNameTF.
-	 * 
-	 * @param e
-	 *            DocumentEvent that happened.
-	 */
-	public void passwordActivity(DocumentEvent e) {
-		password = logString(e);
-	}
-
-	/**
-	 * @param e
-	 *            DocumentEvent to get string from.
-	 */
-	private String logString(DocumentEvent e) {
-		Document doc = e.getDocument();
-		String s = "";
-
-		try {
-			s = doc.getText(0, doc.getLength());
-		} catch (BadLocationException ex) {
-			ex.printStackTrace();
-		}
-
-		return s;
-	}
-
-	/**
 	 * Open popup that retrieves config info and display it in two edible text
 	 * fields
 	 */
@@ -89,8 +53,11 @@ public class ActionHandler {
 	/**
 	 * Retrieves user information and sends it to the workflow.
 	 */
-	public void logIn() {
-		workflow.send("Login", username, password);
+	public void logIn(Container username, Container password) {
+		JTextField user = (JTextField) username;
+		JPasswordField pass = (JPasswordField) password;
+
+		workflow.send("Login", user.getText(), new String(pass.getPassword()));
 	}
 
 	/**
@@ -147,5 +114,17 @@ public class ActionHandler {
 	 */
 	public void newTimeSlot() {
 
+	}
+	
+	/**
+	 * @param ipText
+	 * @param passText
+	 */
+	public void networkDialogOk(CustomDialog customDialog, Container ipText, Container passText){
+		JTextField ip = (JTextField)ipText;
+		JTextField pass = (JTextField)passText;
+		customDialog.setVisible(false);
+		
+		FileManagement.getInstance().writeStrings("config.txt", ip.getText(), pass.getText());
 	}
 }

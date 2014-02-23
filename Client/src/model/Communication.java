@@ -30,11 +30,6 @@ public class Communication extends Observable {
 	 *  which the client needs to create a socket against.
 	 */
 	public Communication() {
-		String s = FileManagement.getInstance().readLine("config.txt");
-		String[] sArr = s.split(":");
-		ip = sArr[0];
-		portNumber = Integer.parseInt(sArr[1]);
-
 	}
 
 	/**

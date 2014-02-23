@@ -9,12 +9,12 @@ import javax.swing.JPanel;
 
 public class CustomDialog extends JDialog {
 	private static final long serialVersionUID = 4131677888057562310L;
-	protected HashMap<String, Container> components;
 	private JPanel canvas;
+	protected final CustomDialog customDialog = this;
+	protected HashMap<String, Container> components;
 	
 	public CustomDialog(){
 		super();
-		
 		components = new HashMap<String, Container>();
 		
 		create();
@@ -23,6 +23,7 @@ public class CustomDialog extends JDialog {
 		pack();
 		setTitle("Custom Dialog");
 		setModal(true); // Block all other components when visible
+		setResizable(false);
 	}
 	
 	/**

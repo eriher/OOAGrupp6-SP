@@ -30,9 +30,9 @@ public abstract class GUI extends JPanel {
 		components = new HashMap<String, Container>();
 		
 		initLabels();
-		initButtons();
 		initPanels();
 		initTextFields();
+		initButtons();
 		
 		buildGUI();
 	}
@@ -50,20 +50,6 @@ public abstract class GUI extends JPanel {
 	protected void initLabels() {}
 
 	/**
-	 * Create all buttons
-	 */
-	protected void initButtons() {
-		JButton tempButton = new JButton("Network Config");
-		tempButton.addActionListener(new ActionListener(){
-			@Override
-			public void actionPerformed(ActionEvent e){
-				ActionHandler.getInstance().networkConfig();
-			}
-		});
-		components.put("networkButton", tempButton);
-	}
-
-	/**
 	 * Create all panels
 	 */
 	protected void initPanels() {
@@ -78,6 +64,20 @@ public abstract class GUI extends JPanel {
 	 * Create all text fields.
 	 */
 	protected void initTextFields() {}
+	
+	/**
+	 * Create all buttons
+	 */
+	protected void initButtons() {
+		JButton tempButton = new JButton("Network Config");
+		tempButton.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e){
+				ActionHandler.getInstance().networkConfig();
+			}
+		});
+		components.put("networkButton", tempButton);
+	}
 
 	/**
 	 * Place all components

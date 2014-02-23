@@ -22,7 +22,6 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import controller.ActionHandler;
-import controller.DocumentListenerHandler;
 
 public class LoginGUI extends GUI {
 	private static final long serialVersionUID = 5285405077713830734L;
@@ -46,27 +45,6 @@ public class LoginGUI extends GUI {
 	}
 
 	/**
-	 * Create all buttons.
-	 */
-	@Override
-	protected void initButtons() {
-		super.initButtons();
-
-		JButton tempButton;
-
-		// Init logIn
-		tempButton = new JButton("Log In");
-		tempButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				ActionHandler.getInstance().logIn();
-			}
-		});
-		components.put("logInButton", tempButton);
-
-	}
-
-	/**
 	 * Create all panels.
 	 */
 	@Override
@@ -78,8 +56,8 @@ public class LoginGUI extends GUI {
 		// Init logInWindow to put logInButton, userName, and password into.
 		tempPanel = new JPanel();
 		tempPanel.setLayout(new GridBagLayout());
-		tempPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory
-				.createRaisedBevelBorder(), "Log In"));
+		tempPanel.setBorder(BorderFactory.createTitledBorder(
+				BorderFactory.createRaisedBevelBorder(), "Log In"));
 		components.put("logInWindow", tempPanel);
 
 		// Init wrapperPanel for logInWindow
@@ -96,21 +74,36 @@ public class LoginGUI extends GUI {
 		super.initTextFields();
 
 		JTextField tempField;
-		DocumentListenerHandler handler;
 
 		// Init userName
 		tempField = new JTextField();
-		handler = new DocumentListenerHandler();
-		handler.setMethod(ActionHandler.getInstance(), "usernameActivity");
-		tempField.getDocument().addDocumentListener(handler);
 		components.put("usernameTF", tempField);
 
 		// Init password
 		tempField = new JPasswordField();
-		handler = new DocumentListenerHandler();
-		handler.setMethod(ActionHandler.getInstance(), "passwordActivity");
-		tempField.getDocument().addDocumentListener(handler);
 		components.put("passwordPF", tempField);
+	}
+	
+	/**
+	 * Create all buttons.
+	 */
+	@Override
+	protected void initButtons() {
+		super.initButtons();
+
+		JButton tempButton;
+
+		// Init logIn
+		tempButton = new JButton("Log In");
+		tempButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ActionHandler.getInstance().logIn(components.get("usernameTF"),
+						components.get("passwordPF"));
+			}
+		});
+		components.put("logInButton", tempButton);
+
 	}
 
 	/**
