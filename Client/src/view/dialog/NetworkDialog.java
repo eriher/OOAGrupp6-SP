@@ -7,7 +7,6 @@ package view.dialog;
 
 import java.awt.Container;
 import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -36,11 +35,6 @@ public class NetworkDialog extends CustomDialog {
 	protected void create() {
 		super.create();
 		Container temp;
-
-		// WrapperPanel
-		temp = new JPanel();
-		temp.setLayout(new GridBagLayout());
-		components.put("wrapperPanel", temp);
 
 		// InfoLabel
 		temp = new JLabel("Restart the program for changes to take effect");
@@ -85,10 +79,11 @@ public class NetworkDialog extends CustomDialog {
 	@Override
 	protected void build() {
 		super.build();
-		GridBagConstraints c = new GridBagConstraints();
+		GridBagConstraints c;
 		JPanel canvas = getCanvas();
 
 		// InfoLabel
+		c = new GridBagConstraints();
 		c.gridx = 0;
 		c.gridy = 0;
 		c.gridwidth = 4;
@@ -96,19 +91,21 @@ public class NetworkDialog extends CustomDialog {
 		canvas.add(components.get("infoLabel"), c);
 
 		// IPLabel
-		c.gridwidth = 1;
+		c = new GridBagConstraints();
 		c.gridx = 2;
 		c.gridy = 1;
 		c.insets = new Insets(0, 0, 0, 10);
 		canvas.add(components.get("ipLabel"), c);
 
 		// PortLabel
+		c = new GridBagConstraints();
 		c.gridx = 2;
 		c.gridy = 2;
 		c.insets = new Insets(0, 0, 0, 10);
 		canvas.add(components.get("portLabel"), c);
 
 		// IPText
+		c = new GridBagConstraints();
 		c.gridx = 3;
 		c.gridy = 1;
 		c.ipadx = 40;
@@ -116,6 +113,7 @@ public class NetworkDialog extends CustomDialog {
 		canvas.add(components.get("ipText"), c);
 
 		// PortText
+		c = new GridBagConstraints();
 		c.gridx = 3;
 		c.gridy = 2;
 		c.ipadx = 40;
@@ -123,22 +121,11 @@ public class NetworkDialog extends CustomDialog {
 		canvas.add(components.get("portText"), c);
 
 		// OkButton
-		c.gridx = 0;
-		c.gridy = 0;
-		c.ipadx = 0;
-		c.fill = GridBagConstraints.NONE;
+		c = new GridBagConstraints();
+		c.gridx = 1;
+		c.gridy = 1;
 		c.anchor = GridBagConstraints.SOUTHEAST;
-		c.insets = new Insets(0, 0, 10, 10);
+		c.insets = new Insets(0, 0, 10, 0);
 		components.get("wrapperPanel").add(components.get("okButton"), c);
-
-		// WrapperPanel
-		c.gridx = 0;
-		c.gridy = 0;
-		c.ipadx = 215;
-		c.ipady = 125;
-		c.fill = GridBagConstraints.NONE;
-		components.get("wrapperPanel").add(canvas, c);
-
-		add(components.get("wrapperPanel"));
 	}
 }

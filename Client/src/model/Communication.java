@@ -102,7 +102,7 @@ public class Communication extends Observable {
 		}
 
 		try {
-			out.writeObject(args);
+			out.writeObject(argsList);
 			out.flush();
 			openInputStream();
 			setChanged();

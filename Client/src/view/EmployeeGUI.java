@@ -62,15 +62,17 @@ public class EmployeeGUI extends UserGUI {
 		super.buildGUI();
 
 		JPanel topMenuPanel = (JPanel) components.get("topMenuPanel");
-		GridBagConstraints c = new GridBagConstraints();
+		GridBagConstraints c;
 
 		// checkInButton
+		c = new GridBagConstraints();
 		c.gridy = 0;
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.insets = new Insets(5, 0, 0, 0);
 		topMenuPanel.add(components.get("checkInButton"), c);
 
 		// checkOutButton
+		c = new GridBagConstraints();
 		c.gridy = 1;
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.insets = new Insets(5, 0, 0, 0);

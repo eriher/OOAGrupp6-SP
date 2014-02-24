@@ -117,6 +117,13 @@ public class ActionHandler {
 	}
 	
 	/**
+	 * @param customDialog
+	 */
+	public void dialogCancel(CustomDialog customDialog){
+		customDialog.setVisible(false);
+	}
+	
+	/**
 	 * @param ipText
 	 * @param passText
 	 */
