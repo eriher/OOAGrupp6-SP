@@ -17,9 +17,10 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-import controller.Workflow;
-import view.dialog.NetworkDialog;
 import model.Communication;
+import view.dialog.CreateUserDialog;
+import view.dialog.NetworkDialog;
+import controller.Workflow;
 
 public class Window extends JFrame implements Observer {
 	private static final long serialVersionUID = 7991892771427260131L;
@@ -45,13 +46,12 @@ public class Window extends JFrame implements Observer {
 	public void addObserver(Observable o) {
 		o.addObserver(this);
 	}
-
+	
+	@SuppressWarnings("unchecked")
 	public void update(Observable o, Object arg) {
 		if (o instanceof Communication) {
-			// Naughty but communication always update with a linkedlist
-			@SuppressWarnings("unchecked")
 			LinkedList<Object> argsList = (LinkedList<Object>) arg;
-
+			
 			// Check what type of message was received
 			if (((String) argsList.get(0)).compareToIgnoreCase("Login") == 0) {
 				// Check which type of user it was
@@ -106,6 +106,7 @@ public class Window extends JFrame implements Observer {
 	 */
 	private void createDialogs() {
 		dialogList.put("networkDialog", new NetworkDialog());
+		dialogList.put("createUserDialog", new CreateUserDialog());
 	}
 
 	/**

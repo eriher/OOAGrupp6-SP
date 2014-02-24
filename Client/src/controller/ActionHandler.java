@@ -9,6 +9,7 @@ package controller;
 
 import java.awt.Container;
 
+import javax.swing.JComboBox;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
@@ -85,7 +86,7 @@ public class ActionHandler {
 	 * Message the server that a new user needs to be added.
 	 */
 	public void createUser() {
-
+		workflow.getWindow().getDialog("createUserDialog").setVisible(true);
 	}
 
 	/**
@@ -127,11 +128,26 @@ public class ActionHandler {
 	 * @param ipText
 	 * @param passText
 	 */
-	public void networkDialogOk(CustomDialog customDialog, Container ipText, Container passText){
+	public void networkDialogOk(CustomDialog customDialog, Container ipText, Container portText){
 		JTextField ip = (JTextField)ipText;
-		JTextField pass = (JTextField)passText;
+		JTextField port = (JTextField)portText;
 		customDialog.setVisible(false);
 		
-		FileManagement.getInstance().writeStrings("config.txt", ip.getText(), pass.getText());
+		FileManagement.getInstance().writeStrings("config.txt", ip.getText(), port.getText());
+	}
+	
+	/**
+	 * @param customDialog
+	 * @param usernameText
+	 * @param passText
+	 * @param authorityText
+	 */
+	public void createUserDialogOk(CustomDialog customDialog, Container usernameText, Container passText, Container authorityText){
+		JTextField username = (JTextField)usernameText;
+		JPasswordField password = (JPasswordField)passText;
+		JComboBox<String> authority = (JComboBox<String>)authorityText;
+		customDialog.setVisible(false);
+		
+		workflow.send("NewUser", username.getText(), new String(password.getPassword()), authority.getSelectedItem());
 	}
 }
