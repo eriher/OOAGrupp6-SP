@@ -51,7 +51,7 @@ public class ActionHandler {
 	}
 
 	/**
-	 * Retrieves user information and sends it to the workflow.
+	 * Retrieves user information and sends it to the communication.
 	 */
 	public void logIn(Container username, Container password) {
 		JTextField user = (JTextField) username;

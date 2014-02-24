@@ -59,13 +59,13 @@ public class NetworkDialog extends CustomDialog {
 
 		// IPText
 		temp = new JTextField();
-		components.put("ipText", temp);
 		((JTextField) temp).setText(sArr[0]);
+		components.put("ipText", temp);
 
 		// PortText
 		temp = new JTextField();
-		components.put("portText", temp);
 		((JTextField) temp).setText(sArr[1]);
+		components.put("portText", temp);
 
 		// OkButton
 		temp = new JButton("Ok");
