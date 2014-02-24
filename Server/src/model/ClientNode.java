@@ -12,6 +12,7 @@ import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -20,7 +21,8 @@ public class ClientNode implements Observer {
 
 	private HashMap<InetAddress, Communication> clientConnected;
 	private ServerSocket server;
-
+	private CommRecieve recComm;
+	
 	/**
 	 * @param port
 	 *            Porten
@@ -33,8 +35,8 @@ public class ClientNode implements Observer {
 			recieveInit();
 
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Another instance of server is already initialized, or some other program is using port: " + port +"\nServer shutdown.");
+			//e.printStackTrace();		//TODO remove after debug
 		}
 
 	}
@@ -58,10 +60,10 @@ public class ClientNode implements Observer {
 			/*if (!clientConnected.containsKey(arg)) {
 				addConnection((InetAddress) arg, ((CommRecieve) o).getSocket());
 			}
-		} else*/ if (o instanceof CommRecieve && arg instanceof String) {
+		} else*/ if (o instanceof CommRecieve && arg instanceof LinkedList) {
 			// Recieved message from Inetaddress send to Communication part
 
-			forwardMessage(((CommRecieve) o).getInetAddress(), (String) arg);
+			forwardMessage(((CommRecieve) o).getInetAddress(), (LinkedList<Object>) arg);
 		}
 		else if(o instanceof Communication){	//Remove Connection 
 			System.out.println("Remove connection (in update)");
@@ -71,7 +73,7 @@ public class ClientNode implements Observer {
 
 	private void recieveInit() {
 		clientConnected = new HashMap<InetAddress, Communication>();
-		CommRecieve recComm = new CommRecieve(server);
+		recComm = new CommRecieve(server);
 		recComm.addObserver(this);
 		Thread recieve = new Thread(recComm);
 		recieve.start();
@@ -81,7 +83,7 @@ public class ClientNode implements Observer {
 	private void addConnection(InetAddress iaddr, Socket soc) {
 		System.out.println("Add Connection");
 		clientConnected.put(iaddr, new Communication(soc));
-		clientConnected.get(iaddr).addObserver(this);				//Lägg till addObserver(this.)
+		clientConnected.get(iaddr).addObserver(this);				
 		new Thread(clientConnected.get(iaddr));
 
 
@@ -89,11 +91,17 @@ public class ClientNode implements Observer {
 
 	private void forwardMessage(InetAddress iaddr, Object message) {
 		if (clientConnected.containsKey(iaddr)) {
-			clientConnected.get(iaddr).messageRecieved(iaddr, (String) message);
+			clientConnected.get(iaddr).messageRecieved(iaddr, (LinkedList) message);
 
 		} else {
 			System.out.println("HashMap did not contain InetAddress: " + iaddr);
 		}
+	}
+	
+	public void killClientNode(){		
+		recComm.kill();
+		clientConnected.clear();
+		nod = null;
 	}
 
 }

@@ -9,6 +9,7 @@
 
 package model;
 
+import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -20,10 +21,12 @@ import java.util.Observable;
 public class Communication extends Observable {
 
 	private Socket socket;
+	private BufferedInputStream checkIn;
 	private ObjectInputStream in;
 	private ObjectOutputStream out;
 	private String ip;
 	private int portNumber;
+	private Boolean socketOpen;
 
 	/**
 	 * Read port number and IP from config.txt which the client needs to create
@@ -34,7 +37,7 @@ public class Communication extends Observable {
 		String[] sArr = s.split(":");
 		ip = sArr[0];
 		portNumber = Integer.parseInt(sArr[1]);
-
+		socketOpen = false;
 	}
 
 	/**
@@ -47,8 +50,16 @@ public class Communication extends Observable {
 				socket.setSoTimeout(10000);
 
 				out = new ObjectOutputStream(socket.getOutputStream());
+				socketOpen = true;
+
+				new Thread() {
+					public void run() {
+						recieve();
+					}
+				}.start();
 			} catch (IOException e) {
 				e.printStackTrace();
+				disconnect();
 			}
 		}
 	}
@@ -66,9 +77,9 @@ public class Communication extends Observable {
 			in = null;
 			socket.close();
 			socket = null;
+			socketOpen = false;
 		} catch (IOException e) {
 			e.printStackTrace();
-
 		}
 	}
 
@@ -82,9 +93,11 @@ public class Communication extends Observable {
 	private void openInputStream() {
 		if (in == null) {
 			try {
-				in = new ObjectInputStream(socket.getInputStream());
+				checkIn = new BufferedInputStream(socket.getInputStream());
+				in = new ObjectInputStream(checkIn);
 			} catch (IOException e) {
 				e.printStackTrace();
+				disconnect();
 			}
 		}
 	}
@@ -104,11 +117,29 @@ public class Communication extends Observable {
 		try {
 			out.writeObject(argsList);
 			out.flush();
-			openInputStream();
-			setChanged();
-			notifyObservers(in.readObject());
 		} catch (Exception e) {
 			e.printStackTrace();
+			disconnect();
+		}
+	}
+
+	/**
+	 * 
+	 */
+	public void recieve() {
+		openInputStream();
+		while (socketOpen) {
+			try {
+				// Naughty but works.
+				while (checkIn.available() != 0) {
+					// Check if there is any data waiting
+					setChanged();
+					notifyObservers(in.readObject());
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+				disconnect();
+			}
 		}
 	}
 }

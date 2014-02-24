@@ -9,12 +9,12 @@
 
 package model;
 
-import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.LinkedList;
 import java.util.Observable;
 
 public class CommRecieve extends Observable implements Runnable {		
@@ -23,7 +23,7 @@ public class CommRecieve extends Observable implements Runnable {
 	private String message = null;
 	private ObjectInputStream objInputStream;
 	private InetAddress iaddr;
-	
+	private Boolean again;
 	
 	public CommRecieve(ServerSocket server) {
 		this.server = server;
@@ -38,8 +38,7 @@ public class CommRecieve extends Observable implements Runnable {
 	
 		try {
 			
-			Boolean again = true;		//TODO remove after debug
-			
+			again = true;		
 			while (again) {
 				
 				soc = server.accept();						
@@ -50,12 +49,13 @@ public class CommRecieve extends Observable implements Runnable {
 				notifyObservers(iaddr);
 				
 				
-				Object inFromClient = objInputStream.readObject();
-				message = inFromClient.toString();
+				LinkedList<Object> listMessage = (LinkedList<Object>) objInputStream.readObject();
+				
+				message =   (String)  listMessage.get(0) ;		//TODO doesent work muppasdasjsajasjdjsdajdjas
 
-				System.out.println(message);				// TODO Debug	
+				System.out.println("This came in: " + message);				// TODO remove after debug	
 				setChanged(); 								//Update Observers
-				notifyObservers(message );
+				notifyObservers(listMessage );
 				
 				
 				//soc.close();
@@ -64,7 +64,8 @@ public class CommRecieve extends Observable implements Runnable {
 			server.close();
 
 		} catch (IOException e) {
-			e.printStackTrace();
+			System.out.println("If this was recieved during Stop from GUI, all should be fine.");
+			//e.printStackTrace();
 			
 		}catch(ClassNotFoundException e){
 			
@@ -84,5 +85,15 @@ public class CommRecieve extends Observable implements Runnable {
 	
 	public InetAddress getInetAddress(){
 		return iaddr;
+	}
+	
+	public void kill(){							// TODO untested if correct usage
+		try {
+			server.close();
+		} catch (IOException e) {
+			System.out.println("Closed serversocket");
+			//e.printStackTrace();
+		}
+		again=false;
 	}
 }

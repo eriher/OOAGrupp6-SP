@@ -14,11 +14,10 @@ public class Main {
 	 * @param args
 	 */
 
-	private static final int PORT = 4444;
 
 	public static void main(String[] args) {
 		
-		System.out.println("Server main method started.");
+		System.out.println("puplbic static void main(String[] arg){};");
 		Workflow flow = new Workflow();
 
 	}

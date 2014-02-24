@@ -5,14 +5,30 @@
  * @version 2013-02-20
  */
 package view;
-import controller.ActionHandler;
-
-import javax.swing.*;
-
-import java.util.*;
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Container;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.InetAddress;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.UnknownHostException;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+
+import controller.ActionHandler;
 
 /**
  * @author Olof
@@ -24,12 +40,15 @@ public class Window {
 	private JFrame frame;
 	private JButton start, stop;
 	private JPanel panel1, panel2;
-	private JTextField ip, port;
+	private JTextField port;
+	private JTextArea ip;
 	private JLabel ipadr, portadr;
 	private JMenuItem startItem, stopItem;
+	private int SERVER_PORT;
 	
-	public Window()
+	public Window(int SERVER_PORT)
 	{
+		this.SERVER_PORT = SERVER_PORT;
 		buildWindow();
 	}
 	
@@ -47,7 +66,7 @@ public class Window {
 		start.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ActionHandler.getInstance().startButton();
+				ActionHandler.getInstance().startButton(SERVER_PORT);
 				enableStartStop();
 				}
 		});
@@ -74,7 +93,7 @@ public class Window {
 		
 		// Create textfields
 		
-		ip = new JTextField();
+		ip = new JTextArea();
 		port = new JTextField();
 
 		ip.setEditable(false);
@@ -114,7 +133,7 @@ public class Window {
 		startItem = new JMenuItem("Start");
 		startItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ActionHandler.getInstance().startButton();
+				ActionHandler.getInstance().startButton(SERVER_PORT);
 				enableStartStop();
 			}
 		});
@@ -162,13 +181,40 @@ public class Window {
 	
 	public String getAddress()
 	{	
-		String address = "192.168.1.5";
-		return address;
+		String addressLocal = "unknown", addressPublic = "unknown";
+		try {
+			addressLocal = InetAddress.getLocalHost().getHostAddress();				//Get local ip address
+			
+		} catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try{																		//Get public ip address
+			URL giefIPAddress = new URL("http://checkip.amazonaws.com");								//Only one line with your public ip address
+			BufferedReader in = new BufferedReader(new InputStreamReader(giefIPAddress.openStream()));
+			addressPublic = in.readLine();
+			System.out.println("addressPublic");
+		}catch(UnknownHostException e){
+			System.out.println("No internet connection, thereforce no Public ip");
+			//e.printStackTrace();
+		}
+		catch(MalformedURLException e){
+			System.out.println("Faulty URL for public IP address, if you dont have an internet connection this is nothing to worry about");
+			e.printStackTrace();
+		}catch(IOException e){
+			System.out.println("Could not read from URL provided");
+			e.printStackTrace();
+		}																		//TODO remove comment (/**/) after debug, it is slow for testing without internet
+		String allAddress ="Local: " +  addressLocal + "\nPublic: " + addressPublic;
+		
+		
+		
+		return allAddress;
 	}
 	
 	public String getPort()
 	{
-		String port = "1234";
+		String port = Integer.toString(SERVER_PORT) ;
 		return port;
 		
 	}

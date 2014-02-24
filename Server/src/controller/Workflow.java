@@ -6,27 +6,26 @@
  */
 
 package controller;
-
-import java.net.InetAddress;
-
+ 
 import model.ClientNode;
-import model.Communication;
 import model.FileManagement;
+import view.Window;
 
 public class Workflow {
 	private final int SERVER_PORT = 4444;
-	private FileManagement fileMan;
+	//private FileManagement fileMan;
 
 	public Workflow() {
-		initModelThread();
+		initWindowThread(SERVER_PORT);
+		//initModelThread();
 	}
 
-	private void initWindowThread() {	//Initializes the Window
-
+	private void initWindowThread(int SERVER_PORT) {	//Initializes the Window	//TODO fix threads 
+		Window window = new Window(SERVER_PORT);
 	}
 
-	private void initModelThread() {
-		ClientNode clientNode = ClientNode.getInstance(SERVER_PORT);
+	private void initModelThread() {		//This will initialize when click on startmodel
+		//ClientNode clientNode = ClientNode.getInstance(SERVER_PORT);
 
 
 	}

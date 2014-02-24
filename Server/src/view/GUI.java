@@ -9,7 +9,7 @@
 
 package view;
 
-public class GUI {
+public class GUI {		//TODO remove entire class unneccesary
 	public GUI(){
 		
 	}

@@ -1,6 +1,6 @@
 /**
  * @author David Stromner
- * @version 2014-02-22
+ * @version 2014-02-24
  */
 
 package view.dialog;
@@ -61,6 +61,8 @@ public class NetworkDialog extends CustomDialog {
 		((JTextField) temp).setText(sArr[1]);
 		components.put("portText", temp);
 
+		// An OKButton needs to be created in a subclass to CustomDialog since
+		// each OKButton is going to trigger different things.
 		// OkButton
 		temp = new JButton("Ok");
 		((JButton) temp).addActionListener(new ActionListener() {
@@ -119,13 +121,5 @@ public class NetworkDialog extends CustomDialog {
 		c.ipadx = 40;
 		c.fill = GridBagConstraints.HORIZONTAL;
 		canvas.add(components.get("portText"), c);
-
-		// OkButton
-		c = new GridBagConstraints();
-		c.gridx = 1;
-		c.gridy = 1;
-		c.anchor = GridBagConstraints.SOUTHEAST;
-		c.insets = new Insets(0, 0, 10, 0);
-		components.get("wrapperPanel").add(components.get("okButton"), c);
 	}
 }

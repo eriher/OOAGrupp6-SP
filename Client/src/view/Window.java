@@ -17,6 +17,7 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+import controller.Workflow;
 import view.dialog.NetworkDialog;
 import model.Communication;
 
@@ -62,10 +63,12 @@ public class Window extends JFrame implements Observer {
 				} else if (((String) argsList.get(1))
 						.compareToIgnoreCase("False") == 0) {
 					setErrorMessage("Bad login information");
+					Workflow.getInstance().disconnectFromServer();
 				}
 				// Bad/Unexpected things happened, display error.
 				else {
 					setErrorMessage("Critical error!\n\n" + arg.toString());
+					Workflow.getInstance().disconnectFromServer();
 				}
 			}
 		}
