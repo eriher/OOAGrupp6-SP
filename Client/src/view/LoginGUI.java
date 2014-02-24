@@ -115,33 +115,39 @@ public class LoginGUI extends GUI {
 
 		JPanel panel = (JPanel) components.get("logInWindow");
 		JPanel wrapper = (JPanel) components.get("wrapperPanel");
-		GridBagConstraints c = new GridBagConstraints();
+		GridBagConstraints c;
 
 		// usernameLabel
+		c = new GridBagConstraints();
 		c.gridx = 0;
 		c.gridy = 0;
-		c.insets = new Insets(0, 10, 0, 0);
+		c.insets = new Insets(0, 0, 0, 10);
 		panel.add(components.get("usernameLabel"), c);
 
 		// passwordLabel
+		c = new GridBagConstraints();
 		c.gridx = 0;
 		c.gridy = 1;
-		c.insets = new Insets(0, 10, 0, 0);
+		c.insets = new Insets(0, 0, 0, 10);
 		panel.add(components.get("passwordLabel"), c);
 
 		// usernameTF
+		c = new GridBagConstraints();
 		c.gridx = 1;
 		c.gridy = 0;
 		c.ipadx = 270;
 		panel.add(components.get("usernameTF"), c);
 
 		// passwordPF
+		c = new GridBagConstraints();
 		c.gridx = 1;
 		c.gridy = 1;
+		c.ipadx = 270;
 		panel.add(components.get("passwordPF"), c);
 		c.ipadx = 0;
 
 		// logInButton
+		c = new GridBagConstraints();
 		c.gridx = 1;
 		c.gridy = 2;
 		c.anchor = GridBagConstraints.SOUTHEAST;
@@ -149,6 +155,7 @@ public class LoginGUI extends GUI {
 		panel.add(components.get("logInButton"), c);
 
 		// logInWindow
+		c = new GridBagConstraints();
 		c.gridx = 0;
 		c.gridy = 0;
 		c.ipadx = 120;

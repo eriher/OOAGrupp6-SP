@@ -87,7 +87,7 @@ public abstract class UserGUI extends GUI {
 
 		JPanel topMenuPanel = (JPanel) components.get("topMenuPanel");
 		JPanel botMenuPanel = (JPanel) components.get("botMenuPanel");
-		GridBagConstraints c = new GridBagConstraints();
+		GridBagConstraints c;
 
 		// topPanel
 		getCanvas().add(components.get("topPanel"), BorderLayout.NORTH);
@@ -102,6 +102,7 @@ public abstract class UserGUI extends GUI {
 		components.get("menuPanel").add(botMenuPanel, BorderLayout.SOUTH);
 
 		// logOutButton
+		c = new GridBagConstraints();
 		c.gridy = 0;
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.insets = new Insets(0, 0, 5, 0);

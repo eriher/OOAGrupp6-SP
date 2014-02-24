@@ -83,10 +83,11 @@ public abstract class GUI extends JPanel {
 	 * Place all components
 	 */
 	protected void buildGUI() {
-		GridBagConstraints c = new GridBagConstraints();
+		GridBagConstraints c;
 		JPanel panel = (JPanel) components.get("southPanel");
 		
 		// networkButton
+		c = new GridBagConstraints();
 		c.weightx = 1.0;
 		c.weighty = 1.0;
 		c.anchor = GridBagConstraints.SOUTHEAST;

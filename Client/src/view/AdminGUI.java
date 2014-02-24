@@ -87,33 +87,38 @@ public class AdminGUI extends UserGUI {
 		super.buildGUI();
 		
 		JPanel topMenuPanel = (JPanel) components.get("topMenuPanel");
-		GridBagConstraints c = new GridBagConstraints();
+		GridBagConstraints c;
 		
 		// createUserButton
+		c = new GridBagConstraints();
 		c.gridy = 0;
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.insets = new Insets(5, 0, 0, 0);
 		topMenuPanel.add(components.get("createUserButton"), c);
 		
 		// editUserButtton
+		c = new GridBagConstraints();
 		c.gridy = 1;
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.insets = new Insets(5, 0, 0, 0);
 		topMenuPanel.add(components.get("editUserButton"), c);
 		
 		// openScheduleButton
+		c = new GridBagConstraints();
 		c.gridy = 2;
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.insets = new Insets(5, 0, 0, 0);
 		topMenuPanel.add(components.get("openScheduleButton"), c);
 		
 		// newScheduleButton
+		c = new GridBagConstraints();
 		c.gridy = 3;
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.insets = new Insets(5, 0, 0, 0);
 		topMenuPanel.add(components.get("newScheduleButton"), c);
 		
 		// newTimeSlotButton
+		c = new GridBagConstraints();
 		c.gridy = 4;
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.insets = new Insets(5, 0, 0, 0);
