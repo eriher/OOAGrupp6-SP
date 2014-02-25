@@ -1,5 +1,5 @@
 /**
- * Contains all the different GUIs' and dialogs. Manages the frame itself.
+ * Contains all the different GUIs' and dialogs for the program, also contains the key-frame.
  * 
  * @author David Stromner
  * @version 2013-02-22
@@ -19,6 +19,7 @@ import javax.swing.JOptionPane;
 
 import model.Communication;
 import view.dialog.CreateUserDialog;
+import view.dialog.EditUserDialog;
 import view.dialog.NetworkDialog;
 import controller.Workflow;
 
@@ -107,6 +108,7 @@ public class Window extends JFrame implements Observer {
 	private void createDialogs() {
 		dialogList.put("networkDialog", new NetworkDialog());
 		dialogList.put("createUserDialog", new CreateUserDialog());
+		dialogList.put("editUserDialog", new EditUserDialog());
 	}
 
 	/**

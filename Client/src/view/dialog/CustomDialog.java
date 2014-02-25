@@ -1,4 +1,6 @@
 /**
+ * Base class for all custom dialogs, contains an empty Ok-button and an Cancel-button.
+ * 
  * @author David Stromner
  * @version 2014-02-24
  */

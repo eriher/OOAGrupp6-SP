@@ -1,10 +1,11 @@
 /**
- * Set up a connection to the server with IP and port number from a config file. 
- * Responsible for sending log in request from a user and receiving if it worked.
- * Also takes care of receiving the user's schedule and sending modified user schedules back to the server.
+ * Set up a connection to the server with IP and port number from the config file.
+ * Contains a looped recive method which checks if any new data is available.
+ * Contains a send method which takes in objects, put them into a linked list and
+ * send it to the server.
  * 
- * @author Erik Hermansson
- * @version 2013-02-18
+ * @author Erik Hermansson, David Stromner
+ * @version 2013-02-25
  */
 
 package model;
@@ -33,10 +34,6 @@ public class Communication extends Observable {
 	 * a socket against.
 	 */
 	public Communication() {
-		String s = FileManagement.getInstance().readLine("config.txt");
-		String[] sArr = s.split(":");
-		ip = sArr[0];
-		portNumber = Integer.parseInt(sArr[1]);
 		socketOpen = false;
 	}
 
@@ -44,6 +41,11 @@ public class Communication extends Observable {
 	 * Set up a new socket and connect to the given ip and port number.
 	 */
 	private void connect() {
+		String s = FileManagement.getInstance().readLine("config.txt");
+		String[] sArr = s.split(":");
+		ip = sArr[0];
+		portNumber = Integer.parseInt(sArr[1]);
+		
 		if (socket == null) {
 			try {
 				socket = new Socket(InetAddress.getByName(ip), portNumber);

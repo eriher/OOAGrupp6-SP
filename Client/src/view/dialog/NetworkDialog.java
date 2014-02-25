@@ -1,4 +1,6 @@
 /**
+ * Dialog for setting ip and port number in the config.txt file.
+ * 
  * @author David Stromner
  * @version 2014-02-24
  */
@@ -25,7 +27,7 @@ public class NetworkDialog extends CustomDialog {
 	public NetworkDialog() {
 		super();
 
-		setTitle("Network Dialog");
+		setTitle("Network");
 	}
 
 	/**
@@ -35,10 +37,6 @@ public class NetworkDialog extends CustomDialog {
 	protected void create() {
 		super.create();
 		Container temp;
-
-		// InfoLabel
-		temp = new JLabel("Restart the program for changes to take effect");
-		components.put("infoLabel", temp);
 
 		// IPLabel
 		temp = new JLabel("IP:");
@@ -83,14 +81,6 @@ public class NetworkDialog extends CustomDialog {
 		super.build();
 		GridBagConstraints c;
 		JPanel canvas = getCanvas();
-
-		// InfoLabel
-		c = new GridBagConstraints();
-		c.gridx = 0;
-		c.gridy = 0;
-		c.gridwidth = 4;
-		c.insets = new Insets(0, 0, 20, 0);
-		canvas.add(components.get("infoLabel"), c);
 
 		// IPLabel
 		c = new GridBagConstraints();

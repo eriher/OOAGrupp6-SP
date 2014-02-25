@@ -1,5 +1,5 @@
 /**
- * Init workflow.
+ * Start the program by calling the singelton method in Workflow
  * 
  * @version 2013-02-16
  */

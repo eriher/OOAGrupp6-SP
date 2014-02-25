@@ -1,5 +1,5 @@
 /**
- * Manage the workflow of the client program.
+ * Initiate the program and manage the flow of the program. Contains a help method for the other classes to send objects to the server.
  * 
  * @author David Stromner
  * @version 2013-02-16

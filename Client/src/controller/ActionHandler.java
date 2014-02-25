@@ -1,8 +1,8 @@
 /**
- * Takes care of all events that can be triggered by swing components.
+ * Each method got a corresponding swing component that calls the method when the swing component is activated.
  * 
  * @author David Stromner
- * @version 2013-02-16
+ * @version 2013-02-25
  */
 
 package controller;
@@ -93,7 +93,7 @@ public class ActionHandler {
 	 * Request a user from the server with all paramaters so they can be edited.
 	 */
 	public void editUser() {
-
+		workflow.getWindow().getDialog("editUserDialog").setVisible(true);
 	}
 
 	/**
@@ -116,38 +116,42 @@ public class ActionHandler {
 	public void newTimeSlot() {
 
 	}
-	
+
 	/**
 	 * @param customDialog
 	 */
-	public void dialogCancel(CustomDialog customDialog){
+	public void dialogCancel(CustomDialog customDialog) {
 		customDialog.setVisible(false);
 	}
-	
+
 	/**
 	 * @param ipText
 	 * @param passText
 	 */
-	public void networkDialogOk(CustomDialog customDialog, Container ipText, Container portText){
-		JTextField ip = (JTextField)ipText;
-		JTextField port = (JTextField)portText;
+	public void networkDialogOk(CustomDialog customDialog, Container ipText,
+			Container portText) {
+		JTextField ip = (JTextField) ipText;
+		JTextField port = (JTextField) portText;
 		customDialog.setVisible(false);
-		
-		FileManagement.getInstance().writeStrings("config.txt", ip.getText(), port.getText());
+
+		FileManagement.getInstance().writeStrings("config.txt", ip.getText(),
+				port.getText());
 	}
-	
+
 	/**
 	 * @param customDialog
 	 * @param usernameText
 	 * @param passText
 	 * @param authorityText
 	 */
-	public void createUserDialogOk(CustomDialog customDialog, Container usernameText, Container passText, Container authorityText){
-		JTextField username = (JTextField)usernameText;
-		JPasswordField password = (JPasswordField)passText;
-		JComboBox<String> authority = (JComboBox<String>)authorityText;
+	public void createUserDialogOk(CustomDialog customDialog,
+			Container usernameText, Container passText, Container authorityText) {
+		JTextField username = (JTextField) usernameText;
+		JPasswordField password = (JPasswordField) passText;
+		JComboBox<String> authority = (JComboBox<String>) authorityText;
 		customDialog.setVisible(false);
-		
-		workflow.send("NewUser", username.getText(), new String(password.getPassword()), authority.getSelectedItem());
+
+		workflow.send("NewUser", username.getText(),
+				new String(password.getPassword()), authority.getSelectedItem());
 	}
 }

@@ -1,3 +1,10 @@
+/**
+ * Dialog for creating a new user in the admin GUI.
+ * 
+ * @author David Stromner
+ * @version 2014-02-25
+ */
+
 package view.dialog;
 
 import java.awt.Container;
@@ -21,7 +28,7 @@ public class CreateUserDialog extends CustomDialog {
 	public CreateUserDialog() {
 		super();
 
-		setTitle("Network Dialog");
+		setTitle("Create User");
 	}
 
 	/**
@@ -36,7 +43,7 @@ public class CreateUserDialog extends CustomDialog {
 		temp = new JLabel("Username:");
 		components.put("usernameLabel", temp);
 
-		// PortLabel
+		// PassLabel
 		temp = new JLabel("Password:");
 		components.put("passwordLabel", temp);
 

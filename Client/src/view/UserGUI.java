@@ -1,7 +1,7 @@
 /**
  * All unique swing components for the UserGUI.
  * 
- * @author David Stromner, Benjamin Wijk, Magnus Kallten
+ * @author David Stromner
  * @version 2013-02-12
  */
 
