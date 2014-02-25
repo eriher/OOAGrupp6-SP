@@ -18,6 +18,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import controller.ActionHandler;
@@ -50,10 +51,11 @@ public class EditUserDialog extends CustomDialog {
 		((JButton) temp).addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ActionHandler.getInstance().createUserDialogOk(customDialog,
-						components.get("usernameText"),
-						components.get("passwordText"),
-						components.get("authorityText"));
+				ActionHandler.getInstance().editUserDialogOk(customDialog,
+						components.get("oIUsernameText"),
+						components.get("eUPasswordPF"),
+						components.get("eUConfirmPasswordPF"),
+						components.get("eUAuthorityComboBox"));
 			}
 		});
 		components.put("okButton", temp);
@@ -78,13 +80,21 @@ public class EditUserDialog extends CustomDialog {
 		temp = new JLabel("Password:");
 		components.put("eUPasswordLabel", temp);
 
+		// ConfirmPasswordLabel
+		temp = new JLabel("Confirm Password:");
+		components.put("eUConfirmPasswordLabel", temp);
+
 		// AuthorityLabel
 		temp = new JLabel("Authority Level:");
 		components.put("eUAuthorityLabel", temp);
 
-		// PasswordText
-		temp = new JTextField();
-		components.put("eUPasswordText", temp);
+		// PasswordPasswordField
+		temp = new JPasswordField();
+		components.put("eUPasswordPF", temp);
+
+		// ConfirmPasswordPasswordField
+		temp = new JPasswordField();
+		components.put("eUConfirmPasswordPF", temp);
 
 		// AuthorityComboBox
 		String[] sArr = { "Employee", "Admin" };
@@ -196,7 +206,7 @@ public class EditUserDialog extends CustomDialog {
 		c.gridx = 0;
 		c.gridy = 0;
 		c.gridheight = 2;
-		c.insets = new Insets(0, 0, 0, 15);
+		c.anchor = GridBagConstraints.NORTH;
 		canvas.add(editUser, c);
 
 		// Label
@@ -214,6 +224,14 @@ public class EditUserDialog extends CustomDialog {
 		c.insets = new Insets(0, 0, 0, 10);
 		editUser.add(components.get("eUPasswordLabel"), c);
 
+		// ConfirmPasswordLabel
+		c = new GridBagConstraints();
+		c.gridx = 1;
+		c.gridy = 2;
+		c.anchor = GridBagConstraints.EAST;
+		c.insets = new Insets(0, 0, 0, 10);
+		editUser.add(components.get("eUConfirmPasswordLabel"), c);
+
 		// AuthorityLabel
 		c = new GridBagConstraints();
 		c.gridx = 1;
@@ -222,13 +240,21 @@ public class EditUserDialog extends CustomDialog {
 		c.insets = new Insets(0, 0, 0, 10);
 		editUser.add(components.get("eUAuthorityLabel"), c);
 
-		// PasswordText
+		// PasswordPasswordField
 		c = new GridBagConstraints();
 		c.gridx = 2;
 		c.gridy = 1;
 		c.ipadx = 65;
 		c.fill = GridBagConstraints.HORIZONTAL;
-		editUser.add(components.get("eUPasswordText"), c);
+		editUser.add(components.get("eUPasswordPF"), c);
+
+		// ConfirmPasswordPasswordField
+		c = new GridBagConstraints();
+		c.gridx = 2;
+		c.gridy = 2;
+		c.ipadx = 65;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		editUser.add(components.get("eUConfirmPasswordPF"), c);
 
 		// AuthorityComboBox
 		c = new GridBagConstraints();
@@ -244,6 +270,7 @@ public class EditUserDialog extends CustomDialog {
 		c.gridy = 4;
 		c.weighty = 1;
 		c.insets = new Insets(50, 0, 0, 0);
+		c.anchor = GridBagConstraints.SOUTH;
 		editUser.add(components.get("eUDeleteUserButton"), c);
 
 	}
@@ -260,6 +287,7 @@ public class EditUserDialog extends CustomDialog {
 		c = new GridBagConstraints();
 		c.gridx = 1;
 		c.gridy = 0;
+		c.anchor = GridBagConstraints.WEST;
 		canvas.add(getUser, c);
 
 		// Label
@@ -267,7 +295,6 @@ public class EditUserDialog extends CustomDialog {
 		c.gridx = 0;
 		c.gridy = 0;
 		c.insets = new Insets(0, 0, 30, 0);
-		c.anchor = GridBagConstraints.WEST;
 		getUser.add(components.get("gULabel"), c);
 
 		// TextField
@@ -309,6 +336,7 @@ public class EditUserDialog extends CustomDialog {
 		c = new GridBagConstraints();
 		c.gridx = 1;
 		c.gridy = 1;
+		c.anchor = GridBagConstraints.WEST;
 		canvas.add(original, c);
 
 		// Label
@@ -316,7 +344,6 @@ public class EditUserDialog extends CustomDialog {
 		c.gridx = 0;
 		c.gridy = 0;
 		c.insets = new Insets(0, 0, 30, 0);
-		c.anchor = GridBagConstraints.WEST;
 		original.add(components.get("oILabel"), c);
 
 		// UsernameLabel

@@ -154,4 +154,28 @@ public class ActionHandler {
 		workflow.send("NewUser", username.getText(),
 				new String(password.getPassword()), authority.getSelectedItem());
 	}
+	
+	/**
+	 * @param customDIalog
+	 * @param passwordText
+	 * @param confirmPasswordText
+	 * @param authorityText
+	 */
+	public void editUserDialogOk(CustomDialog customDialog, Container usernameText, Container passwordText, Container confirmPasswordText, Container authorityText){
+		JTextField username = (JTextField)usernameText;
+		JPasswordField passwordT= (JPasswordField)passwordText;
+		JPasswordField confirmPasswordT = (JPasswordField)confirmPasswordText;
+		JComboBox<String> authority = (JComboBox<String>)authorityText;
+		
+		String password = new String(passwordT.getPassword());
+		String confirmPassword = new String(confirmPasswordT.getPassword());
+		
+		if(password.compareTo(confirmPassword) != 0){
+			workflow.getWindow().setErrorMessage("Passwords doesn't match!");
+		}
+		else{
+			customDialog.setVisible(false);
+			workflow.send("EditUser", username.getText(), password, authority.getSelectedItem());
+		}
+	}
 }

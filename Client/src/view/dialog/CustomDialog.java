@@ -10,7 +10,6 @@ package view.dialog;
 import java.awt.Container;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
@@ -60,6 +59,10 @@ public class CustomDialog extends JDialog {
 		temp.setLayout(new GridBagLayout());
 		components.put("wrapperPanel", temp);
 
+		// ToolbarPanel
+		temp = new JPanel();
+		components.put("toolbarPanel", temp);
+
 		// CancelButton
 		temp = new JButton("Cancel");
 		((JButton) temp).addActionListener(new ActionListener() {
@@ -84,25 +87,18 @@ public class CustomDialog extends JDialog {
 		c = new GridBagConstraints();
 		c.gridx = 0;
 		c.gridy = 0;
-		c.ipadx = 215;
-		c.ipady = 125;
 		components.get("wrapperPanel").add(canvas, c);
 
-		// CancelButton
-		c = new GridBagConstraints();
-		c.gridx = 2;
+		// ToolbarPanel
+		c.gridx = 0;
 		c.gridy = 1;
-		c.anchor = GridBagConstraints.SOUTHEAST;
-		c.insets = new Insets(0, 10, 10, 10);
-		components.get("wrapperPanel").add(components.get("cancelButton"), c);
+		components.get("wrapperPanel").add(components.get("toolbarPanel"), c);
 
 		// OkButton
-		c = new GridBagConstraints();
-		c.gridx = 1;
-		c.gridy = 1;
-		c.anchor = GridBagConstraints.SOUTHEAST;
-		c.insets = new Insets(0, 0, 10, 0);
-		components.get("wrapperPanel").add(components.get("okButton"), c);
+		components.get("toolbarPanel").add(components.get("okButton"), c);
+
+		// CancelButton
+		components.get("toolbarPanel").add(components.get("cancelButton"), c);
 
 		add(components.get("wrapperPanel"));
 	}
