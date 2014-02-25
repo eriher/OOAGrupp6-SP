@@ -39,16 +39,15 @@ public class Window extends JFrame implements Observer {
 	}
 
 	/**
-	 * Sign up to be notified about updates from object 'o'.
+	 * Let other objects tell that we want to be notified about updates.
 	 * 
 	 * @param o
-	 *            The object that the class want updates from.
+	 *            the object that the class want updates from.
 	 */
 	public void addObserver(Observable o) {
 		o.addObserver(this);
 	}
 	
-	@SuppressWarnings("unchecked")
 	public void update(Observable o, Object arg) {
 		if (o instanceof Communication) {
 			LinkedList<Object> argsList = (LinkedList<Object>) arg;
@@ -76,6 +75,8 @@ public class Window extends JFrame implements Observer {
 	}
 
 	/**
+	 * Set an error message to be displayed in a new dialog.
+	 * 
 	 * @param msg
 	 *            message to be displayed in the pop up.
 	 */
@@ -85,7 +86,7 @@ public class Window extends JFrame implements Observer {
 	}
 
 	/**
-	 * Initiate main window,
+	 * Initiate main window.
 	 */
 	private void createFrame() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -94,7 +95,7 @@ public class Window extends JFrame implements Observer {
 	}
 
 	/**
-	 * Create all GUIs.
+	 * Create all the GUIs.
 	 */
 	private void createViews() {
 		interfaceList.put("Login", new LoginGUI());
@@ -103,7 +104,7 @@ public class Window extends JFrame implements Observer {
 	}
 
 	/**
-	 * Create all dialogs.
+	 * Create all the dialogs.
 	 */
 	private void createDialogs() {
 		dialogList.put("networkDialog", new NetworkDialog());
@@ -112,6 +113,8 @@ public class Window extends JFrame implements Observer {
 	}
 
 	/**
+	 * Switch the view that currently is seen. Removes all current components from frame and replaces them with new ones.
+	 * 
 	 * @param key
 	 *            name of the GUI to switch to.
 	 * @throws IllegalArgumentException
@@ -132,9 +135,11 @@ public class Window extends JFrame implements Observer {
 	}
 
 	/**
+	 * Return the dialog that's requested.
+	 * 
 	 * @param key
 	 *            name of the dialog window.
-	 * @return instance of the dialog.
+	 * @return instance of the dialog, null otherwise.
 	 */
 	public JDialog getDialog(String key) {
 		return dialogList.get(key);

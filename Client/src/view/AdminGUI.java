@@ -25,7 +25,7 @@ public class AdminGUI extends UserGUI {
 	}
 
 	/**
-	 * Create all buttons.
+	 * Create all the buttons.
 	 */
 	@Override
 	protected void initButtons() {
@@ -80,7 +80,7 @@ public class AdminGUI extends UserGUI {
 	}
 
 	/**
-	 * Place all components.
+	 * Place all the components.
 	 */
 	@Override
 	protected void buildGUI() {

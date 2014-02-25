@@ -31,7 +31,7 @@ public class LoginGUI extends GUI {
 	}
 
 	/**
-	 * Create all labels.
+	 * Create all the labels.
 	 */
 	@Override
 	protected void initLabels() {
@@ -45,7 +45,7 @@ public class LoginGUI extends GUI {
 	}
 
 	/**
-	 * Create all panels.
+	 * Create all the panels.
 	 */
 	@Override
 	protected void initPanels() {
@@ -67,7 +67,7 @@ public class LoginGUI extends GUI {
 	}
 
 	/**
-	 * Create all text fields.
+	 * Create all the text fields.
 	 */
 	@Override
 	protected void initTextFields() {
@@ -85,7 +85,7 @@ public class LoginGUI extends GUI {
 	}
 	
 	/**
-	 * Create all buttons.
+	 * Create all the buttons.
 	 */
 	@Override
 	protected void initButtons() {
@@ -107,7 +107,7 @@ public class LoginGUI extends GUI {
 	}
 
 	/**
-	 * Place all components.
+	 * Place all the components.
 	 */
 	@Override
 	protected void buildGUI() {

@@ -31,7 +31,7 @@ public class NetworkDialog extends CustomDialog {
 	}
 
 	/**
-	 * Create all components that is going to be used inside the dialog.
+	 * Create all the components that is going to be used inside the dialog.
 	 */
 	@Override
 	protected void create() {
@@ -74,7 +74,7 @@ public class NetworkDialog extends CustomDialog {
 	}
 
 	/**
-	 * Place all created components.
+	 * Place all the created components.
 	 */
 	@Override
 	protected void build() {

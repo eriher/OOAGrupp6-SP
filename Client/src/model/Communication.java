@@ -29,23 +29,20 @@ public class Communication extends Observable {
 	private int portNumber;
 	private Boolean socketOpen;
 
-	/**
-	 * Read port number and IP from config.txt which the client needs to create
-	 * a socket against.
-	 */
 	public Communication() {
 		socketOpen = false;
 	}
 
 	/**
-	 * Set up a new socket and connect to the given ip and port number.
+	 * Set up a new socket with the ip and port number from the config.txt file.
+	 * Creates a new thread that constantly checks for information in.
 	 */
 	private void connect() {
 		String s = FileManagement.getInstance().readLine("config.txt");
 		String[] sArr = s.split(":");
 		ip = sArr[0];
 		portNumber = Integer.parseInt(sArr[1]);
-		
+
 		if (socket == null) {
 			try {
 				socket = new Socket(InetAddress.getByName(ip), portNumber);
@@ -67,7 +64,8 @@ public class Communication extends Observable {
 	}
 
 	/**
-	 * Close down the socket.
+	 * Close the connected socket, reset it states so a new socket can be
+	 * created from the same variables.
 	 */
 	public void disconnect() {
 		try {
@@ -86,11 +84,8 @@ public class Communication extends Observable {
 	}
 
 	/**
-	 * Open the socket's input stream if one of the following is met:
-	 * 
-	 * 1) Socket's input isn't connected.
-	 * 
-	 * 2) The object input stream is null.
+	 * Open the input stream if no earlier input stream exists and the socket is
+	 * connected.
 	 */
 	private void openInputStream() {
 		if (in == null) {
@@ -105,8 +100,11 @@ public class Communication extends Observable {
 	}
 
 	/**
+	 * Send a message to the server with all the given params. The first object
+	 * is always the type of message.
+	 * 
 	 * @param args
-	 *            Additional arguments to be sent with the message.
+	 *            additional arguments to be sent with the message.
 	 */
 	public void send(Object... args) {
 		connect();
@@ -126,7 +124,7 @@ public class Communication extends Observable {
 	}
 
 	/**
-	 * 
+	 * Constantly loops and check if any information inwards is available.
 	 */
 	public void recieve() {
 		openInputStream();

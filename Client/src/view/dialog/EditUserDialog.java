@@ -33,7 +33,8 @@ public class EditUserDialog extends CustomDialog {
 	}
 
 	/**
-	 * Create all components that is going to be used inside the dialog.
+	 * Create all the components that is going to be used inside the dialog.
+	 * 
 	 */
 	@Override
 	protected void create() {
@@ -62,7 +63,7 @@ public class EditUserDialog extends CustomDialog {
 	}
 
 	/**
-	 * Create all components that is going to be used inside the edit dialog.
+	 * Create all the components that is going to be used inside the edit dialog.
 	 */
 	private void initEditUser() {
 		Container temp;
@@ -107,7 +108,7 @@ public class EditUserDialog extends CustomDialog {
 	}
 
 	/**
-	 * Create all components that is going to be used inside the get dialog.
+	 * Create all the components that is going to be used inside the get dialog.
 	 */
 	private void initGetUser() {
 		Container temp;
@@ -135,7 +136,7 @@ public class EditUserDialog extends CustomDialog {
 	}
 
 	/**
-	 * Create all components that is going to be used inside the original info
+	 * Create all the components that is going to be used inside the original info
 	 * dialog.
 	 */
 	private void initOriginalInfo() {
@@ -182,7 +183,7 @@ public class EditUserDialog extends CustomDialog {
 	}
 
 	/**
-	 * Place all created components.
+	 * Place all the created components.
 	 */
 	@Override
 	protected void build() {
@@ -194,7 +195,7 @@ public class EditUserDialog extends CustomDialog {
 	}
 
 	/**
-	 * Place all edit components.
+	 * Place all the edit components.
 	 */
 	private void buildEditUser() {
 		GridBagConstraints c;
@@ -276,7 +277,7 @@ public class EditUserDialog extends CustomDialog {
 	}
 
 	/**
-	 * Place all get components.
+	 * Place all the get components.
 	 */
 	private void buildGetUser() {
 		GridBagConstraints c;
@@ -325,7 +326,7 @@ public class EditUserDialog extends CustomDialog {
 	}
 
 	/**
-	 * Place all original info components.
+	 * Place all the original info components.
 	 */
 	private void buildOriginalInfo() {
 		GridBagConstraints c;

@@ -28,7 +28,7 @@ public abstract class UserGUI extends GUI {
 	}
 
 	/**
-	 * Create all buttons.
+	 * Create all the buttons.
 	 */
 	@Override
 	protected void initButtons() {
@@ -48,7 +48,7 @@ public abstract class UserGUI extends GUI {
 	}
 
 	/**
-	 * Create all panels.
+	 * Create all the panels.
 	 */
 	@Override
 	protected void initPanels() {
@@ -79,7 +79,7 @@ public abstract class UserGUI extends GUI {
 	}
 
 	/**
-	 * Place all components.
+	 * Place all the components.
 	 */
 	@Override
 	protected void buildGUI() {

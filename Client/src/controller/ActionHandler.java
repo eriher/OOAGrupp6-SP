@@ -37,22 +37,29 @@ public class ActionHandler {
 	}
 
 	/**
-	 * @param communication
+	 * @param workflow
+	 *            pointer to the utility class since it got a send and
+	 *            disconnect from server help function.
 	 */
 	public void setWorkflow(Workflow workflow) {
 		this.workflow = workflow;
 	}
 
 	/**
-	 * Open popup that retrieves config info and display it in two edible text
-	 * fields
+	 * Open a dialog that retrieves config info from the config.txt file and
+	 * display it in two edible text fields.
 	 */
 	public void networkConfig() {
 		workflow.getWindow().getDialog("networkDialog").setVisible(true);
 	}
 
 	/**
-	 * Retrieves user information and sends it to the communication.
+	 * Take the current information and tries to verify it with the server.
+	 * 
+	 * @param username
+	 *            of the user.
+	 * @param password
+	 *            of the user.
 	 */
 	public void logIn(Container username, Container password) {
 		JTextField user = (JTextField) username;
@@ -62,71 +69,94 @@ public class ActionHandler {
 	}
 
 	/**
-	 * Retrieves user information and sends it to the workflow.
+	 * Logs out from the server.
 	 */
 	public void logOut() {
 		workflow.disconnectFromServer();
 	}
 
 	/**
-	 * Message the server that the user started working.
+	 * Tell the server that the current worker started a new shift.
 	 */
 	public void checkIn() {
 
 	}
 
 	/**
-	 * Message the server that the user stopped working.
+	 * Tell the server that the current worker stopped the current shift.
 	 */
 	public void checkOut() {
 
 	}
 
 	/**
-	 * Message the server that a new user needs to be added.
+	 * The create user button in AdminGUI was pressed, display the dialog for
+	 * creating a new user.
 	 */
 	public void createUser() {
 		workflow.getWindow().getDialog("createUserDialog").setVisible(true);
 	}
 
 	/**
-	 * Request a user from the server with all paramaters so they can be edited.
+	 * The edit user button in AdminGUI was pressed, display the dialog for
+	 * editing a current user.
 	 */
 	public void editUser() {
 		workflow.getWindow().getDialog("editUserDialog").setVisible(true);
 	}
 
 	/**
-	 * Request another user's schedule from the server.
+	 * Open Schedule button in AdminGUI was pressed, request another user's
+	 * schedule from the server.
 	 */
 	public void openSchedule() {
 
 	}
 
 	/**
-	 * Create a new schedule for the current user.
+	 * New Schedule button in AdminGUI was pressed, create a new schedule and
+	 * send it to the server.
 	 */
 	public void newSchedule() {
 
 	}
 
 	/**
-	 * Create a new time slot for the current week.
+	 * New time slot button was pressed in AdminGUI, display the dialog for
+	 * creating a new time slot.
 	 */
 	public void newTimeSlot() {
 
 	}
 
 	/**
+	 * Change password button was pressed in the EmployeeGUI, display the dialog
+	 * for editing once password.
+	 */
+	public void changePassword() {
+
+	}
+
+	/**
+	 * Cancel button in a dialog window was pressed, close the dialog.
+	 * 
 	 * @param customDialog
+	 *            base dialog window for all dialogs.
 	 */
 	public void dialogCancel(CustomDialog customDialog) {
 		customDialog.setVisible(false);
 	}
 
 	/**
+	 * The ok button in the network dialog was pressed, edit the config.txt with
+	 * the new information
+	 * 
+	 * @param customDialog
+	 *            base dialog window for all dialogs..
 	 * @param ipText
-	 * @param passText
+	 *            ip for the server.
+	 * @param portText
+	 *            port for the server.
 	 */
 	public void networkDialogOk(CustomDialog customDialog, Container ipText,
 			Container portText) {
@@ -139,10 +169,17 @@ public class ActionHandler {
 	}
 
 	/**
+	 * The ok button in the create user dialog was pressed, tell the server to
+	 * create a new user with the given params.
+	 * 
 	 * @param customDialog
+	 *            base dialog window for all dialogs.
 	 * @param usernameText
+	 *            the name of the user.
 	 * @param passText
+	 *            password for the user.
 	 * @param authorityText
+	 *            what authority level the user should have.
 	 */
 	public void createUserDialogOk(CustomDialog customDialog,
 			Container usernameText, Container passText, Container authorityText) {
@@ -154,28 +191,39 @@ public class ActionHandler {
 		workflow.send("NewUser", username.getText(),
 				new String(password.getPassword()), authority.getSelectedItem());
 	}
-	
+
 	/**
-	 * @param customDIalog
+	 * The ok button in the edit user dialog was pressed, tell the server about
+	 * the changes to this user.
+	 * 
+	 * @param customDialog
+	 *            base dialog window for all dialogs.
+	 * @param usernameText
+	 *            name of the user that was edited.
 	 * @param passwordText
+	 *            new password for the user.
 	 * @param confirmPasswordText
+	 *            confirm the new password was correctly written.
 	 * @param authorityText
+	 *            new authority level of the user.
 	 */
-	public void editUserDialogOk(CustomDialog customDialog, Container usernameText, Container passwordText, Container confirmPasswordText, Container authorityText){
-		JTextField username = (JTextField)usernameText;
-		JPasswordField passwordT= (JPasswordField)passwordText;
-		JPasswordField confirmPasswordT = (JPasswordField)confirmPasswordText;
-		JComboBox<String> authority = (JComboBox<String>)authorityText;
-		
+	public void editUserDialogOk(CustomDialog customDialog,
+			Container usernameText, Container passwordText,
+			Container confirmPasswordText, Container authorityText) {
+		JTextField username = (JTextField) usernameText;
+		JPasswordField passwordT = (JPasswordField) passwordText;
+		JPasswordField confirmPasswordT = (JPasswordField) confirmPasswordText;
+		JComboBox<String> authority = (JComboBox<String>) authorityText;
+
 		String password = new String(passwordT.getPassword());
 		String confirmPassword = new String(confirmPasswordT.getPassword());
-		
-		if(password.compareTo(confirmPassword) != 0){
+
+		if (password.compareTo(confirmPassword) != 0) {
 			workflow.getWindow().setErrorMessage("Passwords doesn't match!");
-		}
-		else{
+		} else {
 			customDialog.setVisible(false);
-			workflow.send("EditUser", username.getText(), password, authority.getSelectedItem());
+			workflow.send("EditUser", username.getText(), password,
+					authority.getSelectedItem());
 		}
 	}
 }

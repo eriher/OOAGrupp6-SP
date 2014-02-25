@@ -25,7 +25,7 @@ public class EmployeeGUI extends UserGUI {
 	}
 
 	/**
-	 * Create all buttons.
+	 * Create all the buttons.
 	 */
 	@Override
 	protected void initButtons() {
@@ -52,10 +52,20 @@ public class EmployeeGUI extends UserGUI {
 			}
 		});
 		components.put("checkOutButton", tempButton);
+
+		// Init changePassword
+		tempButton = new JButton("Change Password");
+		tempButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ActionHandler.getInstance().changePassword();
+			}
+		});
+		components.put("changePasswordButton", tempButton);
 	}
-	
+
 	/**
-	 * Place all components.
+	 * Place all the components.
 	 */
 	@Override
 	protected void buildGUI() {
@@ -77,5 +87,12 @@ public class EmployeeGUI extends UserGUI {
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.insets = new Insets(5, 0, 0, 0);
 		topMenuPanel.add(components.get("checkOutButton"), c);
+
+		// changePassword
+		c = new GridBagConstraints();
+		c.gridy = 3;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.insets = new Insets(5, 0, 0, 0);
+		topMenuPanel.add(components.get("changePasswordButton"), c);
 	}
 }

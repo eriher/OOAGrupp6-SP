@@ -1,5 +1,5 @@
 /**
- * Base class for all custom dialogs, contains an empty Ok-button and an Cancel-button.
+ * Base abstract class for all custom dialogs, contains an empty Ok-button and an Cancel-button.
  * 
  * @author David Stromner
  * @version 2014-02-24
@@ -26,6 +26,10 @@ public class CustomDialog extends JDialog {
 	protected final CustomDialog customDialog = this;
 	protected HashMap<String, Container> components;
 
+	/**
+	 * Create and build all components for the dialog. Set the dialog to
+	 * blocking(no other window can be touched) and non-resizable.
+	 */
 	public CustomDialog() {
 		super();
 		components = new HashMap<String, Container>();
@@ -47,7 +51,9 @@ public class CustomDialog extends JDialog {
 	}
 
 	/**
-	 * Create all components that is going to be used inside the dialog.
+	 * Create all the components that is going to be used inside the dialog.
+	 * Except for the Ok-button since it needs to have different actionlistners
+	 * connected to it depending on the dialog.
 	 */
 	protected void create() {
 		canvas = new JPanel();
@@ -78,7 +84,7 @@ public class CustomDialog extends JDialog {
 	}
 
 	/**
-	 * Place all created components.
+	 * Place all the created components.
 	 */
 	protected void build() {
 		GridBagConstraints c;

@@ -81,7 +81,7 @@ public class CreateUserDialog extends CustomDialog {
 	}
 
 	/**
-	 * Place all created components.
+	 * Place all the created components.
 	 */
 	@Override
 	protected void build() {

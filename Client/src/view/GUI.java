@@ -25,6 +25,9 @@ public abstract class GUI extends JPanel {
 	private static final long serialVersionUID = -6618159364253053973L;
 	protected HashMap<String, Container> components;
 
+	/**
+	 * Create the base GUI and layout.
+	 */
 	public GUI() {
 		setLayout(new BorderLayout());
 		components = new HashMap<String, Container>();
@@ -38,19 +41,19 @@ public abstract class GUI extends JPanel {
 	}
 
 	/**
-	 * @return canvas Contains all objects to be displayed in a single panel.
+	 * @return canvas contains all objects to be displayed in a single panel.
 	 */
 	public JPanel getCanvas() {
 		return this;
 	}
 
 	/**
-	 * Create all labels
+	 * Create all the labels.
 	 */
 	protected void initLabels() {}
 
 	/**
-	 * Create all panels
+	 * Create all the panels.
 	 */
 	protected void initPanels() {
 		setLayout(new BorderLayout());
@@ -61,12 +64,12 @@ public abstract class GUI extends JPanel {
 	}
 
 	/**
-	 * Create all text fields.
+	 * Create all the text fields.
 	 */
 	protected void initTextFields() {}
 	
 	/**
-	 * Create all buttons
+	 * Create all the buttons.
 	 */
 	protected void initButtons() {
 		JButton tempButton = new JButton("Network Config");
@@ -80,7 +83,7 @@ public abstract class GUI extends JPanel {
 	}
 
 	/**
-	 * Place all components
+	 * Place all the components.
 	 */
 	protected void buildGUI() {
 		GridBagConstraints c;
