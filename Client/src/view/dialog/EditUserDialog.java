@@ -1,5 +1,5 @@
 /**
- * Dialog for editing a user in the admin GUI. Receives a list from the server on all the users which can be filterted.
+ * Dialog for editing a user in the admin GUI. Receives a list from the server on all the users which can be filtered.
  * 
  * @author David Stromner
  * @version 2014-02-25
@@ -13,6 +13,9 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.LinkedList;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -21,15 +24,37 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import model.Communication;
 import controller.ActionHandler;
 
-public class EditUserDialog extends CustomDialog {
+public class EditUserDialog extends CustomDialog implements Observer {
 	private static final long serialVersionUID = -274172269787570689L;
 
 	public EditUserDialog() {
 		super();
 
 		setTitle("Edit User");
+	}
+
+	public void update(Observable o, Object arg){
+		if (o instanceof Communication) {
+			LinkedList<Object> argsList = (LinkedList<Object>) arg;
+			
+			// Check what type of message was received
+			if (((String) argsList.get(0)).compareToIgnoreCase("GetAllUsers") == 0) {
+				argsList.removeFirst();
+				// TODO STOP LOOPING!
+				for(Object s : argsList){
+					((JComboBox)components.get("gUComboBox")).addItem(s);
+				}
+			}
+			else if(((String) argsList.get(0)).compareToIgnoreCase("GetUser") == 0) {
+				User user = argsList.get(1);
+				((JTextField)components.get("uIUsernameLabel")).setText(user.getPerNr);
+				((JTextField)components.get("uIPasswordLabel")).setText(user.getPassword);
+				((JTextField)components.get("uIAuthorityLabel")).setText(user.getStatus);
+			}
+		}
 	}
 
 	/**
@@ -41,9 +66,9 @@ public class EditUserDialog extends CustomDialog {
 		super.create();
 		Container temp;
 
-		initEditUser();
+		initUserInformation();
 		initGetUser();
-		initOriginalInfo();
+		initEditUser();
 
 		// An OKButton needs to be created in a subclass to CustomDialog since
 		// each OKButton is going to trigger different things.
@@ -63,7 +88,90 @@ public class EditUserDialog extends CustomDialog {
 	}
 
 	/**
-	 * Create all the components that is going to be used inside the edit dialog.
+	 * Create all the components that is going to be used inside the original
+	 * info dialog.
+	 */
+	private void initUserInformation() {
+		Container temp;
+
+		// Panel
+		temp = new JPanel();
+		((JPanel) temp).setLayout(new GridBagLayout());
+		components.put("uIPanel", temp);
+
+		// Label
+		temp = new JLabel("User information:");
+		components.put("uILabel", temp);
+
+		// UsernameLabel
+		temp = new JLabel("Username:");
+		components.put("uIUsernameLabel", temp);
+
+		// PasswordLabel
+		temp = new JLabel("Password:");
+		components.put("uIPasswordLabel", temp);
+
+		// AuthorityLabel
+		temp = new JLabel("Authority Level:");
+		components.put("uIAuthorityLabel", temp);
+
+		// UsernameText
+		temp = new JTextField();
+		((JTextField) temp).setEditable(false);
+		((JTextField) temp).setEnabled(false);
+		components.put("uIUsernameText", temp);
+
+		// PasswordText
+		temp = new JTextField();
+		((JTextField) temp).setEditable(false);
+		((JTextField) temp).setEnabled(false);
+		components.put("uIPasswordText", temp);
+
+		// AuthorityText
+		temp = new JTextField();
+		((JTextField) temp).setEditable(false);
+		((JTextField) temp).setEnabled(false);
+		components.put("uIAuthorityText", temp);
+	}
+
+	/**
+	 * Create all the components that is going to be used inside the get dialog.
+	 */
+	private void initGetUser() {
+		Container temp;
+
+		// Panel
+		temp = new JPanel();
+		((JPanel) temp).setLayout(new GridBagLayout());
+		components.put("gUPanel", temp);
+
+		// Label
+		temp = new JLabel("Get user:");
+		components.put("gULabel", temp);
+
+		// TextField
+		temp = new JTextField();
+		components.put("gUText", temp);
+
+		// ComboBox
+		temp = new JComboBox<String>();
+		components.put("gUComboBox", temp);
+
+		// Button
+		temp = new JButton("Fetch user");
+		((JButton) temp).addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ActionHandler.getInstance().getUser(
+						components.get("gUComboBox"));
+			}
+		});
+		components.put("fetchUserButton", temp);
+	}
+
+	/**
+	 * Create all the components that is going to be used inside the edit
+	 * dialog.
 	 */
 	private void initEditUser() {
 		Container temp;
@@ -104,82 +212,14 @@ public class EditUserDialog extends CustomDialog {
 
 		// DelteUserButton
 		temp = new JButton("Delete user");
+		((JButton) temp).addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ActionHandler.getInstance().deleteUser(customDialog,
+						components.get("uIPasswordText"));
+			}
+		});
 		components.put("eUDeleteUserButton", temp);
-	}
-
-	/**
-	 * Create all the components that is going to be used inside the get dialog.
-	 */
-	private void initGetUser() {
-		Container temp;
-
-		// Panel
-		temp = new JPanel();
-		((JPanel) temp).setLayout(new GridBagLayout());
-		components.put("gUPanel", temp);
-
-		// Label
-		temp = new JLabel("Get user:");
-		components.put("gULabel", temp);
-
-		// TextField
-		temp = new JTextField();
-		components.put("gUText", temp);
-
-		// ComboBox
-		temp = new JComboBox<String>();
-		components.put("gUComboBox", temp);
-
-		// Button
-		temp = new JButton("Fetch user");
-		components.put("fetchUserButton", temp);
-	}
-
-	/**
-	 * Create all the components that is going to be used inside the original info
-	 * dialog.
-	 */
-	private void initOriginalInfo() {
-		Container temp;
-
-		// Panel
-		temp = new JPanel();
-		((JPanel) temp).setLayout(new GridBagLayout());
-		components.put("oIPanel", temp);
-
-		// Label
-		temp = new JLabel("Original info:");
-		components.put("oILabel", temp);
-
-		// UsernameLabel
-		temp = new JLabel("Username:");
-		components.put("oIUsernameLabel", temp);
-
-		// PasswordLabel
-		temp = new JLabel("Password:");
-		components.put("oIPasswordLabel", temp);
-
-		// AuthorityLabel
-		temp = new JLabel("Authority Level:");
-		components.put("oIAuthorityLabel", temp);
-
-		// UsernameText
-		temp = new JTextField();
-		((JTextField) temp).setEditable(false);
-		((JTextField) temp).setEnabled(false);
-		components.put("oIUsernameText", temp);
-
-		// PasswordText
-		temp = new JTextField();
-		((JTextField) temp).setEditable(false);
-		((JTextField) temp).setEnabled(false);
-		components.put("oIPasswordText", temp);
-
-		// AuthorityText
-		temp = new JTextField();
-		((JTextField) temp).setEditable(false);
-		((JTextField) temp).setEnabled(false);
-		components.put("oIAuthorityText", temp);
 	}
 
 	/**
@@ -189,9 +229,130 @@ public class EditUserDialog extends CustomDialog {
 	protected void build() {
 		super.build();
 
-		buildEditUser();
+		buildUserInformation();
 		buildGetUser();
-		buildOriginalInfo();
+		buildEditUser();
+	}
+
+	/**
+	 * Place all the original info components.
+	 */
+	private void buildUserInformation() {
+		GridBagConstraints c;
+		JPanel canvas = getCanvas();
+		JPanel original = (JPanel) components.get("uIPanel");
+
+		// Panel
+		c = new GridBagConstraints();
+		c.gridx = 0;
+		c.gridy = 1;
+		c.anchor = GridBagConstraints.WEST;
+		canvas.add(original, c);
+
+		// Label
+		c = new GridBagConstraints();
+		c.gridx = 0;
+		c.gridy = 0;
+		c.insets = new Insets(0, 0, 30, 0);
+		original.add(components.get("uILabel"), c);
+
+		// UsernameLabel
+		c = new GridBagConstraints();
+		c.gridx = 1;
+		c.gridy = 1;
+		c.anchor = GridBagConstraints.EAST;
+		c.insets = new Insets(0, 0, 0, 10);
+		original.add(components.get("uIUsernameLabel"), c);
+
+		// PasswordLabel
+		c = new GridBagConstraints();
+		c.gridx = 1;
+		c.gridy = 2;
+		c.anchor = GridBagConstraints.EAST;
+		c.insets = new Insets(2, 0, 2, 10);
+		original.add(components.get("uIPasswordLabel"), c);
+
+		// AuthorityLabel
+		c = new GridBagConstraints();
+		c.gridx = 1;
+		c.gridy = 3;
+		c.anchor = GridBagConstraints.EAST;
+		c.insets = new Insets(0, 0, 0, 10);
+		original.add(components.get("uIAuthorityLabel"), c);
+
+		// UsernameText
+		c = new GridBagConstraints();
+		c.gridx = 2;
+		c.gridy = 1;
+		c.ipadx = 100;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		original.add(components.get("uIUsernameText"), c);
+
+		// PasswordText
+		c = new GridBagConstraints();
+		c.gridx = 2;
+		c.gridy = 2;
+		c.ipadx = 100;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.insets = new Insets(2, 0, 2, 0);
+		original.add(components.get("uIPasswordText"), c);
+
+		// AuthorityText
+		c = new GridBagConstraints();
+		c.gridx = 2;
+		c.gridy = 3;
+		c.ipadx = 100;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		original.add(components.get("uIAuthorityText"), c);
+	}
+
+	/**
+	 * Place all the get components.
+	 */
+	private void buildGetUser() {
+		GridBagConstraints c;
+		JPanel canvas = getCanvas();
+		JPanel getUser = (JPanel) components.get("gUPanel");
+
+		// Panel
+		c = new GridBagConstraints();
+		c.gridx = 0;
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.WEST;
+		canvas.add(getUser, c);
+
+		// Label
+		c = new GridBagConstraints();
+		c.gridx = 0;
+		c.gridy = 0;
+		c.insets = new Insets(0, 0, 30, 0);
+		getUser.add(components.get("gULabel"), c);
+
+		// TextField
+		c = new GridBagConstraints();
+		c.gridx = 1;
+		c.gridy = 1;
+		c.ipadx = 65;
+		c.insets = new Insets(0, 0, 0, 10);
+		c.fill = GridBagConstraints.HORIZONTAL;
+		getUser.add(components.get("gUText"), c);
+
+		// ComboBox
+		c = new GridBagConstraints();
+		c.gridx = 2;
+		c.gridy = 1;
+		c.ipadx = 65;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		getUser.add(components.get("gUComboBox"), c);
+
+		// Button
+		c = new GridBagConstraints();
+		c.gridx = 2;
+		c.gridy = 2;
+		c.weighty = 1;
+		c.insets = new Insets(50, 0, 0, 0);
+		getUser.add(components.get("fetchUserButton"), c);
+
 	}
 
 	/**
@@ -204,7 +365,7 @@ public class EditUserDialog extends CustomDialog {
 
 		// Panel
 		c = new GridBagConstraints();
-		c.gridx = 0;
+		c.gridx = 1;
 		c.gridy = 0;
 		c.gridheight = 2;
 		c.anchor = GridBagConstraints.NORTH;
@@ -269,132 +430,8 @@ public class EditUserDialog extends CustomDialog {
 		c = new GridBagConstraints();
 		c.gridx = 2;
 		c.gridy = 4;
-		c.weighty = 1;
 		c.insets = new Insets(50, 0, 0, 0);
 		c.anchor = GridBagConstraints.SOUTH;
 		editUser.add(components.get("eUDeleteUserButton"), c);
-
 	}
-
-	/**
-	 * Place all the get components.
-	 */
-	private void buildGetUser() {
-		GridBagConstraints c;
-		JPanel canvas = getCanvas();
-		JPanel getUser = (JPanel) components.get("gUPanel");
-
-		// Panel
-		c = new GridBagConstraints();
-		c.gridx = 1;
-		c.gridy = 0;
-		c.anchor = GridBagConstraints.WEST;
-		canvas.add(getUser, c);
-
-		// Label
-		c = new GridBagConstraints();
-		c.gridx = 0;
-		c.gridy = 0;
-		c.insets = new Insets(0, 0, 30, 0);
-		getUser.add(components.get("gULabel"), c);
-
-		// TextField
-		c = new GridBagConstraints();
-		c.gridx = 1;
-		c.gridy = 1;
-		c.ipadx = 65;
-		c.insets = new Insets(0, 0, 0, 10);
-		c.fill = GridBagConstraints.HORIZONTAL;
-		getUser.add(components.get("gUText"), c);
-
-		// ComboBox
-		c = new GridBagConstraints();
-		c.gridx = 2;
-		c.gridy = 1;
-		c.ipadx = 65;
-		c.fill = GridBagConstraints.HORIZONTAL;
-		getUser.add(components.get("gUComboBox"), c);
-
-		// Button
-		c = new GridBagConstraints();
-		c.gridx = 2;
-		c.gridy = 2;
-		c.weighty = 1;
-		c.insets = new Insets(50, 0, 0, 0);
-		getUser.add(components.get("fetchUserButton"), c);
-
-	}
-
-	/**
-	 * Place all the original info components.
-	 */
-	private void buildOriginalInfo() {
-		GridBagConstraints c;
-		JPanel canvas = getCanvas();
-		JPanel original = (JPanel) components.get("oIPanel");
-
-		// Panel
-		c = new GridBagConstraints();
-		c.gridx = 1;
-		c.gridy = 1;
-		c.anchor = GridBagConstraints.WEST;
-		canvas.add(original, c);
-
-		// Label
-		c = new GridBagConstraints();
-		c.gridx = 0;
-		c.gridy = 0;
-		c.insets = new Insets(0, 0, 30, 0);
-		original.add(components.get("oILabel"), c);
-
-		// UsernameLabel
-		c = new GridBagConstraints();
-		c.gridx = 1;
-		c.gridy = 1;
-		c.anchor = GridBagConstraints.EAST;
-		c.insets = new Insets(0, 0, 0, 10);
-		original.add(components.get("oIUsernameLabel"), c);
-
-		// PasswordLabel
-		c = new GridBagConstraints();
-		c.gridx = 1;
-		c.gridy = 2;
-		c.anchor = GridBagConstraints.EAST;
-		c.insets = new Insets(2, 0, 2, 10);
-		original.add(components.get("oIPasswordLabel"), c);
-
-		// AuthorityLabel
-		c = new GridBagConstraints();
-		c.gridx = 1;
-		c.gridy = 3;
-		c.anchor = GridBagConstraints.EAST;
-		c.insets = new Insets(0, 0, 0, 10);
-		original.add(components.get("oIAuthorityLabel"), c);
-
-		// UsernameText
-		c = new GridBagConstraints();
-		c.gridx = 2;
-		c.gridy = 1;
-		c.ipadx = 100;
-		c.fill = GridBagConstraints.HORIZONTAL;
-		original.add(components.get("oIUsernameText"), c);
-
-		// PasswordText
-		c = new GridBagConstraints();
-		c.gridx = 2;
-		c.gridy = 2;
-		c.ipadx = 100;
-		c.fill = GridBagConstraints.HORIZONTAL;
-		c.insets = new Insets(2, 0, 2, 0);
-		original.add(components.get("oIPasswordText"), c);
-
-		// AuthorityText
-		c = new GridBagConstraints();
-		c.gridx = 2;
-		c.gridy = 3;
-		c.ipadx = 100;
-		c.fill = GridBagConstraints.HORIZONTAL;
-		original.add(components.get("oIAuthorityText"), c);
-	}
-
 }

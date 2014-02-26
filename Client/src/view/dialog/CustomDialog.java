@@ -38,6 +38,7 @@ public class CustomDialog extends JDialog {
 		build();
 
 		pack();
+		setLocationRelativeTo(this.getParent());
 		setTitle("Custom Dialog");
 		setModal(true); // Block all other components when visible
 		setResizable(false);

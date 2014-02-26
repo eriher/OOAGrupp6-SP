@@ -51,14 +51,14 @@ public class AdminGUI extends UserGUI {
 		});
 		components.put("editUserButton", tempButton);
 		
-		// Init openSchedule
-		tempButton = new JButton("Open Schedule");
+		// Init getUser
+		tempButton = new JButton("Get User");
 		tempButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				ActionHandler.getInstance().openSchedule();
+				ActionHandler.getInstance().getUser();
 			}
 		});
-		components.put("openScheduleButton", tempButton);
+		components.put("getUserButton", tempButton);
 		
 		// Init newSchedule
 		tempButton = new JButton("New Schedule");
@@ -108,7 +108,7 @@ public class AdminGUI extends UserGUI {
 		c.gridy = 2;
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.insets = new Insets(5, 0, 0, 0);
-		topMenuPanel.add(components.get("openScheduleButton"), c);
+		topMenuPanel.add(components.get("getUserButton"), c);
 		
 		// newScheduleButton
 		c = new GridBagConstraints();

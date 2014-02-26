@@ -18,7 +18,6 @@ import view.dialog.CustomDialog;
 
 public class ActionHandler {
 	private static ActionHandler actionHandler = null;
-	private Workflow workflow;
 
 	private ActionHandler() {
 	}
@@ -37,20 +36,11 @@ public class ActionHandler {
 	}
 
 	/**
-	 * @param workflow
-	 *            pointer to the utility class since it got a send and
-	 *            disconnect from server help function.
-	 */
-	public void setWorkflow(Workflow workflow) {
-		this.workflow = workflow;
-	}
-
-	/**
 	 * Open a dialog that retrieves config info from the config.txt file and
 	 * display it in two edible text fields.
 	 */
 	public void networkConfig() {
-		workflow.getWindow().getDialog("networkDialog").setVisible(true);
+		Workflow.getInstance().getWindow().getDialog("networkDialog").setVisible(true);
 	}
 
 	/**
@@ -65,14 +55,15 @@ public class ActionHandler {
 		JTextField user = (JTextField) username;
 		JPasswordField pass = (JPasswordField) password;
 
-		workflow.send("Login", user.getText(), new String(pass.getPassword()));
+		Workflow.getInstance().send("Login", user.getText(), new String(pass.getPassword()));
 	}
 
 	/**
 	 * Logs out from the server.
 	 */
 	public void logOut() {
-		workflow.disconnectFromServer();
+		Workflow.getInstance().send("Logout");
+		Workflow.getInstance().disconnectFromServer();
 	}
 
 	/**
@@ -94,22 +85,23 @@ public class ActionHandler {
 	 * creating a new user.
 	 */
 	public void createUser() {
-		workflow.getWindow().getDialog("createUserDialog").setVisible(true);
+		Workflow.getInstance().getWindow().getDialog("createUserDialog").setVisible(true);
 	}
 
 	/**
 	 * The edit user button in AdminGUI was pressed, display the dialog for
-	 * editing a current user.
+	 * editing a current user. Request all users from the server.
 	 */
 	public void editUser() {
-		workflow.getWindow().getDialog("editUserDialog").setVisible(true);
+		Workflow.getInstance().send("GetAllUsers");
+		Workflow.getInstance().getWindow().getDialog("editUserDialog").setVisible(true);
 	}
 
 	/**
-	 * Open Schedule button in AdminGUI was pressed, request another user's
-	 * schedule from the server.
+	 * Get user button in AdminGUI was pressed, open dialog to get a (full)
+	 * user.
 	 */
-	public void openSchedule() {
+	public void getUser() {
 
 	}
 
@@ -134,7 +126,7 @@ public class ActionHandler {
 	 * for editing once password.
 	 */
 	public void changePassword() {
-
+		Workflow.getInstance().getWindow().getDialog("changePasswordDialog").setVisible(true);
 	}
 
 	/**
@@ -145,6 +137,33 @@ public class ActionHandler {
 	 */
 	public void dialogCancel(CustomDialog customDialog) {
 		customDialog.setVisible(false);
+	}
+
+	/**
+	 * The ok button in the change password dialog was pressed, confirm the
+	 * password matches and send it to the server.
+	 * 
+	 * @param customDialog
+	 *            base dialog window for all dialogs.
+	 * @param passwordText
+	 *            new password for the user.
+	 * @param confirmPasswordText
+	 *            confirm the new password was correctly written.
+	 */
+	public void passwordDialogOk(CustomDialog customDialog,
+			Container passwordText, Container confirmPasswordText) {
+		JPasswordField password = (JPasswordField) passwordText;
+		JPasswordField confirmPassword = (JPasswordField) confirmPasswordText;
+
+		String pass = new String(password.getPassword());
+		String confirmPass = new String(confirmPassword.getPassword());
+
+		if (!checkPassword(pass, confirmPass)) {
+			return;
+		}
+
+		customDialog.setVisible(false);
+		Workflow.getInstance().send("ChangePassword", pass);
 	}
 
 	/**
@@ -188,7 +207,7 @@ public class ActionHandler {
 		JComboBox<String> authority = (JComboBox<String>) authorityText;
 		customDialog.setVisible(false);
 
-		workflow.send("NewUser", username.getText(),
+		Workflow.getInstance().send("NewUser", username.getText(),
 				new String(password.getPassword()), authority.getSelectedItem());
 	}
 
@@ -211,19 +230,60 @@ public class ActionHandler {
 			Container usernameText, Container passwordText,
 			Container confirmPasswordText, Container authorityText) {
 		JTextField username = (JTextField) usernameText;
-		JPasswordField passwordT = (JPasswordField) passwordText;
-		JPasswordField confirmPasswordT = (JPasswordField) confirmPasswordText;
+		JPasswordField password = (JPasswordField) passwordText;
+		JPasswordField confirmPassword = (JPasswordField) confirmPasswordText;
 		JComboBox<String> authority = (JComboBox<String>) authorityText;
 
-		String password = new String(passwordT.getPassword());
-		String confirmPassword = new String(confirmPasswordT.getPassword());
+		String pass = new String(password.getPassword());
+		String confirmPass = new String(confirmPassword.getPassword());
+		String user = username.getText();
 
-		if (password.compareTo(confirmPassword) != 0) {
-			workflow.getWindow().setErrorMessage("Passwords doesn't match!");
-		} else {
-			customDialog.setVisible(false);
-			workflow.send("EditUser", username.getText(), password,
-					authority.getSelectedItem());
+		if (!checkPassword(pass, confirmPass)) {
+			return;
 		}
+		if (user.compareTo(" ") == 0 || user.compareTo("") == 0 || user == null) {
+			Workflow.getInstance().getWindow().setErrorMessage("No valid user!");
+			return;
+		}
+		customDialog.setVisible(false);
+		Workflow.getInstance().send("EditUser", user, password, authority.getSelectedItem());
+	}
+
+	/**
+	 * Confirm that the two strings matches, if not display error message.
+	 * 
+	 * @param password
+	 * @param confirmPassword
+	 * @return true if the strings matches, false otherwise.
+	 */
+	private Boolean checkPassword(String password, String confirmPassword) {
+		if (password.compareTo(confirmPassword) == 0) {
+			return true;
+		}
+
+		Workflow.getInstance().getWindow().setErrorMessage("Passwords doesn't match!");
+		return false;
+	}
+
+	/**
+	 * Delete the user that's sent in as a param on the server.
+	 * 
+	 * @param customDialog
+	 *            base dialog window for all dialogs.
+	 * @param usernameText
+	 *            name of the user.
+	 */
+	public void deleteUser(CustomDialog customDialog, Container usernameText) {
+		JTextField username = (JTextField) usernameText;
+		String user = username.getText();
+
+		customDialog.setVisible(false);
+		Workflow.getInstance().send("DeleteUser", user);
+	}
+	
+	public void getUser(Container usernameBox){
+		JComboBox username = (JComboBox)usernameBox;
+		
+		Workflow.getInstance().send("GetUser", username.getSelectedItem());
 	}
 }

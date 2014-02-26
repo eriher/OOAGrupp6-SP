@@ -29,7 +29,6 @@ public class Workflow {
 				window.addObserver(communication);
 			}
 		}.start();
-		ActionHandler.getInstance().setWorkflow(this);
 	}
 
 	public static Workflow getInstance() {

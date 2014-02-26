@@ -18,6 +18,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import model.Communication;
+import view.dialog.ChangePasswordDialog;
 import view.dialog.CreateUserDialog;
 import view.dialog.EditUserDialog;
 import view.dialog.NetworkDialog;
@@ -110,6 +111,7 @@ public class Window extends JFrame implements Observer {
 		dialogList.put("networkDialog", new NetworkDialog());
 		dialogList.put("createUserDialog", new CreateUserDialog());
 		dialogList.put("editUserDialog", new EditUserDialog());
+		dialogList.put("changePasswordDialog", new ChangePasswordDialog());
 	}
 
 	/**
