@@ -64,13 +64,13 @@ public class ActionHandler {
 		String user = username.getText();
 
 		customDialog.setVisible(false);
-		Workflow.getInstance().send("DeleteUser", user);
+		Workflow.getInstance().getCommunication().send("DeleteUser", user);
 	}
 	
 	public void getUser(Container usernameBox){
 		JComboBox username = (JComboBox)usernameBox;
 		
-		Workflow.getInstance().send("GetUser", username.getSelectedItem());
+		Workflow.getInstance().getCommunication().send("GetUser", username.getSelectedItem());
 	}
 
 	/**
@@ -93,15 +93,16 @@ public class ActionHandler {
 		JTextField user = (JTextField) username;
 		JPasswordField pass = (JPasswordField) password;
 
-		Workflow.getInstance().send("Login", user.getText(), new String(pass.getPassword()));
+		Workflow.getInstance().getCommunication().send("Login", user.getText(), new String(pass.getPassword()));
 	}
 
 	/**
 	 * Logs out from the server.
 	 */
 	public void logOut() {
-		Workflow.getInstance().send("Logout");
-		Workflow.getInstance().disconnectFromServer();
+		Workflow.getInstance().getCommunication().send("Logout");
+		Workflow.getInstance().getWindow().setView("Login");
+		Workflow.getInstance().getCommunication().disconnect();
 	}
 
 	/**
@@ -131,7 +132,7 @@ public class ActionHandler {
 	 * editing a current user. Request all users from the server.
 	 */
 	public void editUserDialog() {
-		Workflow.getInstance().send("GetAllUsers");
+		Workflow.getInstance().getCommunication().send("GetAllUsers");
 		Workflow.getInstance().getWindow().getDialog("editUserDialog").setVisible(true);
 	}
 
@@ -201,7 +202,7 @@ public class ActionHandler {
 		}
 
 		customDialog.setVisible(false);
-		Workflow.getInstance().send("ChangePassword", pass);
+		Workflow.getInstance().getCommunication().send("ChangePassword", pass);
 	}
 
 	/**
@@ -245,7 +246,7 @@ public class ActionHandler {
 		JComboBox<String> authority = (JComboBox<String>) authorityText;
 		customDialog.setVisible(false);
 
-		Workflow.getInstance().send("NewUser", username.getText(),
+		Workflow.getInstance().getCommunication().send("NewUser", username.getText(),
 				new String(password.getPassword()), authority.getSelectedItem());
 	}
 
@@ -284,6 +285,6 @@ public class ActionHandler {
 			return;
 		}
 		customDialog.setVisible(false);
-		Workflow.getInstance().send("EditUser", user, password, authority.getSelectedItem());
+		Workflow.getInstance().getCommunication().send("EditUser", user, password, authority.getSelectedItem());
 	}
 }

@@ -64,12 +64,12 @@ public class Window extends JFrame implements Observer {
 				} else if (((String) argsList.get(1))
 						.compareToIgnoreCase("False") == 0) {
 					setErrorMessage("Bad login information");
-					Workflow.getInstance().disconnectFromServer();
+					Workflow.getInstance().getCommunication().disconnect();
 				}
 				// Bad/Unexpected things happened, display error.
 				else {
 					setErrorMessage("Critical error!\n\n" + arg.toString());
-					Workflow.getInstance().disconnectFromServer();
+					Workflow.getInstance().getCommunication().disconnect();
 				}
 			}
 		}

@@ -45,21 +45,11 @@ public class Workflow {
 	public Window getWindow(){
 		return window;
 	}
-
+	
 	/**
-	 * Help method for outside methods to send to server.
-	 * 
-	 * @param args 
+	 * @return instance of communication.
 	 */
-	public void send(Object ... args) {
-		communication.send(args);
-	}
-
-	/**
-	 * Disconnect from the server
-	 */
-	public void disconnectFromServer() {
-		communication.disconnect();
-		window.setView("Login");
+	public Communication getCommunication(){
+		return communication;
 	}
 }
