@@ -58,7 +58,7 @@ public class EmployeeGUI extends UserGUI {
 		tempButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ActionHandler.getInstance().changePassword();
+				ActionHandler.getInstance().changePasswordDialog();
 			}
 		});
 		components.put("changePasswordButton", tempButton);

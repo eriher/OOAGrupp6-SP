@@ -1,6 +1,5 @@
-import controller.Workflow;
-import model.ClientNode;
 import model.FileManagement;
+import controller.Workflow;
 
 /**
  * Class Main contains starting point(main method) of the Server.
@@ -17,8 +16,32 @@ public class Main {
 
 	public static void main(String[] args) {
 		
-		System.out.println("puplbic static void main(String[] arg){};");
-		Workflow flow = new Workflow();
+		FileManagement fileMan = new FileManagement();
+		
+		
+		
+		
+	/*	Users users = new Users();					//Write some users to the bin file
+		users.add("a", "a", "Admin");
+		users.add("e", "e", "Employee");
+		users.add("199402219773","losen1994","King");
+		users.add("f", "f", "wannabeHaxxor");
+		fileMan.writeUsersFile("users.bin", users);*/
+		
+		
+
+		/*Users users = fileMan.getUsersList();
+		User user = users.getUser("a");
+		
+		System.out.println("PerNr: " + user.getPerNr() );
+		
+		System.out.println("Name: " + user.getName() );
+
+		System.out.println("Password: "+ user.getPassword() );*/
+		
+		
+		
+		Workflow flow = new Workflow();		//TODO uncomment when done testing Users
 
 	}
 

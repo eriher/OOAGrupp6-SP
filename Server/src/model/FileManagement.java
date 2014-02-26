@@ -10,15 +10,14 @@
 
 package model;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Scanner;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 public class FileManagement {
-	private final String PERSNR_PASSWORD_STATUS_FILEPATH = "inlogg.txt";		//Chose here filename/(Path) 
+	private final String USERSLIST_FILEPATH = "users.bin";		//Chose here filename or path.
 	public FileManagement(){
 		
 	}
@@ -28,7 +27,7 @@ public class FileManagement {
 	 * @param perNr
 	 * @return	password if exist both perNr and Password, null otherwise.
 	 */
-	public String getPassword( String perNr){
+	/*public String getPassword( String perNr){
 		try {
 			Scanner in = new Scanner(new FileReader(PERSNR_PASSWORD_STATUS_FILEPATH) );
 			
@@ -50,16 +49,16 @@ public class FileManagement {
 		System.out.println("null returned from file manager");
 		return null;
 		
-	}
+	}*/
 	
 	
-			//TODO might want to add a private method that both getStatus and getPassword uses so that we wont have as much duplicated code
+		//TODO might want to add a private method that both getStatus and getPassword uses so that we wont have as much duplicated code
 	/**
 	 * Get status of personnumber admin or emplployee
 	 * @param perNr
 	 * @return	status of person with personalNr as parameter
 	 */
-	public String getStatus(String perNr){
+	/*public String getStatus(String perNr){
 		try{
 			Scanner in = new Scanner(new FileReader(PERSNR_PASSWORD_STATUS_FILEPATH) );
 			
@@ -81,26 +80,51 @@ public class FileManagement {
 		System.out.println("null returned from file manager");
 		return null;
 		
-	}
-	
+	}*/
 	
 	
 	/**
 	 * @param fileName
 	 */
-	public void writeFile(String fileName){					//TODO Awfully unfinished method test might use with schedulewriting
-		try {
-			fileName ="test.txt";
-			PrintWriter out = new PrintWriter(new FileWriter(fileName, true) );
-			out.write("hejsan i texten test.txt");
-			out.close();
-			
-			
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	public void writeUsersFile(String fileName){				
+		try{
+			Users users = new Users();
+			ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(fileName) );
+			out.writeObject(users);
+		}catch(IOException e){
+			System.out.println("Could not write file");
 		}
 	}
+	
+	public void writeUsersFile(String fileName, Users users){				
+		try{
+			ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(fileName) );
+			out.writeObject(users);
+		}catch(IOException e){
+			System.out.println("Could not write file");
+		}
+	}
+	
+	public void writeUsersFile(Users users){				
+		try{
+			ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(USERSLIST_FILEPATH) );
+			out.writeObject(users);
+		}catch(IOException e){
+			System.out.println("Could not write file");
+		}
+	}
+	
+	
+	public Users getUsersList(){
+		try{
+			ObjectInputStream in = new ObjectInputStream(new FileInputStream(USERSLIST_FILEPATH));
+			return (Users)in.readObject();
+		}catch(Exception e){
+			return null;
+		}
+	}
+	
+	
 	
 	
 	

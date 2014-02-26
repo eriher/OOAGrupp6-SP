@@ -84,7 +84,7 @@ public class ClientNode implements Observer {
 		System.out.println("Add Connection");
 		clientConnected.put(iaddr, new Communication(soc));
 		clientConnected.get(iaddr).addObserver(this);				
-		new Thread(clientConnected.get(iaddr));
+		
 
 
 	}
@@ -92,6 +92,8 @@ public class ClientNode implements Observer {
 	private void forwardMessage(InetAddress iaddr, Object message) {
 		if (clientConnected.containsKey(iaddr)) {
 			clientConnected.get(iaddr).messageRecieved(iaddr, (LinkedList) message);
+			new Thread(clientConnected.get(iaddr)){}
+			.start();
 
 		} else {
 			System.out.println("HashMap did not contain InetAddress: " + iaddr);

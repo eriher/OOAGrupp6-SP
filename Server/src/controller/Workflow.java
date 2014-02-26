@@ -7,8 +7,6 @@
 
 package controller;
  
-import model.ClientNode;
-import model.FileManagement;
 import view.Window;
 
 public class Workflow {
@@ -16,8 +14,7 @@ public class Workflow {
 	//private FileManagement fileMan;
 
 	public Workflow() {
-		initWindowThread(SERVER_PORT);
-		//initModelThread();
+		initModelThread();
 	}
 
 	private void initWindowThread(int SERVER_PORT) {	//Initializes the Window	//TODO fix threads 
@@ -25,8 +22,8 @@ public class Workflow {
 	}
 
 	private void initModelThread() {		//This will initialize when click on startmodel
-		//ClientNode clientNode = ClientNode.getInstance(SERVER_PORT);
 
+		initWindowThread(SERVER_PORT);
 
 	}
 

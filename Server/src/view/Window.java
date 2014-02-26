@@ -189,7 +189,7 @@ public class Window {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		try{																		//Get public ip address
+		/*try{																		//Get public ip address
 			URL giefIPAddress = new URL("http://checkip.amazonaws.com");								//Only one line with your public ip address
 			BufferedReader in = new BufferedReader(new InputStreamReader(giefIPAddress.openStream()));
 			addressPublic = in.readLine();
@@ -204,7 +204,7 @@ public class Window {
 		}catch(IOException e){
 			System.out.println("Could not read from URL provided");
 			e.printStackTrace();
-		}																		//TODO remove comment (/**/) after debug, it is slow for testing without internet
+		}	*/																	
 		String allAddress ="Local: " +  addressLocal + "\nPublic: " + addressPublic;
 		
 		

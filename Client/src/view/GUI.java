@@ -76,7 +76,7 @@ public abstract class GUI extends JPanel {
 		tempButton.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e){
-				ActionHandler.getInstance().networkConfig();
+				ActionHandler.getInstance().networkConfigDialog();
 			}
 		});
 		components.put("networkButton", tempButton);

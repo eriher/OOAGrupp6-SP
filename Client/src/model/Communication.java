@@ -126,7 +126,7 @@ public class Communication extends Observable {
 	/**
 	 * Constantly loops and check if any information inwards is available.
 	 */
-	public void recieve() {
+	private void recieve() {
 		openInputStream();
 		while (socketOpen) {
 			try {

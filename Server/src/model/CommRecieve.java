@@ -41,7 +41,8 @@ public class CommRecieve extends Observable implements Runnable {
 			again = true;		
 			while (again) {
 				
-				soc = server.accept();						
+				soc = server.accept();	
+				System.out.println("CommRecieve");
 				objInputStream = new ObjectInputStream((soc.getInputStream()));
 
 				iaddr = soc.getInetAddress();
@@ -51,15 +52,12 @@ public class CommRecieve extends Observable implements Runnable {
 				
 				LinkedList<Object> listMessage = (LinkedList<Object>) objInputStream.readObject();
 				
-				message =   (String)  listMessage.get(0) ;		//TODO doesent work muppasdasjsajasjdjsdajdjas
-
+				message =   (String)listMessage.get(0) ;		
 				System.out.println("This came in: " + message);				// TODO remove after debug	
 				setChanged(); 								//Update Observers
 				notifyObservers(listMessage );
 				
 				
-				//soc.close();
-			
 			}
 			server.close();
 

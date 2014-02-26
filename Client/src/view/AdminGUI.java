@@ -37,7 +37,7 @@ public class AdminGUI extends UserGUI {
 		tempButton = new JButton("Create User");
 		tempButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				ActionHandler.getInstance().createUser();
+				ActionHandler.getInstance().createUserDialog();
 			}
 		});
 		components.put("createUserButton", tempButton);
@@ -46,7 +46,7 @@ public class AdminGUI extends UserGUI {
 		tempButton = new JButton("Edit User");
 		tempButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				ActionHandler.getInstance().editUser();
+				ActionHandler.getInstance().editUserDialog();
 			}
 		});
 		components.put("editUserButton", tempButton);
@@ -55,7 +55,7 @@ public class AdminGUI extends UserGUI {
 		tempButton = new JButton("Get User");
 		tempButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				ActionHandler.getInstance().getUser();
+				ActionHandler.getInstance().getUserDialog();
 			}
 		});
 		components.put("getUserButton", tempButton);
@@ -73,7 +73,7 @@ public class AdminGUI extends UserGUI {
 		tempButton = new JButton("New Time Slot");
 		tempButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				ActionHandler.getInstance().newTimeSlot();
+				ActionHandler.getInstance().newTimeSlotDialog();
 			}
 		});
 		components.put("newTimeSlotButton", tempButton);

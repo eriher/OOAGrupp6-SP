@@ -25,6 +25,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import model.Communication;
+import model.User;
 import controller.ActionHandler;
 
 public class EditUserDialog extends CustomDialog implements Observer {
@@ -49,7 +50,7 @@ public class EditUserDialog extends CustomDialog implements Observer {
 				}
 			}
 			else if(((String) argsList.get(0)).compareToIgnoreCase("GetUser") == 0) {
-				User user = argsList.get(1);
+				User user = (User)argsList.get(1);
 				((JTextField)components.get("uIUsernameLabel")).setText(user.getPerNr());
 				((JTextField)components.get("uIPasswordLabel")).setText(user.getPassword());
 				((JTextField)components.get("uIAuthorityLabel")).setText(user.getStatus());

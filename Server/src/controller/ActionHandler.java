@@ -18,7 +18,6 @@ import model.ClientNode;
  * @version 2014-02-21
  */
 public class ActionHandler { //Singleton
-	//private final int SERVER_PORT = 4444;
 	private static ActionHandler instance = null;
 	
 	Boolean logicThreadEnd;
@@ -39,8 +38,6 @@ public class ActionHandler { //Singleton
 	}
 	
 	public void startButton(final int SERVER_PORT){	//Executes when click on start button
-		/*clientNode = ClientNode.getInstance(SERVER_PORT);
-		System.out.println("Server start");*/
 		
 		logicThreadEnd = false;
 		
