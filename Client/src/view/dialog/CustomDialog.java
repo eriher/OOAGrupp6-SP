@@ -13,14 +13,19 @@ import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 
 import controller.ActionHandler;
 
-public class CustomDialog extends JDialog {
+public abstract class CustomDialog extends JDialog {
 	private static final long serialVersionUID = 4131677888057562310L;
 	private JPanel canvas;
 	protected final CustomDialog customDialog = this;
@@ -108,5 +113,28 @@ public class CustomDialog extends JDialog {
 		components.get("toolbarPanel").add(components.get("cancelButton"), c);
 
 		add(components.get("wrapperPanel"));
+	}
+
+	/**
+	 * Clear all components which aren't labels or buttons.
+	 */
+	// TODO ugly, fix it better
+	public void clear(){
+		Iterator it = components.entrySet().iterator();
+		while(it.hasNext()){
+			Map.Entry pairs = (Map.Entry)it.next();
+			if(pairs.getValue() instanceof JTextField || pairs.getValue() instanceof JPasswordField){
+				((JTextField)pairs.getValue()).setText("");
+			}
+			else if(pairs.getValue() instanceof JComboBox){
+				// Oh god why!?
+				if(pairs.getValue().equals(components.get("eUAuthorityComboBox"))){
+					
+				}
+				else{
+					((JComboBox)pairs.getValue()).removeAllItems();
+				}
+			}
+		}
 	}
 }

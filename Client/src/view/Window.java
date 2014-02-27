@@ -20,6 +20,7 @@ import javax.swing.JOptionPane;
 import model.Communication;
 import view.dialog.ChangePasswordDialog;
 import view.dialog.CreateUserDialog;
+import view.dialog.CustomDialog;
 import view.dialog.EditUserDialog;
 import view.dialog.NetworkDialog;
 import controller.Workflow;
@@ -27,11 +28,11 @@ import controller.Workflow;
 public class Window extends JFrame implements Observer {
 	private static final long serialVersionUID = 7991892771427260131L;
 	private HashMap<String, GUI> interfaceList;
-	private HashMap<String, JDialog> dialogList;
+	private HashMap<String, CustomDialog> dialogList;
 
 	public Window() {
 		interfaceList = new HashMap<String, GUI>();
-		dialogList = new HashMap<String, JDialog>();
+		dialogList = new HashMap<String, CustomDialog>();
 		createFrame();
 		createViews();
 		createDialogs();
@@ -143,7 +144,11 @@ public class Window extends JFrame implements Observer {
 	 *            name of the dialog window.
 	 * @return instance of the dialog, null otherwise.
 	 */
-	public JDialog getDialog(String key) {
+	public JDialog getDialog(String key) throws IllegalArgumentException{
+		if(dialogList.get(key) == null){
+			throw new IllegalArgumentException("Invalid key: " + key);
+		}
+		dialogList.get(key).clear();
 		return dialogList.get(key);
 	}
 }
