@@ -150,7 +150,8 @@ public class ActionHandler {
 	 * user.
 	 */
 	public void getUserDialog() {
-		//Workflow.getInstance().getWindow().getDialog("getUserDialog").setVisible(true);
+		Workflow.getInstance().getWindow().getDialog("getUserDialog")
+				.setVisible(true);
 	}
 
 	/**
@@ -200,11 +201,9 @@ public class ActionHandler {
 	 *            confirm the new password was correctly written.
 	 */
 	public void getUserDialogOk(CustomDialog customDialog, Container usernameBox) {
-		JComboBox username = (JComboBox) usernameBox;
+		getUser(usernameBox);
 
 		customDialog.setVisible(false);
-		Workflow.getInstance().getCommunication()
-				.send("GetUser", username.getSelectedItem());
 	}
 
 	/**

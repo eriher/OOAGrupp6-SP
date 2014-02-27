@@ -22,6 +22,7 @@ import view.dialog.ChangePasswordDialog;
 import view.dialog.CreateUserDialog;
 import view.dialog.CustomDialog;
 import view.dialog.EditUserDialog;
+import view.dialog.GetUserDialog;
 import view.dialog.NetworkDialog;
 import controller.Workflow;
 
@@ -110,6 +111,8 @@ public class Window extends JFrame implements Observer {
 		dialogList.put("networkDialog", new NetworkDialog());
 		dialogList.put("createUserDialog", new CreateUserDialog());
 		dialogList.put("editUserDialog", new EditUserDialog(Workflow
+				.getInstance().getCommunication()));
+		dialogList.put("getUserDialog", new GetUserDialog(Workflow
 				.getInstance().getCommunication()));
 		dialogList.put("changePasswordDialog", new ChangePasswordDialog());
 	}

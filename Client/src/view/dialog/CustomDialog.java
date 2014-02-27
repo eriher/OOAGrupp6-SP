@@ -99,6 +99,8 @@ public abstract class CustomDialog extends JDialog {
 		c = new GridBagConstraints();
 		c.gridx = 0;
 		c.gridy = 0;
+		c.ipadx = 60;
+		c.ipady = 20;
 		components.get("wrapperPanel").add(canvas, c);
 
 		// ToolbarPanel
