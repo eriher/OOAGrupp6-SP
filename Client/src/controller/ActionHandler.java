@@ -150,8 +150,7 @@ public class ActionHandler {
 	 * user.
 	 */
 	public void getUserDialog() {
-		Workflow.getInstance().getWindow().getDialog("getUserDialog")
-				.setVisible(true);
+		//Workflow.getInstance().getWindow().getDialog("getUserDialog").setVisible(true);
 	}
 
 	/**
