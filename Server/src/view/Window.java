@@ -35,6 +35,10 @@ import controller.ActionHandler;
  *
  */
 
+/**
+ * @author Henrik
+ * @version 2014-02-27
+ */
 public class Window {
 	
 	private JFrame frame;
@@ -179,6 +183,10 @@ public class Window {
 			}		
 	}
 	
+	/**
+	 * @author Henrik
+	 * @return String with both local and public Ip address
+	 */
 	public String getAddress()
 	{	
 		String addressLocal = "unknown", addressPublic = "unknown";
@@ -204,7 +212,7 @@ public class Window {
 		}catch(IOException e){
 			System.out.println("Could not read from URL provided");
 			e.printStackTrace();
-		}															
+		}																		
 		String allAddress ="Local: " +  addressLocal + "\nPublic: " + addressPublic;
 		
 		

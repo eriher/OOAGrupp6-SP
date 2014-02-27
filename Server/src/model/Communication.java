@@ -36,9 +36,6 @@ public class Communication extends Observable {
 	public Communication(ClientHandler clientHandler) {
 		this.clientHandler = clientHandler;
 		fileMan = new FileManagement();
-
-		
-
 	}
 
 	/**
@@ -61,7 +58,12 @@ public class Communication extends Observable {
 				linkedMessageReturn.add("GetAllUsers"); //LinkedList( "GetAllUsers", "PersNr 1", "PersNr 2", "PersNr 3", ..., "PersNr n" )
 				String[] usersListStringArray = users.getAllPerNr().toString().split(", ");
 
-				for (int i = 1; i < usersListStringArray.length; i++) {
+				
+				
+				for (int i = 0; i < usersListStringArray.length; i++) {
+					usersListStringArray[i] = usersListStringArray[i].replace("[", "");			//Removes [] that was recieved from LinkedList.toString
+					usersListStringArray[i] = usersListStringArray[i].replace("]", "");
+									
 					linkedMessageReturn.add(usersListStringArray[i]);
 				}
 

@@ -128,7 +128,7 @@ public abstract class CustomDialog extends JDialog {
 			}
 			else if(pairs.getValue() instanceof JComboBox){
 				// Oh god why!?
-				if(pairs.getValue().equals(components.get("eUAuthorityComboBox"))){
+				if(pairs.getValue().equals(components.get("eUAuthorityComboBox")) || pairs.getValue().equals(components.get("authorityText"))){
 					
 				}
 				else{

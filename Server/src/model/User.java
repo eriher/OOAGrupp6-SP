@@ -49,11 +49,12 @@ public class User implements Serializable{
 		this.password = password;
 	}
 	
+	
 	public String getPerNr(){
 		return perNr;
 	}
 	
-	/*public Schedule getSchedule(){
+	/*public Schedule getSchedule(){	//TODO fix schedule		
 		return schedule;
 	}
 	public void setSchedule(Schedule schedule){

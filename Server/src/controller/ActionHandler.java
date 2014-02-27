@@ -1,6 +1,6 @@
 
 /**
- * Controls all ActionEvents (All 2 of them)
+ * Controls all ActionEvents 
  * 
  * @author Henrik Johansson
  * @version 2013-02-12
@@ -17,7 +17,7 @@ import model.CommRecieve;
  * @author Henrik
  * @version 2014-02-21
  */
-public class ActionHandler { //Singleton
+public class ActionHandler { 						//Singleton
 	private static ActionHandler instance = null;
 	
 	Boolean logicThreadEnd;
@@ -31,7 +31,7 @@ public class ActionHandler { //Singleton
 	/**
 	 * @return instance of ActionHandler
 	 */
-	public static ActionHandler getInstance(){ //Singleton method
+	public static ActionHandler getInstance(){ 		//Singleton method
 		if(instance == null){
 			instance = new ActionHandler();
 		}
@@ -43,13 +43,13 @@ public class ActionHandler { //Singleton
 		System.out.println("Server start");
 	}
 	
-	public void stopButton(){	//Executes when click on stop button
+	public void stopButton(){						//Executes when click on stop button
 		comm.close();
 		comm = null;
 		System.out.println("Server stop");
 	}
 	
-	public void about(){		//Executes when click on menu item about
+	public void about(){							//Executes when click on menu item about
 		String aboutText = "MarximumWorker 9001 (Server)"
 				+ "\n\n"
 				+ "Version 1.0\n"

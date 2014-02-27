@@ -8,6 +8,10 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.LinkedList;
 
+/**
+ * @author Erik
+ * @version 2014-02-27
+ */
 public class ClientHandler extends Thread {
 	
 	private Socket			clientSocket;

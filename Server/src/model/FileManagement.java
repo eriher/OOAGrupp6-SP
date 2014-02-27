@@ -23,72 +23,15 @@ public class FileManagement {
 	}
 	
 	/**
-	 * 	Get password for "perNr" from file "PERSNR_PASSWORD_STATUS_FILEPATH"
-	 * @param perNr
-	 * @return	password if exist both perNr and Password, null otherwise.
-	 */
-	/*public String getPassword( String perNr){
-		try {
-			Scanner in = new Scanner(new FileReader(PERSNR_PASSWORD_STATUS_FILEPATH) );
-			
-			while(in.hasNextLine() ){
-				String fullText = in.nextLine();
-				if(fullText.contains( perNr)  ){
-					//Found row with personalnumber
-					in.close();
-					String[] persNrPasswordStatus = fullText.split("\\s+"); //Split on blanks either space or tab
-					return persNrPasswordStatus[1];		//Return password for perNr
-				}
-			}
-			in.close();
-			
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		System.out.println("null returned from file manager");
-		return null;
-		
-	}*/
-	
-	
-		//TODO might want to add a private method that both getStatus and getPassword uses so that we wont have as much duplicated code
-	/**
-	 * Get status of personnumber admin or emplployee
-	 * @param perNr
-	 * @return	status of person with personalNr as parameter
-	 */
-	/*public String getStatus(String perNr){
-		try{
-			Scanner in = new Scanner(new FileReader(PERSNR_PASSWORD_STATUS_FILEPATH) );
-			
-			while(in.hasNextLine() ){
-				String lineText = in.nextLine();
-				if(lineText.contains(perNr) ){
-					//Found row with personalnumber
-					in.close();
-					String[] persNrPasswordStatus = lineText.split("\\s+");		//Split on blanks either space or tab
-					return persNrPasswordStatus[2]; //Returns status for persnr
-				}
-			}
-			in.close();
-			
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		System.out.println("null returned from file manager");
-		return null;
-		
-	}*/
-	
-	
-	/**
+	 * This is a "first time method" it should only be used if there are no admin users in users.bin. 
+	 * This will make a complete new file and all old users will be removed!
+	 * 
 	 * @param fileName
 	 */
 	public void writeUsersFile(String fileName){				
 		try{
 			Users users = new Users();
+			users.add("Admin", "Admin" , "Admin");
 			ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(fileName) );
 			out.writeObject(users);
 		}catch(IOException e){
@@ -96,6 +39,13 @@ public class FileManagement {
 		}
 	}
 	
+	
+	/**
+	 * Saves users to binfile with a specific name as parameter.
+	 * 
+	 * @param fileName
+	 * @param users
+	 */
 	public void writeUsersFile(String fileName, Users users){				
 		try{
 			ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(fileName) );
@@ -105,6 +55,12 @@ public class FileManagement {
 		}
 	}
 	
+	
+	/**
+	 * Writes users to default binfile choosen as constant.
+	 * 
+	 * @param users
+	 */
 	public void writeUsersFile(Users users){				
 		try{
 			ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(USERSLIST_FILEPATH) );
@@ -115,6 +71,12 @@ public class FileManagement {
 	}
 	
 	
+	
+	/**
+	 * Recieve the Users.
+	 * 
+	 * @return Users if there are som, null ow
+	 */
 	public Users getUsersList(){
 		try{
 			ObjectInputStream in = new ObjectInputStream(new FileInputStream(USERSLIST_FILEPATH));
