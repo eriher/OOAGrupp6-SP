@@ -114,27 +114,4 @@ public abstract class CustomDialog extends JDialog {
 
 		add(components.get("wrapperPanel"));
 	}
-
-	/**
-	 * Clear all components which aren't labels or buttons.
-	 */
-	// TODO ugly, fix it better
-	public void clear(){
-		Iterator it = components.entrySet().iterator();
-		while(it.hasNext()){
-			Map.Entry pairs = (Map.Entry)it.next();
-			if(pairs.getValue() instanceof JTextField || pairs.getValue() instanceof JPasswordField){
-				((JTextField)pairs.getValue()).setText("");
-			}
-			else if(pairs.getValue() instanceof JComboBox){
-				// Oh god why!?
-				if(pairs.getValue().equals(components.get("eUAuthorityComboBox")) || pairs.getValue().equals(components.get("authorityText"))){
-					
-				}
-				else{
-					((JComboBox)pairs.getValue()).removeAllItems();
-				}
-			}
-		}
-	}
 }

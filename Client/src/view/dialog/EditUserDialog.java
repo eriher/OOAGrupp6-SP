@@ -33,28 +33,32 @@ public class EditUserDialog extends CustomDialog implements Observer {
 
 	public EditUserDialog(Communication communication) {
 		super();
-		
+
 		communication.addObserver(this);
+		communication.send("GetAllUsers");
 		setTitle("Edit User");
 	}
 
-	public void update(Observable o, Object arg){
+	public void update(Observable o, Object arg) {
 		if (o instanceof Communication) {
 			LinkedList<Object> argsList = (LinkedList<Object>) arg;
-			
+
 			// Check what type of message was received
 			if (((String) argsList.get(0)).compareToIgnoreCase("GetAllUsers") == 0) {
 				argsList.removeFirst();
 				// TODO STOP LOOPING!
-				for(Object s : argsList){
-					((JComboBox)components.get("gUComboBox")).addItem(s);
+				for (Object s : argsList) {
+					((JComboBox) components.get("gUComboBox")).addItem(s);
 				}
-			}
-			else if(((String) argsList.get(0)).compareToIgnoreCase("GetUser") == 0) {
-				User user = (User)argsList.get(1);
-				((JTextField)components.get("uIUsernameText")).setText(user.getPerNr());
-				((JTextField)components.get("uIPasswordText")).setText(user.getPassword());
-				((JTextField)components.get("uIAuthorityText")).setText(user.getStatus());
+			} else if (((String) argsList.get(0))
+					.compareToIgnoreCase("GetUser") == 0) {
+				User user = (User) argsList.get(1);
+				((JTextField) components.get("uIUsernameText")).setText(user
+						.getPerNr());
+				((JTextField) components.get("uIPasswordText")).setText(user
+						.getPassword());
+				((JTextField) components.get("uIAuthorityText")).setText(user
+						.getStatus());
 			}
 		}
 	}
@@ -151,6 +155,10 @@ public class EditUserDialog extends CustomDialog implements Observer {
 		temp = new JLabel("Get user:");
 		components.put("gULabel", temp);
 
+		// FilterLabel
+		temp = new JLabel("Filter: ");
+		components.put("gUFilterLabel", temp);
+
 		// TextField
 		temp = new JTextField();
 		components.put("gUText", temp);
@@ -218,7 +226,7 @@ public class EditUserDialog extends CustomDialog implements Observer {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				ActionHandler.getInstance().deleteUser(customDialog,
-						components.get("uIPasswordText"));
+						components.get("uIUsernameText"));
 			}
 		});
 		components.put("eUDeleteUserButton", temp);
@@ -330,9 +338,15 @@ public class EditUserDialog extends CustomDialog implements Observer {
 		c.insets = new Insets(0, 0, 30, 0);
 		getUser.add(components.get("gULabel"), c);
 
-		// TextField
+		// FilterLabel
 		c = new GridBagConstraints();
 		c.gridx = 1;
+		c.gridy = 1;
+		getUser.add(components.get("gUFilterLabel"), c);
+
+		// TextField
+		c = new GridBagConstraints();
+		c.gridx = 2;
 		c.gridy = 1;
 		c.ipadx = 65;
 		c.insets = new Insets(0, 0, 0, 10);
@@ -342,7 +356,7 @@ public class EditUserDialog extends CustomDialog implements Observer {
 		// ComboBox
 		c = new GridBagConstraints();
 		c.gridx = 2;
-		c.gridy = 1;
+		c.gridy = 2;
 		c.ipadx = 65;
 		c.fill = GridBagConstraints.HORIZONTAL;
 		getUser.add(components.get("gUComboBox"), c);
@@ -350,7 +364,7 @@ public class EditUserDialog extends CustomDialog implements Observer {
 		// Button
 		c = new GridBagConstraints();
 		c.gridx = 2;
-		c.gridy = 2;
+		c.gridy = 3;
 		c.weighty = 1;
 		c.insets = new Insets(50, 0, 0, 0);
 		getUser.add(components.get("fetchUserButton"), c);

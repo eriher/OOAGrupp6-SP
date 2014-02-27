@@ -34,7 +34,7 @@ public class ActionHandler {
 
 		return actionHandler;
 	}
-	
+
 	/**
 	 * Confirm that the two strings matches, if not display error message.
 	 * 
@@ -47,7 +47,8 @@ public class ActionHandler {
 			return true;
 		}
 
-		Workflow.getInstance().getWindow().setErrorMessage("Passwords doesn't match!");
+		Workflow.getInstance().getWindow()
+				.setErrorMessage("Passwords doesn't match!");
 		return false;
 	}
 
@@ -62,15 +63,19 @@ public class ActionHandler {
 	public void deleteUser(CustomDialog customDialog, Container usernameText) {
 		JTextField username = (JTextField) usernameText;
 		String user = username.getText();
-
-		customDialog.setVisible(false);
-		Workflow.getInstance().getCommunication().send("DeleteUser", user);
+		if (user.compareTo("") == 0 || user.compareTo(" ") == 0) {
+			Workflow.getInstance().getWindow().setErrorMessage("Can't remove empty user!");
+		} else {
+			customDialog.setVisible(false);
+			Workflow.getInstance().getCommunication().send("DeleteUser", user);
+		}
 	}
-	
-	public void getUser(Container usernameBox){
-		JComboBox username = (JComboBox)usernameBox;
-		
-		Workflow.getInstance().getCommunication().send("GetUser", username.getSelectedItem());
+
+	public void getUser(Container usernameBox) {
+		JComboBox username = (JComboBox) usernameBox;
+
+		Workflow.getInstance().getCommunication()
+				.send("GetUser", username.getSelectedItem());
 	}
 
 	/**
@@ -78,7 +83,8 @@ public class ActionHandler {
 	 * display it in two edible text fields.
 	 */
 	public void networkConfigDialog() {
-		Workflow.getInstance().getWindow().getDialog("networkDialog").setVisible(true);
+		Workflow.getInstance().getWindow().getDialog("networkDialog")
+				.setVisible(true);
 	}
 
 	/**
@@ -93,7 +99,8 @@ public class ActionHandler {
 		JTextField user = (JTextField) username;
 		JPasswordField pass = (JPasswordField) password;
 
-		Workflow.getInstance().getCommunication().send("Login", user.getText(), new String(pass.getPassword()));
+		Workflow.getInstance().getCommunication()
+				.send("Login", user.getText(), new String(pass.getPassword()));
 	}
 
 	/**
@@ -101,8 +108,8 @@ public class ActionHandler {
 	 */
 	public void logOut() {
 		Workflow.getInstance().getCommunication().send("Logout");
-		Workflow.getInstance().getWindow().setView("Login");
 		Workflow.getInstance().getCommunication().disconnect();
+		Workflow.getInstance().getWindow().setView("Login");
 	}
 
 	/**
@@ -124,7 +131,8 @@ public class ActionHandler {
 	 * creating a new user.
 	 */
 	public void createUserDialog() {
-		Workflow.getInstance().getWindow().getDialog("createUserDialog").setVisible(true);
+		Workflow.getInstance().getWindow().getDialog("createUserDialog")
+				.setVisible(true);
 	}
 
 	/**
@@ -132,8 +140,8 @@ public class ActionHandler {
 	 * editing a current user. Request all users from the server.
 	 */
 	public void editUserDialog() {
-		Workflow.getInstance().getCommunication().send("GetAllUsers");
-		Workflow.getInstance().getWindow().getDialog("editUserDialog").setVisible(true);
+		Workflow.getInstance().getWindow().getDialog("editUserDialog")
+				.setVisible(true);
 	}
 
 	/**
@@ -141,7 +149,7 @@ public class ActionHandler {
 	 * user.
 	 */
 	public void getUserDialog() {
-		
+
 	}
 
 	/**
@@ -165,7 +173,8 @@ public class ActionHandler {
 	 * for editing once password.
 	 */
 	public void changePasswordDialog() {
-		Workflow.getInstance().getWindow().getDialog("changePasswordDialog").setVisible(true);
+		Workflow.getInstance().getWindow().getDialog("changePasswordDialog")
+				.setVisible(true);
 	}
 
 	/**
@@ -246,8 +255,11 @@ public class ActionHandler {
 		JComboBox<String> authority = (JComboBox<String>) authorityText;
 		customDialog.setVisible(false);
 
-		Workflow.getInstance().getCommunication().send("NewUser", username.getText(),
-				new String(password.getPassword()), authority.getSelectedItem());
+		Workflow.getInstance()
+				.getCommunication()
+				.send("NewUser", username.getText(),
+						new String(password.getPassword()),
+						authority.getSelectedItem());
 	}
 
 	/**
@@ -281,10 +293,12 @@ public class ActionHandler {
 			return;
 		}
 		if (user.compareTo(" ") == 0 || user.compareTo("") == 0 || user == null) {
-			Workflow.getInstance().getWindow().setErrorMessage("No valid user!");
+			Workflow.getInstance().getWindow()
+					.setErrorMessage("No valid user!");
 			return;
 		}
 		customDialog.setVisible(false);
-		Workflow.getInstance().getCommunication().send("EditUser", user, pass, authority.getSelectedItem());
+		Workflow.getInstance().getCommunication()
+				.send("EditUser", user, pass, authority.getSelectedItem());
 	}
 }

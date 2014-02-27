@@ -35,7 +35,6 @@ public class Window extends JFrame implements Observer {
 		dialogList = new HashMap<String, CustomDialog>();
 		createFrame();
 		createViews();
-		createDialogs();
 
 		new NetworkDialog();
 	}
@@ -49,11 +48,12 @@ public class Window extends JFrame implements Observer {
 	public void addObserver(Observable o) {
 		o.addObserver(this);
 	}
-	
+
 	public void update(Observable o, Object arg) {
 		if (o instanceof Communication) {
+			// If it's from communication it's always a linkedlist<object>.
 			LinkedList<Object> argsList = (LinkedList<Object>) arg;
-			
+
 			// Check what type of message was received
 			if (((String) argsList.get(0)).compareToIgnoreCase("Login") == 0) {
 				// Check which type of user it was
@@ -111,12 +111,14 @@ public class Window extends JFrame implements Observer {
 	private void createDialogs() {
 		dialogList.put("networkDialog", new NetworkDialog());
 		dialogList.put("createUserDialog", new CreateUserDialog());
-		dialogList.put("editUserDialog", new EditUserDialog(Workflow.getInstance().getCommunication()));
+		dialogList.put("editUserDialog", new EditUserDialog(Workflow
+				.getInstance().getCommunication()));
 		dialogList.put("changePasswordDialog", new ChangePasswordDialog());
 	}
 
 	/**
-	 * Switch the view that currently is seen. Removes all current components from frame and replaces them with new ones.
+	 * Switch the view that currently is seen. Removes all current components
+	 * from frame and replaces them with new ones.
 	 * 
 	 * @param key
 	 *            name of the GUI to switch to.
@@ -144,11 +146,8 @@ public class Window extends JFrame implements Observer {
 	 *            name of the dialog window.
 	 * @return instance of the dialog, null otherwise.
 	 */
-	public JDialog getDialog(String key) throws IllegalArgumentException{
-		if(dialogList.get(key) == null){
-			throw new IllegalArgumentException("Invalid key: " + key);
-		}
-		dialogList.get(key).clear();
+	public JDialog getDialog(String key) {
+		createDialogs(); // TODO fix it! So ugly.
 		return dialogList.get(key);
 	}
 }
