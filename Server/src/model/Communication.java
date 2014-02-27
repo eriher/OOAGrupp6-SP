@@ -18,7 +18,7 @@ import java.net.Socket;
 import java.util.LinkedList;
 import java.util.Observable;
 
-public class Communication extends Observable implements Runnable {
+public class Communication extends Observable {
 	private Socket soc;
 	private Boolean recieveInited = false;
 	private CommRecieve recComm;
@@ -31,30 +31,26 @@ public class Communication extends Observable implements Runnable {
 	private Users users;
 	private Boolean normalLogin = false;
 	private Boolean adminLogin = false;
+	private ClientHandler clientHandler;
 
-	public Communication(Socket soc) {
-		this.soc = soc;
+	public Communication(ClientHandler clientHandler) {
+		this.clientHandler = clientHandler;
 		fileMan = new FileManagement();
 
 		
 
 	}
 
-	public void run() {
-		recieve();
-	}
-
 	/**
 	 * Check what type of message has been recieved.
 	 */
-	public void messageRecieved(InetAddress iaddr, LinkedList<Object> linkedMessage) {
-		if (iaddr != null && linkedMessage != null) {
-			this.iaddr = iaddr;
+	public void messageRecieved(LinkedList<Object> linkedMessage) {
+		if (linkedMessage != null) {
 			this.linkedMessage = linkedMessage;
 			System.out.println("Message recieved in communication Server" + linkedMessage.toString());
 			String whatToDo = (String) linkedMessage.get(0);
 			if (whatToDo.compareToIgnoreCase("Login") == 0) { // Login has been recieved  previous: linkedMessage.get(0).equals("login")
-				loginRecieved(iaddr, linkedMessage);
+				loginRecieved(linkedMessage);
 			} else if (whatToDo.compareToIgnoreCase("Logout") == 0) {
 				adminLogin = false;
 				normalLogin = false;
@@ -69,7 +65,7 @@ public class Communication extends Observable implements Runnable {
 					linkedMessageReturn.add(usersListStringArray[i]);
 				}
 
-				send(soc, linkedMessageReturn); // Client will recieve a linkedList with strings and the first is "GetAllUsers" followed by the personal numbers
+				clientHandler.send(linkedMessageReturn); // Client will recieve a linkedList with strings and the first is "GetAllUsers" followed by the personal numbers
 
 			} else if (whatToDo.compareToIgnoreCase("GetUser") == 0) { //Sends LinkedList<(String)"GetUser", (User)user> back to client
 				String persNr = (String) linkedMessage.get(1);
@@ -78,7 +74,7 @@ public class Communication extends Observable implements Runnable {
 				LinkedList<Object> linkedMessageReturn = new LinkedList<Object>();
 				linkedMessageReturn.add("GetUser");
 				linkedMessageReturn.add(user);
-				send(soc, linkedMessageReturn);
+				clientHandler.send(linkedMessageReturn);
 
 			} else if (whatToDo.compareToIgnoreCase("RemoveUser") == 0 || whatToDo.compareToIgnoreCase("DeleteUser") == 0) {
 				String persNr = (String) linkedMessage.get(1);
@@ -111,7 +107,7 @@ public class Communication extends Observable implements Runnable {
 	 * @param comm
 	 *            What communication object to use
 	 */
-	public void loginRecieved(InetAddress iaddr, LinkedList<Object> message) { // A login has been recieved
+	public void loginRecieved(LinkedList<Object> message) { // A login has been recieved
 
 		if (message.get(0) instanceof String && message.get(1) instanceof String && message.get(2) instanceof String) {
 
@@ -133,7 +129,7 @@ public class Communication extends Observable implements Runnable {
 					listToSend.add("login");
 					listToSend.add(status);
 
-					send(soc, listToSend); // Sends back to port	
+					clientHandler.send(listToSend);
 					if (status.compareToIgnoreCase("Admin") == 0) { //TODO 
 						adminLogin = true;
 						normalLogin = false;
@@ -149,9 +145,9 @@ public class Communication extends Observable implements Runnable {
 					listToSend.add("login");
 					listToSend.add("false");
 
-					send(soc, listToSend);
+					clientHandler.send(listToSend);
 
-					closeSocket();
+					clientHandler.closeSocket();
 
 				}
 			} catch (Exception e) {
@@ -161,75 +157,11 @@ public class Communication extends Observable implements Runnable {
 				listToSend.add("login");
 				listToSend.add("false");
 
-				send(soc, listToSend);
+				clientHandler.send(listToSend);
 
-				closeSocket();
+				clientHandler.closeSocket();
 
 			}
-		}
-	}
-
-	public void send(Socket soc, Object objStringMessage) { // Send message objBoolMessage to socket soc
-
-		try {
-
-			ObjectOutputStream out = new ObjectOutputStream(soc.getOutputStream());
-			out.writeObject(objStringMessage);
-			out.flush();
-
-		} catch (IOException e) {
-			System.out.println("Client not active, did you close clients recieveing part?"); // TODO close connection to client.
-
-			try {
-				soc.close();
-			} catch (IOException e1) {
-				System.out.println("Could not close socket");
-				e1.printStackTrace();
-			}
-			setChanged();
-			notifyObservers();
-
-			e.printStackTrace();
-		}
-
-	}
-
-	public InetAddress getInetAddress() {
-		return iaddr;
-	}
-
-	private void closeSocket() {
-		try {
-			soc.close();
-		} catch (IOException e1) {
-			System.out.println("Could not close socket");
-			e1.printStackTrace();
-		}
-		setChanged();
-		notifyObservers();
-	}
-
-	public void recieve() { 
-		while (normalLogin || adminLogin) {
-			try {
-
-				BufferedInputStream checkIn = new BufferedInputStream(soc.getInputStream());
-				while (checkIn.available() != 0) {
-					ObjectInputStream in = new ObjectInputStream(checkIn);
-
-					LinkedList<Object> linkedIn = (LinkedList<Object>) in.readObject();
-
-					messageRecieved(soc.getInetAddress(), linkedIn);
-				}
-			} catch (IOException e) {
-				normalLogin = false;
-				adminLogin = false;
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (ClassNotFoundException e) {
-				e.printStackTrace();
-			}
-
 		}
 	}
 

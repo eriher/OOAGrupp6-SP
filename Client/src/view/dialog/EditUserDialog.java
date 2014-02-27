@@ -52,9 +52,9 @@ public class EditUserDialog extends CustomDialog implements Observer {
 			}
 			else if(((String) argsList.get(0)).compareToIgnoreCase("GetUser") == 0) {
 				User user = (User)argsList.get(1);
-				((JTextField)components.get("uIUsernameLabel")).setText(user.getPerNr());
-				((JTextField)components.get("uIPasswordLabel")).setText(user.getPassword());
-				((JTextField)components.get("uIAuthorityLabel")).setText(user.getStatus());
+				((JTextField)components.get("uIUsernameText")).setText(user.getPerNr());
+				((JTextField)components.get("uIPasswordText")).setText(user.getPassword());
+				((JTextField)components.get("uIAuthorityText")).setText(user.getStatus());
 			}
 		}
 	}
@@ -80,7 +80,7 @@ public class EditUserDialog extends CustomDialog implements Observer {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				ActionHandler.getInstance().editUserDialogOk(customDialog,
-						components.get("oIUsernameText"),
+						components.get("uIUsernameText"),
 						components.get("eUPasswordPF"),
 						components.get("eUConfirmPasswordPF"),
 						components.get("eUAuthorityComboBox"));

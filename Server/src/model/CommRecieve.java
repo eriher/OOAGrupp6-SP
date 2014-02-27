@@ -10,88 +10,53 @@
 package model;
 
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.LinkedList;
-import java.util.Observable;
 
-public class CommRecieve extends Observable implements Runnable {		
-	private Socket soc;
-	private ServerSocket server;
-	private String message = null;
-	private ObjectInputStream objInputStream;
-	private InetAddress iaddr;
-	private Boolean again;
+public class CommRecieve extends Thread{
+	private ServerSocket serverSocket;
+	private Boolean haltflag;
 	
-	public CommRecieve(ServerSocket server) {
-		this.server = server;
-		
-	}
-
-	
-	/* (non-Javadoc)
-	 * @see java.lang.Runnable#run()
-	 */
-	public void run() {
-	
+	public CommRecieve(int port)
+	{
 		try {
-			
-			again = true;		
-			while (again) {
-				
-				soc = server.accept();	
-				System.out.println("CommRecieve");
-				objInputStream = new ObjectInputStream((soc.getInputStream()));
-
-				iaddr = soc.getInetAddress();
-				setChanged(); 								//Update Observers of recieved message from iaddr ip
-				notifyObservers(iaddr);
-				
-				
-				LinkedList<Object> listMessage = (LinkedList<Object>) objInputStream.readObject();
-				
-				message =   (String)listMessage.get(0) ;		
-				System.out.println("This came in: " + message);				// TODO remove after debug	
-				setChanged(); 								//Update Observers
-				notifyObservers(listMessage );
-				
-				
-			}
-			server.close();
-
+			this.serverSocket = new ServerSocket(port);
 		} catch (IOException e) {
-			System.out.println("If this was recieved during Stop from GUI, all should be fine.");
-			//e.printStackTrace();
-			
-		}catch(ClassNotFoundException e){
-			
-			System.out.println("message = (String) buffIn.readObject().toString(); ");
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		start();
+	}
+	
+	public void run()
+	{
+		while(true)
+		{
+			try
+			{
+				Socket clientSocket = serverSocket.accept();
+				createClientHandler(clientSocket);
+			} 
+			catch (IOException e)
+			{
+				break;
+			}
+		}
+	}
+
+	private void createClientHandler(Socket clientSocket) {
+		new ClientHandler(clientSocket);
 		
 	}
-	
-	public String getMessage(){
-		return message;
-	}
-	
-	public Socket getSocket(){
-		return soc;
-	}
-	
-	public InetAddress getInetAddress(){
-		return iaddr;
-	}
-	
-	public void kill(){							// TODO untested if correct usage
+	public void close()
+	{
 		try {
-			server.close();
+			serverSocket.close();
 		} catch (IOException e) {
-			System.out.println("Closed serversocket");
-			//e.printStackTrace();
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		again=false;
+
 	}
+
 }

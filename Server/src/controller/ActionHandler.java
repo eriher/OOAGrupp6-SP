@@ -11,7 +11,7 @@ package controller;
 
 import javax.swing.JOptionPane;
 
-import model.ClientNode;
+import model.CommRecieve;
 
 /**
  * @author Henrik
@@ -22,6 +22,7 @@ public class ActionHandler { //Singleton
 	
 	Boolean logicThreadEnd;
 	Boolean haltFlag;
+	CommRecieve comm;
 	
 	private ActionHandler(){
 		
@@ -38,31 +39,13 @@ public class ActionHandler { //Singleton
 	}
 	
 	public void startButton(final int SERVER_PORT){	//Executes when click on start button
-		
-		logicThreadEnd = false;
-		
-		new Thread(){
-			public void run(){
-				ClientNode clientNode = ClientNode.getInstance(SERVER_PORT);
-
-				haltFlag = false;
-				while(!haltFlag){											//TODO Dont know if all (=null) are neccesary, might only need kill from CommRecieve
-				if(logicThreadEnd){
-					interrupt(); 
-					clientNode.killClientNode();
-					clientNode = null;
-					haltFlag = true;
-					
-				}
-				}
-			}
-		}.start();
-		
+		comm = new CommRecieve(SERVER_PORT);
 		System.out.println("Server start");
 	}
 	
 	public void stopButton(){	//Executes when click on stop button
-		logicThreadEnd = true;
+		comm.close();
+		comm = null;
 		System.out.println("Server stop");
 	}
 	

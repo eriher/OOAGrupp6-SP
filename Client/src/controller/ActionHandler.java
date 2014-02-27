@@ -285,6 +285,6 @@ public class ActionHandler {
 			return;
 		}
 		customDialog.setVisible(false);
-		Workflow.getInstance().getCommunication().send("EditUser", user, password, authority.getSelectedItem());
+		Workflow.getInstance().getCommunication().send("EditUser", user, pass, authority.getSelectedItem());
 	}
 }
