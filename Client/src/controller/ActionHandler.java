@@ -64,7 +64,8 @@ public class ActionHandler {
 		JTextField username = (JTextField) usernameText;
 		String user = username.getText();
 		if (user.compareTo("") == 0 || user.compareTo(" ") == 0) {
-			Workflow.getInstance().getWindow().setErrorMessage("Can't remove empty user!");
+			Workflow.getInstance().getWindow()
+					.setErrorMessage("Can't remove empty user!");
 		} else {
 			customDialog.setVisible(false);
 			Workflow.getInstance().getCommunication().send("DeleteUser", user);
@@ -149,7 +150,8 @@ public class ActionHandler {
 	 * user.
 	 */
 	public void getUserDialog() {
-
+		Workflow.getInstance().getWindow().getDialog("getUserDialog")
+				.setVisible(true);
 	}
 
 	/**
@@ -185,6 +187,25 @@ public class ActionHandler {
 	 */
 	public void dialogCancel(CustomDialog customDialog) {
 		customDialog.setVisible(false);
+	}
+
+	/**
+	 * The ok button in the change password dialog was pressed, confirm the
+	 * password matches and send it to the server.
+	 * 
+	 * @param customDialog
+	 *            base dialog window for all dialogs.
+	 * @param passwordText
+	 *            new password for the user.
+	 * @param confirmPasswordText
+	 *            confirm the new password was correctly written.
+	 */
+	public void getUserDialogOk(CustomDialog customDialog, Container usernameBox) {
+		JComboBox username = (JComboBox) usernameBox;
+
+		customDialog.setVisible(false);
+		Workflow.getInstance().getCommunication()
+				.send("GetUser", username.getSelectedItem());
 	}
 
 	/**
