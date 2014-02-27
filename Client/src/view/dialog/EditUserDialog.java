@@ -31,9 +31,10 @@ import controller.ActionHandler;
 public class EditUserDialog extends CustomDialog implements Observer {
 	private static final long serialVersionUID = -274172269787570689L;
 
-	public EditUserDialog() {
+	public EditUserDialog(Communication communication) {
 		super();
-
+		
+		communication.addObserver(this);
 		setTitle("Edit User");
 	}
 

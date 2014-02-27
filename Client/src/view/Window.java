@@ -110,7 +110,7 @@ public class Window extends JFrame implements Observer {
 	private void createDialogs() {
 		dialogList.put("networkDialog", new NetworkDialog());
 		dialogList.put("createUserDialog", new CreateUserDialog());
-		dialogList.put("editUserDialog", new EditUserDialog());
+		dialogList.put("editUserDialog", new EditUserDialog(Workflow.getInstance().getCommunication()));
 		dialogList.put("changePasswordDialog", new ChangePasswordDialog());
 	}
 
