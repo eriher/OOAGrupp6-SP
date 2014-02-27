@@ -39,7 +39,6 @@ public class FileManagement {
 		}
 	}
 	
-	
 	/**
 	 * Saves users to binfile with a specific name as parameter.
 	 * 
@@ -55,7 +54,6 @@ public class FileManagement {
 		}
 	}
 	
-	
 	/**
 	 * Writes users to default binfile choosen as constant.
 	 * 
@@ -69,8 +67,6 @@ public class FileManagement {
 			System.out.println("Could not write file");
 		}
 	}
-	
-	
 	
 	/**
 	 * Recieve the Users.

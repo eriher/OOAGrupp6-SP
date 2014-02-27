@@ -12,7 +12,7 @@ import java.io.Serializable;
 public class User implements Serializable{
 	
 	private String perNr,password,status,name;
-	//private Schedule		//Todo fix so that the users have a schedule
+	//private TEMPSchedule fullSchedule = null;				//TODO Simon 
 
 	/**
 	 * @param perNr
@@ -54,10 +54,19 @@ public class User implements Serializable{
 		return perNr;
 	}
 	
-	/*public Schedule getSchedule(){	//TODO fix schedule		
-		return schedule;
+	
+	/*								//TODO Simon Lägg till så att man kan använda schemat här i User. 
+	 * 								//Hela User kommer att skickas så du behöver endast få det att fungera från User klassen.
+	 * 
+	public TEMPSchedule getWeek(){		
+		return fullSchedule;
 	}
-	public void setSchedule(Schedule schedule){
-		this.schedule = schedule;
+	
+	public void setSchedule(TEMPSchedule fullSchedule){
+		this.fullSchedule = fullSchedule;
+	}
+	
+	public void setWeekSchedule(){
+		
 	}*/
 }

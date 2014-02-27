@@ -1,5 +1,5 @@
 /**
- * Creates receiving part of Communication class, when starting the thread it will check for incomming messages.
+ * Creates receiving part of Communication class, when starting the thread it will check for new incomming messages.
  * 
  * @author Henrik Johansson
  * @version 2013-02-07
@@ -22,7 +22,6 @@ public class CommRecieve extends Thread{
 		try {
 			this.serverSocket = new ServerSocket(port);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		start();

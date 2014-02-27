@@ -58,7 +58,7 @@ public class Window {
 	
 	public void buildWindow(){
 		
-		frame = new JFrame("Stamp");
+		frame = new JFrame("MarximumWorker 9001 Server");
 		Container contentPane = frame.getContentPane();
 		contentPane.setLayout(new BorderLayout());
 		panel1 = new JPanel(new FlowLayout());
@@ -153,7 +153,7 @@ public class Window {
 		stopItem.setEnabled(false);
 		fileMenu.add(stopItem);
 		
-		JMenuItem aboutItem = new JMenuItem("About Stamp");
+		JMenuItem aboutItem = new JMenuItem("About MaximumWorker 9001 Server");
 		aboutItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ActionHandler.getInstance().about();

@@ -6,27 +6,19 @@
  */
 
 package controller;
- 
+
 import view.Window;
 
 public class Workflow {
 	private final int SERVER_PORT = 4444;
-	//private FileManagement fileMan;
 
 	public Workflow() {
-		initModelThread();
-	}
-
-	private void initWindowThread(int SERVER_PORT) {	//Initializes the Window	//TODO fix threads 
-		Window window = new Window(SERVER_PORT);
-	}
-
-	private void initModelThread() {		//This will initialize when click on startmodel
-
 		initWindowThread(SERVER_PORT);
 
 	}
 
-
+	private void initWindowThread(int SERVER_PORT) { //Initializes the Window it was supposed to be a initModelThread as well but it is instead located in actionhandler for consistancy
+		Window window = new Window(SERVER_PORT);
+	}
 
 }

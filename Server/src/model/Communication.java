@@ -9,10 +9,6 @@
 
 package model;
 
-import java.io.BufferedInputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.util.LinkedList;
@@ -39,7 +35,7 @@ public class Communication extends Observable {
 	}
 
 	/**
-	 * Check what type of message has been recieved.
+	 * Check what type of message that has been recieved.
 	 */
 	public void messageRecieved(LinkedList<Object> linkedMessage) {
 		if (linkedMessage != null) {
@@ -58,12 +54,10 @@ public class Communication extends Observable {
 				linkedMessageReturn.add("GetAllUsers"); //LinkedList( "GetAllUsers", "PersNr 1", "PersNr 2", "PersNr 3", ..., "PersNr n" )
 				String[] usersListStringArray = users.getAllPerNr().toString().split(", ");
 
-				
-				
 				for (int i = 0; i < usersListStringArray.length; i++) {
-					usersListStringArray[i] = usersListStringArray[i].replace("[", "");			//Removes [] that was recieved from LinkedList.toString
+					usersListStringArray[i] = usersListStringArray[i].replace("[", ""); //Removes [] that was recieved from LinkedList.toString
 					usersListStringArray[i] = usersListStringArray[i].replace("]", "");
-									
+
 					linkedMessageReturn.add(usersListStringArray[i]);
 				}
 
@@ -97,11 +91,20 @@ public class Communication extends Observable {
 				user.setStatus((String) linkedMessage.get(3));
 
 				fileMan.writeUsersFile(users);
-			}
+			}/*
+			 * else if(whatToDo.compareToIgnoreCase("GetSchedule") == 0){ //Will not be uses, due to the fact that the client can choose
+			 * getUser and will recieve all the users info including the schedule System.out.println("Schedule is sent pseudo");
+			 * 
+			 * User user = fileMan.getUsersList().getUser( (String) linkedMessage.get(1) ); LinkedList<Object> linkedMessageReturn = new
+			 * LinkedList<Object>(); linkedMessage.add("GetSchedule"); linkedMessage.add( user.getSchedule( (int) linkedMessage.get(2) ) );
+			 * linkedMessage.add(linkedMessage.get(2)) clientHandler.send( linkedMessageReturn ); }
+			 */
 
 		}
 	}
 	/**
+	 * Handles what to do when a login has been recieved.
+	 * 
 	 * @param iaddr
 	 *            InetAddress
 	 * @param message
@@ -132,7 +135,7 @@ public class Communication extends Observable {
 					listToSend.add(status);
 
 					clientHandler.send(listToSend);
-					if (status.compareToIgnoreCase("Admin") == 0) { //TODO 
+					if (status.compareToIgnoreCase("Admin") == 0) { 
 						adminLogin = true;
 						normalLogin = false;
 					} else {
@@ -141,7 +144,7 @@ public class Communication extends Observable {
 					}
 
 				} else {
-					System.out.println("False is sent back due to WRONG password"); //TODO fix all send LinkedList<Object //String>
+					System.out.println("False is sent back due to WRONG password"); 
 
 					LinkedList<String> listToSend = new LinkedList<String>();
 					listToSend.add("login");

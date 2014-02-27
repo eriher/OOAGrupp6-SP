@@ -14,11 +14,13 @@ import javax.swing.JOptionPane;
 import model.CommRecieve;
 
 /**
+ * Controller of what to happen when a button is pressed
+ * 
  * @author Henrik
  * @version 2014-02-21
  */
-public class ActionHandler { 						//Singleton
-	private static ActionHandler instance = null;
+public class ActionHandler { 						
+	private static ActionHandler instance = null;	//Singleton
 	
 	Boolean logicThreadEnd;
 	Boolean haltFlag;
