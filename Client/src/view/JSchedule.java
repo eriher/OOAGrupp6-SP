@@ -18,16 +18,16 @@ import javax.swing.JPanel;
 
 
 
-public class ScheduleGUI extends JPanel {
+public class JSchedule extends JPanel {
 	protected LinkedList<JPanel> plannedWorkList = new LinkedList<JPanel>();
 	protected LinkedList<JPanel> plannedActualList = new LinkedList<JPanel>();
 	
 	public static void main(String[] args) {
 		
-		ScheduleGUI bob = new ScheduleGUI();
+		JSchedule bob = new JSchedule();
 	}
 		
-	public ScheduleGUI(){  //Strukturerar om jag har tid. D.v.s. vääääldigt osannolikt
+	public JSchedule(){  //Strukturerar om jag har tid. D.v.s. vääääldigt osannolikt
 		init();
 		fillPanels();
 	}
