@@ -61,15 +61,6 @@ public class AdminGUI extends UserGUI {
 		});
 		components.put("getUserButton", tempButton);
 		
-		// Init newSchedule
-		tempButton = new JButton("New Schedule");
-		tempButton.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e){
-				ActionHandler.getInstance().newSchedule();
-			}
-		});
-		components.put("newScheduleButton", tempButton);
-		
 		// Init newTimeSlot
 		tempButton = new JButton("New Time Slot");
 		tempButton.addActionListener(new ActionListener(){
@@ -111,16 +102,9 @@ public class AdminGUI extends UserGUI {
 		c.insets = new Insets(5, 0, 0, 0);
 		topMenuPanel.add(components.get("getUserButton"), c);
 		
-		// newScheduleButton
-		c = new GridBagConstraints();
-		c.gridy = 3;
-		c.fill = GridBagConstraints.HORIZONTAL;
-		c.insets = new Insets(5, 0, 0, 0);
-		topMenuPanel.add(components.get("newScheduleButton"), c);
-		
 		// newTimeSlotButton
 		c = new GridBagConstraints();
-		c.gridy = 4;
+		c.gridy = 3;
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.insets = new Insets(5, 0, 0, 0);
 		topMenuPanel.add(components.get("newTimeSlotButton"), c);
