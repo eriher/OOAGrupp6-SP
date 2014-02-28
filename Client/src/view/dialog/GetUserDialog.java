@@ -32,7 +32,7 @@ public class GetUserDialog extends CustomDialog implements Observer {
 	private static final long serialVersionUID = 5483970718795036901L;
 
 	public GetUserDialog(Communication communication) {
-		super();
+		super(communication);
 
 		communication.addObserver(this);
 		communication.send("GetAllUsers");

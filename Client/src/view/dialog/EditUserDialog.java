@@ -32,7 +32,7 @@ public class EditUserDialog extends CustomDialog implements Observer {
 	private static final long serialVersionUID = -274172269787570689L;
 
 	public EditUserDialog(Communication communication) {
-		super();
+		super(communication);
 
 		communication.addObserver(this);
 		communication.send("GetAllUsers");

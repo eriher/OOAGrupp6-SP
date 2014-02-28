@@ -84,7 +84,7 @@ public class ActionHandler {
 	 * display it in two edible text fields.
 	 */
 	public void networkConfigDialog() {
-		Workflow.getInstance().getWindow().getDialog("networkDialog")
+		Workflow.getInstance().getWindow().getDialog("NetworkDialog")
 				.setVisible(true);
 	}
 
@@ -110,7 +110,7 @@ public class ActionHandler {
 	public void logOut() {
 		Workflow.getInstance().getCommunication().send("Logout");
 		Workflow.getInstance().getCommunication().disconnect();
-		Workflow.getInstance().getWindow().setView("Login");
+		Workflow.getInstance().getWindow().setView("LoginGUI");
 	}
 
 	/**
@@ -132,7 +132,7 @@ public class ActionHandler {
 	 * creating a new user.
 	 */
 	public void createUserDialog() {
-		Workflow.getInstance().getWindow().getDialog("createUserDialog")
+		Workflow.getInstance().getWindow().getDialog("CreateUserDialog")
 				.setVisible(true);
 	}
 
@@ -141,7 +141,7 @@ public class ActionHandler {
 	 * editing a current user. Request all users from the server.
 	 */
 	public void editUserDialog() {
-		Workflow.getInstance().getWindow().getDialog("editUserDialog")
+		Workflow.getInstance().getWindow().getDialog("EditUserDialog")
 				.setVisible(true);
 	}
 
@@ -150,7 +150,7 @@ public class ActionHandler {
 	 * user.
 	 */
 	public void getUserDialog() {
-		Workflow.getInstance().getWindow().getDialog("getUserDialog")
+		Workflow.getInstance().getWindow().getDialog("GetUserDialog")
 				.setVisible(true);
 	}
 
@@ -175,7 +175,7 @@ public class ActionHandler {
 	 * for editing once password.
 	 */
 	public void changePasswordDialog() {
-		Workflow.getInstance().getWindow().getDialog("changePasswordDialog")
+		Workflow.getInstance().getWindow().getDialog("ChangePasswordDialog")
 				.setVisible(true);
 	}
 

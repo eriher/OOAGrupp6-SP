@@ -5,7 +5,7 @@
  * @version 2013-02-12
  */
 
-package view;
+package view.gui;
 
 import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
@@ -17,6 +17,7 @@ import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+
 
 import controller.ActionHandler;
 

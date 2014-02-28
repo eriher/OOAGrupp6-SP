@@ -18,14 +18,16 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 
+import model.Communication;
+
 import controller.ActionHandler;
 
 public class ChangePasswordDialog extends CustomDialog {
 
 	private static final long serialVersionUID = -4565077328498919365L;
 
-	public ChangePasswordDialog() {
-		super();
+	public ChangePasswordDialog(Communication communication) {
+		super(communication);
 
 		setTitle("Edit Password");
 	}

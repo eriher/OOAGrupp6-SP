@@ -23,6 +23,8 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import model.Communication;
+
 import controller.ActionHandler;
 
 public abstract class CustomDialog extends JDialog {
@@ -35,7 +37,7 @@ public abstract class CustomDialog extends JDialog {
 	 * Create and build all components for the dialog. Set the dialog to
 	 * blocking(no other window can be touched) and non-resizable.
 	 */
-	public CustomDialog() {
+	public CustomDialog(Communication communication) {
 		super();
 		components = new HashMap<String, Container>();
 

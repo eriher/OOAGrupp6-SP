@@ -20,13 +20,15 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import model.Communication;
+
 import controller.ActionHandler;
 
 public class CreateUserDialog extends CustomDialog {
 	private static final long serialVersionUID = 3349531183617491149L;
 
-	public CreateUserDialog() {
-		super();
+	public CreateUserDialog(Communication communication) {
+		super(communication);
 
 		setTitle("Create User");
 	}

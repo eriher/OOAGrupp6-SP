@@ -8,6 +8,7 @@
 package view;
 
 import java.awt.Frame;
+import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Observable;
@@ -24,6 +25,10 @@ import view.dialog.CustomDialog;
 import view.dialog.EditUserDialog;
 import view.dialog.GetUserDialog;
 import view.dialog.NetworkDialog;
+import view.gui.AdminGUI;
+import view.gui.EmployeeGUI;
+import view.gui.GUI;
+import view.gui.LoginGUI;
 import controller.Workflow;
 
 public class Window extends JFrame implements Observer {
@@ -35,7 +40,6 @@ public class Window extends JFrame implements Observer {
 		interfaceList = new HashMap<String, GUI>();
 		dialogList = new HashMap<String, CustomDialog>();
 		createFrame();
-		createViews();
 	}
 
 	/**
@@ -57,10 +61,10 @@ public class Window extends JFrame implements Observer {
 			if (((String) argsList.get(0)).compareToIgnoreCase("Login") == 0) {
 				// Check which type of user it was
 				if (((String) argsList.get(1)).compareToIgnoreCase("Employee") == 0) {
-					setView("Employee");
+					setView("EmployeeGUI");
 				} else if (((String) argsList.get(1))
 						.compareToIgnoreCase("Admin") == 0) {
-					setView("Admin");
+					setView("AdminGUI");
 				} else if (((String) argsList.get(1))
 						.compareToIgnoreCase("False") == 0) {
 					setErrorMessage("Bad login information");
@@ -86,35 +90,13 @@ public class Window extends JFrame implements Observer {
 				JOptionPane.ERROR_MESSAGE);
 	}
 
-	/**
+	/**		createViews();
 	 * Initiate main window.
 	 */
 	private void createFrame() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
 		setTitle("MarximumWorker 9001");
-	}
-
-	/**
-	 * Create all the GUIs.
-	 */
-	private void createViews() {
-		interfaceList.put("Login", new LoginGUI());
-		interfaceList.put("Admin", new AdminGUI());
-		interfaceList.put("Employee", new EmployeeGUI());
-	}
-
-	/**
-	 * Create all the dialogs.
-	 */
-	private void createDialogs() {
-		dialogList.put("networkDialog", new NetworkDialog());
-		dialogList.put("createUserDialog", new CreateUserDialog());
-		dialogList.put("editUserDialog", new EditUserDialog(Workflow
-				.getInstance().getCommunication()));
-		dialogList.put("getUserDialog", new GetUserDialog(Workflow
-				.getInstance().getCommunication()));
-		dialogList.put("changePasswordDialog", new ChangePasswordDialog());
 	}
 
 	/**
@@ -126,11 +108,16 @@ public class Window extends JFrame implements Observer {
 	 * @throws IllegalArgumentException
 	 *             if 'key' contains a non-existing key.
 	 */
-	public void setView(String key) throws IllegalArgumentException {
-		if (interfaceList.get(key) == null) {
-			throw new IllegalArgumentException("Invalid key: " + key);
+	public void setView(String key){
+		String s = "view.gui." + key;
+		try {
+			GUI c = (GUI) Class.forName(s).newInstance();
+			interfaceList.put(key, c);
+			// So many exceptions
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-
+		
 		getContentPane().removeAll();
 		add(interfaceList.get(key).getCanvas());
 		pack();
@@ -141,14 +128,23 @@ public class Window extends JFrame implements Observer {
 	}
 
 	/**
-	 * Return the dialog that's requested.
+	 * Create and return the requested dialog.
 	 * 
 	 * @param key
 	 *            name of the dialog window.
 	 * @return instance of the dialog, null otherwise.
 	 */
 	public JDialog getDialog(String key) {
-		createDialogs(); // TODO fix it! So ugly.
+		try {
+			String s = "view.dialog." + key;
+			CustomDialog c = (CustomDialog) Class.forName(s)
+					.getConstructor(Communication.class)
+					.newInstance(Workflow.getInstance().getCommunication());
+			dialogList.put(key, c);
+			// So many exceptions
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return dialogList.get(key);
 	}
 }

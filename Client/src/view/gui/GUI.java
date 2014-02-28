@@ -5,7 +5,7 @@
  * @version 2013-02-13
  */
 
-package view;
+package view.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Container;

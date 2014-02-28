@@ -23,7 +23,7 @@ public class Workflow {
 		new Thread() {
 			public void run() {
 				window = new Window();
-				window.setView("Login");
+				window.setView("LoginGUI");
 				// TODO Better solution to being able to call
 				// communication.addObserver(this).
 				window.addObserver(communication);
