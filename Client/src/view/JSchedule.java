@@ -10,7 +10,7 @@ package view;
 import java.util.Observable;
 import java.util.Observer;
 
-import model.Schedule;
+import model.schedule;
 
 public class JSchedule implements Observer {
 	Schedule schedule;	

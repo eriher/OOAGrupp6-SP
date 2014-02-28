@@ -5,7 +5,7 @@
  * @version 2014-02-25
  */
 
-package model.Schedule;
+package model.schedule;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -14,7 +14,7 @@ public class Schedule implements Serializable {
 
 	private static final long serialVersionUID = -4841663954805333902L;
 	
-	//Variabler här har inga modifiers (private etc.) så att de kan anropas från samma paket utan att behöva skicka
+	//Variabler hï¿½r har inga modifiers (private etc.) sï¿½ att de kan anropas frï¿½n samma paket utan att behï¿½va skicka
 	//getters och setters-metoder i varje day objekt till servern.
 	ArrayList<Week> weekList;
 	int personNummer;
