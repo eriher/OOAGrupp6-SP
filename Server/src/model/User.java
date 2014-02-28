@@ -3,7 +3,7 @@ package model;
 
 import java.io.Serializable;
 
-import model.Schedule.*;
+import model.schedule.*;
 
 /**
  * Has one specific user"s" all combined information
@@ -58,6 +58,10 @@ public class User implements Serializable{
 	
 	public void setSchedule(Schedule fullSchedule){
 		this.userSchedule = fullSchedule;
+	}
+	
+	public Schedule getUserSchedule(){
+		return userSchedule;
 	}
 	
 	

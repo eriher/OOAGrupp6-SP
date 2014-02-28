@@ -14,6 +14,8 @@ import java.net.Socket;
 import java.util.LinkedList;
 import java.util.Observable;
 
+import model.schedule.ScheduleHandler;
+
 public class Communication extends Observable {
 	private Socket soc;
 	private Boolean recieveInited = false;
@@ -24,10 +26,13 @@ public class Communication extends Observable {
 	private LinkedList linkedMessage = null;
 	private FileManagement fileMan;
 
+	private User user;
 	private Users users;
 	private Boolean normalLogin = false;
 	private Boolean adminLogin = false;
 	private ClientHandler clientHandler;
+	
+	private ScheduleHandler scheduleHandler;
 
 	public Communication(ClientHandler clientHandler) {
 		this.clientHandler = clientHandler;
@@ -91,6 +96,24 @@ public class Communication extends Observable {
 				user.setStatus((String) linkedMessage.get(3));
 
 				fileMan.writeUsersFile(users);
+			} else if (whatToDo.compareToIgnoreCase("CheckIn") == 0) {
+				scheduleHandler.checkIn();
+				fileMan.writeUsersFile(users);
+				
+				LinkedList<Object> linkedMessageReturn = new LinkedList<Object>();
+				linkedMessageReturn.add("CheckIn");
+				linkedMessageReturn.add(user);
+				clientHandler.send(linkedMessageReturn);
+				
+			} else if (whatToDo.compareToIgnoreCase("CheckOut") == 0) {
+				scheduleHandler.checkOut();
+				fileMan.writeUsersFile(users);
+				
+				LinkedList<Object> linkedMessageReturn = new LinkedList<Object>();
+				linkedMessageReturn.add("CheckOut");
+				linkedMessageReturn.add(user);
+				clientHandler.send(linkedMessageReturn);
+				
 			}
 
 		}
@@ -112,7 +135,8 @@ public class Communication extends Observable {
 			try { // If you send empty password server will crash without catch
 				String recievedPassword = (String) message.get(2);
 
-				User user = fileMan.getUsersList().getUser((String) message.get(1)); //Get all info from the user.
+				user = fileMan.getUsersList().getUser((String) message.get(1)); //Get all info from the user.
+				scheduleHandler = new ScheduleHandler(user);
 
 				if (recievedPassword.equals(user.getPassword())) { // Checks with the file to see if sent password is correct
 
@@ -128,6 +152,8 @@ public class Communication extends Observable {
 					listToSend.add(status);
 
 					clientHandler.send(listToSend);
+					
+					
 					if (status.compareToIgnoreCase("Admin") == 0) { 
 						adminLogin = true;
 						normalLogin = false;
@@ -135,6 +161,7 @@ public class Communication extends Observable {
 						normalLogin = true;
 						adminLogin = false;
 					}
+					
 
 				} else {
 					System.out.println("False is sent back due to WRONG password"); 
