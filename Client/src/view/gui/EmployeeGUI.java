@@ -39,7 +39,7 @@ public class EmployeeGUI extends UserGUI {
 		tempButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ActionHandler.getInstance().checkIn();
+				ActionHandler.getInstance().checkIn(components.get("checkInButton"), components.get("checkOutButton"));
 			}
 		});
 		components.put("checkInButton", tempButton);
@@ -49,7 +49,7 @@ public class EmployeeGUI extends UserGUI {
 		tempButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ActionHandler.getInstance().checkOut();
+				ActionHandler.getInstance().checkOut(components.get("checkInButton"), components.get("checkOutButton"));
 			}
 		});
 		components.put("checkOutButton", tempButton);

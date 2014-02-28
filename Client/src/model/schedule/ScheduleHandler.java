@@ -5,11 +5,13 @@
  * @version 2014-02-25
  */
 
-package model;
+package model.schedule;
 
 import java.util.ArrayList;
 
-import org.joda.time.*;
+import model.User;
+
+import org.joda.time.DateTime;
 
 
 public class ScheduleHandler {

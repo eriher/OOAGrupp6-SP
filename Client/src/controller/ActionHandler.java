@@ -9,6 +9,7 @@ package controller;
 
 import java.awt.Container;
 
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -116,14 +117,23 @@ public class ActionHandler {
 	/**
 	 * Tell the server that the current worker started a new shift.
 	 */
-	public void checkIn() {
+	public void checkIn(Container checkIn, Container checkOut) {
+		JButton in = (JButton)checkIn;
+		JButton out = (JButton)checkOut;
+		in.setEnabled(false);
+		out.setEnabled(true);
+		
 		Workflow.getInstance().getCommunication().send("CheckIn");
 	}
 
 	/**
 	 * Tell the server that the current worker stopped the current shift.
 	 */
-	public void checkOut() {
+	public void checkOut(Container checkIn, Container checkOut) {
+		JButton in = (JButton)checkIn;
+		JButton out = (JButton)checkOut;
+		in.setEnabled(true);
+		out.setEnabled(false);
 		Workflow.getInstance().getCommunication().send("CheckOut");
 	}
 

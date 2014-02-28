@@ -5,7 +5,7 @@
  * @version 2014-02-27
  */
 
-package model;
+package model.schedule;
 
 import java.io.Serializable;
 import java.util.ArrayList;
