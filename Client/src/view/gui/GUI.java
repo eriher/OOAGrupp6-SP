@@ -15,15 +15,21 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import model.Communication;
+import model.User;
 import controller.ActionHandler;
 
-public abstract class GUI extends JPanel {
+public abstract class GUI extends JPanel implements Observer {
 	private static final long serialVersionUID = -6618159364253053973L;
 	protected HashMap<String, Container> components;
+	protected User user;
 
 	/**
 	 * Create the base GUI and layout.
@@ -31,13 +37,23 @@ public abstract class GUI extends JPanel {
 	public GUI() {
 		setLayout(new BorderLayout());
 		components = new HashMap<String, Container>();
-		
+
 		initLabels();
 		initPanels();
 		initTextFields();
 		initButtons();
-		
+
 		buildGUI();
+	}
+
+	public void update(Observable o, Object arg) {
+		if (o instanceof Communication) {
+			LinkedList<Object> argsList = (LinkedList<Object>) arg;
+
+			if (((String) argsList.get(0)).compareToIgnoreCase("GetUser") == 0) {
+				user = (User) argsList.get(1);
+			}
+		}
 	}
 
 	/**
@@ -50,14 +66,15 @@ public abstract class GUI extends JPanel {
 	/**
 	 * Create all the labels.
 	 */
-	protected void initLabels() {}
+	protected void initLabels() {
+	}
 
 	/**
 	 * Create all the panels.
 	 */
 	protected void initPanels() {
 		setLayout(new BorderLayout());
-		
+
 		JPanel tempPanel = new JPanel();
 		components.put("southPanel", tempPanel);
 		tempPanel.setLayout(new GridBagLayout());
@@ -66,16 +83,17 @@ public abstract class GUI extends JPanel {
 	/**
 	 * Create all the text fields.
 	 */
-	protected void initTextFields() {}
-	
+	protected void initTextFields() {
+	}
+
 	/**
 	 * Create all the buttons.
 	 */
 	protected void initButtons() {
 		JButton tempButton = new JButton("Network Config");
-		tempButton.addActionListener(new ActionListener(){
+		tempButton.addActionListener(new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent e){
+			public void actionPerformed(ActionEvent e) {
 				ActionHandler.getInstance().networkConfigDialog();
 			}
 		});
@@ -88,7 +106,7 @@ public abstract class GUI extends JPanel {
 	protected void buildGUI() {
 		GridBagConstraints c;
 		JPanel panel = (JPanel) components.get("southPanel");
-		
+
 		// networkButton
 		c = new GridBagConstraints();
 		c.weightx = 1.0;
@@ -96,7 +114,7 @@ public abstract class GUI extends JPanel {
 		c.anchor = GridBagConstraints.SOUTHEAST;
 		c.insets = new Insets(0, 0, 25, 25);
 		panel.add(components.get("networkButton"), c);
-		
+
 		getCanvas().add(panel, BorderLayout.SOUTH);
 	}
 }

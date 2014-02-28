@@ -117,14 +117,14 @@ public class ActionHandler {
 	 * Tell the server that the current worker started a new shift.
 	 */
 	public void checkIn() {
-
+		Workflow.getInstance().getCommunication().send("CheckIn");
 	}
 
 	/**
 	 * Tell the server that the current worker stopped the current shift.
 	 */
 	public void checkOut() {
-
+		Workflow.getInstance().getCommunication().send("CheckOut");
 	}
 
 	/**
