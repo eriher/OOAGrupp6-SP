@@ -21,7 +21,6 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import model.Communication;
-
 import controller.ActionHandler;
 
 public class CreateUserDialog extends CustomDialog {

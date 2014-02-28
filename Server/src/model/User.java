@@ -3,7 +3,7 @@ package model;
 
 import java.io.Serializable;
 
-import model.schedule.*;
+import model.schedule.Schedule;
 
 /**
  * Has one specific user"s" all combined information

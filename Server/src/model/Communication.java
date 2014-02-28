@@ -40,7 +40,7 @@ public class Communication extends Observable {
 	}
 
 	/**
-	 * Check what type of message that has been recieved.
+	 * Check what type of message that has been recieved. TODO fix case instead of if statements
 	 */
 	public void messageRecieved(LinkedList<Object> linkedMessage) {
 		if (linkedMessage != null) {
@@ -96,7 +96,14 @@ public class Communication extends Observable {
 				user.setStatus((String) linkedMessage.get(3));
 
 				fileMan.writeUsersFile(users);
+			} else if (whatToDo.compareToIgnoreCase("ChangePassword") == 0) { 
+
+				Users users = fileMan.getUsersList();
+				users.changePass(user.getPerNr(), (String) linkedMessage.get(1) );
+				fileMan.writeUsersFile(users);
+			
 			} else if (whatToDo.compareToIgnoreCase("CheckIn") == 0) {
+				Users users = fileMan.getUsersList();
 				scheduleHandler.checkIn();
 				fileMan.writeUsersFile(users);
 				
@@ -106,6 +113,7 @@ public class Communication extends Observable {
 				clientHandler.send(linkedMessageReturn);
 				
 			} else if (whatToDo.compareToIgnoreCase("CheckOut") == 0) {
+				Users users = fileMan.getUsersList();
 				scheduleHandler.checkOut();
 				fileMan.writeUsersFile(users);
 				

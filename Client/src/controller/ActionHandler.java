@@ -118,11 +118,11 @@ public class ActionHandler {
 	 * Tell the server that the current worker started a new shift.
 	 */
 	public void checkIn(Container checkIn, Container checkOut) {
-		JButton in = (JButton)checkIn;
-		JButton out = (JButton)checkOut;
+		JButton in = (JButton) checkIn;
+		JButton out = (JButton) checkOut;
 		in.setEnabled(false);
 		out.setEnabled(true);
-		
+
 		Workflow.getInstance().getCommunication().send("CheckIn");
 	}
 
@@ -130,8 +130,8 @@ public class ActionHandler {
 	 * Tell the server that the current worker stopped the current shift.
 	 */
 	public void checkOut(Container checkIn, Container checkOut) {
-		JButton in = (JButton)checkIn;
-		JButton out = (JButton)checkOut;
+		JButton in = (JButton) checkIn;
+		JButton out = (JButton) checkOut;
 		in.setEnabled(true);
 		out.setEnabled(false);
 		Workflow.getInstance().getCommunication().send("CheckOut");
@@ -177,7 +177,8 @@ public class ActionHandler {
 	 * creating a new time slot.
 	 */
 	public void newTimeSlotDialog() {
-
+		Workflow.getInstance().getWindow().getDialog("NewTimeSlotDialog")
+				.setVisible(true);
 	}
 
 	/**
@@ -329,5 +330,9 @@ public class ActionHandler {
 		customDialog.setVisible(false);
 		Workflow.getInstance().getCommunication()
 				.send("EditUser", user, pass, authority.getSelectedItem());
+	}
+	
+	public void newTimeSlotDialogOk(CustomDialog customDialog){
+		customDialog.setVisible(false);
 	}
 }

@@ -10,7 +10,7 @@ package model.schedule;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import org.joda.time.*;
+import org.joda.time.DateTime;
 
 public class Day implements Serializable {
 	

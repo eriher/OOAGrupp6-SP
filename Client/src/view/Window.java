@@ -19,16 +19,9 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import model.Communication;
-import view.dialog.ChangePasswordDialog;
-import view.dialog.CreateUserDialog;
 import view.dialog.CustomDialog;
-import view.dialog.EditUserDialog;
-import view.dialog.GetUserDialog;
-import view.dialog.NetworkDialog;
-import view.gui.AdminGUI;
-import view.gui.EmployeeGUI;
+import view.dialog.NewTimeSlotDialog;
 import view.gui.GUI;
-import view.gui.LoginGUI;
 import controller.Workflow;
 
 public class Window extends JFrame implements Observer {
@@ -90,8 +83,8 @@ public class Window extends JFrame implements Observer {
 				JOptionPane.ERROR_MESSAGE);
 	}
 
-	/**		createViews();
-	 * Initiate main window.
+	/**
+	 * createViews(); Initiate main window.
 	 */
 	private void createFrame() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -108,7 +101,7 @@ public class Window extends JFrame implements Observer {
 	 * @throws IllegalArgumentException
 	 *             if 'key' contains a non-existing key.
 	 */
-	public void setView(String key){
+	public void setView(String key) {
 		String s = "view.gui." + key;
 		try {
 			GUI c = (GUI) Class.forName(s).newInstance();
@@ -117,7 +110,7 @@ public class Window extends JFrame implements Observer {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		getContentPane().removeAll();
 		add(interfaceList.get(key).getCanvas());
 		pack();
