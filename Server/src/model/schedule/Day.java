@@ -1,4 +1,4 @@
-package model.schedule;
+package model.Schedule;
 /**
  * Write a description of class Day here.
  * 

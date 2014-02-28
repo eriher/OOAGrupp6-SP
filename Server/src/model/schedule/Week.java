@@ -5,7 +5,7 @@
  * @version 2014-02-25
  */
 
-package model.schedule;
+package model.Schedule;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -19,7 +19,7 @@ public class Week implements Serializable {
 	//Vecka som schemat representerar
 	int weekNr;
 	
-	//Lista med veckodagarna som hï¿½r till
+	//Lista med veckodagarna som hör till
 	public ArrayList<Day> days = new ArrayList<Day>();
 
 }

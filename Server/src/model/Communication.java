@@ -91,14 +91,7 @@ public class Communication extends Observable {
 				user.setStatus((String) linkedMessage.get(3));
 
 				fileMan.writeUsersFile(users);
-			}/*
-			 * else if(whatToDo.compareToIgnoreCase("GetSchedule") == 0){ //Will not be uses, due to the fact that the client can choose
-			 * getUser and will recieve all the users info including the schedule System.out.println("Schedule is sent pseudo");
-			 * 
-			 * User user = fileMan.getUsersList().getUser( (String) linkedMessage.get(1) ); LinkedList<Object> linkedMessageReturn = new
-			 * LinkedList<Object>(); linkedMessage.add("GetSchedule"); linkedMessage.add( user.getSchedule( (int) linkedMessage.get(2) ) );
-			 * linkedMessage.add(linkedMessage.get(2)) clientHandler.send( linkedMessageReturn ); }
-			 */
+			}
 
 		}
 	}
@@ -156,7 +149,7 @@ public class Communication extends Observable {
 
 				}
 			} catch (Exception e) {
-				System.out.println("Did not recieve password");
+				System.out.println("Did not recieve password, \nor if you are experimenting with the User class user.bin file might be outdated or corrupt.\nTry the reset input param for main.");
 
 				LinkedList<String> listToSend = new LinkedList<String>();
 				listToSend.add("login");
