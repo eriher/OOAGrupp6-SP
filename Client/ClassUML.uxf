@@ -1,54 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="12.2">
-  <zoom_level>7</zoom_level>
+  <zoom_level>2</zoom_level>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>0</x>
-      <y>0</y>
-      <w>581</w>
-      <h>322</h>
+      <x>290</x>
+      <y>628</y>
+      <w>208</w>
+      <h>92</h>
     </coordinates>
-    <panel_attributes>controller::ActionHandler
---
--actionHandler: controller.ActionHandler
---
-~ActionHandler(): ctor
--ActionHandler(): ctor
-+getInstance(): controller.ActionHandler
--checkPassword(java.lang.String, java.lang.String): java.lang.Boolean
-+deleteUser(view.dialog.CustomDialog, java.awt.Container): void
-+getUser(java.awt.Container): void
-+networkConfigDialog(): void
-+logIn(java.awt.Container, java.awt.Container): void
-+logOut(): void
-+checkIn(java.awt.Container, java.awt.Container): void
-+checkOut(java.awt.Container, java.awt.Container): void
-+createUserDialog(): void
-+editUserDialog(): void
-+getUserDialog(): void
-+newSchedule(): void
-+newTimeSlotDialog(): void
-+changePasswordDialog(): void
-+dialogCancel(view.dialog.CustomDialog): void
-+getUserDialogOk(view.dialog.CustomDialog, java.awt.Container): void
-+passwordDialogOk(view.dialog.CustomDialog, java.awt.Container, java.awt.Container): void
-+networkDialogOk(view.dialog.CustomDialog, java.awt.Container, java.awt.Container): void
-+createUserDialogOk(view.dialog.CustomDialog, java.awt.Container, java.awt.Container, java.awt.Container): void
-+editUserDialogOk(view.dialog.CustomDialog, java.awt.Container, java.awt.Container, java.awt.Container, java.awt.Container): void
---
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Class</type>
-    <coordinates>
-      <x>868</x>
-      <y>56</y>
-      <w>728</w>
-      <h>315</h>
-    </coordinates>
-    <panel_attributes>controller::ActionHandler
+    <panel_attributes>ActionHandler
 --
 -actionHandler = null: ActionHandler
 --
@@ -74,6 +35,7 @@
 +networkDialogOk(CustomDialog customDialog, Container ipText, Container portText): void
 +createUserDialogOk(CustomDialog customDialog, Container usernameText, Container passText, Container authorityText): void
 +editUserDialogOk(CustomDialog customDialog, Container usernameText, Container passwordText, Container confirmPasswordText, Container authorityText): void
++newTimeSlotDialogOk(CustomDialog customDialog): void
 --
 </panel_attributes>
     <additional_attributes/>
@@ -81,44 +43,12 @@
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>1603</x>
-      <y>56</y>
-      <w>203</w>
-      <h>245</h>
+      <x>728</x>
+      <y>404</y>
+      <w>88</w>
+      <h>70</h>
     </coordinates>
-    <panel_attributes>model.schedule::ScheduleHandler
---
--currentUser: model.User
--userSchedule: model.schedule.Schedule
--currentWeek: model.schedule.Week
--currentRealWeekNr: int
--currentSelectedWeekNr: int
--isCheckedIn: java.lang.Boolean
---
-+ScheduleHandler(model.User): ctor
-+getWeek(int): void
-+getNextWeek(): void
-+getPrevWeek(): void
-~modifySchedule(): void
-+checkIn(): void
-+checkOut(): void
--populateWeek(model.schedule.Week): void
--populateYear(): void
-+scheduleToDays(int): java.util.ArrayList
-+getSchedule(): model.schedule.Schedule
---
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Class</type>
-    <coordinates>
-      <x>1813</x>
-      <y>56</y>
-      <w>308</w>
-      <h>245</h>
-    </coordinates>
-    <panel_attributes>model.schedule::ScheduleHandler
+    <panel_attributes>ScheduleHandler
 --
 -currentUser: User
 -userSchedule: Schedule
@@ -145,72 +75,12 @@
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>280</x>
-      <y>385</y>
-      <w>280</w>
-      <h>231</h>
+      <x>594</x>
+      <y>258</y>
+      <w>42</w>
+      <h>56</h>
     </coordinates>
-    <panel_attributes>model::User
---
--serialVersionUID: long
--perNr: java.lang.String
--password: java.lang.String
--status: java.lang.String
--name: java.lang.String
--userSchedule: model.schedule.Schedule
---
-+User(java.lang.String, java.lang.String, java.lang.String): ctor
-+getName(): java.lang.String
-+setName(java.lang.String): void
-+getStatus(): java.lang.String
-+setStatus(java.lang.String): void
-+getPassword(): java.lang.String
-+setPassword(java.lang.String): void
-+getPerNr(): java.lang.String
-+setSchedule(model.schedule.Schedule): void
-+getUserSchedule(): model.schedule.Schedule
---
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Class</type>
-    <coordinates>
-      <x>567</x>
-      <y>385</y>
-      <w>189</w>
-      <h>203</h>
-    </coordinates>
-    <panel_attributes>model::Communication
---
--socket: java.net.Socket
--checkIn: java.io.BufferedInputStream
--in: java.io.ObjectInputStream
--out: java.io.ObjectOutputStream
--ip: java.lang.String
--portNumber: int
--socketOpen: java.lang.Boolean
---
-+Communication(): ctor
--connect(): void
-+disconnect(): void
--openInputStream(): void
-+send(java.lang.Object[]): void
--recieve(): void
-~access$0(model.Communication): void
---
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Class</type>
-    <coordinates>
-      <x>763</x>
-      <y>385</y>
-      <w>147</w>
-      <h>196</h>
-    </coordinates>
-    <panel_attributes>model::Communication
+    <panel_attributes>Communication
 --
 -socket: Socket
 -checkIn: BufferedInputStream
@@ -233,12 +103,12 @@
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>917</x>
-      <y>385</y>
-      <w>259</w>
-      <h>196</h>
+      <x>762</x>
+      <y>280</y>
+      <w>74</w>
+      <h>56</h>
     </coordinates>
-    <panel_attributes>model::User
+    <panel_attributes>User
 --
 -serialVersionUID = -6000874821084879926L: long
 -perNr, password, status, name: String
@@ -261,91 +131,12 @@
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>1183</x>
-      <y>385</y>
-      <w>252</w>
-      <h>182</h>
+      <x>226</x>
+      <y>474</y>
+      <w>72</w>
+      <h>48</h>
     </coordinates>
-    <panel_attributes>controller::Workflow
---
--workflow: controller.Workflow
--communication: model.Communication
--window: view.Window
--jSchedule: view.JSchedule
---
--Workflow(): ctor
-+getInstance(): controller.Workflow
-+getWindow(): view.Window
-+getCommunication(): model.Communication
-+getJSchedule(): view.JSchedule
-~access$0(controller.Workflow, view.Window): void
-~access$1(controller.Workflow): view.Window
-~access$2(controller.Workflow): model.Communication
---
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Class</type>
-    <coordinates>
-      <x>1442</x>
-      <y>385</y>
-      <w>238</w>
-      <h>168</h>
-    </coordinates>
-    <panel_attributes>view.dialog::EditUserDialog
---
--serialVersionUID: long
---
-+EditUserDialog(model.Communication): ctor
-+update(java.util.Observable, java.lang.Object): void
-#create(): void
--initUserInformation(): void
--initGetUser(): void
--initEditUser(): void
-#build(): void
--buildUserInformation(): void
--buildGetUser(): void
--buildEditUser(): void
---
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Class</type>
-    <coordinates>
-      <x>1687</x>
-      <y>385</y>
-      <w>238</w>
-      <h>168</h>
-    </coordinates>
-    <panel_attributes>/view.gui::GUI/
---
--serialVersionUID: long
-#components: java.util.HashMap
-#user: model.User
---
-+GUI(): ctor
-+update(java.util.Observable, java.lang.Object): void
-+getCanvas(): javax.swing.JPanel
-#initLabels(): void
-#initPanels(): void
-#initTextFields(): void
-#initButtons(): void
-#buildGUI(): void
---
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Class</type>
-    <coordinates>
-      <x>1932</x>
-      <y>385</y>
-      <w>252</w>
-      <h>168</h>
-    </coordinates>
-    <panel_attributes>view.dialog::EditUserDialog
+    <panel_attributes>EditUserDialog
 --
 -serialVersionUID = -274172269787570689L: long
 --
@@ -366,12 +157,13 @@
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>280</x>
-      <y>623</y>
-      <w>238</w>
-      <h>168</h>
+      <x>530</x>
+      <y>410</y>
+      <w>68</w>
+      <h>48</h>
     </coordinates>
-    <panel_attributes>/view.gui::GUI/
+    <panel_attributes>&lt;&lt;Abstract&gt;&gt;
+/GUI/
 --
 -serialVersionUID = -6618159364253053973L: long
 #components: HashMap&lt;String, Container&gt;
@@ -392,37 +184,12 @@
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>525</x>
-      <y>623</y>
-      <w>238</w>
-      <h>161</h>
+      <x>376</x>
+      <y>332</y>
+      <w>66</w>
+      <h>46</h>
     </coordinates>
-    <panel_attributes>view::Window
---
--serialVersionUID: long
--interfaceList: java.util.HashMap
--dialogList: java.util.HashMap
---
-+Window(): ctor
-+addObserver(java.util.Observable): void
-+update(java.util.Observable, java.lang.Object): void
-+setErrorMessage(java.lang.String): void
--createFrame(): void
-+setView(java.lang.String): void
-+getDialog(java.lang.String): javax.swing.JDialog
---
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Class</type>
-    <coordinates>
-      <x>770</x>
-      <y>623</y>
-      <w>231</w>
-      <h>161</h>
-    </coordinates>
-    <panel_attributes>view::Window
+    <panel_attributes>Window
 --
 -serialVersionUID = 7991892771427260131L: long
 -interfaceList: HashMap&lt;String, GUI&gt;
@@ -442,12 +209,12 @@
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>1008</x>
-      <y>623</y>
-      <w>182</w>
-      <h>147</h>
+      <x>510</x>
+      <y>196</y>
+      <w>52</w>
+      <h>42</h>
     </coordinates>
-    <panel_attributes>controller::Workflow
+    <panel_attributes>Workflow
 --
 -workflow: Workflow
 -communication: Communication
@@ -466,58 +233,13 @@
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>1197</x>
-      <y>623</y>
-      <w>203</w>
-      <h>133</h>
+      <x>190</x>
+      <y>408</y>
+      <w>70</w>
+      <h>38</h>
     </coordinates>
-    <panel_attributes>/view.dialog::CustomDialog/
---
--serialVersionUID: long
--canvas: javax.swing.JPanel
-#customDialog: view.dialog.CustomDialog
-#components: java.util.HashMap
---
-+CustomDialog(model.Communication): ctor
-+getCanvas(): javax.swing.JPanel
-#create(): void
-#build(): void
---
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Class</type>
-    <coordinates>
-      <x>1407</x>
-      <y>623</y>
-      <w>238</w>
-      <h>133</h>
-    </coordinates>
-    <panel_attributes>view::JSchedule
---
-#plannedWorkList: java.util.LinkedList
-#plannedActualList: java.util.LinkedList
---
-+main(java.lang.String[]): void
-+JSchedule(): ctor
-+init(): void
-+fillPanels(): void
-+createJLabel(java.lang.String): javax.swing.JLabel
-+createPanels(int): javax.swing.JPanel[]
---
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Class</type>
-    <coordinates>
-      <x>1652</x>
-      <y>623</y>
-      <w>245</w>
-      <h>133</h>
-    </coordinates>
-    <panel_attributes>/view.dialog::CustomDialog/
+    <panel_attributes>&lt;&lt;Abstract&gt;&gt;
+/CustomDialog/
 --
 -serialVersionUID = 4131677888057562310L: long
 -canvas: JPanel
@@ -535,12 +257,12 @@
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>1904</x>
-      <y>623</y>
-      <w>308</w>
-      <h>133</h>
+      <x>476</x>
+      <y>568</y>
+      <w>88</w>
+      <h>38</h>
     </coordinates>
-    <panel_attributes>view::JSchedule
+    <panel_attributes>JSchedule
 --
 #plannedWorkList = new LinkedList&lt;JPanel&gt;(): LinkedList&lt;JPanel&gt;
 #plannedActualList = new LinkedList&lt;JPanel&gt;(): LinkedList&lt;JPanel&gt;
@@ -558,56 +280,12 @@
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>280</x>
-      <y>798</y>
-      <w>203</w>
-      <h>126</h>
+      <x>648</x>
+      <y>370</y>
+      <w>68</w>
+      <h>36</h>
     </coordinates>
-    <panel_attributes>model.schedule::Day
---
--serialVersionUID: long
-+dayNr: int
-~checkInTime: java.util.ArrayList
-~checkOutTime: java.util.ArrayList
-~scheduledInTime: org.joda.time.DateTime
-~scheduledOutTime: org.joda.time.DateTime
---
-+Day(): ctor
---
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Class</type>
-    <coordinates>
-      <x>490</x>
-      <y>798</y>
-      <w>112</w>
-      <h>126</h>
-    </coordinates>
-    <panel_attributes>view.gui::LoginGUI
---
--serialVersionUID: long
---
-+LoginGUI(): ctor
-#initLabels(): void
-#initPanels(): void
-#initTextFields(): void
-#initButtons(): void
-#buildGUI(): void
---
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Class</type>
-    <coordinates>
-      <x>609</x>
-      <y>798</y>
-      <w>238</w>
-      <h>126</h>
-    </coordinates>
-    <panel_attributes>model.schedule::Day
+    <panel_attributes>Day
 --
 -serialVersionUID = -7092684252961129250L: long
 +dayNr: int
@@ -624,12 +302,12 @@
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>854</x>
-      <y>798</y>
-      <w>231</w>
-      <h>126</h>
+      <x>574</x>
+      <y>468</y>
+      <w>66</w>
+      <h>36</h>
     </coordinates>
-    <panel_attributes>view.gui::LoginGUI
+    <panel_attributes>LoginGUI
 --
 -serialVersionUID = 5285405077713830734L: long
 --
@@ -646,72 +324,12 @@
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>1092</x>
-      <y>798</y>
-      <w>245</w>
-      <h>98</h>
+      <x>688</x>
+      <y>286</y>
+      <w>58</w>
+      <h>28</h>
     </coordinates>
-    <panel_attributes>model::FileManagement
---
--fm: model.FileManagement
---
--FileManagement(): ctor
-+getInstance(): model.FileManagement
-+readLine(java.lang.String): java.lang.String
-+writeStrings(java.lang.String, java.lang.String[]): void
---
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Class</type>
-    <coordinates>
-      <x>1344</x>
-      <y>798</y>
-      <w>238</w>
-      <h>98</h>
-    </coordinates>
-    <panel_attributes>view.dialog::GetUserDialog
---
--serialVersionUID: long
---
-+GetUserDialog(model.Communication): ctor
-+update(java.util.Observable, java.lang.Object): void
-#create(): void
-#build(): void
---
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Class</type>
-    <coordinates>
-      <x>1589</x>
-      <y>798</y>
-      <w>112</w>
-      <h>98</h>
-    </coordinates>
-    <panel_attributes>/view.gui::UserGUI/
---
--serialVersionUID: long
---
-+UserGUI(): ctor
-#initButtons(): void
-#initPanels(): void
-#buildGUI(): void
---
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Class</type>
-    <coordinates>
-      <x>1708</x>
-      <y>798</y>
-      <w>203</w>
-      <h>98</h>
-    </coordinates>
-    <panel_attributes>model::FileManagement
+    <panel_attributes>FileManagement
 --
 -fm: FileManagement
 --
@@ -726,12 +344,12 @@
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>280</x>
-      <y>931</y>
-      <w>245</w>
-      <h>98</h>
+      <x>0</x>
+      <y>474</y>
+      <w>70</w>
+      <h>28</h>
     </coordinates>
-    <panel_attributes>view.dialog::GetUserDialog
+    <panel_attributes>GetUserDialog
 --
 -serialVersionUID = 5483970718795036901L: long
 --
@@ -746,12 +364,13 @@
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>532</x>
-      <y>931</y>
-      <w>231</w>
-      <h>98</h>
+      <x>484</x>
+      <y>468</y>
+      <w>66</w>
+      <h>36</h>
     </coordinates>
-    <panel_attributes>/view.gui::UserGUI/
+    <panel_attributes>&lt;&lt;Abstract&gt;&gt;
+/UserGUI/
 --
 -serialVersionUID = 3638212974922784125L: long
 --
@@ -766,145 +385,12 @@
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>770</x>
-      <y>931</y>
-      <w>133</w>
-      <h>84</h>
+      <x>658</x>
+      <y>342</y>
+      <w>68</w>
+      <h>24</h>
     </coordinates>
-    <panel_attributes>model.schedule::Schedule
---
--serialVersionUID: long
-~weekList: java.util.ArrayList
-~personNummer: int
---
-+Schedule(): ctor
---
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Class</type>
-    <coordinates>
-      <x>910</x>
-      <y>931</y>
-      <w>112</w>
-      <h>84</h>
-    </coordinates>
-    <panel_attributes>model.schedule::Week
---
--serialVersionUID: long
-~weekNr: int
-+days: java.util.ArrayList
---
-+Week(): ctor
---
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Class</type>
-    <coordinates>
-      <x>1029</x>
-      <y>931</y>
-      <w>252</w>
-      <h>84</h>
-    </coordinates>
-    <panel_attributes>view.dialog::ChangePasswordDialog
---
--serialVersionUID: long
---
-+ChangePasswordDialog(model.Communication): ctor
-#create(): void
-#build(): void
---
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Class</type>
-    <coordinates>
-      <x>1288</x>
-      <y>931</y>
-      <w>224</w>
-      <h>84</h>
-    </coordinates>
-    <panel_attributes>view.dialog::CreateUserDialog
---
--serialVersionUID: long
---
-+CreateUserDialog(model.Communication): ctor
-#create(): void
-#build(): void
---
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Class</type>
-    <coordinates>
-      <x>1519</x>
-      <y>931</y>
-      <w>210</w>
-      <h>84</h>
-    </coordinates>
-    <panel_attributes>view.dialog::NetworkDialog
---
--serialVersionUID: long
---
-+NetworkDialog(model.Communication): ctor
-#create(): void
-#build(): void
---
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Class</type>
-    <coordinates>
-      <x>1736</x>
-      <y>931</y>
-      <w>112</w>
-      <h>84</h>
-    </coordinates>
-    <panel_attributes>view.gui::AdminGUI
---
--serialVersionUID: long
---
-+AdminGUI(): ctor
-#initButtons(): void
-#buildGUI(): void
---
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Class</type>
-    <coordinates>
-      <x>280</x>
-      <y>1036</y>
-      <w>112</w>
-      <h>84</h>
-    </coordinates>
-    <panel_attributes>view.gui::EmployeeGUI
---
--serialVersionUID: long
---
-+EmployeeGUI(): ctor
-#initButtons(): void
-#buildGUI(): void
---
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Class</type>
-    <coordinates>
-      <x>399</x>
-      <y>1036</y>
-      <w>238</w>
-      <h>84</h>
-    </coordinates>
-    <panel_attributes>model.schedule::Schedule
+    <panel_attributes>Schedule
 --
 -serialVersionUID = -4841663954805333902L: long
 ~weekList: ArrayList&lt;Week&gt;
@@ -918,12 +404,12 @@
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>644</x>
-      <y>1036</y>
-      <w>287</w>
-      <h>84</h>
+      <x>300</x>
+      <y>474</y>
+      <w>82</w>
+      <h>24</h>
     </coordinates>
-    <panel_attributes>view.dialog::ChangePasswordDialog
+    <panel_attributes>ChangePasswordDialog
 --
 -serialVersionUID = -4565077328498919365L: long
 --
@@ -937,12 +423,12 @@
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>938</x>
-      <y>1036</y>
-      <w>259</w>
-      <h>84</h>
+      <x>72</x>
+      <y>474</y>
+      <w>74</w>
+      <h>24</h>
     </coordinates>
-    <panel_attributes>view.dialog::CreateUserDialog
+    <panel_attributes>CreateUserDialog
 --
 -serialVersionUID = 3349531183617491149L: long
 --
@@ -956,12 +442,12 @@
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>1204</x>
-      <y>1036</y>
-      <w>245</w>
-      <h>84</h>
+      <x>384</x>
+      <y>474</y>
+      <w>70</w>
+      <h>24</h>
     </coordinates>
-    <panel_attributes>view.dialog::NetworkDialog
+    <panel_attributes>NetworkDialog
 --
 -serialVersionUID = 1894512864549284805L: long
 --
@@ -975,12 +461,31 @@
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>1456</x>
-      <y>1036</y>
-      <w>238</w>
-      <h>84</h>
+      <x>148</x>
+      <y>474</y>
+      <w>76</w>
+      <h>24</h>
     </coordinates>
-    <panel_attributes>view.gui::AdminGUI
+    <panel_attributes>NewTimeSlotDialog
+--
+-serialVersionUID = 6654368973245373300L: long
+--
++NewTimeSlotDialog(Communication communication): ctor
+#create(): void
+#build(): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>524</x>
+      <y>520</y>
+      <w>68</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>AdminGUI
 --
 -serialVersionUID = -5722471571581976450L: long
 --
@@ -994,12 +499,12 @@
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>1701</x>
-      <y>1036</y>
-      <w>238</w>
-      <h>84</h>
+      <x>444</x>
+      <y>520</y>
+      <w>68</w>
+      <h>24</h>
     </coordinates>
-    <panel_attributes>view.gui::EmployeeGUI
+    <panel_attributes>EmployeeGUI
 --
 -serialVersionUID = -6805802081178406024L: long
 --
@@ -1013,390 +518,12 @@
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>280</x>
-      <y>1127</y>
-      <w>182</w>
-      <h>77</h>
+      <x>748</x>
+      <y>364</y>
+      <w>68</w>
+      <h>22</h>
     </coordinates>
-    <panel_attributes>controller::Workflow$1
---
-~this$0: controller.Workflow
---
-~Workflow$1(controller.Workflow): ctor
-+run(): void
---
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Class</type>
-    <coordinates>
-      <x>469</x>
-      <y>1127</y>
-      <w>224</w>
-      <h>77</h>
-    </coordinates>
-    <panel_attributes>model::Communication$1
---
-~this$0: model.Communication
---
-~Communication$1(model.Communication): ctor
-+run(): void
---
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Class</type>
-    <coordinates>
-      <x>700</x>
-      <y>1127</y>
-      <w>322</w>
-      <h>77</h>
-    </coordinates>
-    <panel_attributes>view.dialog::ChangePasswordDialog$1
---
-~this$0: view.dialog.ChangePasswordDialog
---
-~ChangePasswordDialog$1(view.dialog.ChangePasswordDialog): ctor
-+actionPerformed(java.awt.event.ActionEvent): void
---
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Class</type>
-    <coordinates>
-      <x>1029</x>
-      <y>1127</y>
-      <w>266</w>
-      <h>77</h>
-    </coordinates>
-    <panel_attributes>view.dialog::CreateUserDialog$1
---
-~this$0: view.dialog.CreateUserDialog
---
-~CreateUserDialog$1(view.dialog.CreateUserDialog): ctor
-+actionPerformed(java.awt.event.ActionEvent): void
---
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Class</type>
-    <coordinates>
-      <x>1302</x>
-      <y>1127</y>
-      <w>231</w>
-      <h>77</h>
-    </coordinates>
-    <panel_attributes>view.dialog::CustomDialog$1
---
-~this$0: view.dialog.CustomDialog
---
-~CustomDialog$1(view.dialog.CustomDialog): ctor
-+actionPerformed(java.awt.event.ActionEvent): void
---
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Class</type>
-    <coordinates>
-      <x>1540</x>
-      <y>1127</y>
-      <w>238</w>
-      <h>77</h>
-    </coordinates>
-    <panel_attributes>view.dialog::EditUserDialog$1
---
-~this$0: view.dialog.EditUserDialog
---
-~EditUserDialog$1(view.dialog.EditUserDialog): ctor
-+actionPerformed(java.awt.event.ActionEvent): void
---
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Class</type>
-    <coordinates>
-      <x>1785</x>
-      <y>1127</y>
-      <w>238</w>
-      <h>77</h>
-    </coordinates>
-    <panel_attributes>view.dialog::EditUserDialog$2
---
-~this$0: view.dialog.EditUserDialog
---
-~EditUserDialog$2(view.dialog.EditUserDialog): ctor
-+actionPerformed(java.awt.event.ActionEvent): void
---
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Class</type>
-    <coordinates>
-      <x>280</x>
-      <y>1211</y>
-      <w>238</w>
-      <h>77</h>
-    </coordinates>
-    <panel_attributes>view.dialog::EditUserDialog$3
---
-~this$0: view.dialog.EditUserDialog
---
-~EditUserDialog$3(view.dialog.EditUserDialog): ctor
-+actionPerformed(java.awt.event.ActionEvent): void
---
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Class</type>
-    <coordinates>
-      <x>525</x>
-      <y>1211</y>
-      <w>238</w>
-      <h>77</h>
-    </coordinates>
-    <panel_attributes>view.dialog::GetUserDialog$1
---
-~this$0: view.dialog.GetUserDialog
---
-~GetUserDialog$1(view.dialog.GetUserDialog): ctor
-+actionPerformed(java.awt.event.ActionEvent): void
---
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Class</type>
-    <coordinates>
-      <x>770</x>
-      <y>1211</y>
-      <w>238</w>
-      <h>77</h>
-    </coordinates>
-    <panel_attributes>view.dialog::NetworkDialog$1
---
-~this$0: view.dialog.NetworkDialog
---
-~NetworkDialog$1(view.dialog.NetworkDialog): ctor
-+actionPerformed(java.awt.event.ActionEvent): void
---
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Class</type>
-    <coordinates>
-      <x>1015</x>
-      <y>1211</y>
-      <w>238</w>
-      <h>77</h>
-    </coordinates>
-    <panel_attributes>view.gui::AdminGUI$1
---
-~this$0: view.gui.AdminGUI
---
-~AdminGUI$1(view.gui.AdminGUI): ctor
-+actionPerformed(java.awt.event.ActionEvent): void
---
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Class</type>
-    <coordinates>
-      <x>1260</x>
-      <y>1211</y>
-      <w>238</w>
-      <h>77</h>
-    </coordinates>
-    <panel_attributes>view.gui::AdminGUI$2
---
-~this$0: view.gui.AdminGUI
---
-~AdminGUI$2(view.gui.AdminGUI): ctor
-+actionPerformed(java.awt.event.ActionEvent): void
---
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Class</type>
-    <coordinates>
-      <x>1505</x>
-      <y>1211</y>
-      <w>238</w>
-      <h>77</h>
-    </coordinates>
-    <panel_attributes>view.gui::AdminGUI$3
---
-~this$0: view.gui.AdminGUI
---
-~AdminGUI$3(view.gui.AdminGUI): ctor
-+actionPerformed(java.awt.event.ActionEvent): void
---
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Class</type>
-    <coordinates>
-      <x>1750</x>
-      <y>1211</y>
-      <w>238</w>
-      <h>77</h>
-    </coordinates>
-    <panel_attributes>view.gui::AdminGUI$4
---
-~this$0: view.gui.AdminGUI
---
-~AdminGUI$4(view.gui.AdminGUI): ctor
-+actionPerformed(java.awt.event.ActionEvent): void
---
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Class</type>
-    <coordinates>
-      <x>280</x>
-      <y>1295</y>
-      <w>238</w>
-      <h>77</h>
-    </coordinates>
-    <panel_attributes>view.gui::AdminGUI$5
---
-~this$0: view.gui.AdminGUI
---
-~AdminGUI$5(view.gui.AdminGUI): ctor
-+actionPerformed(java.awt.event.ActionEvent): void
---
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Class</type>
-    <coordinates>
-      <x>525</x>
-      <y>1295</y>
-      <w>238</w>
-      <h>77</h>
-    </coordinates>
-    <panel_attributes>view.gui::EmployeeGUI$1
---
-~this$0: view.gui.EmployeeGUI
---
-~EmployeeGUI$1(view.gui.EmployeeGUI): ctor
-+actionPerformed(java.awt.event.ActionEvent): void
---
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Class</type>
-    <coordinates>
-      <x>770</x>
-      <y>1295</y>
-      <w>238</w>
-      <h>77</h>
-    </coordinates>
-    <panel_attributes>view.gui::EmployeeGUI$2
---
-~this$0: view.gui.EmployeeGUI
---
-~EmployeeGUI$2(view.gui.EmployeeGUI): ctor
-+actionPerformed(java.awt.event.ActionEvent): void
---
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Class</type>
-    <coordinates>
-      <x>1015</x>
-      <y>1295</y>
-      <w>238</w>
-      <h>77</h>
-    </coordinates>
-    <panel_attributes>view.gui::EmployeeGUI$3
---
-~this$0: view.gui.EmployeeGUI
---
-~EmployeeGUI$3(view.gui.EmployeeGUI): ctor
-+actionPerformed(java.awt.event.ActionEvent): void
---
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Class</type>
-    <coordinates>
-      <x>1260</x>
-      <y>1295</y>
-      <w>238</w>
-      <h>77</h>
-    </coordinates>
-    <panel_attributes>view.gui::GUI$1
---
-~this$0: view.gui.GUI
---
-~GUI$1(view.gui.GUI): ctor
-+actionPerformed(java.awt.event.ActionEvent): void
---
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Class</type>
-    <coordinates>
-      <x>1505</x>
-      <y>1295</y>
-      <w>238</w>
-      <h>77</h>
-    </coordinates>
-    <panel_attributes>view.gui::LoginGUI$1
---
-~this$0: view.gui.LoginGUI
---
-~LoginGUI$1(view.gui.LoginGUI): ctor
-+actionPerformed(java.awt.event.ActionEvent): void
---
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Class</type>
-    <coordinates>
-      <x>1750</x>
-      <y>1295</y>
-      <w>238</w>
-      <h>77</h>
-    </coordinates>
-    <panel_attributes>view.gui::UserGUI$1
---
-~this$0: view.gui.UserGUI
---
-~UserGUI$1(view.gui.UserGUI): ctor
-+actionPerformed(java.awt.event.ActionEvent): void
---
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Class</type>
-    <coordinates>
-      <x>280</x>
-      <y>1379</y>
-      <w>238</w>
-      <h>77</h>
-    </coordinates>
-    <panel_attributes>model.schedule::Week
+    <panel_attributes>Week
 --
 -serialVersionUID = -8613882887180242145L: long
 ~weekNr: int
@@ -1409,34 +536,347 @@
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>525</x>
-      <y>1379</y>
-      <w>140</w>
-      <h>63</h>
+      <x>518</x>
+      <y>162</y>
+      <w>34</w>
+      <h>14</h>
     </coordinates>
-    <panel_attributes>::Main
---
---
-+Main(): ctor
-+main(java.lang.String[]): void
---
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Class</type>
-    <coordinates>
-      <x>672</x>
-      <y>1379</y>
-      <w>119</w>
-      <h>49</h>
-    </coordinates>
-    <panel_attributes>::Main
+    <panel_attributes>Main
 --
 --
 +main(String[] args): void
 --
 </panel_attributes>
     <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>512</x>
+      <y>452</y>
+      <w>22</w>
+      <h>20</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>18;6;18;10;6;10;6;16</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>592</x>
+      <y>452</y>
+      <w>18</w>
+      <h>20</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>6;6;6;10;14;10;14;16</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>502</x>
+      <y>498</y>
+      <w>10</w>
+      <h>26</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>6;6;6;22</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>522</x>
+      <y>498</y>
+      <w>10</w>
+      <h>26</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>6;6;6;22</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>222</x>
+      <y>440</y>
+      <w>46</w>
+      <h>38</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>6;6;6;30;42;30;42;34</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>180</x>
+      <y>440</y>
+      <w>46</w>
+      <h>38</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>42;6;42;30;6;30;6;34</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>226</x>
+      <y>440</y>
+      <w>120</w>
+      <h>38</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>6;6;6;26;116;26;116;34</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>230</x>
+      <y>440</y>
+      <w>194</w>
+      <h>38</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>6;6;6;22;190;22;190;34</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>102</x>
+      <y>440</y>
+      <w>120</w>
+      <h>38</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>116;6;116;26;6;26;6;34</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>30</x>
+      <y>440</y>
+      <w>188</w>
+      <h>38</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>184;6;184;22;6;22;6;34</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>472</x>
+      <y>538</y>
+      <w>46</w>
+      <h>34</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>6;6;6;24;42;24;42;30</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>516</x>
+      <y>538</y>
+      <w>48</w>
+      <h>34</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>44;6;44;24;6;24;6;30</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>528</x>
+      <y>170</y>
+      <w>10</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>6;26;6;6</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>220</x>
+      <y>372</y>
+      <w>174</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>6;36;6;26;170;26;170;6</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>420</x>
+      <y>372</y>
+      <w>148</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>144;38;144;26;6;26;6;6</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>540</x>
+      <y>232</y>
+      <w>78</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>74;26;74;22;6;22;6;6</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>434</x>
+      <y>232</y>
+      <w>108</w>
+      <h>370</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>42;366;6;366;6;276;24;276;24;104;104;104;104;6</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>402</x>
+      <y>232</y>
+      <w>132</w>
+      <h>104</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>6;100;6;96;128;96;128;6</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>404</x>
+      <y>600</y>
+      <w>120</w>
+      <h>32</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>6;28;6;10;116;10;116;6</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>396</x>
+      <y>538</y>
+      <w>80</w>
+      <h>94</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>6;90;6;64;76;64;76;6</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>408</x>
+      <y>538</y>
+      <w>164</w>
+      <h>94</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>6;90;6;76;160;76;160;6</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>400</x>
+      <y>498</y>
+      <w>122</w>
+      <h>134</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>6;130;6;108;68;108;68;66;118;66;118;6</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>416</x>
+      <y>498</y>
+      <w>198</w>
+      <h>134</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>6;130;6;124;194;124;194;6</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>392</x>
+      <y>492</y>
+      <w>32</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>6;136;6;106;28;106;28;6</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>336</x>
+      <y>492</y>
+      <w>58</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>54;136;54;106;6;106;6;6</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>256</x>
+      <y>516</y>
+      <w>134</w>
+      <h>116</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>130;112;130;86;6;86;6;6</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>180</x>
+      <y>492</y>
+      <w>206</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>202;136;202;114;6;112;6;6</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>102</x>
+      <y>492</y>
+      <w>280</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>276;136;276;118;6;118;6;6</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>30</x>
+      <y>496</y>
+      <w>348</w>
+      <h>136</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>344;132;344;118;6;118;6;6</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>412</x>
+      <y>450</y>
+      <w>188</w>
+      <h>182</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>6;178;6;168;184;168;184;64;152;64;152;6</additional_attributes>
   </element>
 </diagram>
