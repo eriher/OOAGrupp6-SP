@@ -2,7 +2,7 @@
  * Initiate the program and manage the flow of the program. Contains a help method for the other classes to send objects to the server.
  * 
  * @author David Stromner
- * @version 2013-02-16
+ * @version 2013-02-28
  */
 
 package controller;

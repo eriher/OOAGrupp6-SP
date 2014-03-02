@@ -2,76 +2,10 @@
 <diagram program="umlet" version="12.2">
   <zoom_level>10</zoom_level>
   <element>
-    <type>com.umlet.element.Package</type>
-    <coordinates>
-      <x>0</x>
-      <y>90</y>
-      <w>150</w>
-      <h>110</h>
-    </coordinates>
-    <panel_attributes/>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Package</type>
-    <coordinates>
-      <x>30</x>
-      <y>120</y>
-      <w>100</w>
-      <h>70</h>
-    </coordinates>
-    <panel_attributes/>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Package</type>
-    <coordinates>
-      <x>260</x>
-      <y>310</y>
-      <w>150</w>
-      <h>110</h>
-    </coordinates>
-    <panel_attributes/>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Package</type>
-    <coordinates>
-      <x>290</x>
-      <y>340</y>
-      <w>100</w>
-      <h>70</h>
-    </coordinates>
-    <panel_attributes/>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Package</type>
-    <coordinates>
-      <x>0</x>
-      <y>90</y>
-      <w>150</w>
-      <h>110</h>
-    </coordinates>
-    <panel_attributes/>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Package</type>
-    <coordinates>
-      <x>30</x>
-      <y>120</y>
-      <w>100</w>
-      <h>70</h>
-    </coordinates>
-    <panel_attributes/>
-    <additional_attributes/>
-  </element>
-  <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>880</x>
-      <y>40</y>
+      <x>430</x>
+      <y>60</y>
       <w>170</w>
       <h>130</h>
     </coordinates>
@@ -87,8 +21,8 @@ bg=orange
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>690</x>
-      <y>230</y>
+      <x>240</x>
+      <y>250</y>
       <w>170</w>
       <h>200</h>
     </coordinates>
@@ -112,12 +46,13 @@ bg=orange</panel_attributes>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>1060</x>
-      <y>220</y>
+      <x>610</x>
+      <y>240</y>
       <w>220</w>
       <h>390</h>
     </coordinates>
     <panel_attributes>view
+--
 {innerclass
 dialog
 {innerclass
@@ -148,8 +83,8 @@ bg=orange</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>830</x>
-      <y>270</y>
+      <x>380</x>
+      <y>290</y>
       <w>250</w>
       <h>50</h>
     </coordinates>
@@ -159,8 +94,8 @@ bg=orange</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>1020</x>
-      <y>140</y>
+      <x>570</x>
+      <y>160</y>
       <w>60</w>
       <h>100</h>
     </coordinates>
@@ -170,12 +105,37 @@ bg=orange</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>830</x>
-      <y>140</y>
+      <x>380</x>
+      <y>160</y>
       <w>70</w>
       <h>110</h>
     </coordinates>
     <panel_attributes>lt=&lt;.&gt;</panel_attributes>
     <additional_attributes>50;30;30;90</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>910</x>
+      <y>250</y>
+      <w>170</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>swing
+--
+RegexJComboBox
+bg=orange</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>800</x>
+      <y>290</y>
+      <w>130</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>110;30;30;30</additional_attributes>
   </element>
 </diagram>

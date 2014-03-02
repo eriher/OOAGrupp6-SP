@@ -73,6 +73,11 @@ public class ActionHandler {
 		}
 	}
 
+	/**
+	 * Ask the server to get the specified user.
+	 * 
+	 * @param usernameBox to get the selected user from
+	 */
 	public void getUser(Container usernameBox) {
 		JComboBox username = (JComboBox) usernameBox;
 
@@ -162,14 +167,6 @@ public class ActionHandler {
 	public void getUserDialog() {
 		Workflow.getInstance().getWindow().getDialog("GetUserDialog")
 				.setVisible(true);
-	}
-
-	/**
-	 * New Schedule button in AdminGUI was pressed, create a new schedule and
-	 * send it to the server.
-	 */
-	public void newSchedule() {
-
 	}
 
 	/**
@@ -331,8 +328,8 @@ public class ActionHandler {
 		Workflow.getInstance().getCommunication()
 				.send("EditUser", user, pass, authority.getSelectedItem());
 	}
-	
-	public void newTimeSlotDialogOk(CustomDialog customDialog){
+
+	public void newTimeSlotDialogOk(CustomDialog customDialog) {
 		customDialog.setVisible(false);
 	}
 }

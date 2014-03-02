@@ -13,6 +13,8 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.LinkedList;
 import java.util.Observable;
 import java.util.Observer;
@@ -26,6 +28,7 @@ import javax.swing.JTextField;
 
 import model.Communication;
 import model.User;
+import swing.RegexJComboBox;
 import controller.ActionHandler;
 
 public class EditUserDialog extends CustomDialog implements Observer {
@@ -159,13 +162,36 @@ public class EditUserDialog extends CustomDialog implements Observer {
 		temp = new JLabel("Filter: ");
 		components.put("gUFilterLabel", temp);
 
+		// ComboBox
+		temp = new RegexJComboBox<String>();
+		components.put("gUComboBox", temp);
+
 		// TextField
 		temp = new JTextField();
 		components.put("gUText", temp);
+		((JTextField) temp).addKeyListener(new KeyListener() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				((RegexJComboBox) components.get("gUComboBox"))
+						.filter(((JTextField) components.get("gUText"))
+								.getText());
+			}
 
-		// ComboBox
-		temp = new JComboBox<String>();
-		components.put("gUComboBox", temp);
+			@Override
+			public void keyReleased(KeyEvent e) {
+				((RegexJComboBox) components.get("gUComboBox"))
+						.filter(((JTextField) components.get("gUText"))
+								.getText());
+
+			}
+
+			@Override
+			public void keyTyped(KeyEvent e) {
+				((RegexJComboBox) components.get("gUComboBox"))
+						.filter(((JTextField) components.get("gUText"))
+								.getText());
+			}
+		});
 
 		// Button
 		temp = new JButton("Fetch user");
@@ -348,7 +374,6 @@ public class EditUserDialog extends CustomDialog implements Observer {
 		c = new GridBagConstraints();
 		c.gridx = 2;
 		c.gridy = 1;
-		c.ipadx = 65;
 		c.insets = new Insets(0, 0, 0, 10);
 		c.fill = GridBagConstraints.HORIZONTAL;
 		getUser.add(components.get("gUText"), c);
@@ -357,7 +382,6 @@ public class EditUserDialog extends CustomDialog implements Observer {
 		c = new GridBagConstraints();
 		c.gridx = 2;
 		c.gridy = 2;
-		c.ipadx = 65;
 		c.fill = GridBagConstraints.HORIZONTAL;
 		getUser.add(components.get("gUComboBox"), c);
 

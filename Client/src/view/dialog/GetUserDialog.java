@@ -13,6 +13,8 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.LinkedList;
 import java.util.Observable;
 import java.util.Observer;
@@ -24,6 +26,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import swing.RegexJComboBox;
 import model.Communication;
 import model.User;
 import controller.ActionHandler;
@@ -64,7 +67,7 @@ public class GetUserDialog extends CustomDialog implements Observer {
 	protected void create() {
 		super.create();
 		Container temp;
-		
+
 		// Panel
 		temp = new JPanel();
 		((JPanel) temp).setLayout(new GridBagLayout());
@@ -74,13 +77,36 @@ public class GetUserDialog extends CustomDialog implements Observer {
 		temp = new JLabel("Filter: ");
 		components.put("gUFilterLabel", temp);
 
+		// ComboBox
+		temp = new RegexJComboBox<String>();
+		components.put("gUComboBox", temp);
+
 		// TextField
 		temp = new JTextField();
 		components.put("gUText", temp);
+		((JTextField) temp).addKeyListener(new KeyListener() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				((RegexJComboBox) components.get("gUComboBox"))
+						.filter(((JTextField) components.get("gUText"))
+								.getText());
+			}
 
-		// ComboBox
-		temp = new JComboBox<String>();
-		components.put("gUComboBox", temp);
+			@Override
+			public void keyReleased(KeyEvent e) {
+				((RegexJComboBox) components.get("gUComboBox"))
+						.filter(((JTextField) components.get("gUText"))
+								.getText());
+
+			}
+
+			@Override
+			public void keyTyped(KeyEvent e) {
+				((RegexJComboBox) components.get("gUComboBox"))
+						.filter(((JTextField) components.get("gUText"))
+								.getText());
+			}
+		});
 
 		// An OKButton needs to be created in a subclass to CustomDialog since
 		// each OKButton is going to trigger different things.
@@ -89,19 +115,20 @@ public class GetUserDialog extends CustomDialog implements Observer {
 		((JButton) temp).addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ActionHandler.getInstance().getUserDialogOk(customDialog, components.get("gUComboBox"));
+				ActionHandler.getInstance().getUserDialogOk(customDialog,
+						components.get("gUComboBox"));
 			}
 		});
 		components.put("okButton", temp);
 	}
-	
+
 	/**
 	 * Place all the created components.
 	 */
 	@Override
 	protected void build() {
 		super.build();
-		
+
 		GridBagConstraints c;
 		JPanel canvas = getCanvas();
 		JPanel getUser = (JPanel) components.get("gUPanel");
