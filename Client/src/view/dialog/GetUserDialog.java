@@ -23,12 +23,10 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-import swing.RegexJComboBox;
 import model.Communication;
-import model.User;
+import swing.RegexJComboBox;
 import controller.ActionHandler;
 
 public class GetUserDialog extends CustomDialog implements Observer {
@@ -49,13 +47,9 @@ public class GetUserDialog extends CustomDialog implements Observer {
 			// Check what type of message was received
 			if (((String) argsList.get(0)).compareToIgnoreCase("GetAllUsers") == 0) {
 				argsList.removeFirst();
-				// TODO STOP LOOPING!
 				for (Object s : argsList) {
 					((JComboBox) components.get("gUComboBox")).addItem(s);
 				}
-			} else if (((String) argsList.get(0))
-					.compareToIgnoreCase("GetUser") == 0) {
-				User user = (User) argsList.get(1);
 			}
 		}
 	}
@@ -83,6 +77,7 @@ public class GetUserDialog extends CustomDialog implements Observer {
 
 		// TextField
 		temp = new JTextField();
+		((JTextField) temp).setSize(400, ((JTextField) temp).getPreferredSize().height);
 		components.put("gUText", temp);
 		((JTextField) temp).addKeyListener(new KeyListener() {
 			@Override
@@ -151,17 +146,15 @@ public class GetUserDialog extends CustomDialog implements Observer {
 		c = new GridBagConstraints();
 		c.gridx = 2;
 		c.gridy = 1;
-		c.ipadx = 65;
 		c.insets = new Insets(0, 0, 0, 10);
-		c.fill = GridBagConstraints.HORIZONTAL;
+		c.fill = GridBagConstraints.BOTH;
 		getUser.add(components.get("gUText"), c);
 
 		// ComboBox
 		c = new GridBagConstraints();
 		c.gridx = 2;
 		c.gridy = 2;
-		c.ipadx = 65;
-		c.fill = GridBagConstraints.HORIZONTAL;
+		c.fill = GridBagConstraints.BOTH;
 		getUser.add(components.get("gUComboBox"), c);
 	}
 }
