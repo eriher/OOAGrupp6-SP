@@ -21,7 +21,6 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-
 import controller.ActionHandler;
 
 public class LoginGUI extends GUI {

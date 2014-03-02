@@ -25,7 +25,6 @@ import javax.swing.JPanel;
 import model.Communication;
 import model.User;
 import controller.ActionHandler;
-import controller.Workflow;
 
 public abstract class GUI extends JPanel implements Observer {
 	private static final long serialVersionUID = -6618159364253053973L;

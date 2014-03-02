@@ -19,7 +19,6 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 
 import model.Communication;
-
 import controller.ActionHandler;
 
 public class ChangePasswordDialog extends CustomDialog {

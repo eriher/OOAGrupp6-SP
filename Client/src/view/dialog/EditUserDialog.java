@@ -13,8 +13,6 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.util.LinkedList;
 import java.util.Observable;
 import java.util.Observer;
@@ -28,33 +26,24 @@ import javax.swing.JTextField;
 
 import model.Communication;
 import model.User;
-import swing.RegexJComboBox;
 import controller.ActionHandler;
 
-public class EditUserDialog extends CustomDialog implements Observer {
+public class EditUserDialog extends GetUserDialog implements Observer {
 	private static final long serialVersionUID = -274172269787570689L;
 
 	public EditUserDialog(Communication communication) {
 		super(communication);
 
-		communication.addObserver(this);
-		communication.send("GetAllUsers");
 		setTitle("Edit User");
 	}
 
 	public void update(Observable o, Object arg) {
+		super.update(o, arg);
 		if (o instanceof Communication) {
 			LinkedList<Object> argsList = (LinkedList<Object>) arg;
 
 			// Check what type of message was received
-			if (((String) argsList.get(0)).compareToIgnoreCase("GetAllUsers") == 0) {
-				argsList.removeFirst();
-				// TODO STOP LOOPING!
-				for (Object s : argsList) {
-					((JComboBox) components.get("gUComboBox")).addItem(s);
-				}
-			} else if (((String) argsList.get(0))
-					.compareToIgnoreCase("GetUser") == 0) {
+			if (((String) argsList.get(0)).compareToIgnoreCase("GetUser") == 0) {
 				User user = (User) argsList.get(1);
 				((JTextField) components.get("uIUsernameText")).setText(user
 						.getPerNr());
@@ -149,49 +138,9 @@ public class EditUserDialog extends CustomDialog implements Observer {
 	private void initGetUser() {
 		Container temp;
 
-		// Panel
-		temp = new JPanel();
-		((JPanel) temp).setLayout(new GridBagLayout());
-		components.put("gUPanel", temp);
-
 		// Label
 		temp = new JLabel("Get user:");
 		components.put("gULabel", temp);
-
-		// FilterLabel
-		temp = new JLabel("Filter: ");
-		components.put("gUFilterLabel", temp);
-
-		// ComboBox
-		temp = new RegexJComboBox<String>();
-		components.put("gUComboBox", temp);
-
-		// TextField
-		temp = new JTextField();
-		components.put("gUText", temp);
-		((JTextField) temp).addKeyListener(new KeyListener() {
-			@Override
-			public void keyPressed(KeyEvent e) {
-				((RegexJComboBox) components.get("gUComboBox"))
-						.filter(((JTextField) components.get("gUText"))
-								.getText());
-			}
-
-			@Override
-			public void keyReleased(KeyEvent e) {
-				((RegexJComboBox) components.get("gUComboBox"))
-						.filter(((JTextField) components.get("gUText"))
-								.getText());
-
-			}
-
-			@Override
-			public void keyTyped(KeyEvent e) {
-				((RegexJComboBox) components.get("gUComboBox"))
-						.filter(((JTextField) components.get("gUText"))
-								.getText());
-			}
-		});
 
 		// Button
 		temp = new JButton("Fetch user");
@@ -350,40 +299,12 @@ public class EditUserDialog extends CustomDialog implements Observer {
 		JPanel canvas = getCanvas();
 		JPanel getUser = (JPanel) components.get("gUPanel");
 
-		// Panel
-		c = new GridBagConstraints();
-		c.gridx = 0;
-		c.gridy = 0;
-		c.anchor = GridBagConstraints.WEST;
-		canvas.add(getUser, c);
-
 		// Label
 		c = new GridBagConstraints();
 		c.gridx = 0;
 		c.gridy = 0;
 		c.insets = new Insets(0, 0, 30, 0);
 		getUser.add(components.get("gULabel"), c);
-
-		// FilterLabel
-		c = new GridBagConstraints();
-		c.gridx = 1;
-		c.gridy = 1;
-		getUser.add(components.get("gUFilterLabel"), c);
-
-		// TextField
-		c = new GridBagConstraints();
-		c.gridx = 2;
-		c.gridy = 1;
-		c.insets = new Insets(0, 0, 0, 10);
-		c.fill = GridBagConstraints.HORIZONTAL;
-		getUser.add(components.get("gUText"), c);
-
-		// ComboBox
-		c = new GridBagConstraints();
-		c.gridx = 2;
-		c.gridy = 2;
-		c.fill = GridBagConstraints.HORIZONTAL;
-		getUser.add(components.get("gUComboBox"), c);
 
 		// Button
 		c = new GridBagConstraints();

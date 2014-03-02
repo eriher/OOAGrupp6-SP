@@ -8,7 +8,6 @@
 package view;
 
 import java.awt.Frame;
-import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Observable;
@@ -20,7 +19,6 @@ import javax.swing.JOptionPane;
 
 import model.Communication;
 import view.dialog.CustomDialog;
-import view.dialog.NewTimeSlotDialog;
 import view.gui.GUI;
 import controller.Workflow;
 
