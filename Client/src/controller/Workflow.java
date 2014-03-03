@@ -8,6 +8,7 @@
 package controller;
 
 import model.Communication;
+import model.schedule.ScheduleHandler;
 import view.JSchedule;
 import view.Window;
 
@@ -16,12 +17,15 @@ public class Workflow {
 	private Communication communication;
 	private Window window;
 	private JSchedule jSchedule;
+	private ScheduleHandler scheduleHandler;
 
 	/**
 	 * Set up all classes that workflow needs to manage
 	 */
 	private Workflow() {
 		communication = new Communication();
+		scheduleHandler = new ScheduleHandler();
+		scheduleHandler.addObserver(communication);
 		//jSchedule = new JSchedule();
 		new Thread() {
 			public void run() {
@@ -61,5 +65,12 @@ public class Workflow {
 	 */
 	public JSchedule getJSchedule(){
 		return jSchedule;
+	}
+	
+	/**
+	 * @return instance of ScheduleHandler
+	 */
+	public ScheduleHandler scheduleHandler(){
+		return scheduleHandler;
 	}
 }
