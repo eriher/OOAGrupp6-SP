@@ -18,9 +18,9 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 
 import model.Communication;
+import swing.TimeTextPanel;
 import controller.ActionHandler;
 
 public class NewTimeSlotDialog extends CustomDialog {
@@ -90,11 +90,11 @@ public class NewTimeSlotDialog extends CustomDialog {
 		components.put("yearComboBox", temp);
 
 		// StartText
-		temp = new JTextField();
+		temp = new TimeTextPanel("00:00");
 		components.put("startText", temp);
 
 		// StopText
-		temp = new JTextField();
+		temp = new TimeTextPanel("00:00");
 		components.put("stopText", temp);
 
 		// An OKButton needs to be created in a subclass to CustomDialog since
@@ -120,13 +120,6 @@ public class NewTimeSlotDialog extends CustomDialog {
 		GridBagConstraints c;
 		JPanel canvas = getCanvas();
 		JPanel timePanel = (JPanel) components.get("timePanel");
-
-		// TimePanel
-		c = new GridBagConstraints();
-		c.gridx = 3;
-		c.gridy = 1;
-		c.gridheight = 3;
-		canvas.add(timePanel, c);
 
 		// InfoLabel
 		c = new GridBagConstraints();
@@ -182,12 +175,19 @@ public class NewTimeSlotDialog extends CustomDialog {
 		c.fill = GridBagConstraints.HORIZONTAL;
 		canvas.add(components.get("yearComboBox"), c);
 
+		// TimePanel
+		c = new GridBagConstraints();
+		c.gridx = 3;
+		c.gridy = 1;
+		c.gridheight = 3;
+		canvas.add(timePanel, c);
+
 		// StartLabel
 		c = new GridBagConstraints();
 		c.gridx = 0;
 		c.gridy = 0;
 		c.anchor = GridBagConstraints.EAST;
-		c.insets = new Insets(0, 0, 0, 10);
+		c.insets = new Insets(0, 0, 5, 10);
 		timePanel.add(components.get("startLabel"), c);
 
 		// StopLabel
@@ -195,21 +195,21 @@ public class NewTimeSlotDialog extends CustomDialog {
 		c.gridx = 0;
 		c.gridy = 1;
 		c.anchor = GridBagConstraints.EAST;
-		c.insets = new Insets(0, 0, 0, 10);
+		c.insets = new Insets(5, 0, 0, 10);
 		timePanel.add(components.get("stopLabel"), c);
 
 		// StartText
 		c = new GridBagConstraints();
 		c.gridx = 1;
 		c.gridy = 0;
-		c.ipadx = 50;
+		c.insets = new Insets(0, 0, 5, 0);
 		timePanel.add(components.get("startText"), c);
 
 		// StopText
 		c = new GridBagConstraints();
 		c.gridx = 1;
 		c.gridy = 1;
-		c.ipadx = 50;
+		c.insets = new Insets(5, 0, 0, 0);
 		timePanel.add(components.get("stopText"), c);
 	}
 }

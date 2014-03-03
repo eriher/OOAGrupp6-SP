@@ -91,13 +91,11 @@ public class Window extends JFrame implements Observer {
 	}
 
 	/**
-	 * Switch the view that currently is seen. Removes all current components
-	 * from frame and replaces them with new ones.
+	 * Create the view that 'key' contains. Removes old view.
 	 * 
 	 * @param key
-	 *            name of the GUI to switch to.
-	 * @throws IllegalArgumentException
-	 *             if 'key' contains a non-existing key.
+	 *            name of the GUI to switch to. Must be identic to the class
+	 *            name.
 	 */
 	public void setView(String key) {
 		String s = "view.gui." + key;
@@ -119,10 +117,10 @@ public class Window extends JFrame implements Observer {
 	}
 
 	/**
-	 * Create and return the requested dialog.
+	 * Create and return the requested dialog. Removes any old dialog.
 	 * 
 	 * @param key
-	 *            name of the dialog window.
+	 *            name of the dialog window. Must be identic to the class name.
 	 * @return instance of the dialog, null otherwise.
 	 */
 	public JDialog getDialog(String key) {

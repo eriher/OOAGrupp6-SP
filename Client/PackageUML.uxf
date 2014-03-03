@@ -123,7 +123,9 @@ bg=orange</panel_attributes>
     </coordinates>
     <panel_attributes>swing
 --
+IntegerField
 RegexJComboBox
+TimeTextPanel
 bg=orange</panel_attributes>
     <additional_attributes/>
   </element>
