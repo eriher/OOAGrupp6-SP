@@ -9,14 +9,14 @@ package controller;
 
 import model.Communication;
 import model.schedule.ScheduleHandler;
-import view.JSchedule;
+//import view.JSchedule;
 import view.Window;
 
 public class Workflow {
 	private static Workflow workflow;
 	private Communication communication;
 	private Window window;
-	private JSchedule jSchedule;
+	//private JSchedule jSchedule;
 	private ScheduleHandler scheduleHandler;
 
 	/**
@@ -63,9 +63,9 @@ public class Workflow {
 	/**
 	 * @return instance of JSchedule
 	 */
-	public JSchedule getJSchedule(){
+	/*public JSchedule getJSchedule(){
 		return jSchedule;
-	}
+	}*/
 	
 	/**
 	 * @return instance of ScheduleHandler
