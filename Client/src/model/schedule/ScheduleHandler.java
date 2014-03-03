@@ -8,13 +8,17 @@
 package model.schedule;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Observable;
+import java.util.Observer;
 
+import model.Communication;
 import model.User;
 
 import org.joda.time.DateTime;
 
 
-public class ScheduleHandler {
+public class ScheduleHandler implements Observer{
 	
 	//A reference to the current user
 	@SuppressWarnings("unused")
@@ -39,7 +43,11 @@ public class ScheduleHandler {
 	 * Sets the current active userSchedule to the schedule contained in the user object.
 	 * @param currentUser the currently logged in user
 	 */
-	public ScheduleHandler(User currentUser) {
+	public ScheduleHandler() {
+	}
+	
+	public void setScheduleHandler(User currentUser)
+	{
 		this.currentUser = currentUser;
 		
 		//Checks if the user has a schedule and if he does, loads the schedule.
@@ -201,6 +209,19 @@ public class ScheduleHandler {
 	
 	public Schedule getSchedule() {
 		return userSchedule;
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		if (o instanceof Communication) {
+
+			LinkedList<Object> argsList = (LinkedList<Object>) arg;
+			setScheduleHandler((User)argsList.get(3)); //this will need to be changed 
+
+		}
+	}
+	public void addObserver(Observable o) {
+		o.addObserver(this);
 	}
 	
 }
