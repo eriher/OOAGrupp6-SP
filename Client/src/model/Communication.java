@@ -19,8 +19,6 @@ import java.net.Socket;
 import java.util.LinkedList;
 import java.util.Observable;
 
-import controller.Workflow;
-
 public class Communication extends Observable {
 
 	private Socket socket;
