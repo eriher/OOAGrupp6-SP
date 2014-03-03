@@ -101,6 +101,16 @@ public class ClientHandler extends Thread {
 			e1.printStackTrace();
 		}
 	}
+	/*
+	 * 	@author Olof Spetz
+	 * 	returns the IP:Port address from client
+	 * 
+	 */
+	public String getAddress()
+	{
+		String ip =  clientSocket.getRemoteSocketAddress().toString();
+		return ip;
+	}
 		
 }
 
