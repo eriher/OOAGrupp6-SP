@@ -218,7 +218,7 @@ public class ScheduleHandler implements Observer{
 		if (o instanceof Communication) {
 			LinkedList<Object> argsList = (LinkedList<Object>) arg;
 			if(argsList.get(0).equals("GetUser") || argsList.get(0).equals("CheckIn") 
-					|| argsList.get(1).equals("CheckOut"))
+					|| argsList.get(0).equals("CheckOut"))
 				setScheduleHandler((User)argsList.get(1));
 			else if(argsList.get(0).equals("login"))
 				setScheduleHandler((User)argsList.get(2));
