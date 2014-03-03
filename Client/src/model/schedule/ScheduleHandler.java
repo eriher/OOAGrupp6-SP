@@ -17,6 +17,8 @@ import model.User;
 
 import org.joda.time.DateTime;
 
+import controller.Workflow;
+
 
 public class ScheduleHandler implements Observer{
 	
@@ -214,10 +216,12 @@ public class ScheduleHandler implements Observer{
 	@Override
 	public void update(Observable o, Object arg) {
 		if (o instanceof Communication) {
-
 			LinkedList<Object> argsList = (LinkedList<Object>) arg;
-			setScheduleHandler((User)argsList.get(3)); //this will need to be changed 
-
+			if(argsList.get(0).equals("GetUser") || argsList.get(0).equals("CheckIn") 
+					|| argsList.get(0).equals("CheckOut"))
+				setScheduleHandler((User)argsList.get(1));
+			else if(argsList.get(0).equals("login"))
+				setScheduleHandler((User)argsList.get(2));
 		}
 	}
 	public void addObserver(Observable o) {
