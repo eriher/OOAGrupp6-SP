@@ -15,6 +15,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import model.FileManagement;
+import swing.TimeTextPanel;
 import view.dialog.CustomDialog;
 
 public class ActionHandler {
@@ -76,7 +77,8 @@ public class ActionHandler {
 	/**
 	 * Ask the server to get the specified user.
 	 * 
-	 * @param usernameBox to get the selected user from
+	 * @param usernameBox
+	 *            to get the selected user from
 	 */
 	public void getUser(Container usernameBox) {
 		JComboBox username = (JComboBox) usernameBox;
@@ -117,6 +119,7 @@ public class ActionHandler {
 		Workflow.getInstance().getCommunication().send("Logout");
 		Workflow.getInstance().getCommunication().disconnect();
 		Workflow.getInstance().getWindow().setView("LoginGUI");
+		Workflow.getInstance().setScheduleHandler(null);
 	}
 
 	/**
@@ -329,7 +332,37 @@ public class ActionHandler {
 				.send("EditUser", user, pass, authority.getSelectedItem());
 	}
 
-	public void newTimeSlotDialogOk(CustomDialog customDialog) {
+	/**
+	 * The ok button in the new time slot dialog was pressed, add it to the
+	 * current schedule.
+	 * 
+	 * @param customDialog
+	 *            base dialog window for all dialogs.
+	 * @param yearComboBox
+	 *            the selected year.
+	 * @param weekComboBox
+	 *            the selected week.
+	 * @param dayComboBox
+	 *            the selected day.
+	 * @param startPanel
+	 *            given start time.
+	 * @param stopPanel
+	 *            given stop time.
+	 */
+	public void newTimeSlotDialogOk(CustomDialog customDialog,
+			Container yearComboBox, Container weekComboBox,
+			Container dayComboBox, Container startPanel, Container stopPanel) {
+
+		int year = Integer.parseInt(((JComboBox) yearComboBox)
+				.getSelectedItem().toString());
+		int week = Integer.parseInt(((JComboBox) weekComboBox)
+				.getSelectedItem().toString());
+		String day = (String) ((JComboBox) dayComboBox).getSelectedItem();
+		String start = ((TimeTextPanel) startPanel).getTime();
+		String stop = ((TimeTextPanel) stopPanel).getTime();
+
+		// Check that a user currently exists
+
 		customDialog.setVisible(false);
 	}
 }

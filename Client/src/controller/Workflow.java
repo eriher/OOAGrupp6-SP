@@ -25,15 +25,13 @@ public class Workflow {
 	private Workflow() {
 		communication = new Communication();
 		scheduleHandler = new ScheduleHandler();
-		scheduleHandler.addObserver(communication);
-		//jSchedule = new JSchedule();
+		communication.addObserver(scheduleHandler);
+		jSchedule = new JSchedule();
+		communication.addObserver(jSchedule);
 		new Thread() {
 			public void run() {
 				window = new Window();
 				window.setView("LoginGUI");
-				// TODO Better solution to being able to call
-				// communication.addObserver(this).
-				window.addObserver(communication);
 			}
 		}.start();
 	}
@@ -70,7 +68,11 @@ public class Workflow {
 	/**
 	 * @return instance of ScheduleHandler
 	 */
-	public ScheduleHandler scheduleHandler(){
+	public ScheduleHandler getScheduleHandler(){
 		return scheduleHandler;
+	}
+	
+	public void setScheduleHandler(ScheduleHandler o){
+		scheduleHandler = o;
 	}
 }

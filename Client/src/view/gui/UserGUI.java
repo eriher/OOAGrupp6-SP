@@ -40,6 +40,14 @@ public abstract class UserGUI extends GUI implements Observer{
 
 			if (((String) argsList.get(0)).compareToIgnoreCase("GetUser") == 0) {
 				user = (User) argsList.get(1);
+				removeAll();
+				
+				initLabels();
+				initPanels();
+				initTextFields();
+				initButtons();
+				
+				buildGUI();
 			}
 		}
 	}
@@ -126,7 +134,6 @@ public abstract class UserGUI extends GUI implements Observer{
 		botMenuPanel.add(components.get("logOutButton"), c);
 
 		// Schedule
-		getCanvas().add(Workflow.getInstance().getJSchedule(),
-				BorderLayout.CENTER);
+		getCanvas().add(Workflow.getInstance().getJSchedule(),BorderLayout.CENTER);
 	}
 }

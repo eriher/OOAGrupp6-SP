@@ -28,19 +28,10 @@ public class Window extends JFrame implements Observer {
 	private HashMap<String, CustomDialog> dialogList;
 
 	public Window() {
+		Workflow.getInstance().getCommunication().addObserver(this);
 		interfaceList = new HashMap<String, GUI>();
 		dialogList = new HashMap<String, CustomDialog>();
 		createFrame();
-	}
-
-	/**
-	 * Let other objects tell that we want to be notified about updates.
-	 * 
-	 * @param o
-	 *            the object that the class want updates from.
-	 */
-	public void addObserver(Observable o) {
-		o.addObserver(this);
 	}
 
 	public void update(Observable o, Object arg) {
