@@ -13,19 +13,35 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.LinkedList;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-
+import model.Communication;
+import model.User;
 import controller.ActionHandler;
+import controller.Workflow;
 
-public abstract class UserGUI extends GUI {
+public abstract class UserGUI extends GUI implements Observer{
 	private static final long serialVersionUID = 3638212974922784125L;
+	protected User user;
 
 	public UserGUI() {
 		super();
+	}
+	
+	public void update(Observable o, Object arg) {
+		if (o instanceof Communication) {
+			LinkedList<Object> argsList = (LinkedList<Object>) arg;
+
+			if (((String) argsList.get(0)).compareToIgnoreCase("GetUser") == 0) {
+				user = (User) argsList.get(1);
+			}
+		}
 	}
 
 	/**
@@ -108,5 +124,9 @@ public abstract class UserGUI extends GUI {
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.insets = new Insets(0, 0, 5, 0);
 		botMenuPanel.add(components.get("logOutButton"), c);
+
+		// Schedule
+		getCanvas().add(Workflow.getInstance().getJSchedule(),
+				BorderLayout.CENTER);
 	}
 }
