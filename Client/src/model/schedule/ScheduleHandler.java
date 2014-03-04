@@ -21,7 +21,7 @@ import org.joda.time.DateTime;
 public class ScheduleHandler implements Observer {
 	
 	//A reference to the current user
-	@SuppressWarnings("unused")
+
 	private User currentUser;
 	
 	//A reference to the schedule object that contains all weeks
@@ -41,12 +41,12 @@ public class ScheduleHandler implements Observer {
 	private Boolean isCheckedIn = false;
 	
 
-	/**
-	 * Sets the current active userSchedule to the schedule contained in the user object.
-	 * @param currentUser the currently logged in user
-	 */
-	public ScheduleHandler(User currentUser) {
-		this.currentUser = currentUser;
+	public ScheduleHandler() {
+		
+	}
+	
+	private void setScheduleHandler(User user) {
+		this.currentUser = user;
 		
 		//Checks if the user has a schedule and if he does, loads the schedule.
 		//Else it creates a new default schedule for the user.
@@ -60,9 +60,6 @@ public class ScheduleHandler implements Observer {
 			currentWeek = userSchedule.yearList.get(currentYearIndex).weekList.get(currentWeekIndex);
 			System.out.println(currentWeek.weekNr);
 		}
-	}
-
-	public ScheduleHandler() {
 		
 	}
 
@@ -260,10 +257,7 @@ public class ScheduleHandler implements Observer {
 				setScheduleHandler((User)argsList.get(2));
 		}
 	}
-	private void setScheduleHandler(User user) {
-		currentUser = user;
-		
-	}
+
 
 	public void addObserver(Observable o) {
 		o.addObserver(this);
