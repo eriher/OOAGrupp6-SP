@@ -1,7 +1,8 @@
 /**
- * Creates receiving part of Communication class, when starting the thread it will check for new incomming messages.
+ * Sets up a serversocket for the given port number
+ * listens after new connections and creates a clienthandler for each
  * 
- * @author Henrik Johansson
+ * @author Erik Hermansson
  * @version 2013-02-07
  * 
  * @param port	port number for Serversocket.
@@ -15,7 +16,6 @@ import java.net.Socket;
 
 public class CommRecieve extends Thread{
 	private ServerSocket serverSocket;
-	private Boolean haltflag;
 	
 	public CommRecieve(int port)
 	{
@@ -26,7 +26,9 @@ public class CommRecieve extends Thread{
 		}
 		start();
 	}
-	
+	/**
+	 * listens after connections until stopped.
+	 */
 	public void run()
 	{
 		while(true)
@@ -38,15 +40,21 @@ public class CommRecieve extends Thread{
 			} 
 			catch (IOException e)
 			{
-				break;
+				break;	//this will be invoked when socket is closed, killing the thread
 			}
 		}
 	}
-
+	
+	/**
+	 * Creates a ClientHandler when client has established connection
+	 */
 	private void createClientHandler(Socket clientSocket) {
 		new ClientHandler(clientSocket);
 		
 	}
+	/**
+	 * Closes the server socket and stops the thread
+	 */
 	public void close()
 	{
 		try {

@@ -158,6 +158,7 @@ public class Communication extends Observable {
 					LinkedList<Object> listToSend = new LinkedList<Object>();
 					listToSend.add("login");
 					listToSend.add(status);
+					if(status.equals("Employee"))
 					listToSend.add(user);
 
 					clientHandler.send(listToSend);

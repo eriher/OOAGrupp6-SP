@@ -1,5 +1,16 @@
-package model;
+/**
+ * Sets up a in/out streams for the given clientsocket.
+ * Creates a communication which contains commands server can perform.
+ * Reads objects from inputsttream forwards to Communication.
+ * Writes objects to outputstream
+ * 
+ * @author Erik Hermansson
+ * @version 2013-02-07
+ * 
+ * @param clientsocket	socket for the client.
+ */
 
+package model;
 
 
 import java.io.IOException;
@@ -8,10 +19,7 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.LinkedList;
 
-/**
- * @author Erik
- * @version 2014-02-27
- */
+
 public class ClientHandler extends Thread {
 	
 	private Socket			clientSocket;
@@ -24,7 +32,9 @@ public class ClientHandler extends Thread {
 		cmnds = new Communication(this);
 		start();
 	}
-	
+	/**
+	 * sets up the in and out streams towards the clientsocket.
+	 */
 	public void run()
 	{
 		System.out.println("Connection recieved");
@@ -39,7 +49,10 @@ public class ClientHandler extends Thread {
 		}
 			handleRequests();
 	}
-
+	/**
+	 * reads the in stream and checks them 
+	 * using the messageRecieved method from Communication
+	 */
 	private void handleRequests() {
 		LinkedList<Object> request = null;
 		while(true)
@@ -64,7 +77,11 @@ public class ClientHandler extends Thread {
 			cmnds.messageRecieved(request);
 		}
 	}
-
+	/**
+	 * sends listToSend to client
+	 * 
+	 * @param listToSend
+	 */
 	public void send(Object listToSend) {
 		try{
 			out.writeObject(listToSend);
@@ -73,7 +90,9 @@ public class ClientHandler extends Thread {
 		}
 		
 	}
-	
+	/**
+	 * Closes the socket
+	 */
 	public void closeSocket() {
 		try {
 			clientSocket.close();
