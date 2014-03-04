@@ -28,6 +28,7 @@ public class Window extends JFrame implements Observer {
 	private HashMap<String, CustomDialog> dialogList;
 
 	public Window() {
+		addObserver(Workflow.getInstance().getCommunication());
 		interfaceList = new HashMap<String, GUI>();
 		dialogList = new HashMap<String, CustomDialog>();
 		createFrame();

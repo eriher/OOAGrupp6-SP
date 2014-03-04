@@ -19,6 +19,8 @@ import java.net.Socket;
 import java.util.LinkedList;
 import java.util.Observable;
 
+import controller.Workflow;
+
 public class Communication extends Observable {
 
 	private Socket socket;
@@ -57,7 +59,7 @@ public class Communication extends Observable {
 					}
 				}.start();
 			} catch (IOException e) {
-				e.printStackTrace();
+				Workflow.getInstance().getWindow().setErrorMessage("No server open!");
 				disconnect();
 			}
 		}

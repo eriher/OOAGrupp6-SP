@@ -126,7 +126,6 @@ public abstract class UserGUI extends GUI implements Observer{
 		botMenuPanel.add(components.get("logOutButton"), c);
 
 		// Schedule
-		getCanvas().add(Workflow.getInstance().getJSchedule(),
-				BorderLayout.CENTER);
+		//getCanvas().add(Workflow.getInstance().getJSchedule(),BorderLayout.CENTER);
 	}
 }

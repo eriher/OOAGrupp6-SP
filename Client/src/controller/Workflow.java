@@ -25,15 +25,11 @@ public class Workflow {
 	private Workflow() {
 		communication = new Communication();
 		scheduleHandler = new ScheduleHandler();
-		scheduleHandler.addObserver(communication);
-		//jSchedule = new JSchedule();
+		jSchedule = new JSchedule();
 		new Thread() {
 			public void run() {
 				window = new Window();
 				window.setView("LoginGUI");
-				// TODO Better solution to being able to call
-				// communication.addObserver(this).
-				window.addObserver(communication);
 			}
 		}.start();
 	}

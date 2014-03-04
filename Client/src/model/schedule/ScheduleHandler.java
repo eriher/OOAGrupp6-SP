@@ -46,10 +46,12 @@ public class ScheduleHandler implements Observer{
 	 * @param currentUser the currently logged in user
 	 */
 	public ScheduleHandler() {
+		addObserver(Workflow.getInstance().getCommunication());
 	}
 	
 	public void setScheduleHandler(User currentUser)
 	{
+		addObserver(Workflow.getInstance().getCommunication());
 		this.currentUser = currentUser;
 		
 		//Checks if the user has a schedule and if he does, loads the schedule.
