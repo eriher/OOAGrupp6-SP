@@ -1,5 +1,5 @@
 /**
- * Handles methods for modifying and getting schedule objects
+  * Handles methods for modifying and getting schedule objects
  * 
  * @author Simon Planhage
  * @version 2014-02-28
@@ -220,7 +220,7 @@ public class ScheduleHandler implements Observer{
 			if(argsList.get(0).equals("GetUser") || argsList.get(0).equals("CheckIn") 
 					|| argsList.get(0).equals("CheckOut"))
 				setScheduleHandler((User)argsList.get(1));
-			else if(argsList.get(0).equals("login"))
+			else if(argsList.get(0).equals("login") && argsList.get(1).equals("Employee"))
 				setScheduleHandler((User)argsList.get(2));
 		}
 	}
