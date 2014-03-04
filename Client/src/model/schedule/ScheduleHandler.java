@@ -45,7 +45,7 @@ public class ScheduleHandler implements Observer {
 	public ScheduleHandler() {
 	}
 	
-	private void setScheduleHandler(User user) {
+	public void setScheduleHandler(User user) {
 		this.currentUser = user;
 		
 		//Checks if the user has a schedule and if he does, loads the schedule.

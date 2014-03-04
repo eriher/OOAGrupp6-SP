@@ -28,7 +28,6 @@ public class User implements Serializable{
 		this.status = status;
 		
 	}
-	
 
 	public String getName(){
 		return name;

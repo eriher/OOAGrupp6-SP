@@ -59,7 +59,7 @@ public class Communication extends Observable {
 					}
 				}.start();
 			} catch (IOException e) {
-				Workflow.getInstance().getWindow().setErrorMessage("No server open!");
+				Workflow.getInstance().getWindow().setErrorMessage("No server available!");
 				disconnect();
 			}
 		}
@@ -95,7 +95,6 @@ public class Communication extends Observable {
 				checkIn = new BufferedInputStream(socket.getInputStream());
 				in = new ObjectInputStream(checkIn);
 			} catch (IOException e) {
-				e.printStackTrace();
 				disconnect();
 			}
 		}
@@ -120,7 +119,6 @@ public class Communication extends Observable {
 			out.writeObject(argsList);
 			out.flush();
 		} catch (Exception e) {
-			e.printStackTrace();
 			disconnect();
 		}
 	}
@@ -139,7 +137,6 @@ public class Communication extends Observable {
 					notifyObservers(in.readObject());
 				}
 			} catch (Exception e) {
-				e.printStackTrace();
 				disconnect();
 			}
 		}
