@@ -61,9 +61,9 @@ public class Workflow {
 	/**
 	 * @return instance of JSchedule
 	 */
-	public JSchedule getJSchedule(){
+	/*public JSchedule getJSchedule(){
 		return jSchedule;
-	}
+	}*/
 	
 	/**
 	 * @return instance of ScheduleHandler
