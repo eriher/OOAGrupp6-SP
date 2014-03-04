@@ -20,6 +20,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import model.Communication;
+
+import org.joda.time.DateTime;
+
 import swing.TimeTextPanel;
 import controller.ActionHandler;
 
@@ -58,7 +61,7 @@ public class NewTimeSlotDialog extends CustomDialog {
 		temp = new JLabel("Week:");
 		components.put("weekLabel", temp);
 
-		// WeekLabel
+		// YearLabel
 		temp = new JLabel("Year:");
 		components.put("yearLabel", temp);
 
@@ -85,7 +88,8 @@ public class NewTimeSlotDialog extends CustomDialog {
 		components.put("weekComboBox", temp);
 
 		// YearComboBox
-		String[] yearArr = { "2014", "2015" }; // TODO remove hardcode.
+		DateTime dt = new DateTime();
+		String[] yearArr = { ""+dt.getYear(), ""+(dt.getYear()+1), ""+(dt.getYear()+2)};
 		temp = new JComboBox(yearArr);
 		components.put("yearComboBox", temp);
 
