@@ -2,19 +2,18 @@
  * Handles methods for modifying and getting schedule objects
  * 
  * @author Simon Planhage
- * @version 2014-02-28
+ * @version 2014-03-04
  */
 
 package model.schedule;
 
 import java.util.ArrayList;
-
 import model.User;
 
-import org.joda.time.*;
+import org.joda.time.DateTime;
 
 
-public class ScheduleHandler {
+public class ScheduleHandler  {
 	
 	//A reference to the current user
 	@SuppressWarnings("unused")
@@ -25,12 +24,14 @@ public class ScheduleHandler {
 	
 	//A reference to the currently active week
 	private Week currentWeek;
-		
+	
 	//The current real week
 	private int currentRealWeekNr = (new DateTime()).getWeekOfWeekyear();
+	private int currentRealYearNr = (new DateTime()).getYear();
 	
-	//The number of the week that is currently active and chosen with getWeek methods etc. Subtracts 1 to compensate for lists starting at 0.
-	private int currentSelectedWeekNr = currentRealWeekNr;
+	private int currentWeekIndex = currentRealWeekNr - 1;
+	private int currentYearIndex = currentRealYearNr - 2014;
+	
 	
 	private Boolean isCheckedIn = false;
 	
@@ -46,14 +47,18 @@ public class ScheduleHandler {
 		//Else it creates a new default schedule for the user.
 		userSchedule = currentUser.getUserSchedule();
 		if (userSchedule != null) {
-			currentWeek = userSchedule.weekList.get(currentSelectedWeekNr);
+			currentWeek = userSchedule.yearList.get(currentYearIndex).weekList.get(currentWeekIndex);
 			System.out.println(currentWeek.weekNr);
 		} else {
 			userSchedule = new Schedule();
 			populateYear();
-			currentWeek = userSchedule.weekList.get(currentSelectedWeekNr);
+			currentWeek = userSchedule.yearList.get(currentYearIndex).weekList.get(currentWeekIndex);
 			System.out.println(currentWeek.weekNr);
 		}
+	}
+
+	public ScheduleHandler() {
+		
 	}
 
 	/**
@@ -61,9 +66,9 @@ public class ScheduleHandler {
 	 * @param weekNumber
 	 * @return
 	 */
-	public void getWeek(int weekNumber) {
-		currentSelectedWeekNr = weekNumber;
-		currentWeek = userSchedule.weekList.get(weekNumber);
+	public void setActiveWeek(int yearNumber, int weekNumber) {
+		currentWeekIndex = weekNumber - 1;
+		currentWeek = userSchedule.yearList.get(yearNumber-currentRealYearNr).weekList.get(currentWeekIndex);
 	}
 	
 
@@ -71,8 +76,8 @@ public class ScheduleHandler {
 	 * Sets the currently active week to the next week
 	 */
 	public void getNextWeek() {
-		currentSelectedWeekNr++;
-		currentWeek = userSchedule.weekList.get(currentSelectedWeekNr);
+		currentWeekIndex++;
+		currentWeek = userSchedule.yearList.get(currentYearIndex).weekList.get(currentWeekIndex);
 		System.out.println("Currently active week: " + currentWeek.weekNr);
 	}
 
@@ -81,8 +86,8 @@ public class ScheduleHandler {
 	 * Sets the currently active week to the previous week
 	 */
 	public void getPrevWeek() {
-		currentSelectedWeekNr--;
-		currentWeek = userSchedule.weekList.get(currentRealWeekNr);
+		currentWeekIndex--;
+		currentWeek = userSchedule.yearList.get(currentYearIndex).weekList.get(currentRealWeekNr);
 		System.out.println("Currently active week: " + currentWeek.weekNr);
 	}
 
@@ -110,7 +115,9 @@ public class ScheduleHandler {
 			int currentRealDayofWeek = currentTime.getDayOfWeek() - 1;
 			Day currentStampInDay = currentWeek.days.get(currentRealDayofWeek);
 			currentStampInDay.checkInTime.add(currentTime);
-			System.out.println("CheckIn: " + currentTime);
+			System.out.println("CheckIns: " + currentWeek.days.get(currentRealDayofWeek).checkInTime);
+			System.out.println("Scheduled time, in: " + currentWeek.days.get(currentRealDayofWeek).scheduledInTime
+								+ ", out: " + currentWeek.days.get(currentRealDayofWeek).scheduledOutTime);
 			isCheckedIn = true;
 		} else {
 			System.out.println("User is already checked in!");
@@ -130,7 +137,9 @@ public class ScheduleHandler {
 			int currentRealDayofWeek = currentTime.getDayOfWeek() - 1;
 			Day currentStampInDay = currentWeek.days.get(currentRealDayofWeek);
 			currentStampInDay.checkOutTime.add(currentTime);
-			System.out.println("CheckOut: " + currentTime);
+			System.out.println("CheckOuts: " + currentWeek.days.get(currentRealDayofWeek).checkOutTime);
+			System.out.println("Scheduled time, in: " + currentWeek.days.get(currentRealDayofWeek).scheduledInTime
+					+ ", out: " + currentWeek.days.get(currentRealDayofWeek).scheduledOutTime);
 			isCheckedIn = false;
 		} else {
 			System.out.println("User is already checked out!");
@@ -147,9 +156,9 @@ public class ScheduleHandler {
 		
 		for(int i = 0; i < 7; i++) {
 			Day day = new Day();
-			day.dayNr = i;
-			day.scheduledInTime = new DateTime(2000,1,1,8,00);
-			day.scheduledOutTime = new DateTime(2000,1,1,17,00,00);
+	//		day.dayNr = i;
+	//		day.scheduledInTime = new DateTime(2000,1,1,8,00);
+	//		day.scheduledOutTime = new DateTime(2000,1,1,17,00,00);
 			week.days.add(day);
 		}
 	}
@@ -160,11 +169,42 @@ public class ScheduleHandler {
 	private void populateYear() {
 		
 		for(int i = 0; i < 52; i++) {
+			Year newYear = new Year();
+			userSchedule.yearList.add(newYear);
 			Week newWeek = new Week();
 			newWeek.weekNr = i;
 			populateWeek(newWeek);
-			userSchedule.weekList.add(newWeek);
+			userSchedule.yearList.get(currentYearIndex).weekList.add(newWeek);
 		}
+	}
+	
+	/**
+	 * Sets the scheduled start and stop time for the day
+	 * The times are strings in form "hh:mm"
+	 * 
+	 * @param week
+	 * @param day
+	 * @param startString format: "hh:mm"
+	 * @param stopString format: "hh:mm"
+	 */
+	public void setScheduledTime(int year, int week, int day, String startString, String stopString) {
+		Day d = getDay(year, week, day);
+		
+		String[] splitString = startString.split(":");
+		int h = Integer.parseInt(splitString[0]);
+		int m = Integer.parseInt(splitString[1]);
+		
+		d.scheduledInTime = new DateTime(2000,1,1,h,m);
+		
+		splitString = stopString.split(":");
+		h = Integer.parseInt(splitString[0]);
+		m = Integer.parseInt(splitString[1]);
+		
+		d.scheduledOutTime = new DateTime(2000,1,1,h,m);		
+	}
+	
+	private Day getDay(int year, int week, int day) {
+		return userSchedule.yearList.get(year-currentRealYearNr).weekList.get(week).days.get(day);
 	}
 	
 	
@@ -202,5 +242,6 @@ public class ScheduleHandler {
 	public Schedule getSchedule() {
 		return userSchedule;
 	}
+
 	
 }
