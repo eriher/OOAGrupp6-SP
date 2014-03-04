@@ -37,6 +37,7 @@ import controller.Workflow;
 public class JSchedule extends JPanel implements Observer {
     protected LinkedList<JPanel> plannedWorkList = new LinkedList<JPanel>();
     protected LinkedList<JPanel> plannedActualList = new LinkedList<JPanel>();
+    protected LinkedList<JTextArea> scheduleList = new LinkedList<JTextArea>();
      
     public JSchedule(){
     }
@@ -113,7 +114,12 @@ public class JSchedule extends JPanel implements Observer {
      *  Fills the JPanels with the planned times, as well as stamped time.  
      */
     public void fillPanels(){  
-           
+        
+    	for(JTextArea temp : scheduleList){
+    		scheduleList.remove(temp);
+    		remove(temp);
+    	}
+    	
         ArrayList<Integer> checkIn = null; //Beh�ver separata listor f�r att f�renkla loopar.
         ArrayList<Integer> checkOut = null;
         ArrayList<Integer> plannedTime = null;
@@ -154,7 +160,7 @@ public class JSchedule extends JPanel implements Observer {
         dayName.add("Monday"); dayName.add("Tuesday"); dayName.add("Wednesday"); dayName.add("Thursay"); dayName.add("Friday"); dayName.add("Saturday"); dayName.add("Sunday");  
            
            
-        for(int i = 0; i<=0; i++){ //F�r varje dag,
+        for(int i = 0; i<=6; i++){ //F�r varje dag,
             //totalList = ScheduleHandler.scheduleToDays(i);   
             ArrayList<Integer> tempFill;
             int listNumber = 0;
