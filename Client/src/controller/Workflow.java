@@ -66,7 +66,11 @@ public class Workflow {
 	/**
 	 * @return instance of ScheduleHandler
 	 */
-	public ScheduleHandler scheduleHandler(){
+	public ScheduleHandler getScheduleHandler(){
 		return scheduleHandler;
+	}
+	
+	public void setScheduleHandler(ScheduleHandler o){
+		scheduleHandler = o;
 	}
 }

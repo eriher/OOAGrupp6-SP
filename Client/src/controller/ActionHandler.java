@@ -117,6 +117,7 @@ public class ActionHandler {
 		Workflow.getInstance().getCommunication().send("Logout");
 		Workflow.getInstance().getCommunication().disconnect();
 		Workflow.getInstance().getWindow().setView("LoginGUI");
+		Workflow.getInstance().setScheduleHandler(null);
 	}
 
 	/**
