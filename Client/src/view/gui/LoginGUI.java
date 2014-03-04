@@ -23,7 +23,7 @@ import javax.swing.JTextField;
 
 import controller.ActionHandler;
 
-public class LoginGUI extends GUI {
+public class LoginGUI extends GUI  {
 	private static final long serialVersionUID = 5285405077713830734L;
 
 	public LoginGUI() {
@@ -83,7 +83,7 @@ public class LoginGUI extends GUI {
 		tempField = new JPasswordField();
 		components.put("passwordPF", tempField);
 	}
-	
+
 	/**
 	 * Create all the buttons.
 	 */

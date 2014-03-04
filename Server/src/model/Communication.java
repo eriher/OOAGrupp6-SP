@@ -155,9 +155,11 @@ public class Communication extends Observable {
 					loginStatus.add(status); //Adding the status as second string in the list so the client know what GUI to open.
 					System.out.println("login" + status + ": is sent back due to RIGHT password:");
 
-					LinkedList<String> listToSend = new LinkedList<String>();
+					LinkedList<Object> listToSend = new LinkedList<Object>();
 					listToSend.add("login");
 					listToSend.add(status);
+					if(status.equals("Employee"))
+					listToSend.add(user);
 
 					clientHandler.send(listToSend);
 					

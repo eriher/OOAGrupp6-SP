@@ -15,21 +15,15 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Observable;
-import java.util.Observer;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import model.Communication;
-import model.User;
 import controller.ActionHandler;
 
-public abstract class GUI extends JPanel implements Observer {
+public abstract class GUI extends JPanel{
 	private static final long serialVersionUID = -6618159364253053973L;
 	protected HashMap<String, Container> components;
-	protected User user;
 
 	/**
 	 * Create the base GUI and layout.
@@ -44,16 +38,6 @@ public abstract class GUI extends JPanel implements Observer {
 		initButtons();
 
 		buildGUI();
-	}
-
-	public void update(Observable o, Object arg) {
-		if (o instanceof Communication) {
-			LinkedList<Object> argsList = (LinkedList<Object>) arg;
-
-			if (((String) argsList.get(0)).compareToIgnoreCase("GetUser") == 0) {
-				user = (User) argsList.get(1);
-			}
-		}
 	}
 
 	/**
@@ -117,7 +101,6 @@ public abstract class GUI extends JPanel implements Observer {
 
 		getCanvas().add(panel, BorderLayout.SOUTH);
 		
-		// Schedule
-		//getCanvas().add(Workflow.getInstance().getJSchedule(), BorderLayout.CENTER);
+		
 	}
 }
