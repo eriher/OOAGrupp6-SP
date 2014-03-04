@@ -108,7 +108,13 @@ public class NewTimeSlotDialog extends CustomDialog {
 		((JButton) temp).addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ActionHandler.getInstance().newTimeSlotDialogOk(customDialog);
+				ActionHandler.getInstance()
+						.newTimeSlotDialogOk(customDialog,
+								components.get("yearComboBox"),
+								components.get("weekComboBox"),
+								components.get("dayComboBox"),
+								components.get("startText"),
+								components.get("stopText"));
 			}
 		});
 		components.put("okButton", temp);

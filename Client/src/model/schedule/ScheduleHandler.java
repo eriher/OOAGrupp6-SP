@@ -43,11 +43,9 @@ public class ScheduleHandler implements Observer {
 	private Boolean isCheckedIn = false;
 
 	public ScheduleHandler() {
-		Workflow.getInstance().getCommunication().addObserver(this);
 	}
 	
 	private void setScheduleHandler(User user) {
-		Workflow.getInstance().getCommunication().addObserver(this);
 		this.currentUser = user;
 		
 		//Checks if the user has a schedule and if he does, loads the schedule.
