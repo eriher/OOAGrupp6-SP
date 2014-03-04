@@ -16,10 +16,12 @@ public class Schedule implements Serializable {
 	
 	//Variabler här har inga modifiers (private etc.) så att de kan anropas från samma paket utan att behöva skicka
 	//getters och setters-metoder i varje day objekt till servern.
-	ArrayList<Week> weekList;
-	int personNummer;
-
+	ArrayList<Year> yearList;
+	
 	public Schedule() {
-		weekList = new ArrayList<Week>();
+		yearList = new ArrayList<Year>();
 	}
+	
+
+
 }

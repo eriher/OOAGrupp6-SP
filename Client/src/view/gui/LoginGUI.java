@@ -13,9 +13,6 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.LinkedList;
-import java.util.Observable;
-import java.util.Observer;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -24,27 +21,13 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-import model.Communication;
-import model.User;
 import controller.ActionHandler;
-import controller.Workflow;
 
-public class LoginGUI extends GUI implements Observer {
+public class LoginGUI extends GUI  {
 	private static final long serialVersionUID = 5285405077713830734L;
-	protected User user;
 
 	public LoginGUI() {
 		super();
-	}
-
-	public void update(Observable o, Object arg) {
-		if (o instanceof Communication) {
-			LinkedList<Object> argsList = (LinkedList<Object>) arg;
-
-			if (((String) argsList.get(0)).compareToIgnoreCase("GetUser") == 0) {
-				user = (User) argsList.get(1);
-			}
-		}
 	}
 
 	/**
@@ -181,9 +164,5 @@ public class LoginGUI extends GUI implements Observer {
 		wrapper.add(panel, c);
 
 		getCanvas().add(wrapper, BorderLayout.CENTER);
-
-		// Schedule
-		getCanvas().add(Workflow.getInstance().getJSchedule(),
-				BorderLayout.CENTER);
 	}
 }
