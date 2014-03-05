@@ -32,6 +32,8 @@ public class FileManagement {
 	private DateFormat dateFormat;
 	private final String USERSLIST_FILEPATH = "users.bin";		//Chose here filename or path.
 	private String LOG_FILEPATH = "log.txt";
+	private boolean file;
+
 	public FileManagement(){
 		
 	}
@@ -139,4 +141,25 @@ public class FileManagement {
 		} 
 
 	}
+	/*
+	 * @Author Olof Spetz
+	 *  Checks if log file exists, if not a new one is created.
+	 */
+	public void createLog()
+	{
+		File log = new File(LOG_FILEPATH);
+		
+		if(!log.exists())
+		{
+			try 
+			{
+				file = new File(LOG_FILEPATH).createNewFile();
+			}
+			catch(IOException e)
+			{
+				System.out.println("Could not create: " + LOG_FILEPATH);
+			}
+		}
+	}
+	
 }
