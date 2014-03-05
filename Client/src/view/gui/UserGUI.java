@@ -38,7 +38,7 @@ public abstract class UserGUI extends GUI implements Observer{
 		if (o instanceof Communication) {
 			LinkedList<Object> argsList = (LinkedList<Object>) arg;
 
-			if (((String) argsList.get(0)).compareToIgnoreCase("GetUser") == 0) {
+			if (((String) argsList.get(0)).compareToIgnoreCase("GetUser") == 0 || ((String) argsList.get(0)).compareToIgnoreCase("NewTimeSlot") == 0) {
 				user = (User) argsList.get(1);
 				removeAll();
 				

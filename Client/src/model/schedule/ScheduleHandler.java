@@ -45,7 +45,7 @@ public class ScheduleHandler implements Observer {
 	public ScheduleHandler() {
 	}
 	
-	private void setScheduleHandler(User user) {
+	public void setScheduleHandler(User user) {
 		this.currentUser = user;
 		
 		//Checks if the user has a schedule and if he does, loads the schedule.
@@ -53,12 +53,14 @@ public class ScheduleHandler implements Observer {
 		userSchedule = currentUser.getUserSchedule();
 		if (userSchedule != null) {
 			currentWeek = userSchedule.yearList.get(currentYearIndex).weekList.get(currentWeekIndex);
-			//System.out.println(currentWeek.weekNr);
+			System.out.println(currentWeek.weekNr);
 		} else {
 			userSchedule = new Schedule();
 			populateYear();
 			currentWeek = userSchedule.yearList.get(currentYearIndex).weekList.get(currentWeekIndex);
-			//System.out.println(currentWeek.weekNr);
+			currentUser.setSchedule(userSchedule);
+			
+			System.out.println(currentWeek.weekNr);
 		}
 		
 	}

@@ -89,7 +89,8 @@ public class NewTimeSlotDialog extends CustomDialog {
 
 		// YearComboBox
 		DateTime dt = new DateTime();
-		String[] yearArr = { ""+dt.getYear(), ""+(dt.getYear()+1), ""+(dt.getYear()+2)};
+		String[] yearArr = { "" + dt.getYear(), "" + (dt.getYear() + 1),
+				"" + (dt.getYear() + 2) };
 		temp = new JComboBox(yearArr);
 		components.put("yearComboBox", temp);
 
@@ -112,7 +113,7 @@ public class NewTimeSlotDialog extends CustomDialog {
 						.newTimeSlotDialogOk(customDialog,
 								components.get("yearComboBox"),
 								components.get("weekComboBox"),
-								components.get("dayComboBox"),
+								((JComboBox)components.get("dayComboBox")).getSelectedIndex(),
 								components.get("startText"),
 								components.get("stopText"));
 			}

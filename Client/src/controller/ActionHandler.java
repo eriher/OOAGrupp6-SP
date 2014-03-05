@@ -15,6 +15,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import model.FileManagement;
+import model.User;
 import swing.TimeTextPanel;
 import view.dialog.CustomDialog;
 
@@ -143,6 +144,14 @@ public class ActionHandler {
 		in.setEnabled(true);
 		out.setEnabled(false);
 		Workflow.getInstance().getCommunication().send("CheckOut");
+	}
+	
+	/**
+	 * Create a default schedule for the current user in admin.
+	 */
+	public void createDefaultSchedule(User user){
+		Workflow.getInstance().getCommunication().send("CreateDefaultSchedule", user);
+		Workflow.getInstance().getCommunication().send("GetUser", user.getPerNr());
 	}
 
 	/**
@@ -285,11 +294,11 @@ public class ActionHandler {
 		JComboBox<String> authority = (JComboBox<String>) authorityText;
 		customDialog.setVisible(false);
 
-		Workflow.getInstance()
-				.getCommunication()
-				.send("NewUser", username.getText(),
-						new String(password.getPassword()),
-						authority.getSelectedItem());
+		User user = new User(username.getText(), new String(
+				password.getPassword()), authority.getSelectedItem().toString());
+		Workflow.getInstance().getScheduleHandler().setScheduleHandler(user);
+
+		Workflow.getInstance().getCommunication().send("NewUser", user);
 	}
 
 	/**
@@ -350,19 +359,19 @@ public class ActionHandler {
 	 *            given stop time.
 	 */
 	public void newTimeSlotDialogOk(CustomDialog customDialog,
-			Container yearComboBox, Container weekComboBox,
-			Container dayComboBox, Container startPanel, Container stopPanel) {
+			Container yearComboBox, Container weekComboBox, int day,
+			Container startPanel, Container stopPanel) {
 
 		int year = Integer.parseInt(((JComboBox) yearComboBox)
 				.getSelectedItem().toString());
 		int week = Integer.parseInt(((JComboBox) weekComboBox)
-				.getSelectedItem().toString());
-		String day = (String) ((JComboBox) dayComboBox).getSelectedItem();
+				.getSelectedItem().toString())-1;
 		String start = ((TimeTextPanel) startPanel).getTime();
 		String stop = ((TimeTextPanel) stopPanel).getTime();
 
-		// Check that a user currently exists
-
+		// Tell model to add the panel
+		Workflow.getInstance().getCommunication()
+				.send("NewTimeSlot", year, week, day, start, stop);
 		customDialog.setVisible(false);
 	}
 }
