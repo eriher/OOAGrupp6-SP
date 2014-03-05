@@ -81,6 +81,7 @@ public class AdminGUI extends UserGUI {
 				ActionHandler.getInstance().createDefaultSchedule(user);
 			}
 		});
+		components.put("createDefaultSchedule", tempButton);
 	}
 
 	/**
