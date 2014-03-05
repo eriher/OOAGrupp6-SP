@@ -145,6 +145,14 @@ public class ActionHandler {
 		out.setEnabled(false);
 		Workflow.getInstance().getCommunication().send("CheckOut");
 	}
+	
+	/**
+	 * Create a default schedule for the current user in admin.
+	 */
+	public void createDefaultSchedule(User user){
+		Workflow.getInstance().getCommunication().send("CreateDefaultSchedule", user);
+		Workflow.getInstance().getCommunication().send("GetUser", user.getPerNr());
+	}
 
 	/**
 	 * The create user button in AdminGUI was pressed, display the dialog for
@@ -357,13 +365,13 @@ public class ActionHandler {
 		int year = Integer.parseInt(((JComboBox) yearComboBox)
 				.getSelectedItem().toString());
 		int week = Integer.parseInt(((JComboBox) weekComboBox)
-				.getSelectedItem().toString());
+				.getSelectedItem().toString())-1;
 		String start = ((TimeTextPanel) startPanel).getTime();
 		String stop = ((TimeTextPanel) stopPanel).getTime();
-		System.out.println(day);
 
 		// Tell model to add the panel
-
+		Workflow.getInstance().getCommunication()
+				.send("NewTimeSlot", year, week, day, start, stop);
 		customDialog.setVisible(false);
 	}
 }
