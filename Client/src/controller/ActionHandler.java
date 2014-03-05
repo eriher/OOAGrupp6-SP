@@ -151,7 +151,7 @@ public class ActionHandler {
 	 */
 	public void createDefaultSchedule(User user){
 		Workflow.getInstance().getCommunication().send("CreateDefaultSchedule", user);
-		Workflow.getInstance().getCommunication().send("GetUser", user.getName());
+		Workflow.getInstance().getCommunication().send("GetUser", user.getPerNr());
 	}
 
 	/**
