@@ -114,11 +114,7 @@ public class JSchedule extends JPanel implements Observer {
      *  Fills the JPanels with the planned times, as well as stamped time.  
      */
     public void fillPanels(){  
-        
-    	for(JTextArea temp : scheduleList){
-    		scheduleList.remove(temp);
-    		remove(temp);
-    	}
+    	removeAll();
     	
         ArrayList<Integer> checkIn = null; //Beh�ver separata listor f�r att f�renkla loopar.
         ArrayList<Integer> checkOut = null;
@@ -224,7 +220,7 @@ public class JSchedule extends JPanel implements Observer {
          
         for(JTextArea temp: dayText)
             add(temp);
-         
+        updateUI(); 
        
     }
            
