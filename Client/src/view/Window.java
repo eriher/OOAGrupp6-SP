@@ -52,11 +52,6 @@ public class Window extends JFrame implements Observer {
 					setErrorMessage("Bad login information");
 					Workflow.getInstance().getCommunication().disconnect();
 				}
-				// Bad/Unexpected things happened, display error.
-				else {
-					setErrorMessage("Critical error!\n\n" + arg.toString());
-					Workflow.getInstance().getCommunication().disconnect();
-				}
 			}
 		}
 	}

@@ -145,6 +145,14 @@ public class ActionHandler {
 		out.setEnabled(false);
 		Workflow.getInstance().getCommunication().send("CheckOut");
 	}
+	
+	/**
+	 * Create a default schedule for the current user in admin.
+	 */
+	public void createDefaultSchedule(User user){
+		Workflow.getInstance().getCommunication().send("CreateDefaultSchedule", user);
+		Workflow.getInstance().getCommunication().send("GetUser", user.getName());
+	}
 
 	/**
 	 * The create user button in AdminGUI was pressed, display the dialog for

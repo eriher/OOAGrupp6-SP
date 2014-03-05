@@ -72,6 +72,15 @@ public class AdminGUI extends UserGUI {
 			}
 		});
 		components.put("newTimeSlotButton", tempButton);
+		
+		// Init createDefaultSchedule
+		tempButton = new JButton("Create Default Schedule");
+		tempButton.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e){
+				ActionHandler.getInstance().createDefaultSchedule(user);
+			}
+		});
 	}
 
 	/**
