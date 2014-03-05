@@ -27,7 +27,7 @@ public class Workflow {
 		scheduleHandler = new ScheduleHandler();
 		communication.addObserver(scheduleHandler);
 		jSchedule = new JSchedule();
-		communication.addObserver(jSchedule);
+		scheduleHandler.addObserver(jSchedule);
 		new Thread() {
 			public void run() {
 				window = new Window();

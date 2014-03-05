@@ -20,7 +20,7 @@ import org.joda.time.DateTime;
 import controller.Workflow;
 
 
-public class ScheduleHandler implements Observer {
+public class ScheduleHandler extends Observable implements Observer {
 	
 	//A reference to the current user
 
@@ -57,6 +57,7 @@ public class ScheduleHandler implements Observer {
 			userSchedule = new Schedule();
 			populateYear();
 			currentWeek = userSchedule.yearList.get(currentYearIndex).weekList.get(currentWeekIndex);
+			currentUser.setSchedule(userSchedule);
 			currentUser.setSchedule(userSchedule);
 		}
 		
@@ -249,17 +250,24 @@ public class ScheduleHandler implements Observer {
 		if (o instanceof Communication) {
 			@SuppressWarnings("unchecked")
 			LinkedList<Object> argsList = (LinkedList<Object>) arg;
-			if(argsList.get(0).equals("GetUser") || argsList.get(0).equals("CheckIn") 
+			if (argsList.get(0).equals("GetAllUsers")) {
+			}
+			else if(argsList.get(0).equals("GetUser") || argsList.get(0).equals("CheckIn") 
 					|| argsList.get(0).equals("CheckOut"))
+			{
 				setScheduleHandler((User)argsList.get(1));
+				setChanged();
+				notifyObservers(this);
+			}
 			else if(argsList.get(0).equals("login") && argsList.get(1).equals("Employee"))
+			{
 				setScheduleHandler((User)argsList.get(2));
+				setChanged();
+				notifyObservers(this);
+			}
 		}
+		
 	}
 
 
-	public void addObserver(Observable o) {
-		o.addObserver(this);
-	}
-	
 }
