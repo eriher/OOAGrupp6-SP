@@ -24,6 +24,12 @@ public class Users implements Serializable {
 			usersList.put(perNrIn, new User(perNrIn, passwordIn, statusIn));
 		}
 	}
+	
+	public void add(User user){
+		if( !usersList.containsKey(user.getPerNr()) ){
+			usersList.put(user.getPerNr(), user);
+		}
+	}
 		
 	public void remove(String perNrIn) {
 		if (usersList.containsKey(perNrIn)) {

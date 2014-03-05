@@ -88,6 +88,7 @@ public class Window extends JFrame implements Observer {
 		try {
 			GUI c = (GUI) Class.forName(s).newInstance();
 			interfaceList.put(key, c);
+			Workflow.getInstance().getCommunication().addObserver(interfaceList.get(key));
 			// So many exceptions
 		} catch (Exception e) {
 			e.printStackTrace();
