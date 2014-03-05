@@ -49,6 +49,17 @@ public abstract class UserGUI extends GUI{
 				
 				buildGUI();
 			}
+			else if((argsList.get(0).equals("CheckIn") || argsList.get(0).equals("CheckOut"))) {
+				user = (User) argsList.get(1);
+				removeAll();
+				
+				initLabels();
+				initPanels();
+				initTextFields();
+				initButtons();
+				
+				buildGUI();
+			}
 		}
 	}
 

@@ -72,8 +72,9 @@ public class Communication extends Observable {
 
 			} else if (whatToDo.compareToIgnoreCase("GetUser") == 0) { //Sends LinkedList<(String)"GetUser", (User)user> back to client
 				String persNr = (String) linkedMessage.get(1);
-				User user = fileMan.getUsersList().getUser(persNr);
-
+				user = fileMan.getUsersList().getUser(persNr);
+				scheduleHandler = new ScheduleHandler(user);
+				
 				LinkedList<Object> linkedMessageReturn = new LinkedList<Object>();
 				linkedMessageReturn.add("GetUser");
 				linkedMessageReturn.add(user);
@@ -128,15 +129,10 @@ public class Communication extends Observable {
 				
 			} else if(whatToDo.compareToIgnoreCase("NewTimeSlot") == 0) {
 				Users users = fileMan.getUsersList();
-				
-				
 				scheduleHandler.setScheduledTime((int)linkedMessage.get(1), (int)linkedMessage.get(2), (int)linkedMessage.get(3), (String)linkedMessage.get(4), (String)linkedMessage.get(5));
 
 				fileMan.writeUsersFile(users);
 				
-			/*	LinkedList<Object> linkedMessageReturn = new LinkedList<Object>();
-				linkedMessageReturn.add("NewTimeSlot");
-				linkedMessageReturn.add(user);*/
 			} else if (whatToDo.compareToIgnoreCase("CreateDefaultSchedule") == 0){
 				Users users = fileMan.getUsersList();
 				

@@ -17,9 +17,6 @@ import model.User;
 
 import org.joda.time.DateTime;
 
-import controller.Workflow;
-
-
 public class ScheduleHandler extends Observable implements Observer {
 	
 	//A reference to the current user
@@ -57,7 +54,7 @@ public class ScheduleHandler extends Observable implements Observer {
 			userSchedule = new Schedule();
 			populateYear();
 			currentWeek = userSchedule.yearList.get(currentYearIndex).weekList.get(currentWeekIndex);
-			currentUser.setSchedule(userSchedule);
+			populateDefaultSchedule();
 			currentUser.setSchedule(userSchedule);
 		}
 		
@@ -244,6 +241,24 @@ public class ScheduleHandler extends Observable implements Observer {
 	public Schedule getSchedule() {
 		return userSchedule;
 	}
+	
+	public void populateDefaultSchedule() {
+		for (Year y : userSchedule.yearList) {
+			for (Week w : y.weekList) {
+				populateDefaultWeek(w);
+			}
+		}
+	}
+
+	private void populateDefaultWeek(Week week) {
+		for (Day d : week.days) {
+			d.scheduledInTime = new DateTime(2000, 1, 1, 8, 00);
+			d.scheduledOutTime = new DateTime(2000, 1, 1, 17, 00, 00);
+			d.checkInTime.add(new DateTime(2000, 1, 1, 17, 00, 00));
+			d.checkOutTime.add(new DateTime(2000, 1, 1, 17, 00, 00));
+		}
+	}
+
 
 	@Override
 	public void update(Observable o, Object arg) {

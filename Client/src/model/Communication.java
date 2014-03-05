@@ -81,7 +81,6 @@ public class Communication extends Observable {
 			socket = null;
 			socketOpen = false;
 		} catch (IOException e) {
-			e.printStackTrace();
 		}
 	}
 
@@ -117,7 +116,6 @@ public class Communication extends Observable {
 
 		try {
 			out.writeObject(argsList);
-			out.flush();
 		} catch (Exception e) {
 			disconnect();
 		}

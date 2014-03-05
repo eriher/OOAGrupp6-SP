@@ -153,27 +153,47 @@ public class JSchedule extends JPanel implements Observer {
 		System.out.println("" + handler);
 
 
+		ArrayList<ArrayList<Integer>> totalList = new ArrayList<ArrayList<Integer>>();
+
 		for (int i = 0; i <= 6; i++) {
-			ArrayList<ArrayList<Integer>> totalList = new ArrayList<ArrayList<Integer>>();
+
 			System.out.println("forloop");
 
-			totalList.add(handler.scheduleToDays(i).get(0));
-			totalList.add(handler.scheduleToDays(i).get(1));
-			totalList.add(handler.scheduleToDays(i).get(2));
-			
+			totalList = handler.scheduleToDays(i);
 			System.out.println("" + totalList);
 
-			
+			ArrayList<Integer> tempFill;
+			int listNumber = 0;
+			System.out.println("ööööööööööh");
+			Iterator<ArrayList<Integer>> it = totalList.iterator(); // "Retrieving"
+																	// various
+																	// lists,
+																	// ska nog
+																	// bytas ut
+																	// mot
+																	// for-each
+																	// loop.
+			while (it.hasNext()) {
+				listNumber++;
+				tempFill = it.next();
+				if (listNumber == 1) // Kom inte p� n�gon b�ttre metod �n
+										// if-satser, bl�.
+					checkIn = tempFill;
+				if (listNumber == 2)
+					checkOut = tempFill;
+				if (listNumber == 3)
+					plannedTime = tempFill;
+			}
 
 			StringBuilder s = new StringBuilder(5000);
 
-			if (totalList.get(2).size() % 2 == 0) {
+			if (plannedTime.size() % 2 == 0) {
 				// System.out.println("Planerad arbetstid:");
 
-				for (int x = 0; x <= totalList.get(2).size() / 2; x += 2) {
-					s.append(toHours(totalList.get(2).get(x)));
+				for (int x = 0; x <= plannedTime.size() / 2; x += 2) {
+					s.append(toHours(plannedTime.get(x)));
 					s.append(" - ");
-					s.append(toHours(totalList.get(2).get(x + 1)));
+					s.append(toHours(plannedTime.get(x + 1)));
 					s.append("\n");
 					// System.out.println(plannedTime.get(x) + "-" +
 					// plannedTime.get(x+1));
@@ -182,11 +202,11 @@ public class JSchedule extends JPanel implements Observer {
 				s.append("Error: plannedTime not even\n");
 
 			s.append("\nStamped times: \n");
-			if (totalList.get(0).size() == totalList.get(1).size()) {
-				for (int x = 0; x <= totalList.get(0).size() - 1; x++) {
-					s.append(toHours(totalList.get(0).get(x)));
+			if (checkIn.size() == checkOut.size()) {
+				for (int x = 0; x <= checkIn.size() - 1; x++) {
+					s.append(toHours(checkIn.get(x)));
 					s.append(" - ");
-					s.append(toHours(totalList.get(1).get(x)));
+					s.append(toHours(checkOut.get(x)));
 					s.append("\n");
 					// System.out.println(checkIn.get(x) + "-" +
 					// checkOut.get(x));
