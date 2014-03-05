@@ -14,10 +14,8 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -65,13 +63,14 @@ public class Window {
 	public Window(int SERVER_PORT)
 	{
 		this.SERVER_PORT = SERVER_PORT;
+		fileMan = new FileManagement();
+		fileMan.createLog();
 		buildWindow();
 	}
 	
 	public void buildWindow(){
 		
 		UpdateWindow thread = new UpdateWindow(this);
-		fileMan = new FileManagement();
 		
 		frame = new JFrame("MarximumWorker 9001 Server");
 		Container contentPane = frame.getContentPane();
