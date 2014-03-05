@@ -34,50 +34,50 @@ public class AdminGUI extends UserGUI {
 	@Override
 	protected void initButtons() {
 		super.initButtons();
-		
+
 		JButton tempButton;
-		
+
 		// Init createUser
 		tempButton = new JButton("Create User");
-		tempButton.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e){
+		tempButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 				ActionHandler.getInstance().createUserDialog();
 			}
 		});
 		components.put("createUserButton", tempButton);
-		
+
 		// Init editUser
 		tempButton = new JButton("Edit User");
-		tempButton.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e){
+		tempButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 				ActionHandler.getInstance().editUserDialog();
 			}
 		});
 		components.put("editUserButton", tempButton);
-		
+
 		// Init getUser
 		tempButton = new JButton("Get User");
-		tempButton.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e){
+		tempButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 				ActionHandler.getInstance().getUserDialog();
 			}
 		});
 		components.put("getUserButton", tempButton);
-		
+
 		// Init newTimeSlot
 		tempButton = new JButton("New Time Slot");
-		tempButton.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e){
+		tempButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 				ActionHandler.getInstance().newTimeSlotDialog();
 			}
 		});
 		components.put("newTimeSlotButton", tempButton);
-		
+
 		// Init createDefaultSchedule
 		tempButton = new JButton("Create Default Schedule");
-		tempButton.addActionListener(new ActionListener(){
+		tempButton.addActionListener(new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent e){
+			public void actionPerformed(ActionEvent e) {
 				ActionHandler.getInstance().createDefaultSchedule(user);
 			}
 		});
@@ -89,36 +89,43 @@ public class AdminGUI extends UserGUI {
 	@Override
 	protected void buildGUI() {
 		super.buildGUI();
-		
+
 		JPanel topMenuPanel = (JPanel) components.get("topMenuPanel");
 		GridBagConstraints c;
-		
+
 		// createUserButton
 		c = new GridBagConstraints();
 		c.gridy = 0;
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.insets = new Insets(5, 0, 0, 0);
 		topMenuPanel.add(components.get("createUserButton"), c);
-		
+
 		// editUserButtton
 		c = new GridBagConstraints();
 		c.gridy = 1;
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.insets = new Insets(5, 0, 0, 0);
 		topMenuPanel.add(components.get("editUserButton"), c);
-		
+
 		// openScheduleButton
 		c = new GridBagConstraints();
 		c.gridy = 2;
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.insets = new Insets(5, 0, 0, 0);
 		topMenuPanel.add(components.get("getUserButton"), c);
-		
+
 		// newTimeSlotButton
 		c = new GridBagConstraints();
 		c.gridy = 3;
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.insets = new Insets(5, 0, 0, 0);
 		topMenuPanel.add(components.get("newTimeSlotButton"), c);
+
+		// createDefaultSchedule
+		c = new GridBagConstraints();
+		c.gridy = 4;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.insets = new Insets(5, 0, 0, 0);
+		topMenuPanel.add(components.get("createDefaultSchedule"), c);
 	}
 }
