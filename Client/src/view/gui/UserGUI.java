@@ -26,7 +26,7 @@ import model.User;
 import controller.ActionHandler;
 import controller.Workflow;
 
-public abstract class UserGUI extends GUI implements Observer{
+public abstract class UserGUI extends GUI{
 	private static final long serialVersionUID = 3638212974922784125L;
 	protected User user;
 
@@ -35,10 +35,10 @@ public abstract class UserGUI extends GUI implements Observer{
 	}
 	
 	public void update(Observable o, Object arg) {
+		
 		if (o instanceof Communication) {
 			LinkedList<Object> argsList = (LinkedList<Object>) arg;
-
-			if (((String) argsList.get(0)).compareToIgnoreCase("GetUser") == 0 || ((String) argsList.get(0)).compareToIgnoreCase("NewTimeSlot") == 0) {
+			if (((String) argsList.get(0)).compareToIgnoreCase("GetUser") == 0) {
 				user = (User) argsList.get(1);
 				removeAll();
 				

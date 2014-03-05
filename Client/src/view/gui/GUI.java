@@ -15,13 +15,19 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import model.Communication;
+import model.User;
+
 import controller.ActionHandler;
 
-public abstract class GUI extends JPanel{
+public abstract class GUI extends JPanel implements Observer {
 	private static final long serialVersionUID = -6618159364253053973L;
 	protected HashMap<String, Container> components;
 
@@ -38,6 +44,10 @@ public abstract class GUI extends JPanel{
 		initButtons();
 
 		buildGUI();
+	}
+
+	public void update(Observable o, Object arg) {
+
 	}
 
 	/**
@@ -100,7 +110,6 @@ public abstract class GUI extends JPanel{
 		panel.add(components.get("networkButton"), c);
 
 		getCanvas().add(panel, BorderLayout.SOUTH);
-		
-		
+
 	}
 }
