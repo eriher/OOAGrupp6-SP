@@ -357,13 +357,13 @@ public class ActionHandler {
 		int year = Integer.parseInt(((JComboBox) yearComboBox)
 				.getSelectedItem().toString());
 		int week = Integer.parseInt(((JComboBox) weekComboBox)
-				.getSelectedItem().toString());
+				.getSelectedItem().toString())-1;
 		String start = ((TimeTextPanel) startPanel).getTime();
 		String stop = ((TimeTextPanel) stopPanel).getTime();
-		System.out.println(day);
 
 		// Tell model to add the panel
-
+		Workflow.getInstance().getCommunication()
+				.send("NewTimeSlot", year, week, day, start, stop);
 		customDialog.setVisible(false);
 	}
 }
