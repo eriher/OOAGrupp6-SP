@@ -120,7 +120,8 @@ public class ActionHandler {
 		Workflow.getInstance().getCommunication().send("Logout");
 		Workflow.getInstance().getCommunication().disconnect();
 		Workflow.getInstance().getWindow().setView("LoginGUI");
-		Workflow.getInstance().setScheduleHandler(null);
+		Workflow.getInstance().getScheduleHandler().setScheduleHandler(new User("","",""));
+		Workflow.getInstance().getJSchedule().removeAll();
 	}
 
 	/**
@@ -133,6 +134,8 @@ public class ActionHandler {
 		out.setEnabled(true);
 
 		Workflow.getInstance().getCommunication().send("CheckIn");
+		Workflow.getInstance().getCommunication().send("GetUser", Workflow.getInstance().getScheduleHandler().getUser().getPerNr());
+		
 	}
 
 	/**
@@ -144,6 +147,7 @@ public class ActionHandler {
 		in.setEnabled(true);
 		out.setEnabled(false);
 		Workflow.getInstance().getCommunication().send("CheckOut");
+		Workflow.getInstance().getCommunication().send("GetUser", Workflow.getInstance().getScheduleHandler().getUser().getPerNr());
 	}
 	
 	/**

@@ -50,6 +50,7 @@ public class FileManagement {
 			users.add("Admin", "Admin" , "Admin");
 			ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(fileName) );
 			out.writeObject(users);
+			out.close();
 		}catch(IOException e){
 			System.out.println("Could not write file");
 		}
@@ -65,6 +66,7 @@ public class FileManagement {
 		try{
 			ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(fileName) );
 			out.writeObject(users);
+			out.close();
 		}catch(IOException e){
 			System.out.println("Could not write file");
 		}
@@ -79,6 +81,7 @@ public class FileManagement {
 		try{
 			ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(USERSLIST_FILEPATH) );
 			out.writeObject(users);
+			out.close();
 		}catch(IOException e){
 			System.out.println("Could not write file");
 		}
@@ -92,7 +95,9 @@ public class FileManagement {
 	public Users getUsersList(){
 		try{
 			ObjectInputStream in = new ObjectInputStream(new FileInputStream(USERSLIST_FILEPATH));
-			return (Users)in.readObject();
+			Users users = (Users)in.readObject();
+			in.close();
+			return users;
 		}catch(Exception e){
 			return null;
 		}

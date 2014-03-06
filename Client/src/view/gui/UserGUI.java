@@ -15,7 +15,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.LinkedList;
 import java.util.Observable;
-import java.util.Observer;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -33,31 +32,20 @@ public abstract class UserGUI extends GUI{
 	public UserGUI() {
 		super();
 	}
-	
+
 	public void update(Observable o, Object arg) {
-		
 		if (o instanceof Communication) {
 			LinkedList<Object> argsList = (LinkedList<Object>) arg;
 			if (((String) argsList.get(0)).compareToIgnoreCase("GetUser") == 0) {
 				user = (User) argsList.get(1);
+
 				removeAll();
-				
+
 				initLabels();
 				initPanels();
 				initTextFields();
 				initButtons();
-				
-				buildGUI();
-			}
-			else if((argsList.get(0).equals("CheckIn") || argsList.get(0).equals("CheckOut"))) {
-				user = (User) argsList.get(1);
-				removeAll();
-				
-				initLabels();
-				initPanels();
-				initTextFields();
-				initButtons();
-				
+
 				buildGUI();
 			}
 		}

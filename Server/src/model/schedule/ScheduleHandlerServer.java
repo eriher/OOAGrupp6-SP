@@ -7,12 +7,11 @@
 
 package model.schedule;
 
-import java.util.ArrayList;
 import model.User;
 
 import org.joda.time.DateTime;
 
-public class ScheduleHandler {
+public class ScheduleHandlerServer {
 
 	// A reference to the current user
 	@SuppressWarnings("unused")
@@ -31,7 +30,7 @@ public class ScheduleHandler {
 	private int currentWeekIndex = currentRealWeekNr - 1;
 	private int currentYearIndex = currentRealYearNr - 2014;
 
-	private Boolean isCheckedIn = false;
+
 
 	/**
 	 * Sets the current active userSchedule to the schedule contained in the
@@ -40,7 +39,7 @@ public class ScheduleHandler {
 	 * @param currentUser
 	 *            the currently logged in user
 	 */
-	public ScheduleHandler(User currentUser) {
+	public ScheduleHandlerServer(User currentUser) {
 		this.currentUser = currentUser;
 
 		// Checks if the user has a schedule and if he does, loads the schedule.
@@ -57,10 +56,6 @@ public class ScheduleHandler {
 					.get(currentWeekIndex);
 			// System.out.println(currentWeek.weekNr);
 		}
-	}
-
-	public ScheduleHandler() {
-
 	}
 
 	/**
@@ -110,7 +105,7 @@ public class ScheduleHandler {
 	 * 
 	 */
 	public void checkIn() {
-		if (isCheckedIn == false) {
+
 			DateTime currentTime = new DateTime();
 			int currentRealDayofWeek = currentTime.getDayOfWeek() - 1;
 			Day currentStampInDay = currentWeek.days.get(currentRealDayofWeek);
@@ -122,10 +117,8 @@ public class ScheduleHandler {
 							+ currentWeek.days.get(currentRealDayofWeek).scheduledInTime
 							+ ", out: "
 							+ currentWeek.days.get(currentRealDayofWeek).scheduledOutTime);
-			isCheckedIn = true;
-		} else {
-			System.out.println("User is already checked in!");
-		}
+
+
 	}
 
 	/**
@@ -135,7 +128,7 @@ public class ScheduleHandler {
 	 * the list of checkOut times.
 	 */
 	public void checkOut() {
-		if (isCheckedIn == true) {
+
 			DateTime currentTime = new DateTime();
 			int currentRealDayofWeek = currentTime.getDayOfWeek() - 1;
 			Day currentStampInDay = currentWeek.days.get(currentRealDayofWeek);
@@ -147,10 +140,8 @@ public class ScheduleHandler {
 							+ currentWeek.days.get(currentRealDayofWeek).scheduledInTime
 							+ ", out: "
 							+ currentWeek.days.get(currentRealDayofWeek).scheduledOutTime);
-			isCheckedIn = false;
-		} else {
-			System.out.println("User is already checked out!");
-		}
+
+
 	}
 
 	/**
@@ -173,14 +164,15 @@ public class ScheduleHandler {
 	 * Populates the active userSchedule with a years worth of weeks.
 	 */
 	private void populateYear() {
-
+		for(int x = 0; x < 5; x++){
+		userSchedule.yearList.add(new Year(currentRealYearNr+x));
+		
 		for (int i = 0; i < 52; i++) {
-			Year newYear = new Year();
-			userSchedule.yearList.add(newYear);
 			Week newWeek = new Week();
 			newWeek.weekNr = i;
 			populateWeek(newWeek);
-			userSchedule.yearList.get(currentYearIndex).weekList.add(newWeek);
+			userSchedule.yearList.get(currentYearIndex+x).weekList.add(newWeek);
+		}
 		}
 	}
 
@@ -232,42 +224,6 @@ public class ScheduleHandler {
 				.get(week).days.get(day);
 	}
 
-	/**
-	 * Translates real time stamps to minutes for easy building of
-	 * schemastaplarna. First field: a list of all checkIns of the day Second
-	 * field: a list of all checkOuts of the day Third field: the scheduled in
-	 * and out times of the day
-	 * 
-	 * @param dayofWeek
-	 * @return
-	 */
-	public ArrayList<ArrayList<Integer>> scheduleToDays(int dayofWeek) {
-
-		ArrayList<ArrayList<Integer>> totalList = new ArrayList<ArrayList<Integer>>(
-				3);
-		ArrayList<Integer> checkInList = new ArrayList<Integer>(
-				currentWeek.days.get(dayofWeek).checkInTime.size());
-		ArrayList<Integer> checkOutList = new ArrayList<Integer>(
-				currentWeek.days.get(dayofWeek).checkInTime.size());
-		ArrayList<Integer> scheduledTimeList = new ArrayList<Integer>(2);
-
-		for (DateTime stamp : currentWeek.days.get(dayofWeek).checkInTime)
-			checkInList.add(stamp.getMinuteOfDay());
-
-		for (DateTime stamp : currentWeek.days.get(dayofWeek).checkOutTime)
-			checkOutList.add(stamp.getMinuteOfDay());
-
-		scheduledTimeList.add(currentWeek.days.get(dayofWeek).scheduledInTime
-				.getMinuteOfDay());
-		scheduledTimeList.add(currentWeek.days.get(dayofWeek).scheduledOutTime
-				.getMinuteOfDay());
-
-		totalList.add(checkInList);
-		totalList.add(checkOutList);
-		totalList.add(scheduledTimeList);
-		System.out.println(totalList);
-		return totalList;
-	}
 
 	public Schedule getSchedule() {
 		return userSchedule;

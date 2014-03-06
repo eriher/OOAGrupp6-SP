@@ -135,7 +135,8 @@ public class Communication extends Observable {
 					notifyObservers(in.readObject());
 				}
 			} catch (Exception e) {
-				disconnect();
+				System.out.println("test");
+				e.printStackTrace();
 			}
 		}
 	}
