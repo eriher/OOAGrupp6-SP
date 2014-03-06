@@ -34,7 +34,7 @@ public class Communication {
 	 */
 	public void messageRecieved(LinkedList<Object> linkedMessage) {
 		if (linkedMessage != null) {
-			users = fileMan.getUsersList();
+			users = fileMan.getUsersList();	// this leads to slow server should be one of theese in server and not separate for each user
 			System.out.println("Message recieved in communication Server"
 					+ linkedMessage.toString());
 			String whatToDo = (String) linkedMessage.get(0);

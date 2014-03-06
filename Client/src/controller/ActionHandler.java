@@ -117,11 +117,14 @@ public class ActionHandler {
 	 * Logs out from the server.
 	 */
 	public void logOut() {
+		System.exit(0);
+		/*
 		Workflow.getInstance().getCommunication().send("Logout");
 		Workflow.getInstance().getCommunication().disconnect();
 		Workflow.getInstance().getWindow().setView("LoginGUI");
 		Workflow.getInstance().getScheduleHandler().setScheduleHandler(new User("","",""));
 		Workflow.getInstance().getJSchedule().removeAll();
+		*/
 	}
 
 	/**

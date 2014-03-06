@@ -61,7 +61,7 @@ public abstract class UserGUI extends GUI{
 		JButton tempButton;
 
 		// Init logOut
-		tempButton = new JButton("Log Out");
+		tempButton = new JButton("Exit");
 		tempButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
