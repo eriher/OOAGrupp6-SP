@@ -11,7 +11,7 @@ package model;
 
 import java.util.LinkedList;
 
-import model.schedule.ScheduleHandlerServer;
+import model.schedule.ScheduleHandler;
 
 public class Communication {
 
@@ -21,7 +21,7 @@ public class Communication {
 	private Users users;
 	private ClientHandler clientHandler;
 
-	private ScheduleHandlerServer scheduleHandler;
+	private ScheduleHandler scheduleHandler;
 
 	public Communication(ClientHandler clientHandler) {
 		this.clientHandler = clientHandler;
@@ -100,7 +100,7 @@ public class Communication {
 																		// client
 				String persNr = (String) linkedMessage.get(1);
 				user = users.getUser(persNr);
-				scheduleHandler = new ScheduleHandlerServer(user);
+				scheduleHandler = new ScheduleHandler(user);
 
 				LinkedList<Object> linkedMessageReturn = new LinkedList<Object>();
 				linkedMessageReturn.add("GetUser");
@@ -195,7 +195,7 @@ public class Communication {
 				user = users.getUser((String) message.get(1)); // Get all info
 																// from the
 																// user.
-				scheduleHandler = new ScheduleHandlerServer(user);
+				scheduleHandler = new ScheduleHandler(user);
 
 				if (recievedPassword.equals(user.getPassword())) { // Checks
 																	// with the

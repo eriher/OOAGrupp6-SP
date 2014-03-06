@@ -17,7 +17,7 @@ import model.User;
 
 import org.joda.time.DateTime;
 
-public class ScheduleHandlerClient extends Observable implements Observer {
+public class ScheduleHandler extends Observable implements Observer {
 
 	// A reference to the current user
 
@@ -36,7 +36,7 @@ public class ScheduleHandlerClient extends Observable implements Observer {
 	private int currentWeekIndex = currentRealWeekNr - 1;
 	private int currentYearIndex = currentRealYearNr - 2014;
 
-	public ScheduleHandlerClient() {
+	public ScheduleHandler() {
 	}
 
 	public void setScheduleHandler(User user) {

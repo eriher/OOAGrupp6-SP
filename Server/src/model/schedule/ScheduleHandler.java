@@ -11,7 +11,7 @@ import model.User;
 
 import org.joda.time.DateTime;
 
-public class ScheduleHandlerServer {
+public class ScheduleHandler {
 
 	// A reference to the current user
 	@SuppressWarnings("unused")
@@ -39,7 +39,7 @@ public class ScheduleHandlerServer {
 	 * @param currentUser
 	 *            the currently logged in user
 	 */
-	public ScheduleHandlerServer(User currentUser) {
+	public ScheduleHandler(User currentUser) {
 		this.currentUser = currentUser;
 
 		// Checks if the user has a schedule and if he does, loads the schedule.

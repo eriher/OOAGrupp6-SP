@@ -29,7 +29,7 @@ import controller.ActionHandler;
 
 import model.Communication;
 import model.User;
-import model.schedule.ScheduleHandlerClient;
+import model.schedule.ScheduleHandler;
 import controller.Workflow;
 
 /**
@@ -43,14 +43,14 @@ public class JSchedule extends JPanel implements Observer
 	protected LinkedList<JPanel> plannedWorkList = new LinkedList<JPanel>();
 	protected LinkedList<JPanel> plannedActualList = new LinkedList<JPanel>();
 	protected LinkedList<JTextArea> scheduleList = new LinkedList<JTextArea>();
-	private ScheduleHandlerClient handler;
+	private ScheduleHandler handler;
 	public JSchedule() {
 		add(initBuild());
 	}
 
 	public void update(Observable o, Object arg) {
 		//add(initBuild());
-		handler = (ScheduleHandlerClient)arg;
+		handler = (ScheduleHandler)arg;
 		fillPanels();
 		
 	}
